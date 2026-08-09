@@ -1,14 +1,7 @@
 {
   "repo_path": "/home/alex/pony",
-  "proposal_command": [
-    "python3",
-    "/home/alex/pony/.hermes/autoresearch_proposal.py",
-    "Improve game balance: adjust one theme scene difficulty (let/normal/svaert) or stat (krop/sind/charme) in themes.py to bring win rate closer to 50%. Only change one scene per trial."
-  ],
-  "evaluator_command": [
-    "python3",
-    "/home/alex/pony/.hermes/autoresearch_evaluator.py"
-  ],
+  "proposal_command": ["python3", "/home/alex/pony/.hermes/autoresearch_proposal.py"],
+  "evaluator_command": ["python3", "/home/alex/pony/.hermes/autoresearch_evaluator.py"],
   "max_trials": 10,
   "max_seconds": 3600,
   "stop_after_no_improve": 3,
@@ -16,8 +9,8 @@
   "keep_on_improve": true,
   "revert_on_no_improve": true,
   "revert_on_failure": true,
-  "allowlist_relative_paths": ["web/app/data/themes.py", "web/app/game/dice.py", "web/app/game/pony.py"],
+  "allowlist_relative_paths": ["web/app/data/themes.py"],
   "tsv_log_path": "runs/experiments.tsv",
   "jsonl_log_path": "runs/experiments.jsonl",
-  "command_timeout_seconds": 300
+  "command_timeout_seconds": 120
 }

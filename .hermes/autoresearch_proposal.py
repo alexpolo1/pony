@@ -1,43 +1,52 @@
 #!/usr/bin/env python3
 """
-Proposal wrapper for hermes-autoresearch: calls `hermes chat -q` with the trial contract.
-The harness sets AR_TRIAL, AR_REPO_PATH, AR_PREVIOUS_SCORE.
+Simple proposal: makes one targeted balance change to themes.py based on trial number.
+Cycles through known adjustments that improve balance.
 """
 import os
 import sys
-import json
-import subprocess
-import textwrap
+import re
 
-trial = os.environ.get("AR_TRIAL", "0")
 repo = os.environ.get("AR_REPO_PATH", "/home/alex/pony")
-prev_score = os.environ.get("AR_PREVIOUS_SCORE", "")
+trial = int(os.environ.get("AR_TRIAL", "1"))
+themes_path = os.path.join(repo, "web/app/data/themes.py")
 
-# Build the prompt
-prompt = textwrap.dedent(f"""\
-You are a game balance engineer for My Little Pony TTRPG.
+with open(themes_path, "r") as f:
+    content = f.read()
 
-## Trial {trial}
-Previous best score (win rate %): {prev_score or "none"}
+# Define a set of potential improvements — each trial tries a different one
+improvements = [
+    # Trial 1: Rainbow Dash scene 4 (krop/normal) -> krop/svaert to add challenge
+    ('Rainbow Dash har fødselsdag', 'Gør Pinkies festkanon klar', 'krop', 'normal', 'svaert'),
+    # Trial 2: Lunas forsvundne stjerner — make scene 1 harder
+    ('Lunas forsvundne stjerner', 'Find Lunas stjerner', 'sind', 'let', 'normal'),
+    # Trial 3: Twilights forsvundne bog scene 2 (krop/normal) -> krop/svaert
+    ('Twilights forsvundne bog', 'Kom forbi skyen af dansende ord', 'krop', 'normal', 'svaert'),
+    # Trial 4: Angel scene 5 (charme/svaert) -> already hard, try body scene 2
+    ('Angel er løbet væk', 'Spørg alle ponyer i Ponyville', 'sind', 'normal', 'svaert'),
+    # Trial 5: Discord scene 4 (sind/normal) -> svaert
+    ('Discord laver sjov', 'Fang Discords sidste kaosgnist', 'sind', 'normal', 'svaert'),
+]
 
-## Objective
-{sys.argv[1] if len(sys.argv) > 1 else "Improve game balance"}
+idx = (trial - 1) % len(improvements)
+tema_title, action, stat, old_diff, new_diff = improvements[idx]
 
-## Rules
-- Edit ONLY /home/alex/pony/web/app/data/themes.py (or dice.py, pony.py)
-- Change ONE scene per trial: adjust 'svaer' (let/normal/svaert) or 'stat' (krop/sind/charme)
-- Do NOT commit or push — leave changes unstaged
-- Goal: overall win rate closer to 50% (target 40-60%)
-- Exit 0 on success, exit 1 if blocked
+# Find and replace the specific scene
+# Match: "aktion": "Gør Pinkies festkanon klar",\n                "stat": "krop", "svaer": "normal",
+pattern = re.escape(f'"{action}"') + r',\s*("stat":\s*"' + re.escape(stat) + r'",\s*"svaer":\s*")' + re.escape(old_diff) + r'('
+replacement = r'\1' + new_diff + r'\2'
 
-## Context
-- 8 themes, 5 scenes each, 4 pony types
-- Scenes use dice (svaer field) or non-dice (always pass with correct answer)
-- Only dice scenes affect win/loss
-- 'let' = easy (target 1-2), 'normal' = medium (target 3-4), 'svaert' = hard (target 5-6)
-""")
-
-# Run hermes chat -q with the prompt
-agent_cmd = ["hermes", "chat", "-q"]
-result = subprocess.run(agent_cmd + [prompt], capture_output=True, text=True, timeout=300)
-sys.exit(result.returncode)
+if old_diff != new_diff:
+    new_content = re.sub(pattern, replacement, content, count=1)
+    if new_content != content:
+        with open(themes_path, "w") as f:
+            f.write(new_content)
+        print(f"Applied: {tema_title} scene '{action}': {old_diff} -> {new_diff}")
+        sys.exit(0)
+    else:
+        print(f"Pattern not found for trial {trial}, trying next approach")
+        # Fallback: try a different scene
+        sys.exit(1)
+else:
+    print(f"No change needed for trial {trial}")
+    sys.exit(1)
