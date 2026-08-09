@@ -99,6 +99,15 @@ export default function HomePage({ volume, setVolume, stats, showAchievements, s
         >
           🎮 Start Nyt Spil!
         </motion.button>
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          className="btn-secondary"
+          onClick={() => onNavigate('pixelConfigurator')}
+          aria-label="Design din pixel pony"
+        >
+          🎨 Design din Pony
+        </motion.button>
       </motion.div>
     </motion.div>
   );

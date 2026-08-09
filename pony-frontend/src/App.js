@@ -314,6 +314,14 @@ function App() {
             />
           )}
 
+          {page === 'pixelConfigurator' && (
+            <PixelPonyConfiguratorPage
+              volume={volume}
+              setVolume={setVolume}
+              onNavigate={navigateTo}
+            />
+          )}
+
           {page === 'start' && (
             <PonySelectPage
               ponies={content.ponies}

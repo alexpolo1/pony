@@ -84,7 +84,8 @@ body {
 .home,
 .start-page,
 .game,
-.game-end {
+.game-end,
+.pixel-configurator {
   min-height: 100vh;
   padding: var(--space-xl);
   position: relative;
@@ -103,7 +104,8 @@ body {
 }
 
 .start-page,
-.game-end {
+.game-end,
+.pixel-configurator {
   text-align: center;
 }
 
@@ -160,6 +162,24 @@ body {
 
 .btn-start:hover {
   transform: scale(1.05);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--color-accent);
+  border: none;
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-pill);
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  margin-top: var(--space-md);
+  transition: transform 0.2s;
+}
+
+.btn-secondary:hover {
+  transform: scale(1.05);
+  background: var(--color-white);
 }
 
 .btn-back {
@@ -373,6 +393,99 @@ body {
   font-size: var(--font-small);
   font-weight: bold;
   margin-top: var(--space-xs);
+}
+
+/* --- Pixel pony configurator --- */
+.pixel-configurator-preview {
+  display: flex;
+  justify-content: center;
+  margin: var(--space-lg) auto;
+  padding: var(--space-lg);
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-lg);
+  max-width: 320px;
+}
+
+.pixel-configurator-section {
+  max-width: 600px;
+  margin: 0 auto var(--space-lg);
+}
+
+.pixel-configurator-section h2 {
+  color: var(--color-white);
+  font-size: 1.1rem;
+  margin-bottom: var(--space-sm);
+}
+
+.pixel-mane-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: var(--space-sm);
+}
+
+.pixel-mane-swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  background: var(--color-white);
+  border: 3px solid transparent;
+  border-radius: var(--radius-md);
+  padding: var(--space-sm);
+  cursor: pointer;
+  font-size: var(--font-small);
+  color: var(--color-muted);
+  transition: transform 0.15s;
+}
+
+.pixel-mane-swatch:hover {
+  transform: scale(1.05);
+}
+
+.pixel-mane-swatch.is-selected {
+  border-color: var(--color-accent);
+}
+
+.pixel-color-row,
+.pixel-toggle-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  justify-content: center;
+}
+
+.pixel-color-swatch {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-round);
+  border: 3px solid rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.pixel-color-swatch:hover {
+  transform: scale(1.1);
+}
+
+.pixel-color-swatch.is-selected {
+  border-color: var(--focus-color);
+  box-shadow: var(--shadow-md);
+}
+
+.pixel-toggle {
+  background: var(--color-white);
+  color: var(--color-muted);
+  border: 3px solid transparent;
+  border-radius: var(--radius-pill);
+  padding: var(--space-sm) var(--space-lg);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.pixel-toggle.is-selected {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  font-weight: bold;
 }
 
 /* --- Pony mini card (in-game) --- */
@@ -1060,8 +1173,13 @@ input:focus-visible,
   .home-content,
   .start-page,
   .game,
-  .game-end {
+  .game-end,
+  .pixel-configurator {
     padding: var(--space-md) !important;
+  }
+
+  .pixel-mane-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
   }
 
   .pony-choices {
@@ -1093,6 +1211,10 @@ input:focus-visible,
 @media (max-width: 480px) {
   .pony-choices {
     grid-template-columns: 1fr !important;
+  }
+
+  .pixel-mane-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
   }
 
   .title {
