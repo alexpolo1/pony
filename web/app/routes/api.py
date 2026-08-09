@@ -9,7 +9,7 @@ import re
 
 from flask import Blueprint, current_app, request, jsonify, make_response, Response
 from app.services.game_service import start_game, roll_scene, resolve_scene_interaction, format_scene_data
-from app.services.persistence import create_game, get_game, update_game, delete_game
+from app.services.persistence import create_game, get_game, update_game, delete_game, record_game_summary
 from app.services.speech_to_text import get_speech_to_text_provider, SpeechToTextError
 from app.services.text_to_speech import synthesize_danish, TextToSpeechError
 from app.services.intent_classifier import classify_with_hermes
@@ -44,6 +44,12 @@ def _set_game_cookie(response, game_id):
     """Add game_id cookie to response."""
     response.set_cookie(GAME_COOKIE, game_id, max_age=86400, httponly=True)
     return response
+
+
+def _maybe_record_stats(game_id, game):
+    """If the game just finished, record a summary for stats."""
+    if game.get("færdig"):
+        record_game_summary(game)
 
 
 @api_bp.route("/api/start", methods=["POST"])
@@ -113,6 +119,7 @@ def api_kast():
 
     game = roll_scene(game)
     update_game(game_id, game)
+    _maybe_record_stats(game_id, game)
 
     resp = make_response(jsonify(format_scene_data(game)))
     _set_game_cookie(resp, game_id)
@@ -133,6 +140,7 @@ def api_interact():
     if not interaction_result.get("accepted"):
         return jsonify({"error": interaction_result.get("error", "invalid_selection")}), 409
     update_game(game_id, game)
+    _maybe_record_stats(game_id, game)
     state = format_scene_data(game)
     state["interactionFeedback"] = interaction_result.get("feedback")
     state["interactionCorrect"] = interaction_result.get("correct")
@@ -187,6 +195,13 @@ def api_content():
 def api_health():
     """Health check endpoint."""
     return jsonify({"ok": True, "game": "MLP Pony: Tails of Equestria"})
+
+
+@api_bp.route("/api/stats", methods=["GET"])
+def api_stats():
+    """Return aggregated game statistics."""
+    from app.services.persistence import get_stats_summary
+    return jsonify(get_stats_summary())
 
 
 @api_bp.route("/api/tts", methods=["POST"])
