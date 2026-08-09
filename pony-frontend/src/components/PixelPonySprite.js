@@ -1,12 +1,12 @@
 /**
- * Renders a layered pixel-art pony from sprite sheets: body + tail + mane +
- * optional horn/wings, recolored with CSS filters.
+ * Renders a layered pixel-art pony from sprite sheets: body + eyes + tail +
+ * mane + optional horn/wings, recolored with CSS filters.
  */
 
 import React from 'react';
 import {
   TILE, SHEET_COLS, SHEET_ROWS, IDLE_FRAME,
-  BASE_SPRITE, TAIL_SPRITE, HORN_SPRITE, WING_SPRITE,
+  BASE_SPRITE, EYE_SPRITE, TAIL_SPRITE, HORN_SPRITE, WING_SPRITE,
   getManeStyle, getColorOption,
 } from '../pixelPony/spriteData';
 
@@ -40,23 +40,26 @@ function Layer({ src, frame, scale, filter, zIndex, sheet = true }) {
 }
 
 export default function PixelPonySprite({
-  mane, bodyColor, maneColor, hasHorn, hasWings,
+  mane, bodyColor, maneColor, eyeColor, tailColor, hasHorn, hasWings,
   frame = IDLE_FRAME, scale = 4, className = '',
 }) {
   const maneStyle = getManeStyle(mane);
   const bodyFilter = getColorOption(bodyColor).filter;
   const maneFilter = getColorOption(maneColor).filter;
+  const eyeFilter = getColorOption(eyeColor).filter;
+  const tailFilter = getColorOption(tailColor).filter;
 
   return (
     <div
       className={className}
       style={{ position: 'relative', width: TILE * scale, height: TILE * scale }}
     >
-      {hasWings && <Layer src={WING_SPRITE} frame={frame} scale={scale} filter="none" zIndex={0} sheet={false} />}
       <Layer src={BASE_SPRITE} frame={frame} scale={scale} filter={bodyFilter} zIndex={1} />
-      <Layer src={TAIL_SPRITE} frame={frame} scale={scale} filter={maneFilter} zIndex={2} sheet={false} />
-      <Layer src={maneStyle.file} frame={frame} scale={scale} filter={maneFilter} zIndex={3} />
-      {hasHorn && <Layer src={HORN_SPRITE} frame={frame} scale={scale} filter="none" zIndex={4} sheet={false} />}
+      {hasWings && <Layer src={WING_SPRITE} frame={frame} scale={scale} filter="none" zIndex={2} sheet={false} />}
+      <Layer src={EYE_SPRITE} frame={frame} scale={scale} filter={eyeFilter} zIndex={3} sheet={false} />
+      <Layer src={TAIL_SPRITE} frame={frame} scale={scale} filter={tailFilter} zIndex={4} sheet={false} />
+      <Layer src={maneStyle.file} frame={frame} scale={scale} filter={maneFilter} zIndex={5} />
+      {hasHorn && <Layer src={HORN_SPRITE} frame={frame} scale={scale} filter="none" zIndex={6} sheet={false} />}
     </div>
   );
 }

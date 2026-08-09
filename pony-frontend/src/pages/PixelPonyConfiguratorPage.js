@@ -1,7 +1,7 @@
 /**
  * Pixel Pony Configurator — build your pony in steps: type, body color,
- * mane, then horn/wings. Replaces the old plain pony-type select screen;
- * finishing the wizard starts the game with the chosen type.
+ * eyes, mane, tail, then horn/wings. Replaces the old plain pony-type
+ * select screen; finishing the wizard starts the game with the chosen type.
  */
 
 import React, { useEffect, useState } from 'react';
@@ -15,13 +15,34 @@ import PixelPonySprite, { ManeIcon } from '../components/PixelPonySprite';
 import { MANE_STYLES, COLOR_OPTIONS, PONY_TYPES, IDLE_FRAME, IDLE_FRAME_2 } from '../pixelPony/spriteData';
 import { loadAppearance, saveAppearance } from '../services/ponyAppearance';
 
-const STEPS = ['type', 'body', 'mane', 'extras'];
+const STEPS = ['type', 'body', 'eyes', 'mane', 'tail', 'extras'];
 const STEP_TITLES = {
   type: 'Vælg din Pony! 🐴',
   body: 'Vælg krop-farve 🎨',
+  eyes: 'Vælg øjenfarve 👀',
   mane: 'Vælg manke 💇',
+  tail: 'Vælg halefarve 🐎',
   extras: 'Horn & vinger ✨',
 };
+
+function ColorSwatches({ options, value, onPick, labelPrefix, swatchColor }) {
+  return (
+    <div className="pixel-color-row">
+      {options.map(c => (
+        <button
+          key={c.id}
+          type="button"
+          className={`pixel-color-swatch ${value === c.id ? 'is-selected' : ''}`}
+          style={{ filter: c.filter, backgroundColor: swatchColor }}
+          onClick={() => onPick(c.id)}
+          aria-label={`${labelPrefix}: ${c.label}`}
+          aria-pressed={value === c.id}
+          title={c.label}
+        />
+      ))}
+    </div>
+  );
+}
 
 export default function PixelPonyConfiguratorPage({ ponies, onSelectType, volume, setVolume, onNavigate }) {
   const [step, setStep] = useState(0);
@@ -62,7 +83,9 @@ export default function PixelPonyConfiguratorPage({ ponies, onSelectType, volume
   const narration = {
     type: 'Vælg din pony type. Tryk på den pony du vil være.',
     body: 'Vælg en farve til din ponys krop.',
+    eyes: 'Vælg en farve til din ponys øjne.',
     mane: 'Vælg en manke og en mankefarve til din pony.',
+    tail: 'Vælg en farve til din ponys hale.',
     extras: 'Vælg om din pony skal have horn og vinger. Tryk på start eventyr når du er klar.',
   }[stepName];
 
@@ -126,20 +149,25 @@ export default function PixelPonyConfiguratorPage({ ponies, onSelectType, volume
 
       {stepName === 'body' && (
         <section className="pixel-configurator-section">
-          <div className="pixel-color-row">
-            {COLOR_OPTIONS.map(c => (
-              <button
-                key={c.id}
-                type="button"
-                className={`pixel-color-swatch ${appearance.bodyColor === c.id ? 'is-selected' : ''}`}
-                style={{ filter: c.filter, backgroundColor: '#b5533f' }}
-                onClick={() => set('bodyColor', c.id)}
-                aria-label={`Kropsfarve: ${c.label}`}
-                aria-pressed={appearance.bodyColor === c.id}
-                title={c.label}
-              />
-            ))}
-          </div>
+          <ColorSwatches
+            options={COLOR_OPTIONS}
+            value={appearance.bodyColor}
+            onPick={(id) => set('bodyColor', id)}
+            labelPrefix="Kropsfarve"
+            swatchColor="#b5533f"
+          />
+        </section>
+      )}
+
+      {stepName === 'eyes' && (
+        <section className="pixel-configurator-section">
+          <ColorSwatches
+            options={COLOR_OPTIONS}
+            value={appearance.eyeColor}
+            onPick={(id) => set('eyeColor', id)}
+            labelPrefix="Øjenfarve"
+            swatchColor="#76d2fb"
+          />
         </section>
       )}
 
@@ -166,22 +194,27 @@ export default function PixelPonyConfiguratorPage({ ponies, onSelectType, volume
           </section>
           <section className="pixel-configurator-section">
             <h2>Mankefarve</h2>
-            <div className="pixel-color-row">
-              {COLOR_OPTIONS.map(c => (
-                <button
-                  key={c.id}
-                  type="button"
-                  className={`pixel-color-swatch ${appearance.maneColor === c.id ? 'is-selected' : ''}`}
-                  style={{ filter: c.filter, backgroundColor: '#f3a13f' }}
-                  onClick={() => set('maneColor', c.id)}
-                  aria-label={`Mankefarve: ${c.label}`}
-                  aria-pressed={appearance.maneColor === c.id}
-                  title={c.label}
-                />
-              ))}
-            </div>
+            <ColorSwatches
+              options={COLOR_OPTIONS}
+              value={appearance.maneColor}
+              onPick={(id) => set('maneColor', id)}
+              labelPrefix="Mankefarve"
+              swatchColor="#f3a13f"
+            />
           </section>
         </>
+      )}
+
+      {stepName === 'tail' && (
+        <section className="pixel-configurator-section">
+          <ColorSwatches
+            options={COLOR_OPTIONS}
+            value={appearance.tailColor}
+            onPick={(id) => set('tailColor', id)}
+            labelPrefix="Halefarve"
+            swatchColor="#f3a13f"
+          />
+        </section>
       )}
 
       {stepName === 'extras' && (

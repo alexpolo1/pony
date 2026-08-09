@@ -18,7 +18,8 @@ export const IDLE_FRAME_2 = { row: 0, col: 1 };
 export const BASE_SPRITE = '/sprites/pony/base.png';
 // Flat single-frame overlays (not sheets) — always drawn at the same spot.
 // The source pack's horn/wing/tail sheets are just 1-3px alignment markers,
-// not visible art, so these three are hand-drawn accents instead.
+// not visible art, so these four are hand-drawn accents instead.
+export const EYE_SPRITE = '/sprites/pony/eye.png';
 export const TAIL_SPRITE = '/sprites/pony/tail.png';
 export const HORN_SPRITE = '/sprites/pony/horn.png';
 export const WING_SPRITE = '/sprites/pony/wing.png';
@@ -51,7 +52,7 @@ export const MANE_STYLES = [
 ];
 
 export const COLOR_OPTIONS = [
-  { id: 'original', label: 'Rødbrun', filter: 'none' },
+  { id: 'original', label: 'Original', filter: 'none' },
   { id: 'pink', label: 'Lyserød', filter: 'hue-rotate(300deg) saturate(1.3)' },
   { id: 'purple', label: 'Lilla', filter: 'hue-rotate(220deg) saturate(1.4)' },
   { id: 'blue', label: 'Blå', filter: 'hue-rotate(150deg) saturate(1.5)' },
@@ -67,6 +68,8 @@ export const DEFAULT_APPEARANCE = {
   mane: MANE_STYLES[0].id,
   bodyColor: COLOR_OPTIONS[1].id,
   maneColor: COLOR_OPTIONS[6].id,
+  tailColor: COLOR_OPTIONS[6].id,
+  eyeColor: COLOR_OPTIONS[0].id,
   hasHorn: false,
   hasWings: false,
 };

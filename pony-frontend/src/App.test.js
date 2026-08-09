@@ -127,12 +127,14 @@ function mockMultiFetch(responses) {
 const findByText = (t) => screen.getByText(t);
 
 // Clicking a pony type on the configurator's first step only selects the
-// type and advances to the mane step; two more "Næste" clicks reach the
-// final step, whose "Start eventyr" button actually starts the game.
+// type and advances to the body-color step; four more "Næste" clicks walk
+// through eyes/mane/tail/extras to the final step, whose "Start eventyr"
+// button actually starts the game.
 async function pickPonyAndStartGame(name = 'Jordpony') {
   await userEvent.click(screen.getByText(name));
-  await userEvent.click(screen.getByRole('button', { name: 'Næste trin' }));
-  await userEvent.click(screen.getByRole('button', { name: 'Næste trin' }));
+  for (let i = 0; i < 4; i++) {
+    await userEvent.click(screen.getByRole('button', { name: 'Næste trin' }));
+  }
   await userEvent.click(screen.getByRole('button', { name: 'Start eventyr' }));
 }
 
@@ -298,6 +300,9 @@ test('renders scene information', async () => {
   await pickPonyAndStartGame();
   await waitFor(() => expect(screen.getByText('Eventyr')).toBeInTheDocument());
   expect(screen.getByText('Du møder en drage.')).toBeInTheDocument();
+  expect(screen.getByRole('img', { name: 'Jordpony, din pixelpony' })).toBeInTheDocument();
+  expect(screen.queryByRole('img', { name: 'Jordpony' })).not.toBeInTheDocument();
+  expect(screen.getByRole('progressbar', { name: /lytte|oplæsning|fortæller/i })).toBeInTheDocument();
 });
 
 test('shows roll button in game', async () => {
@@ -324,7 +329,9 @@ test('shows four story choices instead of dice in a choice scene', async () => {
   await userEvent.click(findByText('Skyggen'));
   await pickPonyAndStartGame();
   await waitFor(() => expect(screen.getByText('Hvordan vil du komme videre?')).toBeInTheDocument());
-  expect(screen.getAllByRole('button', { name: /^Vælg / })).toHaveLength(4);
+  const choices = screen.getAllByRole('button', { name: /^Vælg / });
+  expect(choices).toHaveLength(4);
+  expect(choices[0].closest('.game-controls')).toHaveClass('game-controls-options');
   expect(screen.queryByRole('button', { name: 'Kast terningerne' })).not.toBeInTheDocument();
 });
 
