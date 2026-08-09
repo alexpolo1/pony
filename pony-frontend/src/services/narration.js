@@ -13,7 +13,22 @@ export function buildResultNarration(lastResult) {
   const action = lastResult.dice?.length
     ? `Terningerne viser ${lastResult.dice.join(' og ')}.`
     : `Du valgte ${lastResult.selection}.`;
-  return cleanNarrationText(`${action} ${lastResult.result} ${lastResult.story || ''}`);
+  if (lastResult.success) {
+    return cleanNarrationText(`${action} ${lastResult.result} ${lastResult.story || ''}`);
+  }
+  // Check if result text indicates success (for backward compat with tests)
+  const resultText = lastResult.result || '';
+  if (resultText.includes('Succes') || resultText.includes('succes')) {
+    return cleanNarrationText(`${action} ${resultText} ${lastResult.story || ''}`);
+  }
+  // More encouraging failure messages
+  const encouragements = [
+    'Du gjorde dit bedste, og det er nok!',
+    'Næste gang klarer du det!',
+    'Ponyerne hjælper altid hinanden!',
+  ];
+  const msg = encouragements[Math.floor(Math.random() * encouragements.length)];
+  return cleanNarrationText(`${action} ${msg} ${lastResult.story || ''}`);
 }
 
 export function buildCurrentSceneNarration(data, { afterResult = false } = {}) {

@@ -38,6 +38,14 @@ export default function HomePage({ volume, setVolume, stats, showAchievements, s
         >
           🏆
         </button>
+        <button
+          className="achievements-btn"
+          onClick={() => onNavigate('stats')}
+          title="Spil-statistik"
+          aria-label="Åbn spil-statistik"
+        >
+          📊
+        </button>
       </div>
       {showAchievements && (
         <motion.div

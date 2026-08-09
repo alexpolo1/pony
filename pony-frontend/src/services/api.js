@@ -95,6 +95,18 @@ export async function healthCheck() {
   }
 }
 
+/**
+ * Load game statistics from backend.
+ * @returns {Promise<Object>} stats data
+ */
+export async function loadStats() {
+  try {
+    return apiFetch('/api/stats');
+  } catch {
+    return null;
+  }
+}
+
 /** Send a recorded Danish voice answer for the active scene. */
 export async function sendVoiceAnswer(gameId, sceneId, questionId, audioBlob) {
   const form = new FormData();

@@ -7,6 +7,7 @@ import ThemeSelectPage from './pages/ThemeSelectPage';
 import PixelPonyConfiguratorPage from './pages/PixelPonyConfiguratorPage';
 import GameScenePage from './pages/GameScenePage';
 import GameEndPage from './pages/GameEndPage';
+import StatsPage from './pages/StatsPage';
 import Narrator from './components/Narrator';
 import FullscreenButton from './components/FullscreenButton';
 import { prepareDanishSpeech, speakDanish } from './services/tts';
@@ -382,6 +383,10 @@ function App() {
                 }
               }}
             />
+          )}
+
+          {page === 'stats' && (
+            <StatsPage onNavigate={navigateTo} />
           )}
         </>
       )}

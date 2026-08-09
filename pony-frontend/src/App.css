@@ -1748,3 +1748,50 @@ html.tablet-focus-mode #root {
   .game .btn-voice { width: 72px; height: 72px; }
   .game .interaction-option { min-height: 56px; }
 }
+
+/* Stats page */
+.stats-page {
+  padding: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.stats-page h2 {
+  text-align: center;
+  color: var(--color-primary);
+}
+.stats-page h3 {
+  color: var(--color-accent);
+  margin-top: 1rem;
+}
+.stats-overview {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+}
+.stat-item {
+  background: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.stats-list {
+  list-style: none;
+  padding: 0;
+}
+.stats-list li {
+  padding: 0.5rem;
+  margin: 0.25rem 0;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+.back-button {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}

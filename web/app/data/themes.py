@@ -58,7 +58,7 @@ THEMAER = [
             {
                 "tekst": "Du løber ud i Fluttershys have. Blomsterne er høje og farverige \u2014 røde roser, gule solsikker, blå blåklatter. Angel kan være hvor som helst her!",
                 "aktion": "Søg i blomsterhaven",
-                "stat": "krop", "svaer": "let",
+                "stat": "krop", "svaer": "normal",
                 "succes": "Bag en stor solsikke finder du en lille gulerod og friske kaninspor. Angel er løbet videre mod Ponyville!",
                 "fiasko": "Du finder kun sommerfugle, men Fluttershy opdager små kaninspor, der fører ud gennem havelågen.",
             },
@@ -80,7 +80,7 @@ THEMAER = [
             {
                 "tekst": "Du får øje på Angel, men en flok høns forskrækker ham, og han suser mellem fire små dyreskjul. Du må nå hen til ham uden at skræmme ham mere.",
                 "aktion": "Kom roligt hen til Angel",
-                "stat": "krop", "svaer": "svaert",
+                "stat": "krop", "svaer": "normal",
                 "succes": "Du bevæger dig stille frem, og Angel stopper med at løbe. Han venter ved de nummererede skjul.",
                 "fiasko": "Angel smutter én gang til, men Fluttershys rolige stemme får ham til at vente ved skiltene.",
             },
@@ -102,7 +102,7 @@ THEMAER = [
             {
                 "tekst": "Æbler overalt! De ruller som små røde kugler ned ad bakken på Sweet Apple Acres. Du skal standse dem, før de når bækken.",
                 "aktion": "Jag de rullende æbler",
-                "stat": "krop", "svaer": "let",
+                "stat": "krop", "svaer": "normal",
                 "succes": "Du griber æbler med hovene, halen og en kurv. Applejack råber begejstret, at halvdelen allerede er reddet!",
                 "fiasko": "Æblerne ruller for hurtigt! Du griber nogle få, men de fleste fortsætter ned ad bakken...",
             },
@@ -168,7 +168,7 @@ THEMAER = [
             {
                 "tekst": "Glimmer-stenen er faldet i søen! Du kan SE den på bunden \u2014 den skinner! Men søen er dyb, og du skal dykke for at nå den.",
                 "aktion": "Dyk efter glimmer-stenen",
-                "stat": "krop", "svaer": "normal",
+                "stat": "krop", "svaer": "svaert",
                 "succes": "Du dykker ned! Vandet er koldt, men du griber stenen! Du bryder overfladen med stenen i munden \u2014 den glitrer som aldrig før! \U0001f48e",
                 "fiasko": "Stenen ligger for dybt, men Twilight løfter den forsigtigt op med sin magi, mens du viser vej.",
             },
@@ -190,7 +190,7 @@ THEMAER = [
             {
                 "tekst": "Du træder ud, og dit hov synker ned i en hoppende skumfidusvej. I det fjerne svæver Discord med paraply og hjemmesko, mens han griner af sit kaos.",
                 "aktion": "Find Discord",
-                "stat": "sind", "svaer": "normal",
+                "stat": "sind", "svaer": "let",
                 "succes": "Discord er umulig at overse! Han svæver i luften med en marshmallow-hat. 'Hej, lille pony! Vil du lege?' spørger han.",
                 "fiasko": "Skumfiduserne hopper overalt, men du følger lyden af Discords grin til en sky af candyfloss.",
             },
@@ -234,7 +234,7 @@ THEMAER = [
             {
                 "tekst": "Vinduerne i Venskabsslottets bibliotek står åbne, og lysende bogstaver svæver gennem luften. Twilight peger på et glitrende spor ved døren.",
                 "aktion": "Undersøg det glitrende bogstavspor",
-                "stat": "krop", "svaer": "let",
+                "stat": "krop", "svaer": "normal",
                 "succes": "Du opdager, at bogstaverne danner små pile mod torvet. Sporet er tydeligt!",
                 "fiasko": "Bogstaverne kilder dig på næsen, men Spike finder en lille pil mellem dem, som viser vej.",
             },
