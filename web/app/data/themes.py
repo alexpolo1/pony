@@ -175,7 +175,7 @@ THEMAER = [
             {
                 "tekst": "Stenen har mistet sin glans i søen. Hos boghandler Missy findes fire bind af Magiske dyr, og kun det rigtige bind beskriver den lille sødrage, som kan tænde stenen igen.",
                 "aktion": "Husk nummeret på bogen om magiske dyr",
-                "stat": "charme", "svaer": "svaert",
+                "stat": "charme", "svaer": "normal",
                 "succes": "Du husker bogen. Missy finder det rigtige opslag, og den venlige sødrage puster et glimt ind i stenen. Raritys gallakjole er reddet! \u2728",
                 "fiasko": "Missy hjælper med at finde opslaget. Sødragen tænder stenen igen, og Rarity takker jer begge.",
             },
