@@ -121,11 +121,12 @@ function App() {
     }
   };
 
-  const handleVoiceAnswer = async (audioBlob) => {
+  const handleVoiceAnswer = async (audioBlob, speakResponse) => {
     const sceneId = data.history?.length || 0;
     const result = await api.sendVoiceAnswer(
       data.gameId, sceneId, data.voice?.question?.id, audioBlob,
     );
+    await speakResponse?.(result.child_response);
     if (result.gameState) {
       setData(result.gameState);
       const lastResult = result.gameState.history?.[result.gameState.history.length - 1];

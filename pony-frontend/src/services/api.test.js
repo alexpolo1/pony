@@ -86,3 +86,17 @@ describe('api.resetGame', () => {
     );
   });
 });
+
+describe('api.sendVoiceAnswer', () => {
+  it('uploads audio and scene context as multipart form data', async () => {
+    mockFetch([{ body: { ok: true, data: { matched: true } } }]);
+    const blob = new Blob(['voice'], { type: 'audio/webm' });
+    const result = await api.sendVoiceAnswer('game 1', 0, 'ready-1', blob);
+    expect(result).toEqual({ matched: true });
+    expect(global.fetch.mock.calls[0][0]).toContain('/api/v1/games/game%201/voice');
+    const options = global.fetch.mock.calls[0][1];
+    expect(options.method).toBe('POST');
+    expect(options.body).toBeInstanceOf(FormData);
+    expect(options.headers).toBeUndefined();
+  });
+});

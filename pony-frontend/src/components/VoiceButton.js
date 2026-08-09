@@ -17,7 +17,7 @@ function preferredMimeType() {
     .find(type => MediaRecorder.isTypeSupported(type)) || '';
 }
 
-export default function VoiceButton({ enabled, onAnswer }) {
+export default function VoiceButton({ enabled, onAnswer, speaking = false }) {
   const [status, setStatus] = useState('idle');
   const [message, setMessage] = useState('');
   const [transcript, setTranscript] = useState('');
@@ -38,6 +38,7 @@ export default function VoiceButton({ enabled, onAnswer }) {
   if (!enabled || !navigator.mediaDevices?.getUserMedia || !window.MediaRecorder) return null;
 
   const start = async () => {
+    if (speaking) return;
     setMessage('');
     setStatus('requesting_permission');
     try {
@@ -80,7 +81,7 @@ export default function VoiceButton({ enabled, onAnswer }) {
   };
 
   const active = status === 'listening';
-  const busy = status === 'requesting_permission' || status === 'processing';
+  const busy = speaking || status === 'requesting_permission' || status === 'processing';
   return (
     <section className={`voice-control voice-${status}`} aria-live="polite">
       <motion.button
@@ -92,9 +93,9 @@ export default function VoiceButton({ enabled, onAnswer }) {
         animate={active ? { scale: [1, 1.12, 1] } : { scale: [1, 1.04, 1] }}
         transition={{ duration: active ? 0.8 : 2, repeat: Infinity }}
       >
-        {active ? '⏹️' : busy ? '✨' : '🎤'}
+        {active ? '⏹️' : speaking ? '🔊' : busy ? '✨' : '🎤'}
       </motion.button>
-      <p className="voice-status">{message || STATUS_TEXT[status]}</p>
+      <p className="voice-status">{speaking ? 'Ponyen taler...' : message || STATUS_TEXT[status]}</p>
       {process.env.NODE_ENV === 'development' && transcript && (
         <small className="voice-transcript">Hørt: {transcript}</small>
       )}

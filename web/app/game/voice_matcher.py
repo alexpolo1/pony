@@ -69,7 +69,10 @@ def match_intent(text, intents, accept_threshold=0.8, clarify_threshold=0.55):
     results.sort(key=lambda item: item[1], reverse=True)
     top_id, top_score, top_method = results[0]
     scores = {intent_id: score for intent_id, score, _ in results if intent_id}
-    ambiguous = len(results) > 1 and top_score >= clarify_threshold and top_score - results[1][1] < 0.08
+    ambiguous = (
+        top_method != "exact_phrase" and len(results) > 1
+        and top_score >= clarify_threshold and top_score - results[1][1] < 0.08
+    )
     if ambiguous or top_score < accept_threshold:
         response_type = "clarify" if top_score >= clarify_threshold else "no_match"
         return MatchResult(False, None, top_score, top_method, normalized, response_type, scores)

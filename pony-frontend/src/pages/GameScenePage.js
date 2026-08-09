@@ -2,24 +2,40 @@
  * Game scene — active gameplay with scene text, dice roll, and history feed.
  */
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SceneMusic from '../SceneMusic';
 import VolumeControl from '../components/VolumeControl';
 import FloatingBg from '../components/FloatingBg';
 import DiceRoll from '../components/DiceRoll';
 import VoiceButton from '../components/VoiceButton';
+import { cancelSpeech, speakDanish } from '../services/tts';
 
 const API = window.location.origin.replace('3001', '8082');
 
 export default function GameScenePage({ data, onRollDice, onVoiceAnswer, volume, setVolume }) {
   const scrollRef = useRef(null);
+  const [speaking, setSpeaking] = useState(false);
 
   useEffect(() => {
     if (scrollRef.current && data && data.history && data.history.length > 0) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [data]);
+
+  useEffect(() => {
+    const question = data.voice?.question?.text;
+    const spokenText = [data.sceneText, question].filter(Boolean).join(' ');
+    speakDanish(spokenText, volume, setSpeaking);
+    return cancelSpeech;
+    // A scene change should be read once; changing volume must not restart it.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data.sceneNum]);
+
+  const handleVoiceAnswer = (blob) => onVoiceAnswer(
+    blob,
+    text => speakDanish(text, volume, setSpeaking),
+  );
 
   return (
     <motion.div
@@ -101,7 +117,7 @@ export default function GameScenePage({ data, onRollDice, onVoiceAnswer, volume,
         <div className="scene-difficulty">{data.difficulty}</div>
       </motion.div>
 
-      <VoiceButton enabled={!!data.voice?.enabled} onAnswer={onVoiceAnswer} />
+      <VoiceButton enabled={!!data.voice?.enabled} onAnswer={handleVoiceAnswer} speaking={speaking} />
 
       <motion.button
         whileHover={{ scale: 1.1 }}

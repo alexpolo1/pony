@@ -57,6 +57,13 @@ class AudioManager {
     }
   }
 
+  duckMusic(ducked) {
+    if (!this.musicGain || !this.ctx) return;
+    const target = this._muted ? 0 : (ducked ? this._musicVolume * 0.18 : this._musicVolume);
+    this.musicGain.gain.cancelScheduledValues(this.ctx.currentTime);
+    this.musicGain.gain.linearRampToValueAtTime(target, this.ctx.currentTime + (ducked ? 0.15 : 0.6));
+  }
+
   setSfxVolume(v) {
     this._sfxVolume = v;
     localStorage.setItem('pony_sfx_vol', String(v));
@@ -200,6 +207,10 @@ export function setMasterVolume(v) {
 
 export function resumeAudioContext() {
   audioManager.resume();
+}
+
+export function duckMusic(ducked) {
+  audioManager.duckMusic(ducked);
 }
 
 // ---- Music component (uses musicGain) ----

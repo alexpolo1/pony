@@ -6,7 +6,7 @@ Uses game_id cookies for session persistence.
 
 import random
 
-from flask import Blueprint, request, jsonify, make_response
+from flask import Blueprint, current_app, request, jsonify, make_response
 from app.services.game_service import start_game, roll_scene, format_scene_data
 from app.services.persistence import create_game, get_game, update_game, delete_game
 from app.services.speech_to_text import get_speech_to_text_provider, SpeechToTextError
@@ -168,6 +168,7 @@ def _handle_voice_text(game_id, game, text, scene_id=None, question_id=None, tra
     intents = question.get("intents", [])
     result = match_intent(text, intents)
     match_data = result.to_dict()
+    current_app.logger.debug("Voice match game=%s question=%s result=%r", game_id, question["id"], match_data)
     if not result.matched:
         llm = classify_with_qwen(question.get("text", ""), text, intents)
         if llm and llm["confidence"] >= 0.8:
@@ -198,7 +199,7 @@ def _handle_voice_text(game_id, game, text, scene_id=None, question_id=None, tra
         retries[retry_key] = retries.get(retry_key, 0) + 1
         fallback = question.get("fallback", {})
         if retries[retry_key] > fallback.get("max_retries", 2):
-            match_data["response_type"] = fallback.get("after_max_retries", "show_visual_choices")
+            match_data["show_visual_choices"] = True
         update_game(game_id, game)
 
     public_match = {key: value for key, value in match_data.items() if key != "scores"}
@@ -206,6 +207,7 @@ def _handle_voice_text(game_id, game, text, scene_id=None, question_id=None, tra
         "transcript": text, **public_match, "child_response": child_response,
         "next_action": next_action, "gameState": game_state,
     }
+    data["match_method"] = data.pop("method")
     if transcript_meta:
         data["transcription"] = transcript_meta
     return jsonify({"ok": True, "data": data})
