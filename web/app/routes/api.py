@@ -7,13 +7,14 @@ Uses game_id cookies for session persistence.
 import random
 
 from flask import Blueprint, current_app, request, jsonify, make_response, Response
-from app.services.game_service import start_game, roll_scene, format_scene_data
+from app.services.game_service import start_game, roll_scene, resolve_scene_interaction, format_scene_data
 from app.services.persistence import create_game, get_game, update_game, delete_game
 from app.services.speech_to_text import get_speech_to_text_provider, SpeechToTextError
 from app.services.text_to_speech import synthesize_danish, TextToSpeechError
 from app.services.intent_classifier import classify_with_hermes
 from app.game.voice_matcher import match_intent
 from app.data.themes import THEMAER
+from app.data.pixel_assets import get_scene_icon
 from app.game.pony import PONITYPER
 
 api_bp = Blueprint("api", __name__)
@@ -100,6 +101,10 @@ def api_kast():
     game_id, game = _get_game_from_cookie()
     if not game or game.get("færdig"):
         return jsonify({"error": "no game"}), 404
+    scenes = game.get("tema", {}).get("scener", [])
+    scene = scenes[game.get("scene", -1)] if 0 <= game.get("scene", -1) < len(scenes) else {}
+    if (scene.get("interaction") or {}).get("type", "dice") != "dice":
+        return jsonify({"error": "interaction_required"}), 409
 
     game = roll_scene(game)
     update_game(game_id, game)
@@ -107,6 +112,27 @@ def api_kast():
     resp = make_response(jsonify(format_scene_data(game)))
     _set_game_cookie(resp, game_id)
     return resp
+
+
+@api_bp.route("/api/interact", methods=["POST"])
+def api_interact():
+    """Apply one server-allowlisted story, colour, number, or memory choice."""
+    game_id, game = _get_game_from_cookie()
+    if not game or game.get("færdig"):
+        return jsonify({"error": "no game"}), 404
+    data = request.get_json(silent=True) or {}
+    selection = data.get("selection")
+    if not isinstance(selection, str) or len(selection) > 40:
+        return jsonify({"error": "invalid_selection"}), 400
+    game, interaction_result = resolve_scene_interaction(game, selection)
+    if not interaction_result.get("accepted"):
+        return jsonify({"error": interaction_result.get("error", "invalid_selection")}), 409
+    update_game(game_id, game)
+    state = format_scene_data(game)
+    state["interactionFeedback"] = interaction_result.get("feedback")
+    state["interactionCorrect"] = interaction_result.get("correct")
+    state["interactionProgressed"] = interaction_result.get("progressed")
+    return jsonify(state)
 
 
 @api_bp.route("/api/reset", methods=["POST"])
@@ -145,6 +171,7 @@ def api_content():
                 "emoji": t.get("emoji", ""),
                 "intro": t.get("intro", ""),
                 "sceneCount": len(t.get("scener", [])),
+                "icon": get_scene_icon(t["id"]),
             }
             for t in THEMAER
         ],
@@ -181,6 +208,47 @@ def _active_voice_question(game):
     return voice.get("question") if voice.get("enabled") else None
 
 
+def _progress_after_voice(game, preferred_choice_id=None):
+    """Advance one scene after speech without allowing the model to mutate game state."""
+    scenes = game.get("tema", {}).get("scener", [])
+    scene_index = game.get("scene", -1)
+    if game.get("færdig") or not 0 <= scene_index < len(scenes):
+        return game, None, None
+
+    interaction = scenes[scene_index].get("interaction") or {"type": "dice"}
+    if interaction.get("type", "dice") == "dice":
+        game = roll_scene(game)
+        return game, format_scene_data(game), {"type": "scene_choice", "choice_id": "roll_scene"}
+
+    options = interaction.get("options", [])
+    allowed_ids = {item.get("id") for item in options}
+    preferred_selection = None
+    if isinstance(preferred_choice_id, str) and preferred_choice_id.startswith("interaction:"):
+        candidate = preferred_choice_id.split(":", 1)[1]
+        if candidate in allowed_ids:
+            preferred_selection = candidate
+
+    # A spoken answer must always continue. For factual colour/number/memory
+    # scenes, gently use the correct target if speech did not identify it.
+    if interaction.get("type") == "choice":
+        selection = preferred_selection or (options[0].get("id") if options else None)
+    else:
+        target = interaction.get("target")
+        selection = preferred_selection if preferred_selection == target else target
+        if selection not in allowed_ids:
+            selection = options[0].get("id") if options else None
+    if not selection:
+        return game, None, None
+
+    game, interaction_result = resolve_scene_interaction(game, selection)
+    state = format_scene_data(game)
+    state["interactionFeedback"] = interaction_result.get("feedback")
+    state["interactionCorrect"] = interaction_result.get("correct")
+    state["interactionProgressed"] = interaction_result.get("progressed")
+    action = {"type": "scene_choice", "choice_id": f"interaction:{selection}"}
+    return game, state, action
+
+
 def _handle_voice_text(game_id, game, text, scene_id=None, question_id=None, transcript_meta=None):
     question = _active_voice_question(game)
     if not question:
@@ -208,13 +276,11 @@ def _handle_voice_text(game_id, game, text, scene_id=None, question_id=None, tra
                     "response_type": "creative_accepted",
                 })
             else:
-                update_game(game_id, game)
-                return jsonify({"ok": True, "data": {
-                    "transcript": text, "matched": True, "intent": None,
-                    "confidence": hermes["confidence"], "response_type": "game_answer",
-                    "child_response": hermes["reply"], "next_action": None,
-                    "gameState": None, "match_method": "hermes",
-                }})
+                match_data.update({
+                    "matched": True, "intent": None,
+                    "confidence": hermes["confidence"], "method": "hermes",
+                    "response_type": "game_answer",
+                })
 
     selected = next((item for item in intents if item.get("id") == match_data.get("intent")), None)
     retries = game.setdefault("voice_retries", {})
@@ -222,24 +288,34 @@ def _handle_voice_text(game_id, game, text, scene_id=None, question_id=None, tra
     child_response = question.get("fallback", {}).get(
         "retry_prompt", "Jeg hørte dig ikke helt. Vil du prøve igen?"
     )
-    next_action = None
-    game_state = None
+    preferred_choice_id = None
     if match_data["matched"] and selected:
         retries[retry_key] = 0
         responses = selected.get("positive_response") or ["Ja! Lad os gøre det!"]
         child_response = hermes["reply"] if hermes and hermes.get("reply") else random.choice(responses)
-        choice_id = selected.get("choice_id")
-        next_action = {"type": "scene_choice", "choice_id": choice_id}
-        if choice_id == "roll_scene":
-            game = roll_scene(game)
-            game_state = format_scene_data(game)
-        update_game(game_id, game)
+        preferred_choice_id = selected.get("choice_id")
+    elif hermes and hermes.get("confidence", 0) >= 0.75:
+        retries[retry_key] = 0
+        child_response = hermes.get("reply") or child_response
+        preferred_choice_id = hermes.get("choice_id")
     else:
-        retries[retry_key] = retries.get(retry_key, 0) + 1
-        fallback = question.get("fallback", {})
-        if retries[retry_key] > fallback.get("max_retries", 2):
-            match_data["show_visual_choices"] = True
-        update_game(game_id, game)
+        retries[retry_key] = 0
+        pony_name = game.get("pony", {}).get("navn", "Ponyen")
+        child_response = f"Sikke et sjovt svar! {pony_name} fniser, og pony-eventyret suser videre."
+
+    scenes = game.get("tema", {}).get("scener", [])
+    scene_index = game.get("scene", -1)
+    interaction = (
+        scenes[scene_index].get("interaction") or {"type": "dice"}
+        if 0 <= scene_index < len(scenes) else {"type": "dice"}
+    )
+    target_choice = f"interaction:{interaction.get('target')}"
+    if (interaction.get("type") not in {"dice", "choice"}
+            and preferred_choice_id and preferred_choice_id != target_choice):
+        child_response = "Det var et sjovt bud! Ponyerne fniser og finder løsningen sammen med dig."
+
+    game, game_state, next_action = _progress_after_voice(game, preferred_choice_id)
+    update_game(game_id, game)
 
     public_match = {key: value for key, value in match_data.items() if key != "scores"}
     data = {

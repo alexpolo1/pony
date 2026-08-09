@@ -61,6 +61,14 @@ export default function ThemeSelectPage({ themes, selectedTheme, setSelectedThem
             onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { setSelectedTheme(i); onNavigate('start'); } }}
           >
             <div className="pony-emoji">{t.emoji}</div>
+            {t.icon && (
+              <img
+                className="theme-pixel-icon"
+                src={`/sprites/scenes/icon-${t.icon}.png`}
+                alt=""
+                aria-hidden="true"
+              />
+            )}
             <h3>{t.titel}</h3>
             <p className="pony-bonus">{t.sceneCount || 5} scener</p>
             <SpeakButton

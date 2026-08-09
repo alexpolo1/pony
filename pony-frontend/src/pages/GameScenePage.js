@@ -12,10 +12,13 @@ import VoiceButton from '../components/VoiceButton';
 import { cancelSpeech, NARRATION_STATUS_EVENT, prepareDanishSpeech, speakDanish } from '../services/tts';
 import { buildCurrentSceneNarration, buildResultNarration } from '../services/narration';
 import SpeakButton from '../components/SpeakButton';
+import PixelPonySprite from '../components/PixelPonySprite';
+import { DEFAULT_APPEARANCE } from '../pixelPony/spriteData';
 
-const API = window.location.origin.replace('3001', '8082');
-
-export default function GameScenePage({ data, onRollDice, onVoiceAnswer, rolling = false, volume, setVolume, avatarConfig }) {
+export default function GameScenePage({
+  data, onRollDice, onVoiceAnswer, onInteract, rolling = false,
+  interactionBusy = false, volume, setVolume, avatarConfig,
+}) {
   const previousHistoryLength = useRef(data.history?.length || 0);
   const [narrationStatus, setNarrationStatus] = useState('idle');
   const [activePanel, setActivePanel] = useState('scene');
@@ -64,13 +67,30 @@ export default function GameScenePage({ data, onRollDice, onVoiceAnswer, rolling
 
   const lastResult = data.history?.[data.history.length - 1];
   const narrationBusy = narrationStatus !== 'idle';
-  const narrationLabel = rolling
+  const narrationLabel = interactionBusy
+    ? 'Tjekker dit valg...'
+    : rolling
     ? 'Terningerne ruller...'
     : narrationStatus === 'preparing'
     ? 'Forbereder oplæsning...'
     : narrationStatus === 'speaking'
       ? 'Ponyen fortæller historien...'
       : 'Klar til at lytte';
+  const visualStatus = interactionBusy
+    ? 'checking'
+    : rolling
+      ? 'rolling'
+      : narrationStatus;
+  const statusIcon = visualStatus === 'checking'
+    ? '✨'
+    : visualStatus === 'rolling'
+      ? '🎲'
+      : visualStatus === 'preparing'
+        ? '🔊'
+        : visualStatus === 'speaking'
+          ? '🗣️'
+          : '🎧';
+  const usesDice = (data.interaction?.type || 'dice') === 'dice';
 
   return (
     <motion.div
@@ -102,26 +122,50 @@ export default function GameScenePage({ data, onRollDice, onVoiceAnswer, rolling
             />
           ))}
         </motion.div>
-        <h1>{data.tema}</h1>
+        <h1>
+          {data.themeIcon && (
+            <img
+              className="theme-pixel-icon theme-pixel-icon-inline"
+              src={`/sprites/scenes/icon-${data.themeIcon}.png`}
+              alt=""
+              aria-hidden="true"
+            />
+          )}
+          {data.tema}
+        </h1>
       </motion.div>
 
       <motion.div key="pony" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="pony-card-mini">
-        <motion.img
-          src={`${API}${data.ponyImg}`}
-          alt={data.ponyName}
-          className="pony-mini-img"
-          animate={{ rotate: [-3, 3, -3] }}
-          transition={{ duration: 3, repeat: Infinity }}
-        />
+        <motion.div
+          className="pony-mini-avatar" role="img" aria-label={`${data.ponyName}, din pixelpony`}
+          animate={{ y: [0, -3, 0] }} transition={{ duration: 1.4, repeat: Infinity }}
+        >
+          <PixelPonySprite {...DEFAULT_APPEARANCE} {...avatarConfig} scale={2} />
+        </motion.div>
         <div className="pony-info">
           <strong>{data.ponyName}</strong>
           <span className="pony-type-badge">{data.ponyType}</span>
         </div>
       </motion.div>
 
-      <div className={`narration-status narration-${narrationStatus}`} role="status" aria-live="polite">
-        <span aria-hidden="true">{rolling ? '🎲' : narrationStatus === 'preparing' ? '⏳' : narrationStatus === 'speaking' ? '🔊' : '🎧'}</span>
-        {narrationLabel}
+      <div
+        className={`narration-status narration-${visualStatus}`}
+        role="status" aria-live="polite" aria-label={narrationLabel}
+      >
+        <span className="narration-status-icon" aria-hidden="true">{statusIcon}</span>
+        <div
+          className="narration-load-track" role="progressbar"
+          aria-label={narrationLabel} aria-valuemin="0" aria-valuemax="100"
+          aria-valuetext={narrationLabel}
+        >
+          <span className="narration-load-fill" />
+          {visualStatus === 'speaking' && (
+            <span className="narration-sound-waves" aria-hidden="true">
+              <i /><i /><i /><i />
+            </span>
+          )}
+        </div>
+        <span className="narration-status-text">{narrationLabel}</span>
       </div>
 
       <AnimatePresence mode="wait">
@@ -134,7 +178,7 @@ export default function GameScenePage({ data, onRollDice, onVoiceAnswer, rolling
             <div className="story-window-title">
               <span>{lastResult.success ? '✅' : '❌'}</span> {lastResult.action}
             </div>
-            <DiceRoll dice={lastResult.dice} />
+            {!!lastResult.dice?.length && <DiceRoll dice={lastResult.dice} />}
             <div className="feed-result">{lastResult.result}</div>
             {lastResult.story && <p className="feed-story">{lastResult.story}</p>}
             <SpeakButton
@@ -158,32 +202,56 @@ export default function GameScenePage({ data, onRollDice, onVoiceAnswer, rolling
               <span className="action-label">Du skal:</span>
               <span className="action-text">{data.actionText}</span>
             </div>
+            {data.interaction?.prompt && (
+              <p className="interaction-prompt">{data.interaction.prompt}</p>
+            )}
+            {data.interactionFeedback && !data.interactionProgressed && (
+              <p className="interaction-feedback" role="alert">{data.interactionFeedback}</p>
+            )}
             <div className="scene-difficulty">{data.difficulty}</div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <div className="game-controls">
+      <div className={`game-controls ${usesDice ? 'game-controls-dice' : 'game-controls-options'}`}>
         <VoiceButton
           enabled={!!data.voice?.enabled} onAnswer={handleVoiceAnswer}
-          speaking={narrationBusy} disabled={rolling}
+          speaking={narrationBusy} disabled={rolling || interactionBusy}
         />
 
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          className="btn-roll btn-roll-die"
-          onClick={onRollDice}
-          disabled={rolling || narrationBusy || activePanel === 'result'}
-          animate={{ rotate: [0, -10, 10, -10, 10, 0] }}
-          transition={{ duration: 0.5 }}
-          aria-label="Kast terningerne"
-        >
-          <span className="roll-die-face" aria-hidden="true">
-            <i className="pip pip-1" /><i className="pip pip-2" /><i className="pip pip-3" />
-            <i className="pip pip-4" /><i className="pip pip-5" />
-          </span>
-        </motion.button>
+        {usesDice ? (
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            className="btn-roll btn-roll-die"
+            onClick={onRollDice}
+            disabled={rolling || narrationBusy || activePanel === 'result'}
+            animate={{ rotate: [0, -10, 10, -10, 10, 0] }}
+            transition={{ duration: 0.5 }}
+            aria-label="Kast terningerne"
+          >
+            <span className="roll-die-face" aria-hidden="true">
+              <i className="pip pip-1" /><i className="pip pip-2" /><i className="pip pip-3" />
+              <i className="pip pip-4" /><i className="pip pip-5" />
+            </span>
+          </motion.button>
+        ) : (
+          <div className={`interaction-options interaction-${data.interaction?.type || 'choice'}`}>
+            {(data.interaction?.options || []).map(option => (
+              <motion.button
+                key={option.id} type="button" className="interaction-option"
+                style={option.color ? { '--option-color': option.color } : undefined}
+                onClick={() => onInteract(option.id)}
+                disabled={interactionBusy}
+                whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+                aria-label={`Vælg ${option.label}`}
+              >
+                <span className="interaction-option-emoji" aria-hidden="true">{option.emoji}</span>
+                <span>{option.label}</span>
+              </motion.button>
+            ))}
+          </div>
+        )}
       </div>
     </motion.div>
   );

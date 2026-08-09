@@ -272,9 +272,25 @@ body {
 }
 
 .btn-voice:disabled { opacity: 0.75; cursor: wait; }
-.voice-listening .btn-voice { background: #e53935; }
+.voice-listening .btn-voice {
+  background: #e53935;
+  animation: voice-five-second-pulse 1s ease-in-out 5;
+}
 .voice-understood .btn-voice { background: var(--color-success); }
-.voice-status { margin-top: var(--space-sm); font-size: 1.05rem; font-weight: 700; }
+.voice-status {
+  min-height: 34px;
+  margin-top: var(--space-sm);
+  font-size: 1.65rem;
+  line-height: 1;
+  filter: drop-shadow(0 2px 2px rgba(43, 25, 78, 0.3));
+}
+.voice-listening .voice-status,
+.voice-processing .voice-status { animation: narration-speaker-bounce 0.7s ease-in-out infinite alternate; }
+
+@keyframes voice-five-second-pulse {
+  0%, 100% { box-shadow: 0 0 0 8px rgba(229, 57, 53, 0.22), var(--shadow-lg); }
+  50% { box-shadow: 0 0 0 16px rgba(229, 57, 53, 0.42), var(--shadow-lg); }
+}
 .voice-transcript { opacity: 0.75; margin-top: var(--space-xs); }
 
 .btn-close {
@@ -359,6 +375,22 @@ body {
 .pony-emoji {
   font-size: 2rem;
   margin-bottom: var(--space-sm);
+}
+
+.theme-pixel-icon {
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated;
+  margin: 0 auto var(--space-sm);
+  display: block;
+}
+
+.theme-pixel-icon-inline {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 var(--space-sm) 0 0;
+  width: 28px;
+  height: 28px;
 }
 
 .pony-card h3 {
@@ -496,12 +528,6 @@ body {
   margin-bottom: var(--space-md);
 }
 
-.pony-mini-img {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-}
-
 .pony-info {
   display: flex;
   flex-direction: column;
@@ -521,8 +547,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60px;
-  height: 60px;
+  width: 72px;
+  height: 68px;
+  flex: 0 0 72px;
+  overflow: visible;
 }
 
 /* --- Pony configurator --- */
@@ -642,12 +670,15 @@ body {
 .result-window.fail { border: 4px solid var(--color-fail); }
 
 .narration-status {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto minmax(150px, 330px);
+  grid-template-rows: auto auto;
   align-items: center;
-  gap: var(--space-sm);
-  min-height: 34px;
+  column-gap: 0.7rem;
+  min-height: 58px;
+  width: min(430px, 92vw);
   margin-bottom: 0.45rem;
-  padding: 0.35rem 0.8rem;
+  padding: 0.45rem 0.85rem;
   border-radius: var(--radius-pill);
   background: rgba(255, 255, 255, 0.9);
   color: #4a3975;
@@ -655,8 +686,115 @@ body {
   box-shadow: var(--shadow-sm);
 }
 
+.narration-status-icon {
+  grid-row: 1 / 3;
+  font-size: 2rem;
+  line-height: 1;
+  filter: drop-shadow(0 2px 2px rgba(60, 35, 100, 0.18));
+}
+
+.narration-load-track {
+  position: relative;
+  height: 18px;
+  overflow: hidden;
+  border: 3px solid rgba(74, 57, 117, 0.22);
+  border-radius: var(--radius-pill);
+  background: #e8e4ef;
+  box-shadow: inset 0 2px 4px rgba(50, 35, 85, 0.16);
+}
+
+.narration-load-fill {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ffcf40, #ff8a65, #f06292);
+}
+
+.narration-status-text {
+  margin-top: 0.12rem;
+  font-size: 0.72rem;
+  line-height: 1;
+  text-align: center;
+}
+
 .narration-preparing { background: #fff4c7; }
-.narration-speaking { background: #dff6ff; color: #174f75; }
+.narration-preparing .narration-status-icon {
+  animation: narration-speaker-bounce 0.8s ease-in-out infinite alternate;
+}
+.narration-preparing .narration-load-fill {
+  background-size: 220% 100%;
+  animation:
+    narration-load-progress 1.4s cubic-bezier(0.15, 0.75, 0.25, 1) forwards,
+    narration-loading-shimmer 0.8s linear infinite;
+}
+
+.narration-speaking { background: #d9fff3; color: #12634f; }
+.narration-speaking .narration-load-fill {
+  width: 100%;
+  background: linear-gradient(90deg, #20c997, #42d9f5, #6c7cff);
+  animation: narration-speaking-glow 1.2s ease-in-out infinite alternate;
+}
+
+.narration-rolling .narration-load-fill,
+.narration-checking .narration-load-fill {
+  animation: narration-busy-sweep 1.2s ease-in-out infinite;
+}
+.narration-rolling .narration-load-fill { background: linear-gradient(90deg, #8e6cff, #d35cff); }
+.narration-checking .narration-load-fill { background: linear-gradient(90deg, #ffb42b, #54d66a); }
+
+.narration-sound-waves {
+  position: absolute;
+  inset: 2px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.narration-sound-waves i {
+  width: 4px;
+  height: 55%;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.9);
+  animation: narration-wave 0.65s ease-in-out infinite alternate;
+}
+.narration-sound-waves i:nth-child(2) { animation-delay: -0.45s; }
+.narration-sound-waves i:nth-child(3) { animation-delay: -0.25s; }
+.narration-sound-waves i:nth-child(4) { animation-delay: -0.55s; }
+
+@keyframes narration-load-progress {
+  from { width: 5%; }
+  45% { width: 64%; }
+  to { width: 94%; }
+}
+@keyframes narration-loading-shimmer {
+  from { background-position: 100% 0; }
+  to { background-position: -100% 0; }
+}
+@keyframes narration-busy-sweep {
+  0% { width: 12%; transform: translateX(-30%); }
+  55% { width: 62%; }
+  100% { width: 18%; transform: translateX(470%); }
+}
+@keyframes narration-speaker-bounce {
+  from { transform: scale(0.92) rotate(-5deg); }
+  to { transform: scale(1.08) rotate(5deg); }
+}
+@keyframes narration-speaking-glow {
+  from { filter: brightness(0.92); }
+  to { filter: brightness(1.14); }
+}
+@keyframes narration-wave {
+  from { height: 35%; }
+  to { height: 95%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .narration-load-fill,
+  .narration-status-icon,
+  .narration-sound-waves i { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
+  .narration-preparing .narration-load-fill { width: 80%; }
+}
 
 .game-controls {
   display: flex;
@@ -665,6 +803,25 @@ body {
   gap: clamp(1.5rem, 8vw, 5rem);
   width: 100%;
   min-height: 132px;
+}
+
+.game-controls-options {
+  display: grid;
+  grid-template-columns: 92px minmax(280px, 500px) 92px;
+  align-items: start;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.game-controls-options .voice-control {
+  grid-column: 1;
+  justify-self: end;
+}
+
+.game-controls-options .interaction-options {
+  grid-column: 2;
+  justify-self: center;
+  width: 100%;
 }
 
 .interaction-prompt {
@@ -714,7 +871,22 @@ body {
 
 @media (max-width: 600px) {
   .game-controls { gap: 0.8rem; }
-  .interaction-options { width: min(310px, 66vw); }
+  .game-controls-options {
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+  }
+  .game-controls-options .interaction-options {
+    grid-column: 1;
+    grid-row: 1;
+    width: min(360px, 94vw);
+  }
+  .game-controls-options .voice-control {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: center;
+    min-height: 112px;
+  }
+  .interaction-options { width: min(360px, 94vw); }
   .interaction-option { min-height: 52px; padding: 0.3rem; font-size: 0.8rem; }
 }
 
@@ -1276,4 +1448,164 @@ input:focus-visible,
     font-size: 0.9rem !important;
     padding: 0.6rem var(--space-md) !important;
   }
+}
+
+/* --- Tablet and fullscreen mode --- */
+.fullscreen-button {
+  position: fixed;
+  top: max(0.5rem, env(safe-area-inset-top));
+  left: max(0.65rem, env(safe-area-inset-left));
+  z-index: 700;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgba(255, 255, 255, 0.9);
+  border-radius: 14px;
+  background: rgba(72, 45, 120, 0.88);
+  color: #fff;
+  box-shadow: var(--shadow-md);
+  font-size: 1.7rem;
+  line-height: 1;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.fullscreen-button.is-active {
+  background: linear-gradient(135deg, #20c997, #667eea);
+}
+
+:fullscreen,
+:-webkit-full-screen {
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-body);
+}
+
+html.tablet-focus-mode,
+html.tablet-focus-mode body,
+html.tablet-focus-mode #root {
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--gradient-body);
+}
+
+.top-bar {
+  min-height: 58px;
+  padding-top: max(var(--space-sm), env(safe-area-inset-top));
+  padding-right: max(var(--space-md), env(safe-area-inset-right));
+}
+
+@media (pointer: coarse) {
+  button,
+  [role='button'] {
+    min-width: 48px;
+    min-height: 48px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .interaction-option {
+    min-height: 64px;
+    font-size: 1rem;
+  }
+
+  .volume-slider {
+    width: 130px;
+    height: 28px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1180px) {
+  .home,
+  .start-page,
+  .game-end,
+  .pixel-configurator {
+    padding: calc(4.25rem + env(safe-area-inset-top)) 1.25rem 1.25rem;
+  }
+
+  .pony-choices {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .pixel-mane-grid {
+    grid-template-columns: repeat(4, minmax(110px, 1fr));
+  }
+
+  .story-window {
+    width: min(720px, 94vw);
+  }
+
+  .interaction-options {
+    width: min(520px, 68vw);
+  }
+}
+
+/* Tablet landscape: story and controls stay visible without page scrolling. */
+@media (min-width: 700px) and (max-width: 1180px) and (max-height: 820px) and (orientation: landscape) {
+  .game {
+    display: grid;
+    grid-template-columns: minmax(190px, 28vw) minmax(430px, 680px);
+    grid-template-rows: auto auto minmax(112px, 1fr);
+    align-items: start;
+    justify-content: center;
+    gap: 0.5rem 1rem;
+    height: 100dvh;
+    padding: calc(3.9rem + env(safe-area-inset-top)) max(0.75rem, env(safe-area-inset-right)) 0.5rem max(0.75rem, env(safe-area-inset-left));
+  }
+
+  .game .scene-header {
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0;
+  }
+
+  .game .scene-header h1 { font-size: 1.25rem; }
+
+  .game .pony-card-mini {
+    grid-column: 1;
+    grid-row: 2;
+    width: 100%;
+    margin: 0;
+    padding: 0.55rem;
+  }
+
+  .game .narration-status {
+    grid-column: 1;
+    grid-row: 3;
+    width: 100%;
+    align-self: start;
+    margin: 0;
+    grid-template-columns: auto minmax(90px, 1fr);
+  }
+
+  .game > .story-window {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    width: 100%;
+    min-height: 190px;
+    max-height: min(53dvh, 370px);
+    margin: 0;
+  }
+
+  .game .game-controls {
+    grid-column: 2;
+    grid-row: 3;
+    align-self: start;
+    min-height: 108px;
+  }
+
+  .game .game-controls-options {
+    grid-template-columns: 72px minmax(300px, 480px) 72px;
+    gap: 0.5rem;
+  }
+
+  .game .voice-control { min-height: 108px; }
+  .game .btn-voice { width: 72px; height: 72px; }
+  .game .interaction-option { min-height: 56px; }
 }

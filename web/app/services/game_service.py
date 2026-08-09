@@ -4,6 +4,7 @@ Game service: orchestrates dice rolls, scene progression, and result formatting.
 
 from app.game.dice import resolve_test
 from app.game.state import create_game
+from app.data.pixel_assets import get_scene_icon
 
 
 def start_game(pony_idx, tema_idx, custom_navn=None):
@@ -41,8 +42,6 @@ def roll_scene(game):
         "stat": stat,
         "svaer": svaer,
         "dice": result["dice"],
-        "succeser": result["successes"],
-        "krav": result["required"],
         "succes": result["passed"],
         "tekst": scn["succes"] if result["passed"] else scn["fiasko"],
     }
@@ -61,6 +60,52 @@ def roll_scene(game):
         game["færdig"] = True
 
     return game
+
+
+def resolve_scene_interaction(game, selection):
+    """Validate a four-option interaction and progress only when permitted."""
+    if game.get("færdig") or "tema" not in game:
+        return game, {"accepted": False, "error": "game_finished"}
+    scenes = game["tema"].get("scener", [])
+    if game["scene"] >= len(scenes):
+        return game, {"accepted": False, "error": "scene_missing"}
+    scene = scenes[game["scene"]]
+    interaction = scene.get("interaction") or {"type": "dice"}
+    if interaction.get("type") == "dice":
+        return game, {"accepted": False, "error": "dice_required"}
+    option = next((item for item in interaction.get("options", []) if item.get("id") == selection), None)
+    if not option:
+        return game, {"accepted": False, "error": "invalid_selection"}
+
+    interaction_type = interaction["type"]
+    correct = interaction_type == "choice" or selection == interaction.get("target")
+    if not correct:
+        return game, {
+            "accepted": True, "correct": False, "progressed": False,
+            "feedback": f"Næsten! Prøv igen. {interaction['prompt']}",
+            "selection": option.get("label", selection),
+        }
+
+    if interaction_type == "choice":
+        story = f"{option.get('response', '')} {scene['succes']}".strip()
+    else:
+        story = f"Ja! Du fandt {option.get('label', selection)}. {scene['succes']}"
+    outcome = {
+        "aktion": scene["aktion"], "stat": scene["stat"], "svaer": scene["svaer"],
+        "dice": [], "succeser": 1, "krav": 1, "succes": True, "tekst": story,
+        "interaction_type": interaction_type, "selection": option.get("label", selection),
+    }
+    game["historie"].append(outcome)
+    game["udfald_tekst"] = story
+    game["succeser"] += 1
+    game["scene"] += 1
+    if game["scene"] >= len(scenes):
+        game["færdig"] = True
+    return game, {
+        "accepted": True, "correct": True, "progressed": True,
+        "feedback": f"Ja! Du valgte {option.get('label', selection)}.",
+        "selection": option.get("label", selection),
+    }
 
 
 def format_scene_data(game):
@@ -99,6 +144,7 @@ def format_scene_data(game):
         },
         "talent": pony.get("talent", ""),
         "tema": tema.get("titel", ""),
+        "themeIcon": get_scene_icon(tema.get("id", "")),
         "sceneNum": f"Scene {game['scene'] + 1} af {len(scenes)}",
         "progress": f"\U0001f31f {'\u2b50' * game['succeser']} {'\u2606' * (len(scenes) - game['succeser'] - game['fiaskoer'])} \u274c {'\U0001f494' * game['fiaskoer']}",
         "history": [],
@@ -111,6 +157,15 @@ def format_scene_data(game):
         result["actionText"] = scn.get("aktion", "")
         result["difficulty"] = diff_map.get(scn.get("svaer", ""), "")
         result["voice"] = scn.get("voice")
+        interaction = scn.get("interaction", {"type": "dice"})
+        result["interaction"] = {
+            "type": interaction.get("type", "dice"),
+            "prompt": interaction.get("prompt", ""),
+            "options": [
+                {key: option[key] for key in ("id", "label", "emoji", "color") if key in option}
+                for option in interaction.get("options", [])
+            ],
+        }
     else:
         result["sceneText"] = ""
         result["actionText"] = ""
@@ -124,6 +179,8 @@ def format_scene_data(game):
             "success": h.get("succes", False),
             "result": "\u2705 Succes!" if h.get("succes") else "\u274c Mislykket",
             "story": h.get("tekst", ""),
+            "interactionType": h.get("interaction_type", "dice"),
+            "selection": h.get("selection"),
         })
 
     # End-of-game summary
