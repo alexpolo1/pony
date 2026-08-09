@@ -17,7 +17,8 @@ export default function DiceRoll({ dice }) {
   }, [dice]);
 
   return (
-    <div className="dice-row">
+    <div className="dice-result" aria-label={`Terningerne viser ${(dice || []).join(' og ')}`}>
+      <div className="dice-row">
       <ReactDice
         ref={reactDice}
         numDice={dice?.length || 2}
@@ -34,6 +35,10 @@ export default function DiceRoll({ dice }) {
         disableRandom={true}
         defaultRoll={1}
       />
+      </div>
+      <div className="dice-values">
+        {(dice || []).map((value, index) => <span key={index}>🎲 {value}</span>)}
+      </div>
     </div>
   );
 }

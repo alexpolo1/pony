@@ -6,9 +6,9 @@ from app.game.dice import resolve_test
 from app.game.state import create_game
 
 
-def start_game(pony_idx, tema_idx):
+def start_game(pony_idx, tema_idx, custom_navn=None):
     """Start a new game. Returns game state dict."""
-    return create_game(pony_idx, tema_idx)
+    return create_game(pony_idx, tema_idx, custom_navn)
 
 
 def roll_scene(game):

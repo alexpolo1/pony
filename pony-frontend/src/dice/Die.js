@@ -41,7 +41,8 @@ export default forwardRef(function Die(props, ref) {
   };
 
   const rollDie = (value) => {
-    const rawRoll = disableRandom ? dieValue : (value || getRandomInt());
+    const hasTargetValue = Number.isFinite(Number(value));
+    const rawRoll = hasTargetValue ? Number(value) : (disableRandom ? dieValue : getRandomInt());
     const roll = Math.min(Math.max(rawRoll, 1), 6);
     setDieValue(roll);
     setHasRolled(true);

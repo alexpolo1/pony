@@ -7,8 +7,11 @@ import { motion } from 'framer-motion';
 import SceneMusic from '../SceneMusic';
 import VolumeControl from '../components/VolumeControl';
 import FloatingBg from '../components/FloatingBg';
+import Narrator from '../components/Narrator';
+import SpeakButton from '../components/SpeakButton';
 
 export default function ThemeSelectPage({ themes, selectedTheme, setSelectedTheme, volume, setVolume, onNavigate }) {
+  const choices = themes.map((theme, index) => `Mulighed ${index + 1}: ${theme.titel}.`).join(' ');
   return (
     <motion.div
       key="theme"
@@ -20,6 +23,11 @@ export default function ThemeSelectPage({ themes, selectedTheme, setSelectedThem
       className="start-page"
     >
       <SceneMusic sceneType={volume > 0 ? 'home' : 'none'} />
+      <Narrator
+        text={`Vælg et eventyr. ${choices} Tryk på billedet af det eventyr, du vil opleve.`}
+        volume={volume}
+        narrationKey={`themes-${themes.map(theme => theme.id).join('-')}`}
+      />
       <div className="top-bar">
         <VolumeControl volume={volume} onChange={setVolume} />
       </div>
@@ -30,6 +38,11 @@ export default function ThemeSelectPage({ themes, selectedTheme, setSelectedThem
       <motion.p className="page-desc" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
         Hvilken historie vil du opleve?
       </motion.p>
+      <SpeakButton
+        text={`Vælg et eventyr. ${choices}`}
+        volume={volume}
+        label="Læs alle eventyr højt"
+      />
       <div className="pony-choices">
         {themes.map((t, i) => (
           <motion.div
@@ -50,6 +63,12 @@ export default function ThemeSelectPage({ themes, selectedTheme, setSelectedThem
             <div className="pony-emoji">{t.emoji}</div>
             <h3>{t.titel}</h3>
             <p className="pony-bonus">{t.sceneCount || 5} scener</p>
+            <SpeakButton
+              text={`${t.titel}. ${t.intro || ''}`}
+              volume={volume}
+              label={`Læs eventyret ${t.titel} højt`}
+              className="card-speak-button"
+            />
           </motion.div>
         ))}
       </div>

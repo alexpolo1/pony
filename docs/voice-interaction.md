@@ -15,8 +15,10 @@ export STT_API_KEY="..."
 export STT_MODEL="whisper-1"
 ```
 
-Uden disse variabler forbliver den almindelige spilknap aktiv, og barnet får en
-venlig besked om at prøve igen. API-nøglen sendes aldrig til browseren.
+På den lokale spilserver bruges som standard den installerede
+`Systran/faster-whisper-base`-model på CPU. Lyd forlader derfor ikke maskinen.
+Servicen sætter `STT_PROVIDER=local`. En ekstern provider kan vælges med
+variablerne ovenfor; API-nøglen sendes aldrig til browseren.
 
 Den valgfrie Qwen-fallback bruger en OpenAI-kompatibel chat-endpoint:
 
@@ -28,6 +30,12 @@ export QWEN_MODEL="Qwen3.6-27B"
 
 Qwen modtager kun spørgsmålet, transskriptionen og scenens tilladte intents.
 Output valideres, og modellen kan ikke opfinde eller udføre nye handlinger.
+
+På spilserveren bruges Hermes/OpenAI-endpointet fra `HERMES_CONFIG_PATH` med
+`thinkingcap-27b`. Hermes får kun den aktive scene og en servergenereret liste
+over tilladte valg. Den kan besvare spørgsmål om scenen, vælge `wait` eller
+foreslå `roll_scene`; Flask validerer valget og er alene om at ændre spillet.
+Off-topic svar erstattes med en fast, børnevenlig besked.
 
 ## Dansk TTS
 

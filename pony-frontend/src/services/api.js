@@ -24,13 +24,16 @@ async function apiFetch(path, options = {}) {
  * Start a new game.
  * @param {number} typeIdx - pony type index
  * @param {number} temaIdx - theme index
+ * @param {string} [navn] - optional custom pony name
  * @returns {Promise<Object>} game state JSON
  */
-export async function startGame(typeIdx, temaIdx) {
+export async function startGame(typeIdx, temaIdx, navn) {
+  const body = { type: typeIdx, tema: temaIdx };
+  if (navn) body.navn = navn;
   return apiFetch('/api/start', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ type: typeIdx, tema: temaIdx }),
+    body: JSON.stringify(body),
   });
 }
 

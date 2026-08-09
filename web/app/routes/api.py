@@ -6,11 +6,12 @@ Uses game_id cookies for session persistence.
 
 import random
 
-from flask import Blueprint, current_app, request, jsonify, make_response
+from flask import Blueprint, current_app, request, jsonify, make_response, Response
 from app.services.game_service import start_game, roll_scene, format_scene_data
 from app.services.persistence import create_game, get_game, update_game, delete_game
 from app.services.speech_to_text import get_speech_to_text_provider, SpeechToTextError
-from app.services.intent_classifier import classify_with_qwen
+from app.services.text_to_speech import synthesize_danish, TextToSpeechError
+from app.services.intent_classifier import classify_with_hermes
 from app.game.voice_matcher import match_intent
 from app.data.themes import THEMAER
 from app.game.pony import PONITYPER
@@ -20,6 +21,8 @@ api_bp = Blueprint("api", __name__)
 GAME_COOKIE = "pony_game_id"
 MAX_AUDIO_BYTES = 10 * 1024 * 1024
 ALLOWED_AUDIO_TYPES = {"audio/webm", "audio/ogg", "audio/wav", "audio/x-wav"}
+MAX_NAVN_LENGTH = 20
+MAX_TTS_TEXT_LENGTH = 2000
 
 
 def _get_game_from_cookie():
@@ -41,7 +44,7 @@ def _set_game_cookie(response, game_id):
 def api_start():
     """Start a new game.
 
-    Expects JSON: {"type": <pony_idx>, "tema": <theme_idx>}
+    Expects JSON: {"type": <pony_idx>, "tema": <theme_idx>, "navn": <optional custom name>}
     Returns game state with game_id cookie.
     """
     data = request.get_json(force=True)
@@ -57,7 +60,17 @@ def api_start():
     if not (0 <= tema_idx < len(THEMAER)):
         return jsonify({"error": "Ukendt tema"}), 400
 
-    game = start_game(ponytype_idx, tema_idx)
+    custom_navn = None
+    navn = data.get("navn")
+    if navn is not None:
+        if not isinstance(navn, str):
+            return jsonify({"error": "Ugyldigt navn"}), 400
+        navn = navn.strip()
+        if len(navn) > MAX_NAVN_LENGTH:
+            return jsonify({"error": "Navnet er for langt"}), 400
+        custom_navn = navn or None
+
+    game = start_game(ponytype_idx, tema_idx, custom_navn)
     game_id = game["game_id"]
 
     # Delete old game if exists
@@ -144,6 +157,21 @@ def api_health():
     return jsonify({"ok": True, "game": "MLP Pony: Tails of Equestria"})
 
 
+@api_bp.route("/api/tts", methods=["POST"])
+def api_text_to_speech():
+    """Read child-facing text with the same Danish female voice on every device."""
+    data = request.get_json(silent=True) or {}
+    text = data.get("text")
+    if not isinstance(text, str) or not text.strip() or len(text) > MAX_TTS_TEXT_LENGTH:
+        return jsonify({"error": "invalid_text"}), 400
+    try:
+        audio = synthesize_danish(text.strip())
+    except TextToSpeechError:
+        current_app.logger.exception("Danish TTS failed")
+        return jsonify({"error": "tts_error"}), 503
+    return Response(audio, mimetype="audio/mpeg", headers={"Cache-Control": "private, max-age=86400"})
+
+
 def _active_voice_question(game):
     scenes = game.get("tema", {}).get("scener", [])
     scene_index = game.get("scene", -1)
@@ -169,13 +197,24 @@ def _handle_voice_text(game_id, game, text, scene_id=None, question_id=None, tra
     result = match_intent(text, intents)
     match_data = result.to_dict()
     current_app.logger.debug("Voice match game=%s question=%s result=%r", game_id, question["id"], match_data)
+    hermes = None
     if not result.matched:
-        llm = classify_with_qwen(question.get("text", ""), text, intents)
-        if llm and llm["confidence"] >= 0.8:
-            match_data.update({
-                "matched": True, "intent": llm["intent"], "confidence": llm["confidence"],
-                "method": "llm", "response_type": "creative_accepted",
-            })
+        hermes = classify_with_hermes(game, question, text)
+        if hermes and hermes["confidence"] >= 0.75:
+            if hermes["action"] == "choice":
+                match_data.update({
+                    "matched": True, "intent": hermes["intent"],
+                    "confidence": hermes["confidence"], "method": "hermes",
+                    "response_type": "creative_accepted",
+                })
+            else:
+                update_game(game_id, game)
+                return jsonify({"ok": True, "data": {
+                    "transcript": text, "matched": True, "intent": None,
+                    "confidence": hermes["confidence"], "response_type": "game_answer",
+                    "child_response": hermes["reply"], "next_action": None,
+                    "gameState": None, "match_method": "hermes",
+                }})
 
     selected = next((item for item in intents if item.get("id") == match_data.get("intent")), None)
     retries = game.setdefault("voice_retries", {})
@@ -188,7 +227,7 @@ def _handle_voice_text(game_id, game, text, scene_id=None, question_id=None, tra
     if match_data["matched"] and selected:
         retries[retry_key] = 0
         responses = selected.get("positive_response") or ["Ja! Lad os gøre det!"]
-        child_response = random.choice(responses)
+        child_response = hermes["reply"] if hermes and hermes.get("reply") else random.choice(responses)
         choice_id = selected.get("choice_id")
         next_action = {"type": "scene_choice", "choice_id": choice_id}
         if choice_id == "roll_scene":

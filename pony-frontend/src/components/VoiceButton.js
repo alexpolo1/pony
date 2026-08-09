@@ -17,7 +17,7 @@ function preferredMimeType() {
     .find(type => MediaRecorder.isTypeSupported(type)) || '';
 }
 
-export default function VoiceButton({ enabled, onAnswer, speaking = false }) {
+export default function VoiceButton({ enabled, onAnswer, speaking = false, disabled = false }) {
   const [status, setStatus] = useState('idle');
   const [message, setMessage] = useState('');
   const [transcript, setTranscript] = useState('');
@@ -35,11 +35,15 @@ export default function VoiceButton({ enabled, onAnswer, speaking = false }) {
     closeStream();
   }, []);
 
-  if (!enabled || !navigator.mediaDevices?.getUserMedia || !window.MediaRecorder) return null;
+  if (!enabled) return null;
 
   const start = async () => {
     if (speaking) return;
     setMessage('');
+    if (!navigator.mediaDevices?.getUserMedia || !window.MediaRecorder) {
+      setStatus('error');
+      return;
+    }
     setStatus('requesting_permission');
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -81,7 +85,7 @@ export default function VoiceButton({ enabled, onAnswer, speaking = false }) {
   };
 
   const active = status === 'listening';
-  const busy = speaking || status === 'requesting_permission' || status === 'processing';
+  const busy = disabled || speaking || status === 'requesting_permission' || status === 'processing';
   return (
     <section className={`voice-control voice-${status}`} aria-live="polite">
       <motion.button
@@ -95,7 +99,7 @@ export default function VoiceButton({ enabled, onAnswer, speaking = false }) {
       >
         {active ? '⏹️' : speaking ? '🔊' : busy ? '✨' : '🎤'}
       </motion.button>
-      <p className="voice-status">{speaking ? 'Ponyen taler...' : message || STATUS_TEXT[status]}</p>
+      <p className="voice-status">{disabled ? 'Vent på terningerne...' : speaking ? 'Ponyen taler...' : message || STATUS_TEXT[status]}</p>
       {process.env.NODE_ENV === 'development' && transcript && (
         <small className="voice-transcript">Hørt: {transcript}</small>
       )}

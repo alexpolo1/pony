@@ -11,12 +11,13 @@ from app.data.themes import THEMAER
 from app.game.pony import PONITYPER, PONYNAMNE, apply_pony_bonus
 
 
-def create_game(pony_idx, tema_idx):
+def create_game(pony_idx, tema_idx, custom_navn=None):
     """Create a new game state.
 
     Args:
         pony_idx: index into PONITYPER
         tema_idx: index into THEMAER
+        custom_navn: optional player-chosen pony name, overrides the random one
 
     Returns:
         dict with full game state
@@ -24,7 +25,7 @@ def create_game(pony_idx, tema_idx):
     pony_type = PONITYPER[pony_idx] if 0 <= pony_idx < len(PONITYPER) else PONITYPER[0]
     tema = THEMAER[tema_idx] if 0 <= tema_idx < len(THEMAER) else THEMAER[0]
 
-    name = random.choice(PONYNAMNE) + random.choice([
+    name = custom_navn or random.choice(PONYNAMNE) + random.choice([
         "hals", "støv", "ros", "vinge", "blomst", "fyr",
         "blik", "horn", "lys", "snude", "pels", "mane",
     ])

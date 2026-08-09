@@ -5,6 +5,7 @@ Integration tests: full game flow through the API with cookie-based sessions.
 import sys
 import os
 import tempfile
+from unittest.mock import patch
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
@@ -48,6 +49,26 @@ class TestGameFlow:
         r = c.get("/api/health")
         assert r.status_code == 200
         assert r.get_json()["ok"]
+
+    @patch("app.routes.api.synthesize_danish", return_value=b"fake-mp3")
+    def test_danish_tts_uses_server_voice(self, synthesize):
+        c = make_client()
+        r = c.post("/api/tts", json={"text": "Hej fra Equestria"})
+        assert r.status_code == 200
+        assert r.content_type == "audio/mpeg"
+        assert r.data == b"fake-mp3"
+        synthesize.assert_called_once_with("Hej fra Equestria")
+
+    def test_danish_tts_rejects_empty_text(self):
+        c = make_client()
+        r = c.post("/api/tts", json={"text": ""})
+        assert r.status_code == 400
+
+    def test_pony_image_is_served(self):
+        c = make_client()
+        r = c.get("/static/images/jordpony.png")
+        assert r.status_code == 200
+        assert r.content_type == "image/png"
 
     def test_invalid_pony_type(self):
         c = make_client()
@@ -93,3 +114,31 @@ class TestGameFlow:
         r = c.get("/api/scene")
         data = r.get_json()
         assert len(data["history"]) == 1
+
+    def test_custom_pony_name(self):
+        c = make_client()
+        r = c.post("/api/start", json={"type": 0, "tema": 0, "navn": "Stjerneglans"})
+        assert r.status_code == 200
+        assert r.get_json()["ponyName"] == "Stjerneglans"
+
+    def test_custom_pony_name_is_trimmed(self):
+        c = make_client()
+        r = c.post("/api/start", json={"type": 0, "tema": 0, "navn": "  Regnbue  "})
+        assert r.status_code == 200
+        assert r.get_json()["ponyName"] == "Regnbue"
+
+    def test_blank_pony_name_falls_back_to_random(self):
+        c = make_client()
+        r = c.post("/api/start", json={"type": 0, "tema": 0, "navn": "   "})
+        assert r.status_code == 200
+        assert r.get_json()["ponyName"] != ""
+
+    def test_pony_name_too_long_is_rejected(self):
+        c = make_client()
+        r = c.post("/api/start", json={"type": 0, "tema": 0, "navn": "x" * 21})
+        assert r.status_code == 400
+
+    def test_pony_name_wrong_type_is_rejected(self):
+        c = make_client()
+        r = c.post("/api/start", json={"type": 0, "tema": 0, "navn": 123})
+        assert r.status_code == 400

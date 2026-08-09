@@ -1,13 +1,14 @@
 """Replaceable speech-to-text providers.
 
-The default provider is disabled. Configure an OpenAI-compatible transcription
-endpoint with STT_BASE_URL, STT_API_KEY and optionally STT_MODEL.
+Use a local faster-whisper model or configure an OpenAI-compatible endpoint.
 """
 
 from dataclasses import asdict, dataclass
 import json
 import mimetypes
 import os
+import tempfile
+import threading
 import uuid
 from urllib import request
 
@@ -35,6 +36,58 @@ class SpeechToTextProvider:
 class DisabledSpeechToTextProvider(SpeechToTextProvider):
     def transcribe(self, audio_bytes, language="da", filename="audio.webm", content_type=None):
         raise SpeechToTextError("Speech-to-text is not configured")
+
+
+_LOCAL_MODELS = {}
+_MODEL_LOCK = threading.Lock()
+
+
+class LocalFasterWhisperProvider(SpeechToTextProvider):
+    """On-device transcription; audio and transcripts never leave the machine."""
+
+    def __init__(self, model="Systran/faster-whisper-base", device="cpu", compute_type="int8"):
+        self.model_name, self.device, self.compute_type = model, device, compute_type
+
+    def _model(self):
+        key = (self.model_name, self.device, self.compute_type)
+        with _MODEL_LOCK:
+            if key not in _LOCAL_MODELS:
+                try:
+                    from faster_whisper import WhisperModel
+                    _LOCAL_MODELS[key] = WhisperModel(
+                        self.model_name, device=self.device, compute_type=self.compute_type,
+                        local_files_only=True,
+                    )
+                except Exception as exc:
+                    raise SpeechToTextError("Local speech-to-text model could not be loaded") from exc
+        return _LOCAL_MODELS[key]
+
+    def transcribe(self, audio_bytes, language="da", filename="audio.webm", content_type=None):
+        suffix = next((ext for ext in (".webm", ".ogg", ".wav") if filename.lower().endswith(ext)), ".webm")
+        path = None
+        try:
+            with tempfile.NamedTemporaryFile(suffix=suffix, delete=False) as audio_file:
+                audio_file.write(audio_bytes)
+                path = audio_file.name
+            segments, info = self._model().transcribe(
+                path, language=language, beam_size=3, vad_filter=True,
+                condition_on_previous_text=False,
+            )
+            text = " ".join(segment.text.strip() for segment in segments).strip()
+        except SpeechToTextError:
+            raise
+        except Exception as exc:
+            raise SpeechToTextError("Local speech-to-text failed") from exc
+        finally:
+            if path:
+                try:
+                    os.unlink(path)
+                except OSError:
+                    pass
+        if not text:
+            raise SpeechToTextError("Speech-to-text returned no transcript")
+        confidence = getattr(info, "language_probability", None)
+        return Transcript(text, getattr(info, "language", language), confidence, "faster-whisper-local")
 
 
 class OpenAICompatibleSpeechToTextProvider(SpeechToTextProvider):
@@ -68,6 +121,12 @@ class OpenAICompatibleSpeechToTextProvider(SpeechToTextProvider):
 
 
 def get_speech_to_text_provider():
+    provider = os.getenv("STT_PROVIDER", "").lower()
+    if provider in {"local", "faster-whisper"}:
+        return LocalFasterWhisperProvider(
+            os.getenv("STT_MODEL", "Systran/faster-whisper-base"),
+            os.getenv("STT_DEVICE", "cpu"), os.getenv("STT_COMPUTE_TYPE", "int8"),
+        )
     base_url, api_key = os.getenv("STT_BASE_URL"), os.getenv("STT_API_KEY")
     if base_url and api_key:
         return OpenAICompatibleSpeechToTextProvider(base_url, api_key, os.getenv("STT_MODEL", "whisper-1"))

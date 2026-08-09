@@ -9,8 +9,13 @@ import VolumeControl from '../components/VolumeControl';
 import FloatingBg from '../components/FloatingBg';
 import Sparkles from '../components/Sparkles';
 import Achievements from '../components/Achievements';
+import Narrator from '../components/Narrator';
+import SpeakButton from '../components/SpeakButton';
 
-export default function HomePage({ volume, setVolume, stats, showAchievements, setShowAchievements, onNavigate }) {
+export default function HomePage({ volume, setVolume, stats, showAchievements, setShowAchievements, onNavigate, narrationEnabled = true }) {
+  const narration = showAchievements
+    ? `Statistik. Du har spillet ${stats.games} spil og vundet ${stats.wins}. Tryk på krydset for at lukke.`
+    : 'Velkommen til My Little Pony, Tails of Equestria. Tryk på den store lyserøde startknap for at vælge et eventyr.';
   return (
     <motion.div
       key="home"
@@ -22,6 +27,7 @@ export default function HomePage({ volume, setVolume, stats, showAchievements, s
       className="home"
     >
       <SceneMusic sceneType={volume > 0 ? 'home' : 'none'} />
+      <Narrator text={narration} volume={volume} narrationKey={`home-${showAchievements}`} enabled={narrationEnabled} />
       <div className="top-bar">
         <VolumeControl volume={volume} onChange={setVolume} />
         <button
@@ -83,6 +89,7 @@ export default function HomePage({ volume, setVolume, stats, showAchievements, s
         <motion.p className="home-desc" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}>
           Vælg din pony og gå på eventyr! 🎮
         </motion.p>
+        <SpeakButton text={narration} volume={volume} label="Læs forsiden højt" />
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}

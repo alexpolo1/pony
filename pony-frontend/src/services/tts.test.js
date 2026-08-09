@@ -12,6 +12,8 @@ describe('Danish text to speech', () => {
     window.speechSynthesis = {
       cancel: jest.fn(),
       getVoices: jest.fn(() => [{ lang: 'en-US' }, { lang: 'da-DK', name: 'Dansk' }]),
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
       speak: jest.fn(utterance => {
         utterance.onstart();
         utterance.onend();
@@ -29,5 +31,28 @@ describe('Danish text to speech', () => {
     expect(utterance.volume).toBe(0.6);
     expect(duckMusic.mock.calls).toContainEqual([true]);
     expect(duckMusic.mock.calls).toContainEqual([false]);
+  });
+
+  it('waits for browser voices and prefers a Danish female voice', async () => {
+    let voices = [];
+    let voicesChanged;
+    window.speechSynthesis.getVoices = jest.fn(() => voices);
+    window.speechSynthesis.addEventListener = jest.fn((event, listener) => {
+      if (event === 'voiceschanged') voicesChanged = listener;
+    });
+
+    const speaking = speakDanish('Velkommen til eventyret');
+    expect(window.speechSynthesis.speak).not.toHaveBeenCalled();
+
+    voices = [
+      { lang: 'da-DK', name: 'Jeppe' },
+      { lang: 'da-DK', name: 'Microsoft Christel Online (Natural)' },
+    ];
+    voicesChanged();
+    await speaking;
+
+    const utterance = window.speechSynthesis.speak.mock.calls[0][0];
+    expect(utterance.voice.name).toContain('Christel');
+    expect(utterance.pitch).toBe(1);
   });
 });

@@ -18,7 +18,7 @@ function loadStats() {
 }
 
 function saveStats(stats) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(stats));
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(stats)); } catch { /* ignore */ }
 }
 
 /**

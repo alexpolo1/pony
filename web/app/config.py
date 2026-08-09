@@ -16,7 +16,13 @@ def create_app(config_name=None):
     Returns:
         Configured Flask app
     """
-    app = Flask(__name__)
+    web_root = os.path.dirname(os.path.dirname(__file__))
+    app = Flask(
+        __name__,
+        static_folder=os.path.join(web_root, "static"),
+        static_url_path="/static",
+        template_folder=os.path.join(web_root, "templates"),
+    )
 
     # Secret key
     app.secret_key = os.environ.get("FLASK_SECRET_KEY", "equestria_magic_key_12345")

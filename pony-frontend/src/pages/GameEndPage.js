@@ -8,9 +8,13 @@ import SceneMusic from '../SceneMusic';
 import VolumeControl from '../components/VolumeControl';
 import Confetti from '../components/Confetti';
 import DiceRoll from '../components/DiceRoll';
+import Narrator from '../components/Narrator';
+import { buildEndNarration } from '../services/narration';
+import SpeakButton from '../components/SpeakButton';
 
-export default function GameEndPage({ data, onNavigate }) {
+export default function GameEndPage({ data, onNavigate, volume, setVolume }) {
   const sceneType = data.victory ? 'victory' : data.mixed ? 'mixed' : 'defeat';
+  const narration = buildEndNarration(data);
 
   return (
     <motion.div
@@ -23,8 +27,9 @@ export default function GameEndPage({ data, onNavigate }) {
       className="game-end"
     >
       <SceneMusic sceneType={sceneType} />
+      <Narrator text={narration} volume={volume} narrationKey="game-end" delayMs={1650} />
       <div className="top-bar">
-        <VolumeControl volume={0.5} onChange={() => {}} />
+        <VolumeControl volume={volume} onChange={setVolume} />
       </div>
       {data.victory && <Confetti />}
       <motion.h1
@@ -50,6 +55,7 @@ export default function GameEndPage({ data, onNavigate }) {
       >
         {data.score}
       </motion.p>
+      <SpeakButton text={narration} volume={volume} label="Læs afslutningen højt" />
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -66,6 +72,12 @@ export default function GameEndPage({ data, onNavigate }) {
             className={`history-item ${item.success ? 'success' : 'fail'}`}
           >
             <div className="history-action">{item.action}</div>
+            <SpeakButton
+              text={`Terningerne viser ${item.dice.join(' og ')}. ${item.result} ${item.story || ''}`}
+              volume={volume}
+              label={`Læs resultat ${i + 1} højt`}
+              className="inline-speak-button"
+            />
             <DiceRoll dice={item.dice} />
             <div className="history-result">{item.result}</div>
             {item.story && <p className="history-story">{item.story}</p>}

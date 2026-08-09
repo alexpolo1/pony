@@ -1,4 +1,17 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
+
+function readStorage(key, fallback) {
+  try {
+    const value = window.localStorage.getItem(key);
+    return value === null ? fallback : value;
+  } catch {
+    return fallback;
+  }
+}
+
+function writeStorage(key, value) {
+  try { window.localStorage.setItem(key, value); } catch { /* storage may be blocked */ }
+}
 
 /**
  * AudioManager — singleton that manages the shared Web Audio API context.
@@ -17,18 +30,29 @@ class AudioManager {
     this.musicGain = null;
     this.sfxGain = null;
     this.activeNodes = [];
-    this._musicVolume = parseFloat(localStorage.getItem('pony_music_vol')) || 0.5;
-    this._sfxVolume = parseFloat(localStorage.getItem('pony_sfx_vol')) || 0.7;
-    this._muted = localStorage.getItem('pony_muted') === 'true';
+    this._musicVolume = parseFloat(readStorage('pony_music_vol', '0.5'));
+    this._sfxVolume = parseFloat(readStorage('pony_sfx_vol', '0.7'));
+    this._muted = readStorage('pony_muted', 'false') === 'true';
+    this.unsupported = false;
   }
 
   init() {
-    if (this.ctx) return;
+    if (this.ctx || this.unsupported) return !!this.ctx;
     const AC = window.AudioContext || window.webkitAudioContext;
-    this.ctx = new AC();
-    this.masterGain = this.ctx.createGain();
-    this.musicGain = this.ctx.createGain();
-    this.sfxGain = this.ctx.createGain();
+    if (!AC) {
+      this.unsupported = true;
+      return false;
+    }
+    try {
+      this.ctx = new AC();
+      this.masterGain = this.ctx.createGain();
+      this.musicGain = this.ctx.createGain();
+      this.sfxGain = this.ctx.createGain();
+    } catch {
+      this.ctx = this.masterGain = this.musicGain = this.sfxGain = null;
+      this.unsupported = true;
+      return false;
+    }
 
     this.musicGain.gain.value = this._muted ? 0 : this._musicVolume;
     this.sfxGain.gain.value = this._muted ? 0 : this._sfxVolume;
@@ -36,6 +60,7 @@ class AudioManager {
     this.musicGain.connect(this.masterGain);
     this.sfxGain.connect(this.masterGain);
     this.masterGain.connect(this.ctx.destination);
+    return true;
   }
 
   get() {
@@ -50,7 +75,7 @@ class AudioManager {
 
   setMusicVolume(v) {
     this._musicVolume = v;
-    localStorage.setItem('pony_music_vol', String(v));
+    writeStorage('pony_music_vol', String(v));
     if (this.musicGain) {
       const vol = this._muted ? 0 : v;
       this.musicGain.gain.linearRampToValueAtTime(vol, this.ctx?.currentTime + 0.1 || 0.1);
@@ -66,7 +91,7 @@ class AudioManager {
 
   setSfxVolume(v) {
     this._sfxVolume = v;
-    localStorage.setItem('pony_sfx_vol', String(v));
+    writeStorage('pony_sfx_vol', String(v));
     if (this.sfxGain) {
       const vol = this._muted ? 0 : v;
       this.sfxGain.gain.linearRampToValueAtTime(vol, this.ctx?.currentTime + 0.1 || 0.1);
@@ -75,7 +100,7 @@ class AudioManager {
 
   setMuted(muted) {
     this._muted = muted;
-    localStorage.setItem('pony_muted', muted ? 'true' : 'false');
+    writeStorage('pony_muted', muted ? 'true' : 'false');
     if (this.musicGain) {
       this.musicGain.gain.linearRampToValueAtTime(muted ? 0 : this._musicVolume, this.ctx.currentTime + 0.1);
     }
@@ -86,13 +111,14 @@ class AudioManager {
 
   resume() {
     this.init();
-    if (this.ctx.state === 'suspended') {
-      this.ctx.resume();
+    if (this.ctx?.state === 'suspended') {
+      this.ctx.resume().catch(() => {});
     }
   }
 
   scheduleNote(freq, startTime, duration, gainNode, type = 'sine') {
     const { ctx } = this.get();
+    if (!ctx || !gainNode) return;
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
     osc.type = type;
@@ -118,6 +144,7 @@ const audioManager = new AudioManager();
 
 export function playClick() {
   const { ctx, sfx } = audioManager.get();
+  if (!ctx || !sfx) return;
   const t = ctx.currentTime;
   const o = ctx.createOscillator();
   const g = ctx.createGain();
@@ -131,6 +158,7 @@ export function playClick() {
 
 export function playRoll() {
   const { ctx, sfx } = audioManager.get();
+  if (!ctx || !sfx) return;
   for (let i = 0; i < 5; i++) {
     const t = ctx.currentTime + i * 0.04;
     const o = ctx.createOscillator();
@@ -145,6 +173,7 @@ export function playRoll() {
 
 export function playSuccess() {
   const { ctx, sfx } = audioManager.get();
+  if (!ctx || !sfx) return;
   [523, 659, 784].forEach((f, i) => {
     const t = ctx.currentTime + i * 0.1;
     const o = ctx.createOscillator();
@@ -159,6 +188,7 @@ export function playSuccess() {
 
 export function playFail() {
   const { ctx, sfx } = audioManager.get();
+  if (!ctx || !sfx) return;
   [392, 349, 311].forEach((f, i) => {
     const t = ctx.currentTime + i * 0.12;
     const o = ctx.createOscillator();
@@ -173,6 +203,7 @@ export function playFail() {
 
 export function playSelect() {
   const { ctx, sfx } = audioManager.get();
+  if (!ctx || !sfx) return;
   const t = ctx.currentTime;
   const o = ctx.createOscillator();
   const g = ctx.createGain();
@@ -187,6 +218,7 @@ export function playSelect() {
 
 export function playVictory() {
   const { ctx, sfx } = audioManager.get();
+  if (!ctx || !sfx) return;
   [523, 659, 784, 1047].forEach((f, i) => {
     const t = ctx.currentTime + i * 0.15;
     const o = ctx.createOscillator();
@@ -235,12 +267,14 @@ function SceneMusic({ sceneType, onReady }) {
   const melodyGainRef = useRef(null);
   const activeNodesRef = useRef([]);
   const intervalRef = useRef(null);
+  const startTimeoutRef = useRef(null);
   const currentSceneRef = useRef(sceneType);
   const isPlayingRef = useRef(false);
 
   const initAudio = useCallback(() => {
     audioManager.init();
     const { ctx, music } = audioManager.get();
+    if (!ctx || !music) return false;
     const padGain = ctx.createGain();
     padGain.gain.value = 0;
     padGain.connect(music);
@@ -250,6 +284,7 @@ function SceneMusic({ sceneType, onReady }) {
     melodyGain.connect(music);
     melodyGainRef.current = melodyGain;
     onReady && onReady(true);
+    return true;
   }, [onReady]);
 
   const playNote = useCallback((freq, startTime, duration, gainNode, type = 'sine') => {
@@ -318,7 +353,7 @@ function SceneMusic({ sceneType, onReady }) {
   }, [playNote]);
 
   const startMusic = useCallback(() => {
-    if (isPlayingRef.current) return;
+    if (isPlayingRef.current || !audioManager.ctx || !melodyGainRef.current) return;
     isPlayingRef.current = true;
     const config = SCENE_CONFIGS[currentSceneRef.current] || SCENE_CONFIGS.game;
     const intervalMs = (60 / config.bpm) * 1000;
@@ -334,7 +369,8 @@ function SceneMusic({ sceneType, onReady }) {
   const stopMusic = useCallback(() => {
     isPlayingRef.current = false;
     if (intervalRef.current) { clearInterval(intervalRef.current); intervalRef.current = null; }
-    if (melodyGainRef.current) {
+    if (startTimeoutRef.current) { clearTimeout(startTimeoutRef.current); startTimeoutRef.current = null; }
+    if (melodyGainRef.current && audioManager.ctx) {
       melodyGainRef.current.gain.linearRampToValueAtTime(0, audioManager.ctx.currentTime + 1);
     }
     activeNodesRef.current.filter(n => n.type === 'padInterval').forEach(n => { clearInterval(n.id); });
@@ -344,10 +380,10 @@ function SceneMusic({ sceneType, onReady }) {
   useEffect(() => {
     currentSceneRef.current = sceneType;
     if (sceneType === 'none') { stopMusic(); return; }
-    if (!padGainRef.current) { initAudio(); }
-    if (audioManager.ctx && audioManager.ctx.state === 'suspended') { audioManager.ctx.resume(); }
+    if (!padGainRef.current && !initAudio()) return;
+    if (audioManager.ctx?.state === 'suspended') { audioManager.ctx.resume().catch(() => {}); }
     stopMusic();
-    setTimeout(startMusic, 100);
+    startTimeoutRef.current = setTimeout(startMusic, 100);
   }, [sceneType, initAudio, startMusic, stopMusic]);
 
   useEffect(() => {

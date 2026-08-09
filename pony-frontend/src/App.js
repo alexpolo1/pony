@@ -5,8 +5,12 @@ import TutorialOverlay from './components/TutorialOverlay';
 import HomePage from './pages/HomePage';
 import ThemeSelectPage from './pages/ThemeSelectPage';
 import PonySelectPage from './pages/PonySelectPage';
+import PixelPonyConfiguratorPage from './pages/PixelPonyConfiguratorPage';
 import GameScenePage from './pages/GameScenePage';
 import GameEndPage from './pages/GameEndPage';
+import Narrator from './components/Narrator';
+import { prepareDanishSpeech } from './services/tts';
+import { buildResultNarration } from './services/narration';
 import * as api from './services/api';
 import * as achievements from './services/achievements';
 import './App.css';
@@ -18,6 +22,8 @@ const DEFAULT_PONIES = [
   { navn: 'Enhjørning', emoji: '🦄', img: 'enhjorning.png', bonus: 'Magisk horn ✨', color: '#9370DB', diceBonus: 2 },
   { name: 'Alicorn',   emoji: '👑', img: 'alicorn.png',   bonus: 'Magi + vinger 🌟', color: '#FFD700', diceBonus: 2 },
 ];
+
+const wait = milliseconds => new Promise(resolve => window.setTimeout(resolve, milliseconds));
 
 // Achievement hook — thin wrapper around the service
 function useAchievements() {
@@ -38,12 +44,13 @@ function useAchievements() {
 // Tutorial hook
 function useTutorial() {
   const [shown, setShown] = useState(() => {
-    return localStorage.getItem('pony_tutorial_seen') === 'true';
+    try { return localStorage.getItem('pony_tutorial_seen') === 'true'; }
+    catch { return false; }
   });
 
   const markSeen = useCallback(() => {
     setShown(true);
-    localStorage.setItem('pony_tutorial_seen', 'true');
+    try { localStorage.setItem('pony_tutorial_seen', 'true'); } catch { /* ignore */ }
   }, []);
 
   return { shown, markSeen };
@@ -86,7 +93,7 @@ function App() {
     }
   }, [isGameEnd, data]);
 
-  const handleStartGame = async (typeIdx) => {
+  const handleSelectPonyType = async (typeIdx) => {
     playSelect();
     setLoading(true);
     setError(null);
@@ -106,7 +113,15 @@ function App() {
     setDiceRolling(true);
     setLoading(true);
     try {
-      const json = await api.rollDice();
+      const rollRequest = api.rollDice().then(json => {
+        const lastResult = json.history?.[json.history.length - 1];
+        prepareDanishSpeech(buildResultNarration(lastResult));
+        return json;
+      });
+      const [json] = await Promise.all([
+        rollRequest,
+        wait(900),
+      ]);
       setData(json);
       const lastResult = json.history && json.history[json.history.length - 1];
       if (lastResult) {
@@ -140,7 +155,15 @@ function App() {
     setDiceRolling(true);
     setLoading(true);
     try {
-      const json = await api.rollDice();
+      const rollRequest = api.rollDice().then(json => {
+        const lastResult = json.history?.[json.history.length - 1];
+        prepareDanishSpeech(buildResultNarration(lastResult));
+        return json;
+      });
+      const [json] = await Promise.all([
+        rollRequest,
+        wait(900),
+      ]);
       setData(json);
       const lastResult = json.history && json.history[json.history.length - 1];
       if (lastResult) {
@@ -174,10 +197,16 @@ function App() {
   };
 
   // === LOADING ===
-  if (loading) {
+  if (loading && !diceRolling) {
     return (
       <div className="loading-screen">
         <SceneMusic sceneType="none" />
+        <Narrator
+          text="Et lille øjeblik. Spillet gør klar."
+          volume={volume}
+          narrationKey="loading"
+          enabled={!diceRolling}
+        />
         <motion.div
           animate={{ rotate: 360, scale: [1, 1.3, 1] }}
           transition={{ duration: 1, repeat: Infinity, ease: 'easeInOut' }}
@@ -197,6 +226,11 @@ function App() {
     const isMidGame = page === 'game' && data;
     return (
       <div className="error-screen">
+        <Narrator
+          text="Hov, noget gik galt. Tryk på prøv igen, eller gå tilbage til forsiden."
+          volume={volume}
+          narrationKey="error"
+        />
         <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}>
           <p>❌ {error}</p>
         </motion.div>
@@ -250,7 +284,7 @@ function App() {
       {/* Tutorial overlay */}
       {!tutorialShown && soundEnabled && !showAchievements && (
         <AnimatePresence>
-          <TutorialOverlay onClose={handleTutorialClose} />
+          <TutorialOverlay onClose={handleTutorialClose} volume={volume} />
         </AnimatePresence>
       )}
 
@@ -265,6 +299,7 @@ function App() {
               showAchievements={showAchievements}
               setShowAchievements={setShowAchievements}
               onNavigate={navigateTo}
+              narrationEnabled={tutorialShown || showAchievements}
             />
           )}
 
@@ -282,7 +317,7 @@ function App() {
           {page === 'start' && (
             <PonySelectPage
               ponies={content.ponies}
-              onStartGame={handleStartGame}
+              onSelectType={handleSelectPonyType}
               volume={volume}
               setVolume={setVolume}
               onNavigate={navigateTo}
@@ -294,6 +329,7 @@ function App() {
               data={data}
               onRollDice={handleRollDice}
               onVoiceAnswer={handleVoiceAnswer}
+              rolling={diceRolling}
               volume={volume}
               setVolume={setVolume}
             />
@@ -302,6 +338,8 @@ function App() {
           {isGameEnd && (
             <GameEndPage
               data={data}
+              volume={volume}
+              setVolume={setVolume}
               onNavigate={(p) => {
                 if (p === 'start') {
                   setData(null);
