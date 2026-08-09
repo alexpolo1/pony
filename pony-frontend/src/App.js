@@ -6,12 +6,25 @@ import './App.css';
 
 const API = window.location.origin.replace('3001', '8082');
 
-const PONIES = [
+// Fallback pony data if API fails to load
+const DEFAULT_PONIES = [
   { navn: 'Jordpony',  emoji: '🐴', img: 'jordpony.png',  bonus: 'Stærk 💪', color: '#8B4513', diceBonus: 1 },
   { navn: 'Pegasus',   emoji: '🦅', img: 'pegasus.png',   bonus: 'Flyver 🪽', color: '#87CEEB', diceBonus: 1 },
   { navn: 'Enhjørning', emoji: '🦄', img: 'enhjorning.png', bonus: 'Magisk horn ✨', color: '#9370DB', diceBonus: 2 },
-  { navn: 'Alicorn',   emoji: '👑', img: 'alicorn.png',   bonus: 'Magi + vinger 🌟', color: '#FFD700', diceBonus: 2 },
+  { name: 'Alicorn',   emoji: '👑', img: 'alicorn.png',   bonus: 'Magi + vinger 🌟', color: '#FFD700', diceBonus: 2 },
 ];
+
+// Fetch content (ponies + themes) from backend
+async function loadContent() {
+  try {
+    const r = await fetch(`${API}/api/content`);
+    if (r.ok) {
+      const data = await r.json();
+      return { ponies: data.ponies, themes: data.themes };
+    }
+  } catch (e) { /* fall through */ }
+  return { ponies: DEFAULT_PONIES, themes: [] };
+}
 
 // Achievement system
 function useAchievements() {
@@ -290,9 +303,16 @@ function App() {
   const [volume, setVolume] = useState(0.5);
   const [showAchievements, setShowAchievements] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(false);
+  const [selectedTheme, setSelectedTheme] = useState(0);
+  const [content, setContent] = useState({ ponies: DEFAULT_PONIES, themes: [] });
   const scrollRef = useRef(null);
   const { stats, recordGame } = useAchievements();
   const { shown: tutorialShown, markSeen } = useTutorial();
+
+  // Load content from backend on mount
+  useEffect(() => {
+    loadContent().then(setContent);
+  }, []);
 
   // Auto-scroll history feed
   useEffect(() => {
@@ -320,7 +340,7 @@ function App() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
-        body: JSON.stringify({ type: typeIdx, tema: 0 })
+        body: JSON.stringify({ type: typeIdx, tema: selectedTheme })
       });
       if (!r.ok) throw new Error('Server fejl');
       const json = await r.json();
@@ -475,7 +495,7 @@ function App() {
       {/* Tutorial overlay */}
       {!tutorialShown && soundEnabled && !showAchievements && (
         <AnimatePresence>
-          <TutorialOverlay onClose={() => { markSeen(); navigateTo('start'); }} />
+          <TutorialOverlay onClose={() => { markSeen(); setSelectedTheme(0); navigateTo('theme'); }} />
         </AnimatePresence>
       )}
 
@@ -556,12 +576,63 @@ function App() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               className="btn-start"
-              onClick={() => navigateTo('start')}
+              onClick={() => { setSelectedTheme(0); navigateTo('theme'); }}
               aria-label="Start nyt spil"
             >
               🎮 Start Nyt Spil!
             </motion.button>
           </motion.div>
+        </motion.div>
+      )}
+
+      {/* CHOOSE THEME */}
+      {page === 'theme' && soundEnabled && (
+        <motion.div
+          key="theme"
+          variants={pageVariants}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          transition={{ duration: 0.4 }}
+          className="start-page"
+        >
+          <SceneMusic sceneType={volume > 0 ? 'home' : 'none'} />
+          <div className="top-bar">
+            <VolumeControl volume={volume} onChange={setVolume} />
+          </div>
+          <FloatingBg />
+          <motion.h1 initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="title">
+            Vælg et eventyr! 📖
+          </motion.h1>
+          <motion.p className="page-desc" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
+            Hvilken historie vil du opleve?
+          </motion.p>
+          <div className="pony-choices">
+            {content.themes.map((t, i) => (
+              <motion.div
+                key={t.id || i}
+                whileHover={{ scale: 1.08, y: -8 }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.15 }}
+                className="pony-card"
+                style={{ borderColor: selectedTheme === i ? '#f093fb' : 'transparent' }}
+                onClick={() => { setSelectedTheme(i); navigateTo('start'); }}
+                role="button"
+                tabIndex={0}
+                aria-label={`Vælg ${t.titel}`}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { setSelectedTheme(i); navigateTo('start'); } }}
+              >
+                <div className="pony-emoji">{t.emoji}</div>
+                <h3>{t.titel}</h3>
+                <p className="pony-bonus">{t.sceneCount || 5} scener</p>
+              </motion.div>
+            ))}
+          </div>
+          <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} className="btn-back" onClick={() => navigateTo('home')} aria-label="Tilbage til forsiden">
+            Tilbage
+          </motion.button>
         </motion.div>
       )}
 
@@ -588,7 +659,7 @@ function App() {
             Hver pony har sine egne superkræfter!
           </motion.p>
           <div className="pony-choices">
-            {PONIES.map((p, i) => (
+            {content.ponies.map((p, i) => (
               <motion.div
                 key={p.navn}
                 whileHover={{ scale: 1.08, y: -8, rotate: [0, -2, 2, 0] }}

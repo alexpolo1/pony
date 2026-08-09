@@ -7,6 +7,8 @@ Uses game_id cookies for session persistence.
 from flask import Blueprint, request, jsonify, make_response
 from app.services.game_service import start_game, roll_scene, format_scene_data
 from app.services.persistence import create_game, get_game, update_game, delete_game
+from app.data.themes import THEMAER
+from app.game.pony import PONITYPER
 
 api_bp = Blueprint("api", __name__)
 
@@ -14,7 +16,7 @@ GAME_COOKIE = "pony_game_id"
 
 
 def _get_game_from_cookie():
-    """Get game from cookie, return (response_modifier, game) tuple."""
+    """Get game from cookie, return (game_id, game) tuple."""
     game_id = request.cookies.get(GAME_COOKIE)
     if not game_id:
         return None, None
@@ -90,6 +92,37 @@ def api_reset():
     resp = make_response(jsonify({"ok": True}))
     resp.delete_cookie(GAME_COOKIE)
     return resp
+
+
+@api_bp.route("/api/content", methods=["GET"])
+def api_content():
+    """Get all game metadata: pony types and themes.
+
+    Used by frontend to render selection pages dynamically.
+    """
+    return jsonify({
+        "ponies": [
+            {
+                "id": p["id"],
+                "navn": p["navn"],
+                "emoji": p["emoji"],
+                "bonus": p["bonus"],
+                "tekst": p["tekst"],
+                "img": p["img"],
+            }
+            for p in PONITYPER
+        ],
+        "themes": [
+            {
+                "id": t["id"],
+                "titel": t["titel"],
+                "emoji": t.get("emoji", ""),
+                "intro": t.get("intro", ""),
+                "sceneCount": len(t.get("scener", [])),
+            }
+            for t in THEMAER
+        ],
+    })
 
 
 @api_bp.route("/api/health", methods=["GET"])
