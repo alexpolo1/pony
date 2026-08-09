@@ -29,6 +29,8 @@ class AudioManager {
     this.masterGain = null;
     this.musicGain = null;
     this.sfxGain = null;
+    this.narrationGain = null;
+    this.activeNarration = null;
     this.activeNodes = [];
     this._musicVolume = parseFloat(readStorage('pony_music_vol', '0.5'));
     this._sfxVolume = parseFloat(readStorage('pony_sfx_vol', '0.7'));
@@ -48,17 +50,20 @@ class AudioManager {
       this.masterGain = this.ctx.createGain();
       this.musicGain = this.ctx.createGain();
       this.sfxGain = this.ctx.createGain();
+      this.narrationGain = this.ctx.createGain();
     } catch {
-      this.ctx = this.masterGain = this.musicGain = this.sfxGain = null;
+      this.ctx = this.masterGain = this.musicGain = this.sfxGain = this.narrationGain = null;
       this.unsupported = true;
       return false;
     }
 
     this.musicGain.gain.value = this._muted ? 0 : this._musicVolume;
     this.sfxGain.gain.value = this._muted ? 0 : this._sfxVolume;
+    this.narrationGain.gain.value = this._muted ? 0 : 1;
 
     this.musicGain.connect(this.masterGain);
     this.sfxGain.connect(this.masterGain);
+    this.narrationGain.connect(this.masterGain);
     this.masterGain.connect(this.ctx.destination);
     return true;
   }
@@ -107,6 +112,9 @@ class AudioManager {
     if (this.sfxGain) {
       this.sfxGain.gain.linearRampToValueAtTime(muted ? 0 : this._sfxVolume, this.ctx.currentTime + 0.1);
     }
+    if (this.narrationGain) {
+      this.narrationGain.gain.linearRampToValueAtTime(muted ? 0 : 1, this.ctx.currentTime + 0.1);
+    }
   }
 
   resume() {
@@ -114,6 +122,58 @@ class AudioManager {
     if (this.ctx?.state === 'suspended') {
       this.ctx.resume().catch(() => {});
     }
+  }
+
+  stopNarration() {
+    if (!this.activeNarration) return;
+    const source = this.activeNarration;
+    this.activeNarration = null;
+    if (source._ponyEndTimer) clearTimeout(source._ponyEndTimer);
+    source.onended = null;
+    try { source.stop(); } catch { /* already stopped */ }
+    try { source.disconnect(); } catch { /* already disconnected */ }
+  }
+
+  async playNarration(blob, volume, onStart, onEnd) {
+    this.resume();
+    const { ctx } = this.get();
+    if (!ctx || !this.narrationGain) throw new Error('Web Audio er ikke tilgængelig');
+    if (ctx.state === 'suspended') {
+      await Promise.race([
+        ctx.resume(),
+        new Promise((_, reject) => setTimeout(
+          () => reject(new Error('Web Audio blev ikke frigivet af browseren')),
+          1200,
+        )),
+      ]);
+    }
+    if (ctx.state !== 'running') throw new Error('Web Audio kunne ikke starte');
+    const encoded = await blob.arrayBuffer();
+    const buffer = await ctx.decodeAudioData(encoded.slice(0));
+    this.stopNarration();
+    const source = ctx.createBufferSource();
+    source.buffer = buffer;
+    this.narrationGain.gain.value = this._muted ? 0 : Math.min(1, Math.max(0, volume));
+    source.connect(this.narrationGain);
+    let finished = false;
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      if (source._ponyEndTimer) clearTimeout(source._ponyEndTimer);
+      if (this.activeNarration === source) this.activeNarration = null;
+      try { source.disconnect(); } catch { /* already disconnected */ }
+      onEnd?.();
+    };
+    source.onended = finish;
+    this.activeNarration = source;
+    source.start(0);
+    // A few tablet browsers occasionally omit AudioBufferSourceNode.onended.
+    source._ponyEndTimer = setTimeout(() => {
+      try { source.stop(); } catch { /* already stopped */ }
+      finish();
+    }, Math.max(1500, (buffer.duration + 1.5) * 1000));
+    onStart?.();
+    return source;
   }
 
   scheduleNote(freq, startTime, duration, gainNode, type = 'sine') {
@@ -243,6 +303,14 @@ export function resumeAudioContext() {
 
 export function duckMusic(ducked) {
   audioManager.duckMusic(ducked);
+}
+
+export function playNarrationBlob(blob, volume, onStart, onEnd) {
+  return audioManager.playNarration(blob, volume, onStart, onEnd);
+}
+
+export function stopNarration() {
+  audioManager.stopNarration();
 }
 
 // ---- Music component (uses musicGain) ----

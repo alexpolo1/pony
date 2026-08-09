@@ -5,6 +5,7 @@ Uses game_id cookies for session persistence.
 """
 
 import random
+import re
 
 from flask import Blueprint, current_app, request, jsonify, make_response, Response
 from app.services.game_service import start_game, roll_scene, resolve_scene_interaction, format_scene_data
@@ -24,6 +25,10 @@ MAX_AUDIO_BYTES = 10 * 1024 * 1024
 ALLOWED_AUDIO_TYPES = {"audio/webm", "audio/ogg", "audio/wav", "audio/x-wav"}
 MAX_NAVN_LENGTH = 20
 MAX_TTS_TEXT_LENGTH = 2000
+NON_CONTINUING_REPLY = re.compile(
+    r"\b(?:vent|vente|venter|prøv igen|gæt igen|når du er klar|svar igen|svare igen)\b",
+    re.IGNORECASE,
+)
 
 
 def _get_game_from_cookie():
@@ -249,6 +254,21 @@ def _progress_after_voice(game, preferred_choice_id=None):
     return game, state, action
 
 
+def _continuation_safe_reply(reply, interaction_type):
+    """Never tell the child to wait when voice input always advances the game."""
+    if not NON_CONTINUING_REPLY.search(reply):
+        return reply
+    replacements = {
+        "color": "Farverne laver vist regnbueballade! Ponyerne finder den rigtige farve sammen, og eventyret suser videre.",
+        "number": "Tallene leger gemmeleg! Ponyerne finder det rigtige tal sammen, og eventyret suser videre.",
+        "memory": "Hukommelsen gemmer sig vist under en ponyhale! Ponyerne finder tallet sammen, og eventyret suser videre.",
+    }
+    return replacements.get(
+        interaction_type,
+        "Sikke en sjov ponytanke! Ponyerne fniser, og eventyret suser videre.",
+    )
+
+
 def _handle_voice_text(game_id, game, text, scene_id=None, question_id=None, transcript_meta=None):
     question = _active_voice_question(game)
     if not question:
@@ -313,6 +333,7 @@ def _handle_voice_text(game_id, game, text, scene_id=None, question_id=None, tra
     if (interaction.get("type") not in {"dice", "choice"}
             and preferred_choice_id and preferred_choice_id != target_choice):
         child_response = "Det var et sjovt bud! Ponyerne fniser og finder løsningen sammen med dig."
+    child_response = _continuation_safe_reply(child_response, interaction.get("type", "dice"))
 
     game, game_state, next_action = _progress_after_voice(game, preferred_choice_id)
     update_game(game_id, game)

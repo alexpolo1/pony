@@ -9,7 +9,7 @@ import VolumeControl from '../components/VolumeControl';
 import Confetti from '../components/Confetti';
 import DiceRoll from '../components/DiceRoll';
 import Narrator from '../components/Narrator';
-import { buildEndNarration } from '../services/narration';
+import { buildEndNarration, buildResultNarration } from '../services/narration';
 import SpeakButton from '../components/SpeakButton';
 
 export default function GameEndPage({ data, onNavigate, volume, setVolume }) {
@@ -37,7 +37,7 @@ export default function GameEndPage({ data, onNavigate, volume, setVolume }) {
         animate={{ opacity: 1, scale: 1 }}
         className="end-title"
       >
-        {data.victory ? '🌟 SEJR! 🌟' : data.mixed ? '⚖️ Blant resultat! ⚖️' : '💪 Prøv igen! 💪'}
+        {data.victory ? '🌟 SEJR! 🌟' : '🌈 FLOT EVENTYR! 🌈'}
       </motion.h1>
       <motion.p
         initial={{ opacity: 0 }}
@@ -73,12 +73,12 @@ export default function GameEndPage({ data, onNavigate, volume, setVolume }) {
           >
             <div className="history-action">{item.action}</div>
             <SpeakButton
-              text={`Terningerne viser ${item.dice.join(' og ')}. ${item.result} ${item.story || ''}`}
+              text={buildResultNarration(item)}
               volume={volume}
               label={`Læs resultat ${i + 1} højt`}
               className="inline-speak-button"
             />
-            <DiceRoll dice={item.dice} />
+            {!!item.dice?.length && <DiceRoll dice={item.dice} />}
             <div className="history-result">{item.result}</div>
             {item.story && <p className="history-story">{item.story}</p>}
           </motion.div>

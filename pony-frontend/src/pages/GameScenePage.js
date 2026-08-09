@@ -36,7 +36,7 @@ export default function GameScenePage({
     const hasNewResult = historyLength > previousHistoryLength.current;
     previousHistoryLength.current = historyLength;
     const resultNarration = hasNewResult ? buildResultNarration(lastResult) : '';
-    const sceneNarration = buildCurrentSceneNarration(data);
+    const sceneNarration = buildCurrentSceneNarration(data, { afterResult: !!resultNarration });
 
     // Generate both clips while the dice animation/result is visible.
     prepareDanishSpeech(resultNarration);
@@ -45,11 +45,13 @@ export default function GameScenePage({
     const narrate = async () => {
       if (resultNarration) {
         setActivePanel('result');
-        await speakDanish(resultNarration, volume);
+        try { await speakDanish(resultNarration, volume); }
+        catch { /* the next scene must still be introduced */ }
       }
       if (cancelled) return;
       setActivePanel('scene');
-      await speakDanish(sceneNarration, volume);
+      try { await speakDanish(sceneNarration, volume); }
+      catch { /* controls remain usable if narration is unavailable */ }
     };
     narrate();
     return () => {
@@ -176,7 +178,7 @@ export default function GameScenePage({
             className={`story-window result-window ${lastResult.success ? 'success' : 'fail'}`}
           >
             <div className="story-window-title">
-              <span>{lastResult.success ? '✅' : '❌'}</span> {lastResult.action}
+              <span>{lastResult.success ? '✅' : '🌈'}</span> {lastResult.action}
             </div>
             {!!lastResult.dice?.length && <DiceRoll dice={lastResult.dice} />}
             <div className="feed-result">{lastResult.result}</div>
@@ -225,7 +227,7 @@ export default function GameScenePage({
             whileTap={{ scale: 0.95 }}
             className="btn-roll btn-roll-die"
             onClick={onRollDice}
-            disabled={rolling || narrationBusy || activePanel === 'result'}
+            disabled={rolling || interactionBusy}
             animate={{ rotate: [0, -10, 10, -10, 10, 0] }}
             transition={{ duration: 0.5 }}
             aria-label="Kast terningerne"
@@ -237,15 +239,16 @@ export default function GameScenePage({
           </motion.button>
         ) : (
           <div className={`interaction-options interaction-${data.interaction?.type || 'choice'}`}>
-            {(data.interaction?.options || []).map(option => (
+            {(data.interaction?.options || []).map((option, optionIndex) => (
               <motion.button
                 key={option.id} type="button" className="interaction-option"
                 style={option.color ? { '--option-color': option.color } : undefined}
                 onClick={() => onInteract(option.id)}
                 disabled={interactionBusy}
                 whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
-                aria-label={`Vælg ${option.label}`}
+                aria-label={`Vælg mulighed ${optionIndex + 1}: ${option.label}`}
               >
+                <span className="interaction-option-number" aria-hidden="true">{optionIndex + 1}</span>
                 <span className="interaction-option-emoji" aria-hidden="true">{option.emoji}</span>
                 <span>{option.label}</span>
               </motion.button>

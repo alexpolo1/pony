@@ -8,10 +8,13 @@ import PixelPonyConfiguratorPage from './pages/PixelPonyConfiguratorPage';
 import GameScenePage from './pages/GameScenePage';
 import GameEndPage from './pages/GameEndPage';
 import Narrator from './components/Narrator';
+import FullscreenButton from './components/FullscreenButton';
 import { prepareDanishSpeech, speakDanish } from './services/tts';
 import { buildResultNarration } from './services/narration';
+import { waitForSpokenReply } from './services/voiceFlow';
 import * as api from './services/api';
 import * as achievements from './services/achievements';
+import { loadAppearance } from './services/ponyAppearance';
 import './App.css';
 
 // Fallback pony data if API fails to load
@@ -72,6 +75,7 @@ function App() {
   const [showAchievements, setShowAchievements] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(false);
   const [selectedTheme, setSelectedTheme] = useState(0);
+  const [avatarConfig, setAvatarConfig] = useState(loadAppearance);
   const [content, setContent] = useState({ ponies: DEFAULT_PONIES, themes: [] });
   const { stats, recordGame } = useAchievements();
   const { shown: tutorialShown, markSeen } = useTutorial();
@@ -95,6 +99,8 @@ function App() {
 
   const handleSelectPonyType = async (typeIdx) => {
     playSelect();
+    // The configurator saves immediately before starting the game.
+    setAvatarConfig(loadAppearance());
     setLoading(true);
     setError(null);
     try {
@@ -141,11 +147,15 @@ function App() {
     const result = await api.sendVoiceAnswer(
       data.gameId, sceneId, data.voice?.question?.id, audioBlob,
     );
-    await speakResponse?.(result.child_response);
-    if (result.gameState) {
-      setData(result.gameState);
-      const lastResult = result.gameState.history?.[result.gameState.history.length - 1];
-      if (lastResult) lastResult.success ? playSuccess() : playFail();
+    try {
+      await waitForSpokenReply(speakResponse, result.child_response);
+    } finally {
+      // A missing audio "ended" event must never trap the child on this scene.
+      if (result.gameState) {
+        setData(result.gameState);
+        const lastResult = result.gameState.history?.[result.gameState.history.length - 1];
+        if (lastResult) lastResult.success ? playSuccess() : playFail();
+      }
     }
     return result;
   };
@@ -277,6 +287,7 @@ function App() {
   // === RENDER PAGES ===
   return (
     <AnimatePresence mode="wait">
+      <FullscreenButton />
       {/* Sound prompt */}
       {!soundEnabled && (
         <motion.div
@@ -291,12 +302,10 @@ function App() {
             animate={{ scale: 1 }}
             className="sound-prompt-card"
           >
-            <p>🔊 Aktivér lyd for den bedste oplevelse!</p>
+            <div className="sound-prompt-icon" aria-hidden="true">🔊</div>
+            <p>Tryk én gang. Så starter historien med lyd.</p>
             <button className="btn-start" onClick={enableSound} aria-label="Aktivér lyd">
-              Aktiver lyd
-            </button>
-            <button className="btn-back" onClick={() => { enableSound(); setSoundEnabled(true); }} aria-label="Skip lyd">
-              Skip
+              🔊 Start med lyd
             </button>
           </motion.div>
         </motion.div>
@@ -355,6 +364,7 @@ function App() {
               interactionBusy={interactionBusy}
               volume={volume}
               setVolume={setVolume}
+              avatarConfig={avatarConfig}
             />
           )}
 

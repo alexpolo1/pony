@@ -11,6 +11,16 @@ const STATUS_TEXT = {
   error: 'Mikrofonen virker ikke lige nu. Brug knappen nedenunder.',
 };
 
+const STATUS_ICON = {
+  idle: '🎤',
+  requesting_permission: '⏳',
+  listening: '👂',
+  processing: '✨',
+  understood: '✅',
+  need_retry: '❓',
+  error: '⚠️',
+};
+
 function preferredMimeType() {
   if (!window.MediaRecorder) return '';
   return ['audio/webm;codecs=opus', 'audio/ogg;codecs=opus', 'audio/webm']
@@ -24,15 +34,25 @@ export default function VoiceButton({ enabled, onAnswer, speaking = false, disab
   const recorderRef = useRef(null);
   const streamRef = useRef(null);
   const chunksRef = useRef([]);
+  const autoStopRef = useRef(null);
+
+  const clearAutoStop = () => {
+    if (autoStopRef.current) window.clearTimeout(autoStopRef.current);
+    autoStopRef.current = null;
+  };
 
   const closeStream = () => {
+    clearAutoStop();
     if (streamRef.current) streamRef.current.getTracks().forEach(track => track.stop());
     streamRef.current = null;
   };
 
   useEffect(() => () => {
     if (recorderRef.current?.state === 'recording') recorderRef.current.stop();
-    closeStream();
+    if (autoStopRef.current) window.clearTimeout(autoStopRef.current);
+    autoStopRef.current = null;
+    if (streamRef.current) streamRef.current.getTracks().forEach(track => track.stop());
+    streamRef.current = null;
   }, []);
 
   if (!enabled) return null;
@@ -56,6 +76,7 @@ export default function VoiceButton({ enabled, onAnswer, speaking = false, disab
         if (event.data.size) chunksRef.current.push(event.data);
       };
       recorder.onstop = async () => {
+        clearAutoStop();
         const blob = new Blob(chunksRef.current, { type: recorder.mimeType || 'audio/webm' });
         closeStream();
         if (!blob.size) {
@@ -67,12 +88,15 @@ export default function VoiceButton({ enabled, onAnswer, speaking = false, disab
           const result = await onAnswer(blob);
           setTranscript(result.transcript || '');
           setMessage(result.child_response || '');
-          setStatus(result.matched ? 'understood' : 'need_retry');
+          setStatus(result.gameState || result.matched ? 'understood' : 'need_retry');
         } catch {
           setStatus('need_retry');
         }
       };
       recorder.start();
+      autoStopRef.current = window.setTimeout(() => {
+        if (recorderRef.current?.state === 'recording') recorderRef.current.stop();
+      }, 5000);
       setStatus('listening');
     } catch {
       closeStream();
@@ -81,13 +105,23 @@ export default function VoiceButton({ enabled, onAnswer, speaking = false, disab
   };
 
   const stop = () => {
+    clearAutoStop();
     if (recorderRef.current?.state === 'recording') recorderRef.current.stop();
   };
 
   const active = status === 'listening';
   const busy = disabled || speaking || status === 'requesting_permission' || status === 'processing';
+  const statusText = disabled
+    ? 'Vent på terningerne...'
+    : speaking
+      ? 'Ponyen taler...'
+      : message || STATUS_TEXT[status];
+  const statusIcon = disabled ? '⏳' : speaking ? '🔊' : STATUS_ICON[status];
   return (
-    <section className={`voice-control voice-${status}`} aria-live="polite">
+    <section
+      className={`voice-control voice-${status}`} aria-live="polite"
+      aria-label={statusText}
+    >
       <motion.button
         type="button"
         className="btn-voice"
@@ -99,7 +133,37 @@ export default function VoiceButton({ enabled, onAnswer, speaking = false, disab
       >
         {active ? '⏹️' : speaking ? '🔊' : busy ? '✨' : '🎤'}
       </motion.button>
-      <p className="voice-status">{disabled ? 'Vent på terningerne...' : speaking ? 'Ponyen taler...' : message || STATUS_TEXT[status]}</p>
+      <p className="voice-status" aria-hidden="true">{statusIcon}</p>
+      {status === 'listening' && (
+        <div
+          className="voice-activity voice-activity-listening"
+          role="progressbar" aria-valuemin="0" aria-valuemax="5"
+          aria-label="Mikrofonen lytter i højst fem sekunder"
+        >
+          <div className="voice-activity-track" aria-hidden="true">
+            <span className="voice-activity-fill" />
+          </div>
+          <div className="voice-activity-steps" aria-hidden="true">
+            <span>🎤</span><i /><i /><i /><i /><i />
+          </div>
+        </div>
+      )}
+      {status === 'processing' && (
+        <div
+          className="voice-activity voice-activity-processing"
+          role="progressbar"
+          aria-label="Whisper lytter og sender beskeden til Hermes"
+        >
+          <div className="voice-activity-track" aria-hidden="true">
+            <span className="voice-activity-fill" />
+          </div>
+          <div className="voice-processing-steps" aria-hidden="true">
+            <span><b>👂</b> Whisper</span>
+            <i>➜</i>
+            <span><b>💭</b> Hermes</span>
+          </div>
+        </div>
+      )}
       {process.env.NODE_ENV === 'development' && transcript && (
         <small className="voice-transcript">Hørt: {transcript}</small>
       )}

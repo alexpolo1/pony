@@ -76,6 +76,17 @@ describe('api.getScene', () => {
   });
 });
 
+describe('api.chooseInteraction', () => {
+  it('sends only the selected allowlisted option id', async () => {
+    mockFetch([{ body: { interactionProgressed: true } }]);
+    await api.chooseInteraction('grøn');
+    expect(global.fetch).toHaveBeenCalledWith(
+      expect.stringContaining('/api/interact'),
+      expect.objectContaining({ method: 'POST', body: JSON.stringify({ selection: 'grøn' }) }),
+    );
+  });
+});
+
 describe('api.resetGame', () => {
   it('sends POST to /api/reset', async () => {
     mockFetch([{ body: { ok: true } }]);

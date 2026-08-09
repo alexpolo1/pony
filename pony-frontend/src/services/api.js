@@ -45,6 +45,15 @@ export async function rollDice() {
   return apiFetch('/api/kast', { method: 'POST' });
 }
 
+/** Apply a server-validated story, colour, number, or memory choice. */
+export async function chooseInteraction(selection) {
+  return apiFetch('/api/interact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ selection }),
+  });
+}
+
 /**
  * Get current scene data.
  * @returns {Promise<Object>} scene JSON

@@ -145,7 +145,11 @@ def format_scene_data(game):
         "talent": pony.get("talent", ""),
         "tema": tema.get("titel", ""),
         "themeIcon": get_scene_icon(tema.get("id", "")),
-        "sceneNum": f"Scene {game['scene'] + 1} af {len(scenes)}",
+        "sceneNum": (
+            "Eventyret er slut"
+            if game.get("færdig")
+            else f"Scene {game['scene'] + 1} af {len(scenes)}"
+        ),
         "progress": f"\U0001f31f {'\u2b50' * game['succeser']} {'\u2606' * (len(scenes) - game['succeser'] - game['fiaskoer'])} \u274c {'\U0001f494' * game['fiaskoer']}",
         "history": [],
     }
@@ -177,7 +181,7 @@ def format_scene_data(game):
             "action": h.get("aktion", ""),
             "dice": h.get("dice", []),
             "success": h.get("succes", False),
-            "result": "\u2705 Succes!" if h.get("succes") else "\u274c Mislykket",
+            "result": "\u2705 Succes!" if h.get("succes") else "\U0001f308 Godt forsøg!",
             "story": h.get("tekst", ""),
             "interactionType": h.get("interaction_type", "dice"),
             "selection": h.get("selection"),
@@ -193,9 +197,9 @@ def format_scene_data(game):
             result["endText"] = "Fantastisk! Du reddede Equestria! \U0001f31f"
         elif wins >= total // 2:
             result["mixed"] = True
-            result["endText"] = "Du gjorde dit bedste! Prøv igen for at blive endnu bedre! \U0001f4aa"
+            result["endText"] = "Flot eventyr! Ponyerne hjalp hinanden hele vejen til slutningen. \U0001f308"
         else:
             result["defeat"] = True
-            result["endText"] = "Ingen panik! Alle ponies prøver igen! \U0001f308"
+            result["endText"] = "I nåede sikkert gennem eventyret sammen. Det er ægte venskabsmagi! \U0001f308"
 
     return result

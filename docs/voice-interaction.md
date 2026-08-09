@@ -2,8 +2,8 @@
 
 Spillet bruger browserens `MediaRecorder` til korte optagelser og sender dem til
 Flask. Backend transskriberer på dansk og matcher kun mod intents fra den aktive
-scene. Et sikkert match på `ready` kalder den samme scenehandling som knappen
-**KAST TERNINGERNE**, så voice aldrig bliver et separat gameplay-system.
+scene. Et sikkert match kalder den samme scenehandling som terning- eller
+valgknapperne, så voice aldrig bliver et separat gameplay-system.
 
 ## Konfiguration
 
@@ -33,15 +33,23 @@ Output valideres, og modellen kan ikke opfinde eller udføre nye handlinger.
 
 På spilserveren bruges Hermes/OpenAI-endpointet fra `HERMES_CONFIG_PATH` med
 `thinkingcap-27b`. Hermes får kun den aktive scene og en servergenereret liste
-over tilladte valg. Den kan besvare spørgsmål om scenen, vælge `wait` eller
-foreslå `roll_scene`; Flask validerer valget og er alene om at ændre spillet.
-Off-topic svar erstattes med en fast, børnevenlig besked.
+over tilladte valg. Den kan besvare kommentarer om historien, vælge `wait`,
+foreslå `roll_scene` eller et af scenens fire valg. Flask validerer altid valget
+og er alene om at ændre spillet. Off-topic svar erstattes med en fast,
+børnevenlig besked.
+
+Spillet blander terningkast med fire historievalg, farveopgaver og
+hukommelsesspørgsmål med tallene 1–4. Ledetråden gives og oplæses i den første
+scene; spørgsmålet kommer fire scener senere. Forkerte opgavesvar flytter ikke
+historien videre, og feedbacken bliver læst op.
 
 ## Dansk TTS
 
-Frontend bruger browserens Speech Synthesis med sproget `da-DK` og foretrækker
-en installeret dansk stemme. Scenetekst og spørgsmål læses automatisk op. Svar,
-gentagelser og positive reaktioner læses også op. Musikken dæmpes under tale, og
+Frontend henter MP3-oplæsning fra `POST /api/tts`, som bruger den faste danske
+kvindestemme `da-DK-ChristelNeural`. Browserens Speech Synthesis bruges kun som
+nødreserve. Scenetekst, spørgsmål, Hermes-svar og terningresultater læses op.
+Frontend forbereder resultat- og scenelyd parallelt med terninganimationen og
+viser status for forberedelse og aktiv oplæsning. Musikken dæmpes under tale, og
 mikrofonknappen er låst, så spillet ikke transskriberer sin egen stemme.
 
 TTS følger spillets eksisterende lydstyrke; lydstyrke `0` slår oplæsning fra.
@@ -52,6 +60,8 @@ TTS følger spillets eksisterende lydstyrke; lydstyrke `0` slår oplæsning fra.
   `scene_id` og valgfrit `question_id`. WebM, Ogg og WAV op til 10 MiB accepteres.
 - `POST /api/v1/games/<game_id>/voice/text` modtager JSON med `text`, `scene_id`
   og valgfrit `question_id` til udvikling og tests uden mikrofon.
+- `POST /api/tts` modtager JSON med `text` og returnerer dansk MP3.
+- `POST /api/interact` modtager et af den aktive scenes fire tilladte valg.
 
 Gamle scene- og question-ID'er afvises, så et langsomt svar ikke kan ændre den
 forkerte scene.

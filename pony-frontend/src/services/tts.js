@@ -1,4 +1,4 @@
-import { duckMusic } from '../SceneMusic';
+import { duckMusic, playNarrationBlob, stopNarration } from '../SceneMusic';
 
 const API = window.location.origin.replace('3001', '8082');
 let activeResolve = null;
@@ -59,17 +59,22 @@ const setNarrationStatus = (status, onSpeakingChange) => {
 function requestSpeechBlob(text) {
   if (speechCache.has(text)) return speechCache.get(text);
   if (speechCache.size >= 40) speechCache.delete(speechCache.keys().next().value);
+  const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+  const timeout = window.setTimeout(() => controller?.abort(), 6000);
   const pending = fetch(`${API}/api/tts`, {
     method: 'POST',
     credentials: 'include',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ text }),
+    signal: controller?.signal,
   }).then(response => {
     if (!response.ok) throw new Error('TTS serverfejl');
     return response.blob();
   }).catch(error => {
     speechCache.delete(text);
     throw error;
+  }).finally(() => {
+    window.clearTimeout(timeout);
   });
   speechCache.set(text, pending);
   return pending;
@@ -83,6 +88,7 @@ export function prepareDanishSpeech(text) {
 export function cancelSpeech() {
   speechGeneration += 1;
   if (window.speechSynthesis) window.speechSynthesis.cancel();
+  if (typeof stopNarration === 'function') stopNarration();
   if (activeAudio) {
     activeAudio.pause();
     activeAudio.src = '';
@@ -106,7 +112,11 @@ function speakWithBrowser(text, volume, onSpeakingChange, generation) {
   return new Promise(resolve => {
     activeResolve = resolve;
     loadVoices().then(voices => {
-      if (generation !== speechGeneration) return;
+      if (generation !== speechGeneration) {
+        if (activeResolve === resolve) activeResolve = null;
+        resolve();
+        return;
+      }
       const utterance = new window.SpeechSynthesisUtterance(text);
       utterance.lang = 'da-DK';
       utterance.rate = 0.9;
@@ -150,11 +160,11 @@ function speakWithServer(text, volume, onSpeakingChange, generation) {
       reject(new Error('Serveroplæsning fejlede'));
     };
     requestSpeechBlob(text).then(blob => {
-      if (generation !== speechGeneration) return;
-      activeAudioUrl = window.URL.createObjectURL(blob);
-      const audio = new window.Audio(activeAudioUrl);
-      activeAudio = audio;
-      audio.volume = Math.min(1, Math.max(0, volume));
+      if (generation !== speechGeneration) {
+        if (activeResolve === resolve) activeResolve = null;
+        resolve();
+        return;
+      }
       const finish = () => {
         setMusicDucking(false);
         setNarrationStatus('idle', onSpeakingChange);
@@ -166,9 +176,20 @@ function speakWithServer(text, volume, onSpeakingChange, generation) {
         if (activeResolve === resolve) activeResolve = null;
         resolve();
       };
-      audio.onplay = () => {
+      const onStart = () => {
         setMusicDucking(true);
         setNarrationStatus('speaking', onSpeakingChange);
+      };
+      if (typeof playNarrationBlob === 'function') {
+        playNarrationBlob(blob, volume, onStart, finish).catch(fail);
+        return;
+      }
+      activeAudioUrl = window.URL.createObjectURL(blob);
+      const audio = new window.Audio(activeAudioUrl);
+      activeAudio = audio;
+      audio.volume = Math.min(1, Math.max(0, volume));
+      audio.onplay = () => {
+        onStart();
       };
       audio.onended = finish;
       audio.onerror = fail;

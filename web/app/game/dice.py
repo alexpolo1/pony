@@ -1,23 +1,23 @@
 """
 Dice engine for MLP Pony: Tails of Equestria.
 
-d6 pool system:
-  - 6 = 2 successes
-  - 4-5 = 1 success
-  - 1-3 = 0 successes
+Single d6 system:
+  - 1 terning per kast
+  - Stat = target number (slå X eller mere for succes)
+  - Talent giver +1 til target
+  - Sv\u00e6rhed: let = ingen straf, normal = -1, sv\u00e6rt = -2
+  - Hvis resultat >= target efter straf = succes
 
-Difficulty thresholds:
-  - let (easy) = 1 success needed
-  - normal = 2 successes needed
-  - svaert (hard) = 3 successes needed
+Eksempel: stat 3 + talent = target 4. Normal sv\u00e6rhed = -1.
+  M\u00e5l = 3. Sl\u00e5 3+ p\u00e5 terningen = succes (66% chance).
 """
 
 import random
 
-DIFFICULTY_REQUIREMENTS = {
-    "let": 1,
-    "normal": 2,
-    "svaert": 3,
+DIFFICULTY_PENALTY = {
+    "let": 0,
+    "normal": 1,
+    "svaert": 2,
 }
 
 DIFFICULTY_TEXT = {
@@ -27,47 +27,11 @@ DIFFICULTY_TEXT = {
 }
 
 
-def roll_d6(count, rng=None):
-    """Roll N six-sided dice. Uses provided RNG or random module."""
+def roll_d6(rng=None):
+    """Roll a single six-sided die."""
     if rng is None:
         rng = random
-    return [rng.randint(1, 6) for _ in range(count)]
-
-
-def count_successes(dice):
-    """Count successes from a list of d6 results.
-
-    6 = 2 successes, 4-5 = 1 success, 1-3 = 0.
-    """
-    total = 0
-    for d in dice:
-        if d == 6:
-            total += 2
-        elif d >= 4:
-            total += 1
-    return total
-
-
-def roll_and_evaluate(dice_count, difficulty, rng=None):
-    """Roll dice and evaluate against difficulty.
-
-    Returns dict with:
-      - dice: list of rolled values
-      - successes: total success count
-      - required: successes needed for this difficulty
-      - passed: whether the roll met the threshold
-    """
-    if dice_count < 0:
-        dice_count = 0
-    required = DIFFICULTY_REQUIREMENTS.get(difficulty, 2)
-    dice = roll_d6(dice_count, rng)
-    successes = count_successes(dice)
-    return {
-        "dice": dice,
-        "successes": successes,
-        "required": required,
-        "passed": successes >= required,
-    }
+    return rng.randint(1, 6)
 
 
 def resolve_test(pony, stat, difficulty, rng=None):
@@ -80,9 +44,28 @@ def resolve_test(pony, stat, difficulty, rng=None):
         rng: optional random.Random instance for deterministic testing
 
     Returns:
-        dict with dice, successes, required, passed
+        dict with dice, passed
     """
-    dice_count = pony.get(stat, 2)
-    if pony.get("talent") == stat:
-        dice_count += 1
-    return roll_and_evaluate(dice_count, difficulty, rng)
+    if rng is None:
+        rng = random
+
+    base = pony.get(stat, 2)
+    talent_bonus = 1 if pony.get("talent") == stat else 0
+    penalty = DIFFICULTY_PENALTY.get(difficulty, 0)
+
+    # Higher stat = lower target = easier.
+    # stat 2 -> target 4 (50%), stat 3 -> target 3 (67%), stat 4 -> target 2 (83%),
+    # stat 5 -> target 1 (100%). Talent lowers target by 1, difficulty raises it.
+    target = 6 - base + penalty - talent_bonus
+    if target < 1:
+        target = 1
+    if target > 6:
+        target = 6
+
+    die = roll_d6(rng)
+    passed = die >= target
+
+    return {
+        "dice": [die],
+        "passed": passed,
+    }

@@ -62,6 +62,7 @@ import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
 import * as SFX from './SceneMusic';
+import * as TTS from './services/tts';
 
 // --- Helpers ---
 
@@ -91,15 +92,9 @@ beforeEach(() => {
 
 async function dismissSoundPrompt() {
   await waitFor(() => {
-    const btn = screen.queryByText('Aktiver lyd') || screen.queryByText('Skip');
-    expect(btn).not.toBeNull();
+    expect(screen.queryByRole('button', { name: 'Aktivér lyd' })).not.toBeNull();
   }, { timeout: 2000 });
-  const enableBtn = screen.queryByText('Aktiver lyd');
-  if (enableBtn) {
-    await userEvent.click(enableBtn);
-  } else {
-    await userEvent.click(screen.getByText('Skip'));
-  }
+  await userEvent.click(screen.getByRole('button', { name: 'Aktivér lyd' }));
   await new Promise(r => setTimeout(r, 100));
 }
 
@@ -340,6 +335,98 @@ test('shows four story choices instead of dice in a choice scene', async () => {
   expect(screen.queryByRole('button', { name: 'Kast terningerne' })).not.toBeInTheDocument();
 });
 
+test('keeps the next four choices enabled while the previous result is being narrated', async () => {
+  const nextChoiceScene = {
+    ...CHOICE_SCENE,
+    sceneNum: 3,
+    history: [{
+      action: 'Vælg en vej', selection: 'Vær modig', dice: [],
+      result: '✅ Succes!', story: 'Du fandt den næste sti.', success: true,
+    }],
+  };
+  mockMultiFetch([
+    { body: CONTENT },
+    { body: CHOICE_SCENE },
+    { body: { ...nextChoiceScene, interactionProgressed: true } },
+  ]);
+  TTS.speakDanish
+    .mockResolvedValueOnce()
+    .mockReturnValueOnce(new Promise(() => {}));
+  render(<App />);
+  await dismissSoundPrompt();
+  await userEvent.click(findByText('🎮 Start Nyt Spil!'));
+  await userEvent.click(findByText('Skyggen'));
+  await pickPonyAndStartGame();
+  await userEvent.click(await screen.findByRole('button', { name: 'Vælg mulighed 1: Vær modig' }));
+
+  await waitFor(() => expect(screen.getByText('Du fandt den næste sti.')).toBeInTheDocument());
+  screen.getAllByRole('button', { name: /^Vælg / }).forEach(choice => expect(choice).toBeEnabled());
+});
+
+test('keeps the next dice enabled while the previous choice result is being narrated', async () => {
+  const nextDiceScene = {
+    ...GAME_SCENE,
+    sceneNum: 3,
+    interaction: { type: 'dice', options: [] },
+    history: [{
+      action: 'Vælg en vej', selection: 'Vær modig', dice: [],
+      result: '✅ Succes!', story: 'Du fandt den næste sti.', success: true,
+    }],
+  };
+  mockMultiFetch([
+    { body: CONTENT },
+    { body: CHOICE_SCENE },
+    { body: { ...nextDiceScene, interactionProgressed: true } },
+  ]);
+  TTS.speakDanish
+    .mockResolvedValueOnce()
+    .mockReturnValueOnce(new Promise(() => {}));
+  render(<App />);
+  await dismissSoundPrompt();
+  await userEvent.click(findByText('🎮 Start Nyt Spil!'));
+  await userEvent.click(findByText('Skyggen'));
+  await pickPonyAndStartGame();
+  await userEvent.click(await screen.findByRole('button', { name: 'Vælg mulighed 1: Vær modig' }));
+
+  await waitFor(() => expect(screen.getByText('Du fandt den næste sti.')).toBeInTheDocument());
+  expect(screen.getByRole('button', { name: 'Kast terningerne' })).toBeEnabled();
+});
+
+test('auto-introduces the next scene and keeps playing when result narration fails', async () => {
+  const nextDiceScene = {
+    ...GAME_SCENE,
+    sceneNum: 3,
+    sceneText: 'Nu åbner den næste pony-sti sig.',
+    actionText: 'Følg den glitrende sti',
+    interaction: { type: 'dice', options: [] },
+    history: [{
+      action: 'Vælg en vej', selection: 'Vær modig', dice: [],
+      result: '✅ Succes!', story: 'Du klarede valget.', success: true,
+    }],
+  };
+  mockMultiFetch([
+    { body: CONTENT },
+    { body: CHOICE_SCENE },
+    { body: { ...nextDiceScene, interactionProgressed: true } },
+  ]);
+  TTS.speakDanish
+    .mockResolvedValueOnce()
+    .mockRejectedValueOnce(new Error('manglende ended-signal'))
+    .mockResolvedValueOnce();
+  render(<App />);
+  await dismissSoundPrompt();
+  await userEvent.click(findByText('🎮 Start Nyt Spil!'));
+  await userEvent.click(findByText('Skyggen'));
+  await pickPonyAndStartGame();
+  await userEvent.click(await screen.findByRole('button', { name: 'Vælg mulighed 1: Vær modig' }));
+
+  await waitFor(() => expect(TTS.speakDanish).toHaveBeenCalledWith(
+    expect.stringContaining('Nu fortsætter eventyret. Nu åbner den næste pony-sti sig.'),
+    expect.any(Number),
+  ));
+  expect(screen.getByRole('button', { name: 'Kast terningerne' })).toBeEnabled();
+});
+
 test('calls /api/kast when rolling dice', async () => {
   mockMultiFetch([
     { body: CONTENT },
@@ -388,7 +475,7 @@ test('shows defeat message for non-victory', async () => {
   await pickPonyAndStartGame();
   await waitFor(() => expect(screen.getByRole('button', { name: 'Kast terningerne' })).toBeInTheDocument());
   await userEvent.click(screen.getByRole('button', { name: 'Kast terningerne' }));
-  await waitFor(() => expect(screen.getByText('💪 Prøv igen! 💪')).toBeInTheDocument());
+  await waitFor(() => expect(screen.getByText('🌈 FLOT EVENTYR! 🌈')).toBeInTheDocument());
 });
 
 test('Spil Igen navigates to pony selection', async () => {
