@@ -1,0 +1,104 @@
+/**
+ * Home page — title, subtitle, start button.
+ */
+
+import React from 'react';
+import { motion } from 'framer-motion';
+import SceneMusic from '../SceneMusic';
+import VolumeControl from '../components/VolumeControl';
+import FloatingBg from '../components/FloatingBg';
+import Sparkles from '../components/Sparkles';
+import Achievements from '../components/Achievements';
+
+export default function HomePage({ volume, setVolume, stats, showAchievements, setShowAchievements, onNavigate }) {
+  return (
+    <motion.div
+      key="home"
+      variants={pageVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      transition={{ duration: 0.4 }}
+      className="home"
+    >
+      <SceneMusic sceneType={volume > 0 ? 'home' : 'none'} />
+      <div className="top-bar">
+        <VolumeControl volume={volume} onChange={setVolume} />
+        <button
+          className="achievements-btn"
+          onClick={() => setShowAchievements(!showAchievements)}
+          title="Statistikk"
+          aria-label="Åbn statistikk"
+        >
+          🏆
+        </button>
+      </div>
+      {showAchievements && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="achievements-backdrop"
+          onClick={() => setShowAchievements(false)}
+        />
+      )}
+      {showAchievements && (
+        <motion.div
+          initial={{ opacity: 0, y: -20, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -20, scale: 0.9 }}
+          className="achievements-overlay"
+          role="dialog"
+          aria-label="Statistikk"
+        >
+          <Achievements stats={stats} />
+          <button className="btn-close" onClick={() => setShowAchievements(false)} aria-label="Luk statistikk">✕</button>
+        </motion.div>
+      )}
+      <FloatingBg />
+      <Sparkles />
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="home-content">
+        <motion.div
+          className="banner-emoji"
+          animate={{ y: [0, -10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          🦄🌈✨
+        </motion.div>
+        <motion.h1
+          animate={{ scale: [1, 1.05, 1], rotate: [0, 2, -2, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="title"
+        >
+          My Little Pony
+        </motion.h1>
+        <motion.h2
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="subtitle"
+        >
+          Tails of Equestria
+        </motion.h2>
+        <motion.p className="home-desc" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}>
+          Vælg din pony og gå på eventyr! 🎮
+        </motion.p>
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          className="btn-start"
+          onClick={() => onNavigate('theme')}
+          aria-label="Start nyt spil"
+        >
+          🎮 Start Nyt Spil!
+        </motion.button>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+const pageVariants = {
+  initial: { opacity: 0, y: 30 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -30 },
+};
