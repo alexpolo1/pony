@@ -300,7 +300,7 @@ THEMAER = [
             {
                 "tekst": "Den tredje stjerne er fanget i en sky over bjergtoppen. Torden rumler, mens skyen farer rundt på himlen.",
                 "aktion": "Befri stjernen fra tordenskyen",
-                "stat": "krop", "svaer": "svaert",
+                "stat": "krop", "svaer": "normal",
                 "succes": "Du når gennem vinden og prikker hul i skyen. Stjernen springer fri med et klart blink!",
                 "fiasko": "Vinden skubber dig tilbage, men Rainbow Dash laver en rolig luftvej gennem skyen.",
             },
