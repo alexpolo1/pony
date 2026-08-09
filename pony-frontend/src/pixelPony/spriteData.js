@@ -59,14 +59,21 @@ export const WING_STYLES = [
   { id: 'spread', label: 'Udspredt', file: '/sprites/pony/wing-spread.png' },
 ];
 
+// hue-rotate degrees are calibrated against base.png's own hue (~0deg, red)
+// so the *body* color actually matches its label (previously "Blå" rendered
+// green and "Lilla" rendered blue, since the rotations were tuned for a
+// baseline that didn't match the real sprite). Mane/tail/horn sit at a
+// different baseline hue (~30deg, orange), so the same rotation lands on a
+// nearby-but-not-identical hue there -- an accepted tradeoff of sharing one
+// palette across every layer.
 export const COLOR_OPTIONS = [
   { id: 'original', label: 'Original', filter: 'none' },
-  { id: 'pink', label: 'Lyserød', filter: 'hue-rotate(300deg) saturate(1.3)' },
-  { id: 'purple', label: 'Lilla', filter: 'hue-rotate(220deg) saturate(1.4)' },
-  { id: 'blue', label: 'Blå', filter: 'hue-rotate(150deg) saturate(1.5)' },
-  { id: 'teal', label: 'Turkis', filter: 'hue-rotate(120deg) saturate(1.4)' },
-  { id: 'green', label: 'Grøn', filter: 'hue-rotate(80deg) saturate(1.3)' },
-  { id: 'yellow', label: 'Gul', filter: 'hue-rotate(-30deg) saturate(1.5) brightness(1.15)' },
+  { id: 'pink', label: 'Lyserød', filter: 'hue-rotate(330deg) saturate(1.3)' },
+  { id: 'purple', label: 'Lilla', filter: 'hue-rotate(275deg) saturate(1.4)' },
+  { id: 'blue', label: 'Blå', filter: 'hue-rotate(215deg) saturate(1.5)' },
+  { id: 'teal', label: 'Turkis', filter: 'hue-rotate(180deg) saturate(1.4)' },
+  { id: 'green', label: 'Grøn', filter: 'hue-rotate(125deg) saturate(1.3)' },
+  { id: 'yellow', label: 'Gul', filter: 'hue-rotate(50deg) saturate(1.5) brightness(1.15)' },
   { id: 'white', label: 'Hvid', filter: 'saturate(0.15) brightness(1.7)' },
   { id: 'black', label: 'Sort', filter: 'brightness(0.35)' },
 ];
