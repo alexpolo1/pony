@@ -38,11 +38,17 @@ def api_start():
     Returns game state with game_id cookie.
     """
     data = request.get_json(force=True)
-    ponytype_idx = data.get("type")
-    if ponytype_idx is None:
+    if not data or "type" not in data:
         return jsonify({"error": "Manglende pony type"}), 400
-    ponytype_idx = int(ponytype_idx)
-    tema_idx = int(data.get("tema", 0))
+    try:
+        ponytype_idx = int(data["type"])
+        tema_idx = int(data.get("tema", 0))
+    except (ValueError, TypeError):
+        return jsonify({"error": "Ugyldig input"}), 400
+    if not (0 <= ponytype_idx < len(PONITYPER)):
+        return jsonify({"error": "Ukendt pony type"}), 400
+    if not (0 <= tema_idx < len(THEMAER)):
+        return jsonify({"error": "Ukendt tema"}), 400
 
     game = start_game(ponytype_idx, tema_idx)
     game_id = game["game_id"]
