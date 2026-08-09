@@ -337,7 +337,7 @@ export default function PixelPonyConfiguratorPage({ ponies, onSelectType, volume
                   value={appearance.wingColor}
                   onPick={(id) => set('wingColor', id)}
                   labelPrefix="Vingefarve"
-                  swatchColor="#fdfefe"
+                  swatchColor="#f5c8af"
                 />
               </section>
             </>

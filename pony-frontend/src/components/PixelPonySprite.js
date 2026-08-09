@@ -5,12 +5,12 @@
 
 import React from 'react';
 import {
-  TILE, SHEET_COLS, SHEET_ROWS, IDLE_FRAME,
+  TILE, SHEET_COLS, SHEET_ROWS, IDLE_FRAME, IDLE_FRAME_2,
   BASE_SPRITE, EYE_SPRITE,
   getManeStyle, getTailStyle, getHornStyle, getWingStyle, getColorOption,
 } from '../pixelPony/spriteData';
 
-function Layer({ src, frame, scale, filter, zIndex, sheet = true }) {
+function Layer({ src, frame, scale, filter, zIndex, sheet = true, bob = false }) {
   const size = TILE * scale;
   const style = sheet
     ? {
@@ -21,6 +21,12 @@ function Layer({ src, frame, scale, filter, zIndex, sheet = true }) {
       backgroundSize: `${size}px ${size}px`,
       backgroundPosition: '0 0',
     };
+  // Flat overlays don't have their own walk-cycle frames, so nudge them a
+  // little on the second idle frame to swish along with the leg movement
+  // instead of sitting frozen while the rest of the sprite bobs.
+  const transform = bob && frame && frame.col === IDLE_FRAME_2.col
+    ? `translate(${-scale}px, ${scale}px)`
+    : undefined;
   return (
     <div
       style={{
@@ -33,6 +39,7 @@ function Layer({ src, frame, scale, filter, zIndex, sheet = true }) {
         imageRendering: 'pixelated',
         filter,
         zIndex,
+        transform,
         ...style,
       }}
     />
@@ -63,7 +70,7 @@ export default function PixelPonySprite({
       <Layer src={BASE_SPRITE} frame={frame} scale={scale} filter={bodyFilter} zIndex={1} />
       {hasWings && <Layer src={wingStyle.file} frame={frame} scale={scale} filter={wingFilter} zIndex={2} sheet={false} />}
       <Layer src={EYE_SPRITE} frame={frame} scale={scale} filter={eyeFilter} zIndex={3} sheet={false} />
-      <Layer src={tailStyle.file} frame={frame} scale={scale} filter={tailFilter} zIndex={4} sheet={false} />
+      <Layer src={tailStyle.file} frame={frame} scale={scale} filter={tailFilter} zIndex={4} sheet={false} bob />
       <Layer src={maneStyle.file} frame={frame} scale={scale} filter={maneFilter} zIndex={5} />
       {hasHorn && <Layer src={hornStyle.file} frame={frame} scale={scale} filter={hornFilter} zIndex={6} sheet={false} />}
     </div>
