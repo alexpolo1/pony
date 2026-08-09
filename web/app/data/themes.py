@@ -221,3 +221,40 @@ THEMAER = [
         ],
     },
 ]
+
+
+# Voice is content data: both microphone and touch ultimately execute the same
+# scene action. More specific adventures can replace this block per scene with
+# their own intent list and choice IDs without changing the matcher or routes.
+for _theme in THEMAER:
+    for _index, _scene in enumerate(_theme["scener"]):
+        _scene.setdefault("voice", {
+            "enabled": True,
+            "question": {
+                "id": f"{_theme['id']}-{_index + 1}-ready",
+                "text": f"Er du klar til at {_scene['aktion'].lower()}?",
+                "intents": [
+                    {
+                        "id": "ready",
+                        "choice_id": "roll_scene",
+                        "description": "barnet er klar og vil udføre handlingen",
+                        "keywords": ["ja", "klar", "kom så", "afsted", "gør det", "lad os"],
+                        "synonyms": ["jeg er klar", "det vil jeg", "vi gør det", "jeg vil gerne"],
+                        "positive_response": ["Ja! Lad os gøre det!", "God idé!", "Woohoo! Afsted!"],
+                    },
+                    {
+                        "id": "not_ready",
+                        "choice_id": "wait",
+                        "description": "barnet vil vente eller er ikke klar endnu",
+                        "keywords": ["nej", "vent", "stop", "ikke endnu"],
+                        "synonyms": ["jeg er ikke klar", "vi skal vente"],
+                        "positive_response": ["Det er helt okay. Vi venter lidt."],
+                    },
+                ],
+                "fallback": {
+                    "retry_prompt": "Jeg hørte dig ikke helt. Er du klar?",
+                    "max_retries": 2,
+                    "after_max_retries": "show_visual_choices",
+                },
+            },
+        })

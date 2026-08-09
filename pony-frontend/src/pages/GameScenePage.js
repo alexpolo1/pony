@@ -8,10 +8,11 @@ import SceneMusic from '../SceneMusic';
 import VolumeControl from '../components/VolumeControl';
 import FloatingBg from '../components/FloatingBg';
 import DiceRoll from '../components/DiceRoll';
+import VoiceButton from '../components/VoiceButton';
 
 const API = window.location.origin.replace('3001', '8082');
 
-export default function GameScenePage({ data, onRollDice, volume, setVolume }) {
+export default function GameScenePage({ data, onRollDice, onVoiceAnswer, volume, setVolume }) {
   const scrollRef = useRef(null);
 
   useEffect(() => {
@@ -99,6 +100,8 @@ export default function GameScenePage({ data, onRollDice, volume, setVolume }) {
         </div>
         <div className="scene-difficulty">{data.difficulty}</div>
       </motion.div>
+
+      <VoiceButton enabled={!!data.voice?.enabled} onAnswer={onVoiceAnswer} />
 
       <motion.button
         whileHover={{ scale: 1.1 }}

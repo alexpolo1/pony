@@ -121,6 +121,19 @@ function App() {
     }
   };
 
+  const handleVoiceAnswer = async (audioBlob) => {
+    const sceneId = data.history?.length || 0;
+    const result = await api.sendVoiceAnswer(
+      data.gameId, sceneId, data.voice?.question?.id, audioBlob,
+    );
+    if (result.gameState) {
+      setData(result.gameState);
+      const lastResult = result.gameState.history?.[result.gameState.history.length - 1];
+      if (lastResult) lastResult.success ? playSuccess() : playFail();
+    }
+    return result;
+  };
+
   const handleRetryRoll = async () => {
     setError(null);
     setDiceRolling(true);
@@ -279,6 +292,7 @@ function App() {
             <GameScenePage
               data={data}
               onRollDice={handleRollDice}
+              onVoiceAnswer={handleVoiceAnswer}
               volume={volume}
               setVolume={setVolume}
             />

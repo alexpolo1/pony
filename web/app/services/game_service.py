@@ -86,6 +86,7 @@ def format_scene_data(game):
     }
 
     result = {
+        "gameId": game.get("game_id"),
         "finished": game.get("færdig", False),
         "ponyName": pony.get("navn", ""),
         "ponyType": pony.get("type", ""),
@@ -109,6 +110,7 @@ def format_scene_data(game):
         result["sceneText"] = scn.get("tekst", "")
         result["actionText"] = scn.get("aktion", "")
         result["difficulty"] = diff_map.get(scn.get("svaer", ""), "")
+        result["voice"] = scn.get("voice")
     else:
         result["sceneText"] = ""
         result["actionText"] = ""

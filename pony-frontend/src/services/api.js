@@ -82,3 +82,17 @@ export async function healthCheck() {
     return false;
   }
 }
+
+/** Send a recorded Danish voice answer for the active scene. */
+export async function sendVoiceAnswer(gameId, sceneId, questionId, audioBlob) {
+  const form = new FormData();
+  const extension = audioBlob.type.includes('ogg') ? 'ogg' : 'webm';
+  form.append('audio', audioBlob, `answer.${extension}`);
+  form.append('scene_id', String(sceneId));
+  if (questionId) form.append('question_id', questionId);
+  const response = await apiFetch(`/api/v1/games/${encodeURIComponent(gameId)}/voice`, {
+    method: 'POST',
+    body: form,
+  });
+  return response.data;
+}

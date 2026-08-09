@@ -205,6 +205,34 @@ body {
   cursor: not-allowed;
 }
 
+.voice-control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 132px;
+  margin: 0 0 var(--space-md);
+  color: var(--color-white);
+  text-align: center;
+}
+
+.btn-voice {
+  width: 82px;
+  height: 82px;
+  border: 4px solid rgba(255, 255, 255, 0.85);
+  border-radius: var(--radius-round);
+  background: var(--gradient-btn);
+  box-shadow: 0 0 0 8px rgba(240, 147, 251, 0.25), var(--shadow-lg);
+  color: white;
+  cursor: pointer;
+  font-size: 2.2rem;
+}
+
+.btn-voice:disabled { opacity: 0.75; cursor: wait; }
+.voice-listening .btn-voice { background: #e53935; }
+.voice-understood .btn-voice { background: var(--color-success); }
+.voice-status { margin-top: var(--space-sm); font-size: 1.05rem; font-weight: 700; }
+.voice-transcript { opacity: 0.75; margin-top: var(--space-xs); }
+
 .btn-close {
   position: absolute;
   top: var(--space-sm);
