@@ -8,6 +8,7 @@ import PonySelectPage from './pages/PonySelectPage';
 import GameScenePage from './pages/GameScenePage';
 import GameEndPage from './pages/GameEndPage';
 import * as api from './services/api';
+import * as achievements from './services/achievements';
 import './App.css';
 
 // Fallback pony data if API fails to load
@@ -18,32 +19,17 @@ const DEFAULT_PONIES = [
   { name: 'Alicorn',   emoji: '👑', img: 'alicorn.png',   bonus: 'Magi + vinger 🌟', color: '#FFD700', diceBonus: 2 },
 ];
 
-// Achievement hook
+// Achievement hook — thin wrapper around the service
 function useAchievements() {
-  const [stats, setStats] = useState(() => {
-    try {
-      return JSON.parse(localStorage.getItem('pony_stats') || '{"wins":0,"losses":0,"games":0,"bestScore":0}');
-    } catch { return { wins: 0, losses: 0, games: 0, bestScore: 0 }; }
-  });
+  const [stats, setStats] = useState(() => achievements.getStats());
 
   const recordGame = useCallback((victory, score) => {
-    setStats(prev => {
-      const next = {
-        ...prev,
-        games: prev.games + 1,
-        wins: victory ? prev.wins + 1 : prev.wins,
-        losses: victory ? prev.losses : prev.losses + 1,
-        bestScore: Math.max(prev.bestScore, score || 0),
-      };
-      localStorage.setItem('pony_stats', JSON.stringify(next));
-      return next;
-    });
+    setStats(achievements.recordGame(victory, score));
   }, []);
 
   const resetStats = useCallback(() => {
-    const zero = { wins: 0, losses: 0, games: 0, bestScore: 0 };
-    setStats(zero);
-    localStorage.setItem('pony_stats', JSON.stringify(zero));
+    achievements.resetStats();
+    setStats(achievements.getStats());
   }, []);
 
   return { stats, recordGame, resetStats };

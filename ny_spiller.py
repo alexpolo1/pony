@@ -418,35 +418,90 @@ def print_test_table(all_tests):
 # === HUVUDKØRSEL ===
 
 def main():
-    random.seed()  # Tilfældig seed hver gang
+    import sys
 
-    print_header("MY LITTLE PONY: TAILS OF EQUESTRIA")
-    print("  — Ny Spiller Generator —")
-    print("  Genereret af Hermes AI GM")
+    # Parse CLI args
+    parser_type = "argparse"  # avoid import if not needed
+    args = {
+        "seed": None,
+        "pony_count": None,
+        "scene_count": None,
+        "json": False,
+        "quiet": False,
+    }
+    raw = sys.argv[1:]
+    i = 0
+    while i < len(raw):
+        a = raw[i]
+        if a == "--seed" and i + 1 < len(raw):
+            args["seed"] = int(raw[i + 1])
+            i += 2
+        elif a == "--pony-count" and i + 1 < len(raw):
+            args["pony_count"] = int(raw[i + 1])
+            i += 2
+        elif a == "--scene-count" and i + 1 < len(raw):
+            args["scene_count"] = int(raw[i + 1])
+            i += 2
+        elif a == "--json":
+            args["json"] = True
+            i += 1
+        elif a == "--quiet":
+            args["quiet"] = True
+            i += 1
+        else:
+            i += 1
 
-    # Generer 4-6 ponyer
-    ant_al_ponyer = random.randint(4, 6)
-    print(f"\nGenererer {ant_al_ponyer} ponyer...")
+    # Seed RNG
+    if args["seed"] is not None:
+        random.seed(args["seed"])
+    else:
+        random.seed()
+
+    result = {
+        "ponies": [],
+        "theme": None,
+        "location": None,
+        "scenes": [],
+        "tests": [],
+        "outcome": None,
+    }
+
+    if not args["quiet"]:
+        print_header("MY LITTLE PONY: TAILS OF EQUESTRIA")
+        print("  — Ny Spiller Generator —")
+        print("  Genereret af Hermes AI GM")
+
+    # Generate ponies
+    ant_al_ponyer = args["pony_count"] or random.randint(4, 6)
+    if not args["quiet"]:
+        print(f"\nGenererer {ant_al_ponyer} ponyer...")
     ponies = [generer_pony() for _ in range(ant_al_ponyer)]
+    result["ponies"] = ponies
 
-    print_header("DINE PONYER")
-    for p in ponies:
-        print_pony(p)
+    if not args["quiet"]:
+        print_header("DINE PONYER")
+        for p in ponies:
+            print_pony(p)
 
-    # Vælg tema og setting
+    # Select theme and setting
     tema = random.choice(THEMAER)
     sted = random.choice(EQUESTRIA_STEDER)
-    print_header(f"EVENTYR: {tema['titel'].upper()}")
-    print(f"  SETTING: {sted['navn']} — {sted['beskrivelse']}")
-    print(f"  Fjende: {tema['fjende']}")
-    print(f"  Stakes: {tema['stakes']}")
+    result["theme"] = tema["titel"]
+    result["location"] = sted["navn"]
 
-    # Kør scener (5-7)
-    scenes = tema['scener']
-    ant_al_scener = min(len(scenes), random.randint(5, 7))
+    if not args["quiet"]:
+        print_header(f"EVENTYR: {tema['titel'].upper()}")
+        print(f"  SETTING: {sted['navn']} — {sted['beskrivelse']}")
+        print(f"  Fjende: {tema['fjende']}")
+        print(f"  Stakes: {tema['stakes']}")
+
+    # Run scenes
+    scenes = tema["scener"]
+    ant_al_scener = args["scene_count"] or min(len(scenes), random.randint(5, 7))
     scenes_at_koere = scenes[:ant_al_scener]
 
-    print_header(f"HANDLING ({ant_al_scener} SCENER)")
+    if not args["quiet"]:
+        print_header(f"HANDLING ({ant_al_scener} SCENER)")
     all_tests = []
     scene_nummer = 0
 
@@ -454,22 +509,24 @@ def main():
         scene_nummer += 1
         scene_navn, scene_beskrivelse, egenskab, svaerhedsgrad = scene
 
-        print(f"\n{'─' * 60}")
-        print(f"  SCENE {scene_nummer}: {scene_navn.upper()}")
-        print(f"{'─' * 60}")
-        print(f"  {scene_beskrivelse}")
+        if not args["quiet"]:
+            print(f"\n{'─' * 60}")
+            print(f"  SCENE {scene_nummer}: {scene_navn.upper()}")
+            print(f"{'─' * 60}")
+            print(f"  {scene_beskrivelse}")
 
-        # Tilfældig NPC-møde (20% chance)
+        # Random NPC encounter (20% chance)
         if random.random() < 0.2:
             npc = random.choice(KENDTE_NPCS)
             handling = random.choice(npc["handlinger"])
-            print(f"\n  🎭 NPC-MØDE: {npc['navn']} ({npc['race']}) dukker op og {handling}")
-            print(f"     ({npc['personlighed']})")
+            if not args["quiet"]:
+                print(f"\n  🎭 NPC-MØDE: {npc['navn']} ({npc['race']}) dukker op og {handling}")
+                print(f"     ({npc['personlighed']})")
 
-        # Vælg hvilken pony der tester (tilfældig, men foretrækker relevante stats)
+        # Pick test pony
         test_pony = random.choice(ponies)
 
-        # Find relevant talent baseret på egenskab
+        # Find relevant talent
         relevant_talent = None
         if egenskab == "krop":
             for t in test_pony["talenter"]:
@@ -487,47 +544,89 @@ def main():
                     relevant_talent = t
                     break
 
-        result = test(test_pony, egenskab, svaerhedsgrad, relevant_talent)
-        all_tests.append(result)
-        print_test(result, len(all_tests))
+        r = test(test_pony, egenskab, svaerhedsgrad, relevant_talent)
+        all_tests.append(r)
+        result["scenes"].append({
+            "number": scene_nummer,
+            "name": scene_navn,
+            "test": r,
+        })
+        if not args["quiet"]:
+            print_test(r, len(all_tests))
 
-        # Hvis succes, lav en bonus-test fra en anden pony (for variation)
-        if result["udfald"] == "SUCCES" and result["overskud"] >= 2:
+        # Bonus test on big success
+        if r["udfald"] == "SUCCES" and r["overskud"] >= 2:
             bonus_pony = random.choice([p for p in ponies if p["navn"] != test_pony["navn"]])
             bonus_egen = random.choice(EGENSKABER)
             bonus_sv = random.choice(["let", "normal", "svaert"])
             bonus_result = test(bonus_pony, bonus_egen, bonus_sv)
             all_tests.append(bonus_result)
-            print_test(bonus_result, len(all_tests))
-            print(f"\n  🌟 BONUS: {bonus_pony['navn']} hjælper med!")
+            if not args["quiet"]:
+                print_test(bonus_result, len(all_tests))
+                print(f"\n  🌟 BONUS: {bonus_pony['navn']} hjælper med!")
 
-    # Slutopgørelse
-    print_header("SLUTOPOPGØRELSE")
+    # Final tally
     succeser = sum(1 for t in all_tests if t["udfald"] == "SUCCES")
     fiaskoer = sum(1 for t in all_tests if t["udfald"] == "MISLYKKES")
     fantastiske_total = sum(t["fantastiske"] for t in all_tests)
 
-    print(f"\n  Total succeser: {succeser}")
-    print(f"  Total fiaskoer: {fiaskoer}")
-    print(f"  Fantastiske terninger (6): {fantastiske_total}")
-
     if succeser > fiaskoer:
-        print(f"\n  🌟 SEJR! Ponyerne har overvundet {tema['fjende']}!")
-        print(f"  {tema['stakes']}")
+        outcome = "SEJR"
         if fantastiske_total >= 3:
-            print(f"  ✦ EPISKE SEJR! Alle i Equestria hylder dem!")
+            outcome = "EPISKE_SEJR"
     elif succeser == fiaskoer:
-        print(f"\n  ⚖️  BLANDET RESULTAT. Ponyerne har kæmpet hårdt, men {tema['fjende']} trækker sig tilbage midlertidigt.")
-        print(f"  {tema['stakes']}")
+        outcome = "BLANDET"
     else:
-        print(f"\n  💀 Nederlag. {tema['fjende']} har vundet denne gang.")
-        print(f"  {tema['stakes']}")
+        outcome = "NEDERLAG"
+    result["outcome"] = outcome
 
-    print_test_table(all_tests)
+    if not args["quiet"]:
+        print_header("SLUTOPOPGØRELSE")
+        print(f"\n  Total succeser: {succeser}")
+        print(f"  Total fiaskoer: {fiaskoer}")
+        print(f"  Fantastiske terninger (6): {fantastiske_total}")
 
-    print(f"\n{'=' * 60}")
-    print("  FÆRDIG")
-    print(f"{'=' * 60}")
+        if succeser > fiaskoer:
+            print(f"\n  🌟 SEJR! Ponyerne har overvundet {tema['fjende']}!")
+            print(f"  {tema['stakes']}")
+            if fantastiske_total >= 3:
+                print(f"  ✦ EPISKE SEJR! Alle i Equestria hylder dem!")
+        elif succeser == fiaskoer:
+            print(f"\n  ⚖️  BLANDET RESULTAT. Ponyerne har kæmpet hårdt, men {tema['fjende']} trækker sig tilbage midlertidigt.")
+            print(f"  {tema['stakes']}")
+        else:
+            print(f"\n  💀 Nederlag. {tema['fjende']} har vundet denne gang.")
+            print(f"  {tema['stakes']}")
+
+        print_test_table(all_tests)
+        print(f"\n{'=' * 60}")
+        print("  FÆRDIG")
+        print(f"{'=' * 60}")
+
+    if args["json"]:
+        import json
+        # Strip non-serializable data
+        out = {
+            "seed": args["seed"],
+            "ponies": ponies,
+            "theme": tema["titel"],
+            "location": sted["navn"],
+            "outcome": outcome,
+            "successes": succeser,
+            "failures": fiaskoer,
+            "fantastic_rolls": fantastiske_total,
+            "tests": [
+                {
+                    "pony": t["pony"],
+                    "stat": t["egenskab"],
+                    "dice": t["resultat"],
+                    "successes": t["succeser"],
+                    "outcome": t["udfald"],
+                }
+                for t in all_tests
+            ],
+        }
+        print(json.dumps(out, ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":
