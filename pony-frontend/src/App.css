@@ -1795,3 +1795,66 @@ html.tablet-focus-mode #root {
   cursor: pointer;
   margin-bottom: 0.5rem;
 }
+
+
+/* Stats page — mobile responsive */
+@media (max-width: 768px) {
+  .stats-page {
+    padding: 0.75rem;
+  }
+  .stats-page h2 {
+    font-size: 1.4rem;
+  }
+  .stats-page h3 {
+    font-size: 1.1rem;
+    margin-top: 0.75rem;
+  }
+  .stats-overview {
+    gap: 0.5rem;
+  }
+  .stat-item {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.9rem;
+  }
+  .stats-list li {
+    padding: 0.4rem 0.5rem;
+    font-size: 0.85rem;
+  }
+  .back-button {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-page {
+    padding: 0.5rem;
+  }
+  .stats-page h2 {
+    font-size: 1.2rem;
+  }
+  .stats-page h3 {
+    font-size: 1rem;
+    margin-top: 0.6rem;
+  }
+  .stats-overview {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.4rem;
+  }
+  .stat-item {
+    text-align: center;
+    padding: 0.5rem;
+  }
+  .stats-list li {
+    padding: 0.35rem 0.4rem;
+    font-size: 0.8rem;
+  }
+  .back-button {
+    width: 100%;
+    text-align: center;
+    padding: 0.6rem;
+  }
+}

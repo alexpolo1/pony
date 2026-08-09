@@ -44,6 +44,7 @@ def _ensure_tables(conn):
             played_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
+    conn.execute("CREATE INDEX IF NOT EXISTS idx_game_stats_played_at ON game_stats(played_at)")
     conn.commit()
 
 

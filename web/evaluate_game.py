@@ -194,6 +194,54 @@ def evaluate_exhaustive():
     return all_runs
 
 
+def compute_per_theme_stats(runs):
+    """Compute win-rate and stats per theme. Returns a list of dicts."""
+    themes = {}
+    for r in runs:
+        t = r["tema"]
+        if t not in themes:
+            themes[t] = {"wins": 0, "mixed": 0, "defeats": 0, "count": 0,
+                         "succeser": [], "fiaskoer": []}
+        themes[t]["count"] += 1
+        themes[t]["succeser"].append(r["succeser"])
+        themes[t]["fiaskoer"].append(r["fiaskoer"])
+        if r.get("victory"):
+            themes[t]["wins"] += 1
+        elif r.get("mixed"):
+            themes[t]["mixed"] += 1
+        elif r.get("defeat"):
+            themes[t]["defeats"] += 1
+
+    per_theme = []
+    for t, d in themes.items():
+        per_theme.append({
+            "tema": t,
+            "count": d["count"],
+            "avg_succeser": round(statistics.mean(d["succeser"]), 2),
+            "avg_fiaskoer": round(statistics.mean(d["fiaskoer"]), 2),
+            "win_rate": round(d["wins"] / d["count"] * 100, 1) if d["count"] else 0,
+            "mixed_rate": round(d["mixed"] / d["count"] * 100, 1) if d["count"] else 0,
+            "defeat_rate": round(d["defeats"] / d["count"] * 100, 1) if d["count"] else 0,
+        })
+    return per_theme
+
+
+def export_json(runs, output_path):
+    """Write per-theme win-rate JSON to a file."""
+    per_theme = compute_per_theme_stats(runs)
+    total = len(runs)
+    victory_count = sum(1 for r in runs if r.get("victory"))
+    json_output = {
+        "total": total,
+        "victory_count": victory_count,
+        "win_rate": round(victory_count / total * 100, 1) if total else 0,
+        "per_theme": per_theme,
+    }
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(json_output, f, indent=2, ensure_ascii=False)
+    print(f"JSON exported to {output_path}")
+
+
 def report(runs):
     total = len(runs)
 
@@ -358,26 +406,26 @@ def report_exhaustive(runs):
     print(json.dumps(json_output, indent=2))
 
 
-def evaluate():
-    all_runs = []
-
-    print(f"Kører {NUM_RUNS} spil-gennemgange...")
-    for i in range(NUM_RUNS):
-        try:
-            all_runs.append(play_one_game())
-        except Exception as e:
-            print(f"  Fejl i løb {i}: {e}")
-
-    print(f"Klar! {len(all_runs)} gennemgange færdige.\n")
-    report(all_runs)
-
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--exhaustive", action="store_true", help="Run all pony×theme combinations")
+    parser.add_argument("--output", type=str, default=None, help="Path to write per-theme win-rate JSON")
     args = parser.parse_args()
     if args.exhaustive:
         runs = evaluate_exhaustive()
         report_exhaustive(runs)
     else:
-        evaluate()
+        runs = []
+        print(f"Kører {NUM_RUNS} spil-gennemgange...")
+        for i in range(NUM_RUNS):
+            try:
+                runs.append(play_one_game())
+            except Exception as e:
+                print(f"  Fejl i løb {i}: {e}")
+        print(f"Klar! {len(runs)} gennemgange færdige.\n")
+        report(runs)
+    if args.output:
+        if not runs:
+            print("Warning: no runs collected for JSON export.")
+        else:
+            export_json(runs, args.output)
