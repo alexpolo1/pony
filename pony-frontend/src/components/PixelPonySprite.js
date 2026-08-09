@@ -1,5 +1,5 @@
 /**
- * Renders a layered pixel-art pony from sprite sheets: body + mane + tail +
+ * Renders a layered pixel-art pony from sprite sheets: body + tail + mane +
  * optional horn/wings, recolored with CSS filters.
  */
 
@@ -40,7 +40,7 @@ function Layer({ src, frame, scale, filter, zIndex, sheet = true }) {
 }
 
 export default function PixelPonySprite({
-  mane, bodyColor, maneColor, hasHorn, hasWings, hasTail,
+  mane, bodyColor, maneColor, hasHorn, hasWings,
   frame = IDLE_FRAME, scale = 4, className = '',
 }) {
   const maneStyle = getManeStyle(mane);
@@ -54,9 +54,23 @@ export default function PixelPonySprite({
     >
       {hasWings && <Layer src={WING_SPRITE} frame={frame} scale={scale} filter="none" zIndex={0} sheet={false} />}
       <Layer src={BASE_SPRITE} frame={frame} scale={scale} filter={bodyFilter} zIndex={1} />
-      {hasTail && <Layer src={TAIL_SPRITE} frame={frame} scale={scale} filter={maneFilter} zIndex={2} sheet={false} />}
+      <Layer src={TAIL_SPRITE} frame={frame} scale={scale} filter={maneFilter} zIndex={2} sheet={false} />
       <Layer src={maneStyle.file} frame={frame} scale={scale} filter={maneFilter} zIndex={3} />
       {hasHorn && <Layer src={HORN_SPRITE} frame={frame} scale={scale} filter="none" zIndex={4} sheet={false} />}
+    </div>
+  );
+}
+
+/** Isolated mane-only icon — used by the mane-style picker so it shows just the hairstyle, not a whole pony. */
+export function ManeIcon({ mane, maneColor, frame = IDLE_FRAME, scale = 2, className = '' }) {
+  const maneStyle = getManeStyle(mane);
+  const maneFilter = getColorOption(maneColor).filter;
+  return (
+    <div
+      className={className}
+      style={{ position: 'relative', width: TILE * scale, height: TILE * scale }}
+    >
+      <Layer src={maneStyle.file} frame={frame} scale={scale} filter={maneFilter} zIndex={1} />
     </div>
   );
 }

@@ -41,10 +41,12 @@ function renderWizard(onSelectType = jest.fn()) {
   return { onNavigate, onSelectType };
 }
 
+const next = () => userEvent.click(screen.getByRole('button', { name: 'Næste trin' }));
+
 async function pickTypeAndAdvanceToExtras() {
   await userEvent.click(screen.getByRole('button', { name: 'Vælg Jordpony - Stærk 💪' }));
-  await userEvent.click(screen.getByRole('button', { name: 'Næste trin' })); // mane -> colors
-  await userEvent.click(screen.getByRole('button', { name: 'Næste trin' })); // colors -> extras
+  await next(); // body -> mane
+  await next(); // mane -> extras
 }
 
 test('step 1 shows all four pony types', () => {
@@ -56,11 +58,22 @@ test('step 1 shows all four pony types', () => {
   expect(screen.getByText('Trin 1 af 4')).toBeInTheDocument();
 });
 
-test('picking a pony type advances to the mane step', async () => {
+test('picking a pony type advances to the body-color step, not mane', async () => {
   renderWizard();
   await userEvent.click(screen.getByRole('button', { name: 'Vælg Pegasus - Flyver 🪽' }));
   expect(screen.getByText('Trin 2 af 4')).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: 'Kropsfarve: Lilla' })).toBeInTheDocument();
+  expect(screen.queryByRole('button', { name: 'Vælg manke: Boglig' })).not.toBeInTheDocument();
+});
+
+test('mane step shows only mane swatches, not the color pickers', async () => {
+  renderWizard();
+  await userEvent.click(screen.getByRole('button', { name: 'Vælg Jordpony - Stærk 💪' }));
+  await next(); // body -> mane
+  expect(screen.getByText('Trin 3 af 4')).toBeInTheDocument();
   expect(screen.getByRole('button', { name: 'Vælg manke: Boglig' })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: 'Mankefarve: Gul' })).toBeInTheDocument();
+  expect(screen.queryByRole('button', { name: 'Kropsfarve: Lilla' })).not.toBeInTheDocument();
 });
 
 test('back on the first step exits to home', async () => {
@@ -77,7 +90,7 @@ test('back on a later step returns to the previous step, not home', async () => 
   expect(screen.getByText('Trin 1 af 4')).toBeInTheDocument();
 });
 
-test('walks through mane, colors, and extras before starting the game', async () => {
+test('walks through body color and mane before starting the game', async () => {
   const { onSelectType } = renderWizard();
   await pickTypeAndAdvanceToExtras();
   expect(screen.getByText('Trin 4 af 4')).toBeInTheDocument();
@@ -100,9 +113,9 @@ test('toggling horn and wings flips their pressed state', async () => {
 test('starting the game saves the appearance to localStorage', async () => {
   renderWizard();
   await userEvent.click(screen.getByRole('button', { name: 'Vælg Enhjørning - Magisk horn ✨' }));
+  await next(); // body -> mane
   await userEvent.click(screen.getByRole('button', { name: 'Vælg manke: Boblende' }));
-  await userEvent.click(screen.getByRole('button', { name: 'Næste trin' }));
-  await userEvent.click(screen.getByRole('button', { name: 'Næste trin' }));
+  await next(); // mane -> extras
   await userEvent.click(screen.getByRole('button', { name: 'Start eventyr' }));
   const saved = JSON.parse(window.localStorage.getItem('pony_appearance'));
   expect(saved.mane).toBe('bubbly');

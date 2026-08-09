@@ -67,7 +67,6 @@ export const DEFAULT_APPEARANCE = {
   mane: MANE_STYLES[0].id,
   bodyColor: COLOR_OPTIONS[1].id,
   maneColor: COLOR_OPTIONS[6].id,
-  hasTail: true,
   hasHorn: false,
   hasWings: false,
 };
