@@ -1,0 +1,223 @@
+"""
+Adventure themes and scenes for MLP Pony: Tails of Equestria.
+
+5 themes, each with 5 scenes of increasing difficulty.
+"""
+
+THEMAER = [
+    {
+        "id": "regnbues-fødselsdag",
+        "titel": "Regnbues fødselsdag",
+        "emoji": "\U0001f382\U0001f308",
+        "intro": "Pinkie Pie vil lave en fødselsdagssurprise! Men melhylden er tom \u2014 du skal finde mel til kagen før alle vennerne kommer.",
+        "scener": [
+            {
+                "tekst": "Du løber ind i supermarkedet. Melhylden er helt tom \u2014 kun en lille fuge af mel er tilbage. Du ser Mrs. Cake bag disken, der vifter med en note.",
+                "aktion": "Spørg Mrs. Cake om mel",
+                "stat": "charme", "svaer": "let",
+                "succes": "Mrs. Cake smiler varmt. 'Ah, en lille pony der hjælper! Jeg har en ekstra pose bagved.' Hun rækker dig en stor pose mel med et glimt i øjet.",
+                "fiasko": "Mrs. Cake ryster på hovedet. 'Desværre, alt mel er solgt.' Men hun hvisker: 'Prøv måske hos Zecora i skoven?'",
+            },
+            {
+                "tekst": "Du finder Zecoras hytte i skoven. Den dufter af urter og honning. Zecora taler i vers \u2014 det er svær at forstå, men hun har noget der kan bruges!",
+                "aktion": "Forstå Zecoras vers",
+                "stat": "sind", "svaer": "normal",
+                "succes": "Du lytter omhyggeligt. 'Dundrende urter, knus dem små, så bliver de til mel, se!' Du knuser urterne og får perfekt mel!",
+                "fiasko": "Zecoras vers er for kryptisk. 'Dundrende...' hvad? Men hun giver dig alligevel en pose med noget der ligner mel.",
+            },
+            {
+                "tekst": "Kagen er klar! Du skal sætte den i ovnen. Den skal være perfekt \u2014 ikke for brændt, ikke for rå. Ovnen gløder orange og varm.",
+                "aktion": "Bag kagen i ovnen",
+                "stat": "krop", "svaer": "normal",
+                "succes": "Du trækker kagen ud på det perfekte tidspunkt! Den er gylden og dufter fantastisk. Pinkie Pie vil elske den!",
+                "fiasko": "Kagen bliver lidt for brændt ovenpå. Men inde i er den stadig god \u2014 du skraber den brændte del af!",
+            },
+            {
+                "tekst": "Nu skal kagen pyntes! Pinkie Pie vil have regnbueglasure, sprinkles og en lille pony-figur ovenpå. Det ser sværere ud end det lydes...",
+                "aktion": "Pynt kagen perfekt",
+                "stat": "krop", "svaer": "svaert",
+                "succes": "Kagen er VAKKER! Regnbueglasuren skinner, sprinklerne er perfekt fordelt, og pony-figuren står lige midt på. Pinkie Pie vil græde af glæde!",
+                "fiasko": "Glasuren løber lidt ud, og sprinklerne lander lidt tilfældigt. Men kagen er sød \u2014 og det er det vigtigste!",
+            },
+            {
+                "tekst": "Kagen er klar! Nu skal alle ponyerne samles. Rainbow Dash er i luften, Fluttershy er i haven, og Rarity er i sit værksted. Du skal finde dem alle!",
+                "aktion": "Find alle ponyerne",
+                "stat": "charme", "svaer": "svaert",
+                "succes": "Du finder dem alle! Rainbow Dash lander med et whoosh, Fluttershy kommer småløbende, og Rarity glimrer i solen. Alle er klar til fødselsdagen! \U0001f389",
+                "fiasko": "Du finder de fleste \u2014 men Rainbow Dash er for hurtig at fange! Men det går fint, hun kommer alligevel når hun får lugtet kagen!",
+            },
+        ],
+    },
+    {
+        "id": "angel-er-løbet-væk",
+        "titel": "Angel er løbet væk",
+        "emoji": "\U0001f430\u2764\ufe0f",
+        "intro": "Fluttershy er i gråd! Hendes lille kanin Angel er løbet væk. Du tilbyder at hjælpe med at finde ham.",
+        "scener": [
+            {
+                "tekst": "Du løber ud i Fluttershys have. Blomsterne er høje og farverige \u2014 røde roser, gule solsikker, blå blåklatter. Angel kan være hvor som helst her!",
+                "aktion": "Søg i blomsterhaven",
+                "stat": "sind", "svaer": "let",
+                "succes": "Du kigger bag en stor solsikke \u2014 og ser to små ører rulle frem! Angel gemte sig der! Men... han ser ud til at være løbet videre.",
+                "fiasko": "Du leder og leder, men finder kun en sommerfugl og en bier. Angel er ikke her \u2014 men du finder små fodspor der peger væk!",
+            },
+            {
+                "tekst": "Du løber gennem PonyVille. Alle ponyer er travle \u2014 Applejack pløjer, Rarity måler stof, og Twilight skriver noter. Har nogen set Angel?",
+                "aktion": "Spørg alle ponyer i PonyVille",
+                "stat": "charme", "svaer": "normal",
+                "succes": "Rarity råber: 'En lille hvid kanin? Jeg så ham løbe mod bakken!' Du har en ledetråd!",
+                "fiasko": "Ponyerne ryster på hovedet. 'En kanin?' Men Spike hvisker: 'Jeg så noget hvidt hoppe forbi...' Det må være ham!",
+            },
+            {
+                "tekst": "Små fodspor fører gennem det høje græs. De er små og runde \u2014 typiske kanin-fodspor! De fører op ad bakken mod skoven.",
+                "aktion": "Følg fodsporene",
+                "stat": "sind", "svaer": "normal",
+                "succes": "Fodsporene fører dig direkte til et stort træ! Du kigger op \u2014 og ser Angel sidde på en gren, der ryster nervøst.",
+                "fiasko": "Fodsporene forsvinder i græsset. Men du hører et lille 'pip' fra et træ \u2014 Angel er deroppe!",
+            },
+            {
+                "tekst": "Angel sidder højt oppe i et stort egetræ! Han ryster og græder. Træet er højt, og grenene er tynde. Du skal op til ham!",
+                "aktion": "Klatr op i træet",
+                "stat": "krop", "svaer": "svaert",
+                "succes": "Du klatrer op ad stammen, gren for gren. Det er skræmmende højt, men du når Angel! Han hopper ned i dine arme med en lille glæde-pip!",
+                "fiasko": "Du klatrer op, men grenen knækker under dig! Du lander blødt i en busk. Men Angel ser dig og hopper ned af sig selv!",
+            },
+            {
+                "tekst": "Angel er i dine arme, men han er stadig bange. Han ryster og gemmer hovedet i pelsen. Du skal få ham til at føle sig tryg igen.",
+                "aktion": "Berolig Angel",
+                "stat": "charme", "svaer": "svaert",
+                "succes": "Du stryger ham blidt over pelsen og synger en lille sang. Angel stopper med at ryste og slikker din kind! Fluttershy græder af glæde: 'Angel! Du har reddet ham!' \u2764\ufe0f",
+                "fiasko": "Angel er stadig en lille smule bange, men han holder fast i dit øre. Fluttershy smiler: 'Han bliver bedre \u2014 tak fordi du fandt ham!'",
+            },
+        ],
+    },
+    {
+        "id": "æblerne-ruller",
+        "titel": "Æblerne ruller ned ad bakken",
+        "emoji": "\U0001f34e\U0001f434",
+        "intro": "Applejacks æbleskure er væltet! Hundredevis af æbler ruller ned ad bakken. Hjælp med at redde høsten!",
+        "scener": [
+            {
+                "tekst": "ÆBLER! Overalt! De ruller som små røde boulder ned ad bakken. Du skal gribe dem, før de rammer bunden!",
+                "aktion": "Jag de rullende æbler",
+                "stat": "krop", "svaer": "let",
+                "succes": "Du griber og griber! Æbler i munden, æbler i halen, æbler i ørerne! Du redder halvdelen!",
+                "fiasko": "Æblerne ruller for hurtigt! Du griber nogle få, men de fleste fortsætter ned ad bakken...",
+            },
+            {
+                "tekst": "Mange æbler er landet i det høje, gyldne græs. De er svære at se \u2014 kun små røde prikker mellem græsstråene.",
+                "aktion": "Saml æbler i højt græs",
+                "stat": "krop", "svaer": "normal",
+                "succes": "Du kravler gennem græsset og finder æblerne ét for ét! Din kurv er snart fyldt til randen!",
+                "fiasko": "Græsset er højt, og du finder kun halvdelen. Men Apple Bloom hjælper med at finde resten!",
+            },
+            {
+                "tekst": "Bækken glimrer i solen \u2014 og der svømmer røde æbler rundt i det! De er våde og glatte, svære at gribe.",
+                "aktion": "Fisk æbler op af bækken",
+                "stat": "krop", "svaer": "normal",
+                "succes": "Du bøjer dig ned og griber æblerne ét for ét! Vandet er koldt, men det er sjovt! Alle æbler reddet!",
+                "fiasko": "Æblerne er glatte! De glider ud af dine poter. Men du får fanget de fleste med halen!",
+            },
+            {
+                "tekst": "Nu skal alle æbler bæres tilbage til gården! Kurven er TUNG. Bakken er STEIL. Men du kan gøre det!",
+                "aktion": "Bær tunge kurve hjem",
+                "stat": "krop", "svaer": "svaert",
+                "succes": "Du bærer kurven op ad bakken med stolthed! Applejack råber: 'Du er stærkere end de fleste!' Alle æbler er i sikkerhed!",
+                "fiasko": "Kurven er for tung! Du vælter og æblerne ruller lidt. Men Big Mac kommer og hjælper \u2014 sammen når I hjem!",
+            },
+            {
+                "tekst": "Applejack står med tårer i øjnene. 'Du har reddet hele høsten,' hvisker hun. Hun rækker dig noget... en æblekage, lavet specielt til dig!",
+                "aktion": "Modtag præmien fra Applejack",
+                "stat": "charme", "svaer": "let",
+                "succes": "Æblekagen er den bedste du nogensinde har smagt! Applejack giver dig et knus. 'Du er den bedste pony i hele Equestria!' \U0001f34e",
+                "fiasko": "Du får æblekagen, men den er lidt brændt. Applejack griner: 'Næste gang bliver den perfekt!'",
+            },
+        ],
+    },
+    {
+        "id": "raritys-glimmer-sten",
+        "titel": "Raritys glimmer-sten er borte",
+        "emoji": "\U0001f48e\u2728",
+        "intro": "Rarity er i panik! Hendes kæreste glimmer-sten \u2014 den smukkeste sten i hele Equestria \u2014 er forsvundet! Du skal finde den.",
+        "scener": [
+            {
+                "tekst": "Raritys værksted er et kaotisk paradis! Stofruller overalt, nåle i luften, og glitter på gulvet. Måske har stenen faldet et sted her?",
+                "aktion": "Søg i Raritys værksted",
+                "stat": "sind", "svaer": "let",
+                "succes": "Du finder en glimt under en stofrulle! Men det er kun en lille krystall \u2014 ikke glimmer-stenen. Men det giver dig en idé!",
+                "fiasko": "Værkstedet er for rodet! Du finder nåle, knapper og glitter \u2014 men ikke glimmer-stenen.",
+            },
+            {
+                "tekst": "Du løber gennem PonyVille. Glimmer-stenen er så lysende \u2014 den burde være svær at overse. Har nogen set den?",
+                "aktion": "Spørg i PonyVille",
+                "stat": "charme", "svaer": "normal",
+                "succes": "Spike råber: 'Jeg så Rarity droppe noget glitrende da hun løb forbi parken!' Du ved hvor du skal lede!",
+                "fiasko": "Ingen har set stenen. Men Twilight hvisker: 'Måske kan min magi hjælpe?'",
+            },
+            {
+                "tekst": "Parken er smuk i solen! Bænke, blomsterbede, og en lille sø. Glimmer-stenen skinner \u2014 du kan næsten SE den glitre et sted!",
+                "aktion": "Søg i parken",
+                "stat": "sind", "svaer": "normal",
+                "succes": "Du ser et glimt ved søen! Glimmer-stenen ligger på en sten, der glitrer som en lille sol!",
+                "fiasko": "Du leder overalt i parken. Men du finder en glimt der kommer fra vandet...",
+            },
+            {
+                "tekst": "Glimmer-stenen er faldet i søen! Du kan SE den på bunden \u2014 den skinner! Men søen er dyb, og du skal dykke for at nå den.",
+                "aktion": "Dyk efter glimmer-stenen",
+                "stat": "krop", "svaer": "svaert",
+                "succes": "Du dykker ned! Vandet er koldt, men du griber stenen! Du bryder overfladen med stenen i munden \u2014 den glitrer som aldrig før! \U0001f48e",
+                "fiasko": "Du dykker, men stenen er for dybt! Men Fluttershy kommer og dykker med dig \u2014 sammen redder I stenen!",
+            },
+            {
+                "tekst": "Rarity græder af glæde! 'Min glimmer-sten! Åh, du er en engel!' Hun omfavner dig og rækker dig en lille æske...",
+                "aktion": "Modtag Raritys tak",
+                "stat": "charme", "svaer": "let",
+                "succes": "Inden i æsken er en lille glimmer-ørestift! 'Til dig, min søde ven!' Rarity hvisker. Du føler dig som en stjerne! \u2728",
+                "fiasko": "Rarity giver dig en knus i stedet. 'Du er bedre end nogen sten!' Og det føles faktisk bedre.",
+            },
+        ],
+    },
+    {
+        "id": "discord-laver-sjov",
+        "titel": "Discord laver sjov",
+        "emoji": "\U0001f9e1\U0001f409",
+        "intro": "Discord \u2014 den skøre drage \u2014 har forvandlet jorden til marshmallow! PonyVille er i kaos. Du skal fikse det!",
+        "scener": [
+            {
+                "tekst": "Du træder ud \u2014 og dit ben synker ned i MARSHMALLOW! Overalt er hvid, blød masse. I det fjerne ser du en drage der griner hysterisk.",
+                "aktion": "Find Discord",
+                "stat": "sind", "svaer": "let",
+                "succes": "Discord er umulig at overse! Han svæver i luften med en marshmallow-hat. 'Hej, lille pony! Vil du lege?' spørger han.",
+                "fiasko": "Marshmallow er overalt! Det er svær at se. Men du hører Discords grin \u2014 og følger lyden!",
+            },
+            {
+                "tekst": "Discord griner. 'Jeg vil kun fixe det, hvis du får mig til at grine! Det er min regel!' Han krydser armene og puster på næsen.",
+                "aktion": "Få Discord til at grine",
+                "stat": "charme", "svaer": "normal",
+                "succes": "Du laver en latterlig dans \u2014 hoppende, snurrende, med munden skæv! Discord griner så meget at han næsten falder af himlen! 'OK, OK! Jeg fikser det!'",
+                "fiasko": "Du fortæller en vittighed. Discord ryster på hovedet... men så fniser han! 'OK, det var faktisk ret sjovt. Jeg fikser det.'",
+            },
+            {
+                "tekst": "Discord har lavet en marshmallow-labyrint! Du skal finde vejen gennem til hans magiske krystall \u2014 den kan vende forandringen tilbage.",
+                "aktion": "Find vejen gennem marshmallow-labyrinten",
+                "stat": "krop", "svaer": "normal",
+                "succes": "Du hopper og balancerer gennem marshmallow-væggene! Det er som at lege i en kæmpe slikbutik! Du finder krystallen!",
+                "fiasko": "Du vader gennem marshmallowet \u2014 det er blød og klæbrig! Men du når alligevel krystallen!",
+            },
+            {
+                "tekst": "Discord rækker dig en gåde på et stykke marshmallow: 'Jeg har ben men kan ikke gå, jeg har en rygrad men kan ikke bo. Hvad er jeg?'",
+                "aktion": "Løs Discordens gåde",
+                "stat": "sind", "svaer": "svaert",
+                "succes": "'En bog!' råber du! Discord griner: 'Korrekt! Du er klogere end du ser ud!' Han klapper i klørne \u2014 og alt bliver normalt igen!",
+                "fiasko": "Du tænker længe... 'En... fisk?' Discord griner: 'Nej, det er en bog! Men det var sødt at du prøvede!' Han fikser det alligevel.",
+            },
+            {
+                "tekst": "PonyVille er tilbage til normalt! Discord lander blidt og rækker dig en marshmallow. 'Til næste gang,' hvisker han med et glimt i øjet. Alle ponyer fejrer dig!",
+                "aktion": "Fejr sejren med alle ponyer",
+                "stat": "charme", "svaer": "let",
+                "succes": "Alle ponyer synger og danser! Discord laver marshmallow-regn \u2014 men denne gang er det sjovt! Du er heltens af dagen! \U0001f389\U0001f9e1",
+                "fiasko": "Alle er glade! Discord giver dig et high-five. 'Du er en sej pony!' Og marshmallow-regnet er faktisk ret sjovt!",
+            },
+        ],
+    },
+]
