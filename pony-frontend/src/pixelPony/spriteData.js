@@ -1,9 +1,10 @@
 /**
  * Data for the pixel pony configurator: sprite sheet layout and available
- * customization options. Body/mane/tail sheets are 8x8 grids of 32x32
- * frames. Horn/wing are small single-frame accent overlays (the source
- * asset pack's horn/wing sheets are just 1-3px alignment markers, not
- * visible art, so those two are hand-drawn flat 32x32 overlays instead).
+ * customization options. The base body and mane sheets are 8x8 grids of
+ * 32x32 frames. Eyes/tail/horn/wings are small single-frame accent
+ * overlays — the source asset pack's horn/wing/tail sheets turned out to
+ * be either 1-3px alignment markers or unrelated expression icons, not
+ * visible body-part art, so those are hand-drawn flat 32x32 overlays.
  */
 
 export const TILE = 32;
@@ -16,13 +17,7 @@ export const IDLE_FRAME = { row: 0, col: 0 };
 export const IDLE_FRAME_2 = { row: 0, col: 1 };
 
 export const BASE_SPRITE = '/sprites/pony/base.png';
-// Flat single-frame overlays (not sheets) — always drawn at the same spot.
-// The source pack's horn/wing/tail sheets are just 1-3px alignment markers,
-// not visible art, so these four are hand-drawn accents instead.
 export const EYE_SPRITE = '/sprites/pony/eye.png';
-export const TAIL_SPRITE = '/sprites/pony/tail.png';
-export const HORN_SPRITE = '/sprites/pony/horn.png';
-export const WING_SPRITE = '/sprites/pony/wing.png';
 
 export const PONY_TYPES = [
   { id: 'jordpony', label: 'Jordpony', hasHorn: false, hasWings: false },
@@ -31,24 +26,37 @@ export const PONY_TYPES = [
   { id: 'alicorn', label: 'Alicorn', hasHorn: true, hasWings: true },
 ];
 
+// Of the source pack's 17 "mane" files, only these actually contain hair
+// art at the idle frame — the rest (dramatic/fabulous/inquisitive/
+// intelligent/perky/friendly/practical/stoic/tough) turned out to be small
+// eye/expression icons unrelated to hair, so they're excluded here.
 export const MANE_STYLES = [
   { id: 'bookish', label: 'Boglig', file: '/sprites/pony/mane-bookish.png' },
   { id: 'bubbly', label: 'Boblende', file: '/sprites/pony/mane-bubbly.png' },
   { id: 'clean', label: 'Ren', file: '/sprites/pony/mane-clean.png' },
-  { id: 'dramatic', label: 'Dramatisk', file: '/sprites/pony/mane-dramatic.png' },
-  { id: 'fabulous', label: 'Fabelagtig', file: '/sprites/pony/mane-fabulous.png' },
   { id: 'fancy', label: 'Fin', file: '/sprites/pony/mane-fancy.png' },
   { id: 'fiesty', label: 'Vild', file: '/sprites/pony/mane-fiesty.png' },
-  { id: 'friendly', label: 'Venlig', file: '/sprites/pony/mane-friendly.png' },
   { id: 'genki', label: 'Energisk', file: '/sprites/pony/mane-genki.png' },
-  { id: 'inquisitive', label: 'Nysgerrig', file: '/sprites/pony/mane-inquisitive.png' },
-  { id: 'intelligent', label: 'Klog', file: '/sprites/pony/mane-intelligent.png' },
-  { id: 'perky', label: 'Kæk', file: '/sprites/pony/mane-perky.png' },
   { id: 'ponytail', label: 'Hestehale', file: '/sprites/pony/mane-ponytail.png' },
-  { id: 'practical', label: 'Praktisk', file: '/sprites/pony/mane-practical.png' },
   { id: 'reserved', label: 'Rolig', file: '/sprites/pony/mane-reserved.png' },
-  { id: 'stoic', label: 'Stærk', file: '/sprites/pony/mane-stoic.png' },
-  { id: 'tough', label: 'Tuf', file: '/sprites/pony/mane-tough.png' },
+];
+
+// Hand-drawn accent styles (no matching art existed in the source pack).
+export const TAIL_STYLES = [
+  { id: 'long', label: 'Lang', file: '/sprites/pony/tail-long.png' },
+  { id: 'short', label: 'Kort', file: '/sprites/pony/tail-short.png' },
+  { id: 'curly', label: 'Krøllet', file: '/sprites/pony/tail-curly.png' },
+];
+
+export const HORN_STYLES = [
+  { id: 'spike', label: 'Spids', file: '/sprites/pony/horn-spike.png' },
+  { id: 'swirl', label: 'Snoet', file: '/sprites/pony/horn-swirl.png' },
+  { id: 'nub', label: 'Lille', file: '/sprites/pony/horn-nub.png' },
+];
+
+export const WING_STYLES = [
+  { id: 'folded', label: 'Foldet', file: '/sprites/pony/wing-folded.png' },
+  { id: 'spread', label: 'Udspredt', file: '/sprites/pony/wing-spread.png' },
 ];
 
 export const COLOR_OPTIONS = [
@@ -68,14 +76,31 @@ export const DEFAULT_APPEARANCE = {
   mane: MANE_STYLES[0].id,
   bodyColor: COLOR_OPTIONS[1].id,
   maneColor: COLOR_OPTIONS[6].id,
+  tail: TAIL_STYLES[0].id,
   tailColor: COLOR_OPTIONS[6].id,
   eyeColor: COLOR_OPTIONS[0].id,
   hasHorn: false,
+  horn: HORN_STYLES[0].id,
+  hornColor: COLOR_OPTIONS[6].id,
   hasWings: false,
+  wing: WING_STYLES[0].id,
+  wingColor: COLOR_OPTIONS[0].id,
 };
 
 export function getManeStyle(id) {
   return MANE_STYLES.find(m => m.id === id) || MANE_STYLES[0];
+}
+
+export function getTailStyle(id) {
+  return TAIL_STYLES.find(t => t.id === id) || TAIL_STYLES[0];
+}
+
+export function getHornStyle(id) {
+  return HORN_STYLES.find(h => h.id === id) || HORN_STYLES[0];
+}
+
+export function getWingStyle(id) {
+  return WING_STYLES.find(w => w.id === id) || WING_STYLES[0];
 }
 
 export function getColorOption(id) {

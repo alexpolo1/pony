@@ -127,12 +127,12 @@ function mockMultiFetch(responses) {
 const findByText = (t) => screen.getByText(t);
 
 // Clicking a pony type on the configurator's first step only selects the
-// type and advances to the body-color step; four more "Næste" clicks walk
-// through eyes/mane/tail/extras to the final step, whose "Start eventyr"
+// type and advances to the body-color step; five more "Næste" clicks walk
+// through eyes/mane/tail/horn/wings to the final step, whose "Start eventyr"
 // button actually starts the game.
 async function pickPonyAndStartGame(name = 'Jordpony') {
   await userEvent.click(screen.getByText(name));
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 5; i++) {
     await userEvent.click(screen.getByRole('button', { name: 'Næste trin' }));
   }
   await userEvent.click(screen.getByRole('button', { name: 'Start eventyr' }));
