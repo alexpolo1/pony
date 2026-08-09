@@ -241,7 +241,7 @@ THEMAER = [
             {
                 "tekst": "På torvet danser en hel sky af ord rundt om rådhuset. Bogen må have fløjet denne vej, men ordene blokerer stien.",
                 "aktion": "Kom forbi skyen af dansende ord",
-                "stat": "krop", "svaer": "normal",
+                "stat": "krop", "svaer": "svaert",
                 "succes": "Din plan virker! Ordene stiller sig pænt på række og viser vej mod klokketårnet.",
                 "fiasko": "Ordene flyver lidt vildt, men en venlig pony hjælper dig sikkert igennem.",
             },
