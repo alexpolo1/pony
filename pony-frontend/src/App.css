@@ -287,9 +287,100 @@ body {
 .voice-listening .voice-status,
 .voice-processing .voice-status { animation: narration-speaker-bounce 0.7s ease-in-out infinite alternate; }
 
+.voice-activity {
+  width: min(210px, 44vw);
+  margin-top: 0.15rem;
+}
+
+.voice-activity-track {
+  height: 12px;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 999px;
+  background: rgba(55, 31, 91, 0.42);
+  box-shadow: 0 2px 5px rgba(43, 25, 78, 0.3);
+}
+
+.voice-activity-fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+}
+
+.voice-activity-listening .voice-activity-fill {
+  width: 0;
+  background: linear-gradient(90deg, #ffeb3b, #ff7043, #e53935);
+  animation: voice-recording-progress 5s linear forwards;
+}
+
+.voice-activity-steps {
+  display: grid;
+  grid-template-columns: auto repeat(5, 1fr);
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 0.25rem;
+}
+
+.voice-activity-steps i {
+  width: 9px;
+  height: 9px;
+  justify-self: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.42);
+  animation: voice-second-dot 1s ease-out forwards;
+}
+.voice-activity-steps i:nth-of-type(2) { animation-delay: 1s; }
+.voice-activity-steps i:nth-of-type(3) { animation-delay: 2s; }
+.voice-activity-steps i:nth-of-type(4) { animation-delay: 3s; }
+.voice-activity-steps i:nth-of-type(5) { animation-delay: 4s; }
+
+.voice-activity-processing .voice-activity-fill {
+  width: 34%;
+  background: linear-gradient(90deg, #5ee7df, #b490ca, #fff176);
+  animation: voice-processing-progress 1.35s ease-in-out infinite alternate;
+}
+
+.voice-processing-steps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem;
+  margin-top: 0.25rem;
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-shadow: 0 1px 2px rgba(43, 25, 78, 0.55);
+}
+
+.voice-processing-steps span {
+  animation: voice-processing-step 1.35s ease-in-out infinite alternate;
+}
+.voice-processing-steps span:last-child { animation-direction: alternate-reverse; }
+.voice-processing-steps b { font-size: 1rem; }
+.voice-processing-steps i { font-style: normal; animation: voice-arrow-pulse 0.7s ease-in-out infinite alternate; }
+
 @keyframes voice-five-second-pulse {
   0%, 100% { box-shadow: 0 0 0 8px rgba(229, 57, 53, 0.22), var(--shadow-lg); }
   50% { box-shadow: 0 0 0 16px rgba(229, 57, 53, 0.42), var(--shadow-lg); }
+}
+@keyframes voice-recording-progress {
+  from { width: 0; }
+  to { width: 100%; }
+}
+@keyframes voice-second-dot {
+  from { background: rgba(255, 255, 255, 0.42); transform: scale(0.8); }
+  to { background: #ffeb3b; transform: scale(1.25); }
+}
+@keyframes voice-processing-progress {
+  from { transform: translateX(-5%); }
+  to { transform: translateX(205%); }
+}
+@keyframes voice-processing-step {
+  from { opacity: 0.55; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1.05); }
+}
+@keyframes voice-arrow-pulse {
+  from { opacity: 0.45; transform: translateX(-2px); }
+  to { opacity: 1; transform: translateX(3px); }
 }
 .voice-transcript { opacity: 0.75; margin-top: var(--space-xs); }
 
@@ -818,6 +909,10 @@ body {
   justify-self: end;
 }
 
+.game-controls-options .voice-activity { width: 92px; }
+.game-controls-options .voice-processing-steps { gap: 0.1rem; font-size: 0.52rem; }
+.game-controls-options .voice-processing-steps b { font-size: 0.75rem; }
+
 .game-controls-options .interaction-options {
   grid-column: 2;
   justify-self: center;
@@ -847,6 +942,7 @@ body {
 }
 
 .interaction-option {
+  position: relative;
   min-height: 58px;
   padding: 0.45rem 0.65rem;
   border: 3px solid rgba(255, 255, 255, 0.9);
@@ -858,6 +954,24 @@ body {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
   box-shadow: var(--shadow-md);
   cursor: pointer;
+}
+
+.interaction-option-number {
+  position: absolute;
+  top: 5px;
+  left: 7px;
+  display: grid;
+  place-items: center;
+  width: 25px;
+  height: 25px;
+  border: 2px solid rgba(255, 255, 255, 0.95);
+  border-radius: 50%;
+  background: rgba(54, 35, 91, 0.82);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 950;
+  line-height: 1;
+  box-shadow: 0 2px 4px rgba(35, 21, 62, 0.3);
 }
 
 .interaction-option:disabled { opacity: 0.55; cursor: wait; }
@@ -886,6 +1000,9 @@ body {
     justify-self: center;
     min-height: 112px;
   }
+  .game-controls-options .voice-activity { width: min(210px, 70vw); }
+  .game-controls-options .voice-processing-steps { gap: 0.35rem; font-size: 0.72rem; }
+  .game-controls-options .voice-processing-steps b { font-size: 1rem; }
   .interaction-options { width: min(360px, 94vw); }
   .interaction-option { min-height: 52px; padding: 0.3rem; font-size: 0.8rem; }
 }
@@ -1335,10 +1452,10 @@ body {
   z-index: 1;
 }
 
-.floating-emoji {
+.floating-pony {
   position: absolute;
-  font-size: 2rem;
   opacity: 0.6;
+  image-rendering: pixelated;
 }
 
 /* Confetti */
@@ -1604,6 +1721,10 @@ html.tablet-focus-mode #root {
     grid-template-columns: 72px minmax(300px, 480px) 72px;
     gap: 0.5rem;
   }
+
+  .game .game-controls-options .voice-activity { width: 72px; }
+  .game .game-controls-options .voice-processing-steps { font-size: 0; }
+  .game .game-controls-options .voice-processing-steps b { font-size: 0.75rem; }
 
   .game .voice-control { min-height: 108px; }
   .game .btn-voice { width: 72px; height: 72px; }
