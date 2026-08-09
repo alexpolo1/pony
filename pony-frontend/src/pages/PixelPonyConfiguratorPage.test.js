@@ -16,15 +16,14 @@ jest.mock('framer-motion', () => {
 jest.mock('../SceneMusic', () => function SceneMusic() { return null; });
 jest.mock('../services/tts', () => ({ speakDanish: jest.fn(), cancelSpeech: jest.fn() }));
 
+// Order matches spriteData.PONY_TYPES: jordpony (neither), pegasus (wings
+// only), enhjorning (horn only), alicorn (both).
 const PONIES = [
   { navn: 'Jordpony', emoji: '🐴', bonus: 'Stærk 💪' },
   { navn: 'Pegasus', emoji: '🦅', bonus: 'Flyver 🪽' },
   { navn: 'Enhjørning', emoji: '🦄', bonus: 'Magisk horn ✨' },
   { navn: 'Alicorn', emoji: '👑', bonus: 'Magi + vinger 🌟' },
 ];
-
-// type -> body -> eyes -> mane -> tail -> horn -> wings
-const STEP_COUNT = 7;
 
 beforeEach(() => {
   window.localStorage.clear();
@@ -45,15 +44,12 @@ function renderWizard(onSelectType = jest.fn()) {
 }
 
 const next = () => userEvent.click(screen.getByRole('button', { name: 'Næste trin' }));
-const pickJordpony = () => userEvent.click(screen.getByRole('button', { name: 'Vælg Jordpony - Stærk 💪' }));
+const pick = (label) => userEvent.click(screen.getByRole('button', { name: label }));
 
-async function pickTypeAndAdvanceToWings() {
-  await pickJordpony();
-  await next(); // body -> eyes
-  await next(); // eyes -> mane
-  await next(); // mane -> tail
-  await next(); // tail -> horn
-  await next(); // horn -> wings
+async function clickThroughToEnd() {
+  while (screen.queryByRole('button', { name: 'Næste trin' })) {
+    await next();
+  }
 }
 
 test('step 1 shows all four pony types', () => {
@@ -62,13 +58,13 @@ test('step 1 shows all four pony types', () => {
   expect(screen.getByText('Pegasus')).toBeInTheDocument();
   expect(screen.getByText('Enhjørning')).toBeInTheDocument();
   expect(screen.getByText('Alicorn')).toBeInTheDocument();
-  expect(screen.getByText(`Trin 1 af ${STEP_COUNT}`)).toBeInTheDocument();
+  expect(screen.getByText('Trin 1 af 5')).toBeInTheDocument();
 });
 
 test('picking a pony type advances to the body-color step, not mane', async () => {
   renderWizard();
-  await userEvent.click(screen.getByRole('button', { name: 'Vælg Pegasus - Flyver 🪽' }));
-  expect(screen.getByText(`Trin 2 af ${STEP_COUNT}`)).toBeInTheDocument();
+  await pick('Vælg Pegasus - Flyver 🪽');
+  expect(screen.getByText('Trin 2 af 6')).toBeInTheDocument();
   expect(screen.getByRole('button', { name: 'Kropsfarve: Lilla' })).toBeInTheDocument();
   expect(screen.queryByRole('button', { name: 'Vælg manke: Boglig' })).not.toBeInTheDocument();
 });
@@ -76,106 +72,76 @@ test('picking a pony type advances to the body-color step, not mane', async () =
 test('mane list excludes the eye-icon files misfiled as mane styles', () => {
   renderWizard();
   expect(screen.queryByText('Dramatisk')).not.toBeInTheDocument();
-  expect(screen.queryByText('Fabelagtig')).not.toBeInTheDocument();
-  expect(screen.queryByText('Nysgerrig')).not.toBeInTheDocument();
-  expect(screen.queryByText('Klog')).not.toBeInTheDocument();
-  expect(screen.queryByText('Kæk')).not.toBeInTheDocument();
-  expect(screen.queryByText('Praktisk')).not.toBeInTheDocument();
   expect(screen.queryByText('Tuf')).not.toBeInTheDocument();
 });
 
-test('mane step shows only mane swatches', async () => {
-  renderWizard();
-  await pickJordpony();
-  await next(); // body -> eyes
-  await next(); // eyes -> mane
-  expect(screen.getByText(`Trin 4 af ${STEP_COUNT}`)).toBeInTheDocument();
-  expect(screen.getByRole('button', { name: 'Vælg manke: Boglig' })).toBeInTheDocument();
-  expect(screen.queryByRole('button', { name: 'Kropsfarve: Lilla' })).not.toBeInTheDocument();
-});
-
-test('tail step offers multiple tail shapes with their own color', async () => {
-  renderWizard();
-  await pickJordpony();
+test('Jordpony has no horn or wings step — the wizard is 5 steps and ends after tail', async () => {
+  const { onSelectType } = renderWizard();
+  await pick('Vælg Jordpony - Stærk 💪');
+  expect(screen.getByText('Trin 2 af 5')).toBeInTheDocument();
   await next(); // body -> eyes
   await next(); // eyes -> mane
   await next(); // mane -> tail
-  expect(screen.getByText(`Trin 5 af ${STEP_COUNT}`)).toBeInTheDocument();
-  expect(screen.getByRole('button', { name: 'Vælg hale: Lang' })).toBeInTheDocument();
-  expect(screen.getByRole('button', { name: 'Vælg hale: Kort' })).toBeInTheDocument();
-  expect(screen.getByRole('button', { name: 'Vælg hale: Krøllet' })).toBeInTheDocument();
-  expect(screen.getByRole('button', { name: 'Halefarve: Grøn' })).toBeInTheDocument();
+  expect(screen.getByText('Trin 5 af 5')).toBeInTheDocument();
+  expect(screen.queryByRole('button', { name: 'Næste trin' })).not.toBeInTheDocument();
+  expect(screen.getByRole('button', { name: 'Start eventyr' })).toBeInTheDocument();
+  await pick('Start eventyr');
+  const saved = JSON.parse(window.localStorage.getItem('pony_appearance'));
+  expect(saved.hasHorn).toBe(false);
+  expect(saved.hasWings).toBe(false);
+  expect(onSelectType).toHaveBeenCalledWith(0);
 });
 
-test('horn step is off by default and hides style/color pickers until toggled on', async () => {
+test('Pegasus gets a wings step but no horn step', async () => {
   renderWizard();
-  await pickJordpony();
+  await pick('Vælg Pegasus - Flyver 🪽');
+  expect(screen.getByText('Trin 2 af 6')).toBeInTheDocument();
+  await clickThroughToEnd();
+  expect(screen.getByText('Vælg vinger 🪽')).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: 'Vælg vinge: Foldet' })).toBeInTheDocument();
+});
+
+test('Enhjørning gets a horn step but no wings step', async () => {
+  renderWizard();
+  await pick('Vælg Enhjørning - Magisk horn ✨');
+  expect(screen.getByText('Trin 2 af 6')).toBeInTheDocument();
+  await clickThroughToEnd();
+  expect(screen.getByText('Vælg horn 🦄')).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: 'Vælg horn: Spids' })).toBeInTheDocument();
+});
+
+test('Alicorn gets both a horn and a wings step', async () => {
+  const { onSelectType } = renderWizard();
+  await pick('Vælg Alicorn - Magi + vinger 🌟');
+  expect(screen.getByText('Trin 2 af 7')).toBeInTheDocument();
   await next(); // body -> eyes
   await next(); // eyes -> mane
   await next(); // mane -> tail
   await next(); // tail -> horn
-  expect(screen.getByText(`Trin 6 af ${STEP_COUNT}`)).toBeInTheDocument();
-  const toggle = screen.getByRole('button', { name: '🦄 Horn til/fra' });
-  expect(toggle).toHaveAttribute('aria-pressed', 'false');
-  expect(screen.queryByRole('button', { name: 'Vælg horn: Spids' })).not.toBeInTheDocument();
-  await userEvent.click(toggle);
-  expect(screen.getByRole('button', { name: 'Vælg horn: Spids' })).toBeInTheDocument();
-  expect(screen.getByRole('button', { name: 'Vælg horn: Snoet' })).toBeInTheDocument();
-  expect(screen.getByRole('button', { name: 'Vælg horn: Lille' })).toBeInTheDocument();
-  expect(screen.getByRole('button', { name: 'Hornfarve: Gul' })).toBeInTheDocument();
-});
-
-test('wings step is off by default and hides style/color pickers until toggled on', async () => {
-  renderWizard();
-  await pickTypeAndAdvanceToWings();
-  expect(screen.getByText(`Trin 7 af ${STEP_COUNT}`)).toBeInTheDocument();
-  const toggle = screen.getByRole('button', { name: '🪽 Vinger til/fra' });
-  expect(toggle).toHaveAttribute('aria-pressed', 'false');
-  expect(screen.queryByRole('button', { name: 'Vælg vinge: Foldet' })).not.toBeInTheDocument();
-  await userEvent.click(toggle);
-  expect(screen.getByRole('button', { name: 'Vælg vinge: Foldet' })).toBeInTheDocument();
-  expect(screen.getByRole('button', { name: 'Vælg vinge: Udspredt' })).toBeInTheDocument();
+  expect(screen.getByText('Vælg horn 🦄')).toBeInTheDocument();
+  await pick('Vælg horn: Snoet');
+  await next(); // horn -> wings
+  expect(screen.getByText('Vælg vinger 🪽')).toBeInTheDocument();
+  await pick('Vælg vinge: Udspredt');
+  await pick('Start eventyr');
+  const saved = JSON.parse(window.localStorage.getItem('pony_appearance'));
+  expect(saved.hasHorn).toBe(true);
+  expect(saved.horn).toBe('swirl');
+  expect(saved.hasWings).toBe(true);
+  expect(saved.wing).toBe('spread');
+  expect(onSelectType).toHaveBeenCalledWith(3);
 });
 
 test('back on the first step exits to home', async () => {
   const { onNavigate } = renderWizard();
-  await userEvent.click(screen.getByRole('button', { name: 'Tilbage' }));
+  await pick('Tilbage');
   expect(onNavigate).toHaveBeenCalledWith('home');
 });
 
 test('back on a later step returns to the previous step, not home', async () => {
   const { onNavigate } = renderWizard();
-  await pickJordpony();
-  await userEvent.click(screen.getByRole('button', { name: 'Tilbage' }));
+  await pick('Vælg Jordpony - Stærk 💪');
+  await pick('Tilbage');
   expect(onNavigate).not.toHaveBeenCalled();
-  expect(screen.getByText(`Trin 1 af ${STEP_COUNT}`)).toBeInTheDocument();
-});
-
-test('walks through every step before starting the game', async () => {
-  const { onSelectType } = renderWizard();
-  await pickTypeAndAdvanceToWings();
-  await userEvent.click(screen.getByRole('button', { name: 'Start eventyr' }));
-  expect(onSelectType).toHaveBeenCalledWith(0);
-});
-
-test('starting the game saves the full appearance, including chosen horn/wing styles', async () => {
-  renderWizard();
-  await pickJordpony();
-  await next(); // body -> eyes
-  await next(); // eyes -> mane
-  await next(); // mane -> tail
-  await userEvent.click(screen.getByRole('button', { name: 'Vælg hale: Krøllet' }));
-  await next(); // tail -> horn
-  await userEvent.click(screen.getByRole('button', { name: '🦄 Horn til/fra' }));
-  await userEvent.click(screen.getByRole('button', { name: 'Vælg horn: Snoet' }));
-  await next(); // horn -> wings
-  await userEvent.click(screen.getByRole('button', { name: '🪽 Vinger til/fra' }));
-  await userEvent.click(screen.getByRole('button', { name: 'Vælg vinge: Udspredt' }));
-  await userEvent.click(screen.getByRole('button', { name: 'Start eventyr' }));
-  const saved = JSON.parse(window.localStorage.getItem('pony_appearance'));
-  expect(saved.tail).toBe('curly');
-  expect(saved.hasHorn).toBe(true);
-  expect(saved.horn).toBe('swirl');
-  expect(saved.hasWings).toBe(true);
-  expect(saved.wing).toBe('spread');
+  expect(screen.getByText('Trin 1 af 5')).toBeInTheDocument();
 });

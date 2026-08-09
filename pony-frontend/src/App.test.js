@@ -58,7 +58,7 @@ jest.mock('./components/SpeakButton', () => function SpeakButton() { return null
 jest.mock('./components/VoiceButton', () => function VoiceButton() { return null; });
 
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
 import * as SFX from './SceneMusic';
@@ -127,12 +127,13 @@ function mockMultiFetch(responses) {
 const findByText = (t) => screen.getByText(t);
 
 // Clicking a pony type on the configurator's first step only selects the
-// type and advances to the body-color step; five more "Næste" clicks walk
-// through eyes/mane/tail/horn/wings to the final step, whose "Start eventyr"
-// button actually starts the game.
+// type and advances to the body-color step. How many "Næste" clicks it
+// takes to reach the end depends on the type — a Jordpony has neither
+// horn nor wings steps, so its wizard is shorter than an Alicorn's — so
+// just click "Næste" until "Start eventyr" appears instead of a fixed count.
 async function pickPonyAndStartGame(name = 'Jordpony') {
   await userEvent.click(screen.getByText(name));
-  for (let i = 0; i < 5; i++) {
+  while (screen.queryByRole('button', { name: 'Næste trin' })) {
     await userEvent.click(screen.getByRole('button', { name: 'Næste trin' }));
   }
   await userEvent.click(screen.getByRole('button', { name: 'Start eventyr' }));
@@ -332,6 +333,10 @@ test('shows four story choices instead of dice in a choice scene', async () => {
   const choices = screen.getAllByRole('button', { name: /^Vælg / });
   expect(choices).toHaveLength(4);
   expect(choices[0].closest('.game-controls')).toHaveClass('game-controls-options');
+  act(() => window.dispatchEvent(new CustomEvent('pony-narration-status', {
+    detail: { status: 'preparing' },
+  })));
+  choices.forEach(choice => expect(choice).toBeEnabled());
   expect(screen.queryByRole('button', { name: 'Kast terningerne' })).not.toBeInTheDocument();
 });
 
