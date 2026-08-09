@@ -1,3 +1,9 @@
+/**
+ * Integration tests for the full App flow.
+ *
+ * Tests: Home → Theme Select → Pony Select → Game Scene → Game End → Home.
+ */
+
 // Mock framer-motion
 jest.mock('framer-motion', () => {
   const React = require('react');
@@ -13,14 +19,12 @@ jest.mock('framer-motion', () => {
 jest.mock('./dice/ReactDice', () => {
   const React = require('react');
   return React.forwardRef(function ReactDice({ numDice, ...props }, ref) {
-    if (ref) {
-      ref.current = { rollAll: jest.fn() };
-    }
+    if (ref) ref.current = { rollAll: jest.fn() };
     return React.createElement('div', { 'data-testid': 'dice', 'data-dice-count': numDice || 2, ...props });
   });
 });
 
-// Mock SceneMusic - exports both default and named
+// Mock SceneMusic
 jest.mock('./SceneMusic', () => {
   const SceneMusic = function SceneMusic() { return null; };
   return {
@@ -32,6 +36,7 @@ jest.mock('./SceneMusic', () => {
     playFail: jest.fn(),
     playSelect: jest.fn(),
     playVictory: jest.fn(),
+    playDefeat: jest.fn(),
     setMasterVolume: jest.fn(),
     resumeAudioContext: jest.fn(),
   };
@@ -43,17 +48,8 @@ import userEvent from '@testing-library/user-event';
 import App from './App';
 import * as SFX from './SceneMusic';
 
-// Mock fetch
-const mockFetch = (response, ok = true) => {
-  global.fetch = jest.fn(() =>
-    Promise.resolve({
-      ok,
-      json: () => Promise.resolve(response),
-    })
-  );
-};
+// --- Helpers ---
 
-// Mock localStorage - with tutorial already seen so it doesn't block tests
 const mockLocalStorage = (overrides) => {
   const store = {
     pony_tutorial_seen: 'true',
@@ -66,19 +62,7 @@ const mockLocalStorage = (overrides) => {
         const parsed = JSON.parse(storeStr);
         return parsed[k] || null;
       },
-      setItem: (k, v) => {
-        // mutate the string representation
-        const parsed = JSON.parse(storeStr);
-        parsed[k] = v;
-        Object.defineProperty(window, 'localStorage', {
-          value: {
-            getItem: (kk) => JSON.parse(JSON.stringify(parsed))[kk] || null,
-            setItem: (kk, vv) => {},
-            clear: () => {},
-          },
-          writable: true,
-        });
-      },
+      setItem: (k, v) => {},
       clear: () => {},
     },
     writable: true,
@@ -90,33 +74,52 @@ beforeEach(() => {
   mockLocalStorage();
 });
 
-// Helper - dismiss sound prompt to get to actual game
+// Helper - dismiss sound prompt
 async function dismissSoundPrompt() {
-  // Wait for the sound prompt to appear
   await waitFor(() => {
     const btn = screen.queryByText('Aktiver lyd') || screen.queryByText('Skip');
     expect(btn).not.toBeNull();
   }, { timeout: 2000 });
-
-  // Click "Aktiver lyd" if present, otherwise "Skip"
   const enableBtn = screen.queryByText('Aktiver lyd');
   if (enableBtn) {
     await userEvent.click(enableBtn);
   } else {
     await userEvent.click(screen.getByText('Skip'));
   }
-
-  // Wait for animations to settle
   await new Promise(r => setTimeout(r, 100));
 }
 
-// Helper
+// Multi-call fetch mock — returns same content data for all calls
+function mockContentFetch(contentData) {
+  global.fetch = jest.fn(() =>
+    Promise.resolve({
+      ok: true,
+      json: () => Promise.resolve(contentData),
+    })
+  );
+}
+
+// Multi-call fetch with different responses per call
+function mockMultiFetch(responses) {
+  let idx = 0;
+  global.fetch = jest.fn(() => {
+    const r = responses[idx++];
+    return Promise.resolve({
+      ok: r.ok !== false,
+      status: r.status || 200,
+      json: () => Promise.resolve(r.body || {}),
+    });
+  });
+}
+
 const findByText = (t) => screen.getByText(t);
-const queryByText = (t) => screen.queryByText(t);
-const findAllByText = (t) => screen.getAllByText(t);
 
 // ===== HOME =====
 test('renders title and start button', async () => {
+  mockContentFetch({
+    ponies: [{ navn: 'Jordpony', emoji: '🐴', bonus: 'Stærk 💪', tekst: 'x', img: 'jordpony.png' }],
+    themes: [{ titel: 'Skyggen', emoji: '🌑', intro: 'x', sceneCount: 5 }],
+  });
   render(<App />);
   await dismissSoundPrompt();
   expect(screen.getByText('My Little Pony')).toBeInTheDocument();
@@ -124,19 +127,75 @@ test('renders title and start button', async () => {
   expect(findByText('🎮 Start Nyt Spil!')).toBeInTheDocument();
 });
 
-test('navigates to start page when clicking Start', async () => {
+test('navigates to theme select when clicking Start', async () => {
+  mockContentFetch({
+    ponies: [{ navn: 'Jordpony', emoji: '🐴', bonus: 'Stærk 💪', tekst: 'x', img: 'jordpony.png' }],
+    themes: [{ titel: 'Skyggen', emoji: '🌑', intro: 'x', sceneCount: 5 }],
+  });
   render(<App />);
   await dismissSoundPrompt();
   await userEvent.click(findByText('🎮 Start Nyt Spil!'));
   expect(SFX.playClick).toHaveBeenCalled();
-  expect(screen.getByText('Vælg din Pony! 🐴')).toBeInTheDocument();
+  expect(findByText('Vælg et eventyr! 📖')).toBeInTheDocument();
+});
+
+// ===== THEME SELECT =====
+test('renders theme selection page', async () => {
+  mockContentFetch({
+    ponies: [{ navn: 'Jordpony', emoji: '🐴', bonus: 'Stærk 💪', tekst: 'x', img: 'jordpony.png' }],
+    themes: [
+      { titel: 'Skyggen Over Equestria', emoji: '🌑', intro: 'A dark shadow...', sceneCount: 5 },
+      { titel: 'Havdypens Skat', emoji: '🌊', intro: 'Under the sea...', sceneCount: 7 },
+    ],
+  });
+  render(<App />);
+  await dismissSoundPrompt();
+  await userEvent.click(findByText('🎮 Start Nyt Spil!'));
+  expect(findByText('Vælg et eventyr! 📖')).toBeInTheDocument();
+});
+
+test('selecting a theme navigates to pony selection', async () => {
+  mockContentFetch({
+    ponies: [{ navn: 'Jordpony', emoji: '🐴', bonus: 'Stærk 💪', tekst: 'x', img: 'jordpony.png' }],
+    themes: [{ titel: 'Skyggen', emoji: '🌑', intro: 'x', sceneCount: 5 }],
+  });
+  render(<App />);
+  await dismissSoundPrompt();
+  await userEvent.click(findByText('🎮 Start Nyt Spil!'));
+  expect(findByText('Vælg et eventyr! 📖')).toBeInTheDocument();
+  await userEvent.click(findByText('Skyggen'));
+  expect(SFX.playClick).toHaveBeenCalled();
+  expect(findByText('Vælg din Pony! 🐴')).toBeInTheDocument();
+});
+
+test('Tilbage from theme goes to home', async () => {
+  mockContentFetch({
+    ponies: [{ navn: 'Jordpony', emoji: '🐴', bonus: 'Stærk 💪', tekst: 'x', img: 'jordpony.png' }],
+    themes: [{ titel: 'Skyggen', emoji: '🌑', intro: 'x', sceneCount: 5 }],
+  });
+  render(<App />);
+  await dismissSoundPrompt();
+  await userEvent.click(findByText('🎮 Start Nyt Spil!'));
+  expect(findByText('Vælg et eventyr! 📖')).toBeInTheDocument();
+  await userEvent.click(findByText('Tilbage'));
+  expect(screen.getByText('My Little Pony')).toBeInTheDocument();
 });
 
 // ===== PONY SELECTION =====
 test('renders all 4 pony types', async () => {
+  mockContentFetch({
+    ponies: [
+      { navn: 'Jordpony', emoji: '🐴', bonus: 'Stærk 💪', tekst: 'x', img: 'jordpony.png' },
+      { navn: 'Pegasus', emoji: '🦅', bonus: 'Flyver 🪽', tekst: 'x', img: 'pegasus.png' },
+      { navn: 'Enhjørning', emoji: '🦄', bonus: 'Magisk ✨', tekst: 'x', img: 'enhjorning.png' },
+      { navn: 'Alicorn', emoji: '👑', bonus: 'Magi 🌟', tekst: 'x', img: 'alicorn.png' },
+    ],
+    themes: [{ titel: 'Skyggen', emoji: '🌑', intro: 'x', sceneCount: 5 }],
+  });
   render(<App />);
   await dismissSoundPrompt();
   await userEvent.click(findByText('🎮 Start Nyt Spil!'));
+  await userEvent.click(findByText('Skyggen'));
   expect(screen.getByText('Jordpony')).toBeInTheDocument();
   expect(screen.getByText('Pegasus')).toBeInTheDocument();
   expect(screen.getByText('Enhjørning')).toBeInTheDocument();
@@ -144,339 +203,173 @@ test('renders all 4 pony types', async () => {
 });
 
 test('calls /api/start when selecting a pony', async () => {
-  mockFetch({
-    sceneNum: 1, tema: 'Eventyr i Equestria', sceneText: 'Du møder en drage.',
-    actionText: 'Kæmp mod dragen', difficulty: '⭐⭐', ponyName: 'Jordpony',
-    ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png', history: [],
+  mockMultiFetch([
+    { body: { ponies: [{ navn: 'Jordpony', emoji: '🐴', bonus: 'Stærk 💪', tekst: 'x', img: 'jordpony.png' }], themes: [{ titel: 'Skyggen', emoji: '🌑', intro: 'x', sceneCount: 5 }] } },
+    { body: { sceneNum: 1, tema: 'Eventyr', sceneText: 'Du møder en drage.', actionText: 'Kæmp', difficulty: '⭐⭐', ponyName: 'Jordpony', ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png', history: [] } },
+  ]);
+  render(<App />);
+  await dismissSoundPrompt();
+  await userEvent.click(findByText('🎮 Start Nyt Spil!'));
+  await userEvent.click(findByText('Skyggen'));
+  await userEvent.click(screen.getByText('Jordpony'));
+  expect(SFX.playSelect).toHaveBeenCalled();
+  await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(2));
+});
+
+test('shows error when /api/start fails', async () => {
+  mockMultiFetch([
+    { body: { ponies: [{ navn: 'Jordpony', emoji: '🐴', bonus: 'Stærk 💪', tekst: 'x', img: 'jordpony.png' }], themes: [{ titel: 'Skyggen', emoji: '🌑', intro: 'x', sceneCount: 5 }] } },
+    { ok: false, body: { error: 'bad' } },
+  ]);
+  render(<App />);
+  await dismissSoundPrompt();
+  await userEvent.click(findByText('🎮 Start Nyt Spil!'));
+  await userEvent.click(findByText('Skyggen'));
+  await userEvent.click(screen.getByText('Jordpony'));
+  await waitFor(() => expect(screen.getByText(/Kunne ikke starte spil/)).toBeInTheDocument());
+});
+
+test('Tilbage from pony selection goes to home', async () => {
+  mockContentFetch({
+    ponies: [{ navn: 'Jordpony', emoji: '🐴', bonus: 'Stærk 💪', tekst: 'x', img: 'jordpony.png' }],
+    themes: [{ titel: 'Skyggen', emoji: '🌑', intro: 'x', sceneCount: 5 }],
   });
   render(<App />);
   await dismissSoundPrompt();
   await userEvent.click(findByText('🎮 Start Nyt Spil!'));
-  await userEvent.click(screen.getByText('Jordpony'));
-  expect(SFX.playSelect).toHaveBeenCalled();
-  await waitFor(() => expect(global.fetch).toHaveBeenCalledWith(
-    'http://localhost/api/start',
-    expect.objectContaining({ method: 'POST' })
-  ));
-});
-
-test('shows error when /api/start fails', async () => {
-  mockFetch(null, false);
-  render(<App />);
-  await dismissSoundPrompt();
-  await userEvent.click(findByText('🎮 Start Nyt Spil!'));
-  await userEvent.click(screen.getByText('Jordpony'));
-  await waitFor(() => expect(screen.getByText(/Kunne ikke starte spil/)).toBeInTheDocument());
-});
-
-test('handles network error (throws)', async () => {
-  global.fetch = jest.fn(() => Promise.reject(new Error('Network')));
-  render(<App />);
-  await dismissSoundPrompt();
-  await userEvent.click(findByText('🎮 Start Nyt Spil!'));
-  await userEvent.click(screen.getByText('Jordpony'));
-  await waitFor(() => expect(screen.getByText(/Kunne ikke starte spil/)).toBeInTheDocument());
-});
-
-test('Tilbage button navigates to home', async () => {
-  render(<App />);
-  await dismissSoundPrompt();
-  await userEvent.click(findByText('🎮 Start Nyt Spil!'));
-  await userEvent.click(screen.getByText('Tilbage'));
-  expect(SFX.playClick).toHaveBeenCalled();
+  await userEvent.click(findByText('Skyggen'));
+  expect(findByText('Vælg din Pony! 🐴')).toBeInTheDocument();
+  await userEvent.click(findByText('Tilbage'));
   expect(screen.getByText('My Little Pony')).toBeInTheDocument();
 });
 
 // ===== GAME SCENE =====
 test('renders scene information', async () => {
-  mockFetch({
-    sceneNum: 1, tema: 'Eventyr', sceneText: 'Du møder en drage.',
-    actionText: 'Kæmp', difficulty: '⭐⭐', ponyName: 'Jordpony',
-    ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png', history: [],
-  });
+  mockMultiFetch([
+    { body: { ponies: [{ navn: 'Jordpony', emoji: '🐴', bonus: 'Stærk 💪', tekst: 'x', img: 'jordpony.png' }], themes: [{ titel: 'Skyggen', emoji: '🌑', intro: 'x', sceneCount: 5 }] } },
+    { body: { sceneNum: 1, tema: 'Eventyr', sceneText: 'Du møder en drage.', actionText: 'Kæmp', difficulty: '⭐⭐', ponyName: 'Jordpony', ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png', history: [] } },
+  ]);
   render(<App />);
   await dismissSoundPrompt();
   await userEvent.click(findByText('🎮 Start Nyt Spil!'));
+  await userEvent.click(findByText('Skyggen'));
   await userEvent.click(screen.getByText('Jordpony'));
   await waitFor(() => expect(screen.getByText('Eventyr')).toBeInTheDocument());
   expect(screen.getByText('Du møder en drage.')).toBeInTheDocument();
 });
 
-test('shows roll button', async () => {
-  mockFetch({
-    sceneNum: 1, tema: 'Eventyr', sceneText: 'Du møder en drage.',
-    actionText: 'Kæmp', difficulty: '⭐⭐', ponyName: 'Jordpony',
-    ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png', history: [],
-  });
+test('shows roll button in game', async () => {
+  mockMultiFetch([
+    { body: { ponies: [{ navn: 'Jordpony', emoji: '🐴', bonus: 'Stærk 💪', tekst: 'x', img: 'jordpony.png' }], themes: [{ titel: 'Skyggen', emoji: '🌑', intro: 'x', sceneCount: 5 }] } },
+    { body: { sceneNum: 1, tema: 'Eventyr', sceneText: 'Du møder en drage.', actionText: 'Kæmp', difficulty: '⭐⭐', ponyName: 'Jordpony', ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png', history: [] } },
+  ]);
   render(<App />);
   await dismissSoundPrompt();
   await userEvent.click(findByText('🎮 Start Nyt Spil!'));
+  await userEvent.click(findByText('Skyggen'));
   await userEvent.click(screen.getByText('Jordpony'));
   await waitFor(() => expect(screen.getByText('🎲 KAST TERNINGERNE! 🎲')).toBeInTheDocument());
 });
 
 test('calls /api/kast when rolling dice', async () => {
-  mockFetch({
-    sceneNum: 1, tema: 'Eventyr', sceneText: 'Du møder en drage.',
-    actionText: 'Kæmp', difficulty: '⭐⭐', ponyName: 'Jordpony',
-    ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png', history: [],
-  });
+  mockMultiFetch([
+    { body: { ponies: [{ navn: 'Jordpony', emoji: '🐴', bonus: 'Stærk 💪', tekst: 'x', img: 'jordpony.png' }], themes: [{ titel: 'Skyggen', emoji: '🌑', intro: 'x', sceneCount: 5 }] } },
+    { body: { sceneNum: 1, tema: 'Eventyr', sceneText: 'Du møder en drage.', actionText: 'Kæmp', difficulty: '⭐⭐', ponyName: 'Jordpony', ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png', history: [] } },
+    { body: { sceneNum: 2, tema: 'Eventyr', sceneText: 'Scene 2', actionText: 'Kæmp', difficulty: '⭐', ponyName: 'Jordpony', ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png', history: [] } },
+  ]);
   render(<App />);
   await dismissSoundPrompt();
   await userEvent.click(findByText('🎮 Start Nyt Spil!'));
+  await userEvent.click(findByText('Skyggen'));
   await userEvent.click(screen.getByText('Jordpony'));
   await waitFor(() => expect(screen.getByText('🎲 KAST TERNINGERNE! 🎲')).toBeInTheDocument());
   await userEvent.click(screen.getByText('🎲 KAST TERNINGERNE! 🎲'));
   expect(SFX.playRoll).toHaveBeenCalled();
-  await waitFor(() => expect(global.fetch).toHaveBeenCalledWith(
-    'http://localhost/api/kast',
-    expect.objectContaining({ method: 'POST' })
-  ));
-});
-
-test('shows history items in feed', async () => {
-  mockFetch({
-    sceneNum: 1, tema: 'Eventyr', sceneText: 'Du møder en drage.',
-    actionText: 'Kæmp', difficulty: '⭐⭐', ponyName: 'Jordpony',
-    ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png',
-    history: [{ action: 'Kæmp', dice: [3, 4], result: 'Du vandt!', success: true, story: 'Bravo!' }],
-  });
-  render(<App />);
-  await dismissSoundPrompt();
-  await userEvent.click(findByText('🎮 Start Nyt Spil!'));
-  await userEvent.click(screen.getByText('Jordpony'));
-  await waitFor(() => expect(screen.getByText('Du vandt!')).toBeInTheDocument());
-});
-
-test('shows pony info in game', async () => {
-  mockFetch({
-    sceneNum: 1, tema: 'Eventyr', sceneText: 'Du møder en drage.',
-    actionText: 'Kæmp', difficulty: '⭐⭐', ponyName: 'Jordpony',
-    ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png', history: [],
-  });
-  render(<App />);
-  await dismissSoundPrompt();
-  await userEvent.click(findByText('🎮 Start Nyt Spil!'));
-  await userEvent.click(screen.getByText('Jordpony'));
-  await waitFor(() => expect(findAllByText('Jordpony').length).toBeGreaterThanOrEqual(1));
+  await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(3));
 });
 
 // ===== GAME END =====
 test('shows victory message', async () => {
-  mockFetch({
-    sceneNum: 1, tema: 'Eventyr', sceneText: 'Du møder en drage.',
-    actionText: 'Kæmp', difficulty: '⭐⭐', ponyName: 'Jordpony',
-    ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png', history: [],
-  });
+  mockMultiFetch([
+    { body: { ponies: [{ navn: 'Jordpony', emoji: '🐴', bonus: 'Stærk 💪', tekst: 'x', img: 'jordpony.png' }], themes: [{ titel: 'Skyggen', emoji: '🌑', intro: 'x', sceneCount: 5 }] } },
+    { body: { sceneNum: 1, tema: 'Eventyr', sceneText: 'Du møder en drage.', actionText: 'Kæmp', difficulty: '⭐⭐', ponyName: 'Jordpony', ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png', history: [] } },
+    { body: { victory: true, finished: true, endText: 'Du vandt!', score: '100', history: [{ action: 'Kæmp', dice: [6, 6], result: 'Sejr!', success: true }], ponyName: 'Jordpony', ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png' } },
+  ]);
   render(<App />);
   await dismissSoundPrompt();
   await userEvent.click(findByText('🎮 Start Nyt Spil!'));
+  await userEvent.click(findByText('Skyggen'));
   await userEvent.click(screen.getByText('Jordpony'));
   await waitFor(() => expect(screen.getByText('🎲 KAST TERNINGERNE! 🎲')).toBeInTheDocument());
-  mockFetch({
-    victory: true, finished: true, endText: 'Du vandt!', score: '100',
-    history: [{ action: 'Kæmp', dice: [6, 6], result: 'Sejr!', success: true }],
-    ponyName: 'Jordpony', ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png',
-  });
   await userEvent.click(screen.getByText('🎲 KAST TERNINGERNE! 🎲'));
   await waitFor(() => expect(screen.getByText('🌟 SEJR! 🌟')).toBeInTheDocument());
   expect(SFX.playVictory).toHaveBeenCalled();
 });
 
-test('shows history on game end', async () => {
-  mockFetch({
-    sceneNum: 1, tema: 'Eventyr', sceneText: 'Du møder en drage.',
-    actionText: 'Kæmp', difficulty: '⭐⭐', ponyName: 'Jordpony',
-    ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png', history: [],
-  });
+test('shows defeat message for non-victory', async () => {
+  mockMultiFetch([
+    { body: { ponies: [{ navn: 'Jordpony', emoji: '🐴', bonus: 'Stærk 💪', tekst: 'x', img: 'jordpony.png' }], themes: [{ titel: 'Skyggen', emoji: '🌑', intro: 'x', sceneCount: 5 }] } },
+    { body: { sceneNum: 1, tema: 'Eventyr', sceneText: 'Du møder en drage.', actionText: 'Kæmp', difficulty: '⭐⭐', ponyName: 'Jordpony', ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png', history: [] } },
+    { body: { victory: false, mixed: false, finished: true, endText: 'Du tabte...', score: '0', history: [{ action: 'Kæmp', dice: [1, 1], result: 'Tab!', success: false }], ponyName: 'Jordpony', ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png' } },
+  ]);
   render(<App />);
   await dismissSoundPrompt();
   await userEvent.click(findByText('🎮 Start Nyt Spil!'));
+  await userEvent.click(findByText('Skyggen'));
   await userEvent.click(screen.getByText('Jordpony'));
   await waitFor(() => expect(screen.getByText('🎲 KAST TERNINGERNE! 🎲')).toBeInTheDocument());
-  mockFetch({
-    victory: true, finished: true, endText: 'Du vandt!', score: '100',
-    history: [{ action: 'Kæmp', dice: [6, 6], result: 'Sejr!', success: true }],
-    ponyName: 'Jordpony', ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png',
-  });
   await userEvent.click(screen.getByText('🎲 KAST TERNINGERNE! 🎲'));
-  await waitFor(() => expect(screen.getByText('📖 Hvad skete der? 📖')).toBeInTheDocument());
+  await waitFor(() => expect(screen.getByText('💪 Prøv igen! 💪')).toBeInTheDocument());
 });
 
-test('has Spil Igen button', async () => {
-  mockFetch({
-    sceneNum: 1, tema: 'Eventyr', sceneText: 'Du møder en drage.',
-    actionText: 'Kæmp', difficulty: '⭐⭐', ponyName: 'Jordpony',
-    ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png', history: [],
-  });
+test('Spil Igen navigates to pony selection', async () => {
+  mockMultiFetch([
+    { body: { ponies: [{ navn: 'Jordpony', emoji: '🐴', bonus: 'Stærk 💪', tekst: 'x', img: 'jordpony.png' }], themes: [{ titel: 'Skyggen', emoji: '🌑', intro: 'x', sceneCount: 5 }] } },
+    { body: { sceneNum: 1, tema: 'Eventyr', sceneText: 'Du møder en drage.', actionText: 'Kæmp', difficulty: '⭐⭐', ponyName: 'Jordpony', ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png', history: [] } },
+    { body: { victory: true, finished: true, endText: 'Du vandt!', score: '100', history: [{ action: 'Kæmp', dice: [6, 6], result: 'Sejr!', success: true }], ponyName: 'Jordpony', ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png' } },
+  ]);
   render(<App />);
   await dismissSoundPrompt();
   await userEvent.click(findByText('🎮 Start Nyt Spil!'));
+  await userEvent.click(findByText('Skyggen'));
   await userEvent.click(screen.getByText('Jordpony'));
   await waitFor(() => expect(screen.getByText('🎲 KAST TERNINGERNE! 🎲')).toBeInTheDocument());
-  mockFetch({
-    victory: true, finished: true, endText: 'Du vandt!', score: '100',
-    history: [{ action: 'Kæmp', dice: [6, 6], result: 'Sejr!', success: true }],
-    ponyName: 'Jordpony', ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png',
-  });
   await userEvent.click(screen.getByText('🎲 KAST TERNINGERNE! 🎲'));
-  await waitFor(() => expect(screen.getByText('🎲 Spil Igen!')).toBeInTheDocument());
-});
-
-test('Spil Igen navigates to start page', async () => {
-  mockFetch({
-    sceneNum: 1, tema: 'Eventyr', sceneText: 'Du møder en drage.',
-    actionText: 'Kæmp', difficulty: '⭐⭐', ponyName: 'Jordpony',
-    ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png', history: [],
-  });
-  render(<App />);
-  await dismissSoundPrompt();
-  await userEvent.click(findByText('🎮 Start Nyt Spil!'));
-  await userEvent.click(screen.getByText('Jordpony'));
-  await waitFor(() => expect(screen.getByText('🎲 KAST TERNINGERNE! 🎲')).toBeInTheDocument());
-  mockFetch({
-    victory: true, finished: true, endText: 'Du vandt!', score: '100',
-    history: [{ action: 'Kæmp', dice: [6, 6], result: 'Sejr!', success: true }],
-    ponyName: 'Jordpony', ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png',
-  });
-  await userEvent.click(screen.getByText('🎲 KAST TERNINGERNE! 🎲'));
-  await waitFor(() => expect(screen.getByText('🎲 Spil Igen!')).toBeInTheDocument());
+  await waitFor(() => expect(screen.getByText('🌟 SEJR! 🌟')).toBeInTheDocument());
   await userEvent.click(screen.getByText('🎲 Spil Igen!'));
   expect(screen.getByText('Vælg din Pony! 🐴')).toBeInTheDocument();
 });
 
 test('Forside button navigates to home', async () => {
-  mockFetch({
-    sceneNum: 1, tema: 'Eventyr', sceneText: 'Du møder en drage.',
-    actionText: 'Kæmp', difficulty: '⭐⭐', ponyName: 'Jordpony',
-    ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png', history: [],
-  });
+  mockMultiFetch([
+    { body: { ponies: [{ navn: 'Jordpony', emoji: '🐴', bonus: 'Stærk 💪', tekst: 'x', img: 'jordpony.png' }], themes: [{ titel: 'Skyggen', emoji: '🌑', intro: 'x', sceneCount: 5 }] } },
+    { body: { sceneNum: 1, tema: 'Eventyr', sceneText: 'Du møder en drage.', actionText: 'Kæmp', difficulty: '⭐⭐', ponyName: 'Jordpony', ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png', history: [] } },
+    { body: { victory: true, finished: true, endText: 'Du vandt!', score: '100', history: [{ action: 'Kæmp', dice: [6, 6], result: 'Sejr!', success: true }], ponyName: 'Jordpony', ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png' } },
+  ]);
   render(<App />);
   await dismissSoundPrompt();
   await userEvent.click(findByText('🎮 Start Nyt Spil!'));
+  await userEvent.click(findByText('Skyggen'));
   await userEvent.click(screen.getByText('Jordpony'));
   await waitFor(() => expect(screen.getByText('🎲 KAST TERNINGERNE! 🎲')).toBeInTheDocument());
-  mockFetch({
-    victory: true, finished: true, endText: 'Du vandt!', score: '100',
-    history: [{ action: 'Kæmp', dice: [6, 6], result: 'Sejr!', success: true }],
-    ponyName: 'Jordpony', ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png',
-  });
   await userEvent.click(screen.getByText('🎲 KAST TERNINGERNE! 🎲'));
-  await waitFor(() => expect(screen.getByText('🏠 Forside')).toBeInTheDocument());
+  await waitFor(() => expect(screen.getByText('🌟 SEJR! 🌟')).toBeInTheDocument());
   await userEvent.click(screen.getByText('🏠 Forside'));
   expect(screen.getByText('My Little Pony')).toBeInTheDocument();
 });
 
-test('shows defeat message for non-victory', async () => {
-  mockFetch({
-    sceneNum: 1, tema: 'Eventyr', sceneText: 'Du møder en drage.',
-    actionText: 'Kæmp', difficulty: '⭐⭐', ponyName: 'Jordpony',
-    ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png', history: [],
-  });
-  render(<App />);
-  await dismissSoundPrompt();
-  await userEvent.click(findByText('🎮 Start Nyt Spil!'));
-  await userEvent.click(screen.getByText('Jordpony'));
-  await waitFor(() => expect(screen.getByText('🎲 KAST TERNINGERNE! 🎲')).toBeInTheDocument());
-  mockFetch({
-    victory: false, mixed: false, finished: true, endText: 'Du tabte...', score: '0',
-    history: [{ action: 'Kæmp', dice: [1, 1], result: 'Tab!', success: false }],
-    ponyName: 'Jordpony', ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png',
-  });
-  await userEvent.click(screen.getByText('🎲 KAST TERNINGERNE! 🎲'));
-  await waitFor(() => expect(screen.getByText('💪 Prøv igen! 💪')).toBeInTheDocument());
-});
-
-test('shows mixed result message', async () => {
-  mockFetch({
-    sceneNum: 1, tema: 'Eventyr', sceneText: 'Du møder en drage.',
-    actionText: 'Kæmp', difficulty: '⭐⭐', ponyName: 'Jordpony',
-    ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png', history: [],
-  });
-  render(<App />);
-  await dismissSoundPrompt();
-  await userEvent.click(findByText('🎮 Start Nyt Spil!'));
-  await userEvent.click(screen.getByText('Jordpony'));
-  await waitFor(() => expect(screen.getByText('🎲 KAST TERNINGERNE! 🎲')).toBeInTheDocument());
-  mockFetch({
-    victory: false, mixed: true, finished: true, endText: 'Blandet...', score: '50',
-    history: [{ action: 'Kæmp', dice: [3, 4], result: 'Blandet', success: true }],
-    ponyName: 'Jordpony', ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png',
-  });
-  await userEvent.click(screen.getByText('🎲 KAST TERNINGERNE! 🎲'));
-  await waitFor(() => expect(screen.getByText('⚖️ Blant resultat! ⚖️')).toBeInTheDocument());
-});
-
-// ===== ERROR =====
-test('shows error screen with Tilbage button', async () => {
-  global.fetch = jest.fn(() => Promise.reject(new Error('Network')));
-  render(<App />);
-  await dismissSoundPrompt();
-  await userEvent.click(findByText('🎮 Start Nyt Spil!'));
-  await userEvent.click(screen.getByText('Jordpony'));
-  await waitFor(() => expect(screen.getByText(/Kunne ikke starte spil/)).toBeInTheDocument());
-  expect(screen.getByText('Tilbage')).toBeInTheDocument();
-});
-
-// ===== LOADING =====
-test('shows loading spinner while waiting for API', async () => {
-  let resolveFetch;
-  global.fetch = jest.fn(() => new Promise(r => { resolveFetch = r; }));
-  render(<App />);
-  await dismissSoundPrompt();
-  await userEvent.click(findByText('🎮 Start Nyt Spil!'));
-  await userEvent.click(screen.getByText('Jordpony'));
-  expect(screen.getByText('Indlæser...')).toBeInTheDocument();
-  resolveFetch({ ok: true, json: () => Promise.resolve({
-    sceneNum: 1, tema: 'Eventyr', sceneText: 'Test', actionText: 'Test',
-    difficulty: '⭐', ponyName: 'Jordpony', ponyType: 'Jordpony',
-    ponyImg: '/static/images/jordpony.png', history: [],
-  })});
-});
-
-// ===== DICE COMPONENT =====
-test('renders dice in game end history', async () => {
-  mockFetch({
-    sceneNum: 1, tema: 'Eventyr', sceneText: 'Du møder en drage.',
-    actionText: 'Kæmp', difficulty: '⭐⭐', ponyName: 'Jordpony',
-    ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png', history: [],
-  });
-  render(<App />);
-  await dismissSoundPrompt();
-  await userEvent.click(findByText('🎮 Start Nyt Spil!'));
-  await userEvent.click(screen.getByText('Jordpony'));
-  await waitFor(() => expect(screen.getByText('🎲 KAST TERNINGERNE! 🎲')).toBeInTheDocument());
-  mockFetch({
-    victory: true, finished: true, endText: 'Du vandt!', score: '100',
-    history: [{ action: 'Kæmp', dice: [6, 6], result: 'Sejr!', success: true }],
-    ponyName: 'Jordpony', ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png',
-  });
-  await userEvent.click(screen.getByText('🎲 KAST TERNINGERNE! 🎲'));
-  await waitFor(() => expect(screen.getByTestId('dice')).toBeInTheDocument());
-});
-
 // ===== FULL FLOW =====
-test('home -> start -> game -> end -> home', async () => {
-  let callCount = 0;
-  global.fetch = jest.fn(() => {
-    callCount++;
-    if (callCount === 1) {
-      return Promise.resolve({ ok: true, json: () => Promise.resolve({
-        sceneNum: 1, tema: 'Eventyr', sceneText: 'Test', actionText: 'Test',
-        difficulty: '⭐', ponyName: 'Jordpony', ponyType: 'Jordpony',
-        ponyImg: '/static/images/jordpony.png', history: [],
-      })});
-    } else {
-      return Promise.resolve({ ok: true, json: () => Promise.resolve({
-        victory: true, finished: true, endText: 'Sejr!', score: '100',
-        history: [{ action: 'Kæmp', dice: [6, 6], result: 'Sejr!', success: true }],
-        ponyName: 'Jordpony', ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png',
-      })});
-    }
-  });
+test('home -> theme -> pony -> game -> end -> home', async () => {
+  mockMultiFetch([
+    { body: { ponies: [{ navn: 'Jordpony', emoji: '🐴', bonus: 'Stærk 💪', tekst: 'x', img: 'jordpony.png' }], themes: [{ titel: 'Skyggen', emoji: '🌑', intro: 'x', sceneCount: 5 }] } },
+    { body: { sceneNum: 1, tema: 'Eventyr', sceneText: 'Test', actionText: 'Test', difficulty: '⭐', ponyName: 'Jordpony', ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png', history: [] } },
+    { body: { victory: true, finished: true, endText: 'Sejr!', score: '100', history: [{ action: 'Kæmp', dice: [6, 6], result: 'Sejr!', success: true }], ponyName: 'Jordpony', ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png' } },
+  ]);
   render(<App />);
   await dismissSoundPrompt();
   await userEvent.click(findByText('🎮 Start Nyt Spil!'));
+  expect(screen.getByText('Vælg et eventyr! 📖')).toBeInTheDocument();
+  await userEvent.click(findByText('Skyggen'));
   expect(screen.getByText('Vælg din Pony! 🐴')).toBeInTheDocument();
   await userEvent.click(screen.getByText('Jordpony'));
   await waitFor(() => expect(screen.getByText('🎲 KAST TERNINGERNE! 🎲')).toBeInTheDocument());

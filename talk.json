@@ -1,0 +1,659 @@
+{
+  "goal": {
+    "name": "MLP Pony Game - Dansk Voice Interaction for 4-årige",
+    "agent": "Hermes",
+    "target_model": "Qwen3.6-27B",
+    "project_path": "/home/alex/Documents/Obsidian Vault/Projects/MLP-Pony",
+    "documentation_path": "/home/alex/Documents/Obsidian Vault/Projects/MLP-Pony/Dokumentation.md",
+    "primary_objective": "Implementér et komplet dansk voice-interaction system i MLP Pony Game, hvor et barn omkring 4 år kan tale til spillet, besvare spørgsmål, vælge handlinger og interagere med ponyerne uden at skulle kunne læse eller skrive. Brug Wispr Flow/Whisper-kompatibel speech-to-text som inputlag, tolerant dansk keyword-, synonym- og fuzzy matching som primær forståelsesmekanisme og Qwen3.6-27B som intelligent fallback til kreative eller uventede svar.",
+    "execution_mode": "autonomous_iterative",
+    "priority": "high",
+    "language": {
+      "child_interface": "Danish",
+      "documentation": "Danish",
+      "code": "English",
+      "code_comments": "English",
+      "api_fields": "English"
+    }
+  },
+
+  "product_vision": {
+    "feature_name": "Tal med ponyerne",
+    "target_user": {
+      "age": 4,
+      "reading_required": false,
+      "writing_required": false,
+      "interaction_style": "voice-first"
+    },
+    "experience": "En pony eller fortællerstemme stiller et spørgsmål på dansk. Barnet trykker på en stor mikrofonknap og svarer med sin egen stemme. Speech-to-text konverterer talen til dansk tekst. Spillet forsøger først at forstå svaret deterministisk via keywords, synonymer og fuzzy matching. Hvis dette ikke giver et sikkert resultat, kan Qwen3.6-27B klassificere svaret mod de tilladte scene-intents. Ponyen reagerer derefter positivt og naturligt, og historien fortsætter.",
+    "design_principles": [
+      "Barnet skal kunne spille uden at kunne læse.",
+      "Voice interaction skal føles som samtale, ikke som diktering.",
+      "Barnets formulering behøver ikke være grammatisk korrekt.",
+      "Små udtalefejl skal tolereres.",
+      "Speech-to-text fejl skal tolereres.",
+      "Spillet skal forstå betydningen fremfor at kræve eksakte sætninger.",
+      "Barnet skal sjældent opleve et hårdt 'forkert svar'.",
+      "Ved misforståelser skal spillet hjælpe barnet videre.",
+      "Responstiden skal være kort nok til, at samtalen føles naturlig.",
+      "LLM må ikke være nødvendig for simple svar.",
+      "Gameplay skal stadig fungere med mus/touch hvis voice ikke bruges."
+    ]
+  },
+
+  "important_architecture_decision": {
+    "rule": "Qwen3.6-27B må ikke være første trin for alle voice-svar.",
+    "reasoning": [
+      "Keyword matching er hurtigere.",
+      "Keyword matching er deterministisk.",
+      "Simple børnesvar kræver ikke LLM reasoning.",
+      "LLM-inference giver unødvendig latency.",
+      "Det reducerer risikoen for at modellen fortolker svaret anderledes end spillets design."
+    ],
+    "matching_pipeline": [
+      "speech_to_text",
+      "normalization",
+      "exact_keyword_match",
+      "normalized_keyword_match",
+      "synonym_match",
+      "fuzzy_match",
+      "intent_scoring",
+      "llm_fallback",
+      "child_friendly_recovery"
+    ]
+  },
+
+  "high_level_flow": {
+    "steps": [
+      {
+        "step": 1,
+        "action": "Scene vises."
+      },
+      {
+        "step": 2,
+        "action": "Pony/fortæller afspiller spørgsmålet med dansk TTS hvis TTS er aktiveret."
+      },
+      {
+        "step": 3,
+        "action": "Mikrofonknappen bliver tydelig og aktiv."
+      },
+      {
+        "step": 4,
+        "action": "Barnet trykker eller holder mikrofonknappen."
+      },
+      {
+        "step": 5,
+        "action": "Browseren optager lyd."
+      },
+      {
+        "step": 6,
+        "action": "Lyd sendes til backend."
+      },
+      {
+        "step": 7,
+        "action": "Backend sender lyden til konfigureret speech-to-text provider."
+      },
+      {
+        "step": 8,
+        "action": "Dansk transcription returneres."
+      },
+      {
+        "step": 9,
+        "action": "Teksten normaliseres."
+      },
+      {
+        "step": 10,
+        "action": "Voice matcher forsøger deterministic intent matching."
+      },
+      {
+        "step": 11,
+        "action": "Hvis confidence er høj, accepter intent."
+      },
+      {
+        "step": 12,
+        "action": "Hvis confidence er middel, brug kontekst eller clarification."
+      },
+      {
+        "step": 13,
+        "action": "Hvis deterministic matching ikke kan afgøre det, send kun nødvendige data til Qwen fallback."
+      },
+      {
+        "step": 14,
+        "action": "Resultatet oversættes til en game action."
+      },
+      {
+        "step": 15,
+        "action": "Ponyen reagerer positivt."
+      },
+      {
+        "step": 16,
+        "action": "Scene/game state opdateres."
+      }
+    ]
+  },
+
+  "speech_to_text": {
+    "provider": "Wispr Flow or Whisper-compatible STT",
+    "provider_abstraction_required": true,
+    "language": "da",
+    "expected_input": [
+      "webm",
+      "ogg",
+      "wav"
+    ],
+    "requirements": [
+      "Speech-to-text provider må ikke kaldes direkte fra React hvis API credentials ellers eksponeres.",
+      "Frontend sender audio blob til Flask backend.",
+      "Backend håndterer provider communication.",
+      "Provider logic skal ligge bag en adapter/interface.",
+      "STT provider skal senere kunne udskiftes uden ændringer i game logic.",
+      "Transcription skal returnere plain text og metadata.",
+      "Ingen gameplaybeslutning må foretages i STT-provider adapteren."
+    ],
+    "suggested_interface": {
+      "file": "backend/app/services/speech_to_text.py",
+      "methods": [
+        "transcribe(audio_bytes, language='da')"
+      ],
+      "output": {
+        "text": "string",
+        "language": "da",
+        "confidence": "float|null",
+        "provider": "string"
+      }
+    }
+  },
+
+  "frontend_voice_capture": {
+    "technology": [
+      "navigator.mediaDevices.getUserMedia",
+      "MediaRecorder"
+    ],
+    "components": [
+      "VoiceButton",
+      "VoiceRecorder",
+      "VoiceStatus",
+      "VoiceTranscriptDebug"
+    ],
+    "ui_states": [
+      "idle",
+      "requesting_permission",
+      "listening",
+      "processing",
+      "understood",
+      "need_retry",
+      "error"
+    ],
+    "microphone_button": {
+      "size": "large",
+      "touch_friendly": true,
+      "icon": "microphone",
+      "animations": {
+        "idle": "gentle pulse",
+        "listening": "animated listening pulse",
+        "processing": "soft spinner",
+        "success": "positive bounce"
+      }
+    },
+    "child_facing_status_examples": {
+      "idle": "Tryk og fortæl mig dit svar!",
+      "listening": "Jeg lytter...",
+      "processing": "Hmm, lad mig tænke...",
+      "understood": "Ja!",
+      "retry": "Jeg hørte dig ikke helt. Vil du prøve igen?"
+    },
+    "requirements": [
+      "Ingen tekniske fejlbeskeder må vises til barnet.",
+      "Microphone permission denial skal håndteres.",
+      "Hvis microphone ikke virker, skal normale knapper fortsat kunne bruges.",
+      "Audio recording skal stoppes korrekt ved component unmount.",
+      "Gamle MediaRecorder streams skal closes.",
+      "Mikrofonstatus skal være visuelt tydelig.",
+      "Undgå at optage kontinuerligt i baggrunden."
+    ]
+  },
+
+  "voice_api": {
+    "new_endpoints": [
+      {
+        "method": "POST",
+        "path": "/api/v1/games/<game_id>/voice",
+        "content_type": "multipart/form-data",
+        "purpose": "Transcribe audio, match voice answer og returnér intent/result."
+      },
+      {
+        "method": "POST",
+        "path": "/api/v1/games/<game_id>/voice/text",
+        "content_type": "application/json",
+        "purpose": "Development/debug endpoint hvor transcribed text kan testes uden microphone."
+      }
+    ],
+    "voice_request_fields": {
+      "audio": "binary audio file",
+      "scene_id": "string",
+      "question_id": "string optional"
+    },
+    "text_debug_request": {
+      "scene_id": "forest_02",
+      "text": "jeg tror vi skal kigge inde mellem træerne"
+    },
+    "response_example": {
+      "ok": true,
+      "data": {
+        "transcript": "jeg tror vi skal kigge inde mellem træerne",
+        "normalized_text": "jeg tror vi skal kigge inde mellem træerne",
+        "matched": true,
+        "intent": "forest",
+        "confidence": 0.96,
+        "match_method": "keyword",
+        "response_type": "accepted",
+        "child_response": "Ja! Lad os kigge mellem træerne!",
+        "next_action": {
+          "type": "scene_choice",
+          "choice_id": "search_forest"
+        }
+      }
+    }
+  },
+
+  "voice_question_schema": {
+    "id": "find_bunny",
+    "prompt": "Hvor tror du, kaninen gemmer sig?",
+    "prompt_tts": "Hvor tror du, kaninen gemmer sig?",
+    "allow_voice": true,
+    "allow_buttons": true,
+    "intents": [
+      {
+        "id": "forest",
+        "choice_id": "search_forest",
+        "keywords": [
+          "skov",
+          "skoven",
+          "træ",
+          "træer",
+          "træerne",
+          "mellem træerne"
+        ],
+        "synonyms": [
+          "inde i skoven",
+          "henne ved træerne",
+          "under træerne"
+        ],
+        "positive_response": [
+          "Ja! Lad os kigge i skoven!",
+          "God idé! Måske gemmer den sig mellem træerne.",
+          "Det prøver vi!"
+        ]
+      },
+      {
+        "id": "garden",
+        "choice_id": "search_garden",
+        "keywords": [
+          "have",
+          "haven",
+          "blomst",
+          "blomster",
+          "blomsterne"
+        ],
+        "synonyms": [
+          "i blomsterne",
+          "ude i haven"
+        ]
+      },
+      {
+        "id": "house",
+        "choice_id": "search_house",
+        "keywords": [
+          "hus",
+          "huset",
+          "indenfor",
+          "inde"
+        ]
+      }
+    ],
+    "fallback": {
+      "retry_prompt": "Hmm... skal vi kigge i skoven, i haven eller i huset?",
+      "max_retries": 2,
+      "after_max_retries": "show_visual_choices"
+    }
+  },
+
+  "normalization": {
+    "file": "backend/app/game/voice_normalizer.py",
+    "requirements": [
+      "Lowercase.",
+      "Trim whitespace.",
+      "Collapse repeated whitespace.",
+      "Remove irrelevant punctuation.",
+      "Bevar danske tegn æ, ø og å.",
+      "Normalisér almindelige transcription artifacts.",
+      "Kun minimal grammatisk behandling.",
+      "Barnet må ikke være afhængigt af korrekt bøjning."
+    ],
+    "optional_features": [
+      "simple Danish stemming",
+      "common child pronunciation map",
+      "common STT error map"
+    ],
+    "examples": [
+      {
+        "input": "SKOVEN!!",
+        "output": "skoven"
+      },
+      {
+        "input": "Jeg tror... den er ved træerne.",
+        "output": "jeg tror den er ved træerne"
+      }
+    ]
+  },
+
+  "matching_engine": {
+    "file": "backend/app/game/voice_matcher.py",
+    "objective": "Klassificér barnets svar mod de intents, som den aktuelle scene tillader.",
+    "important_rule": "Matcher må aldrig vælge mellem intents, som ikke findes i den aktuelle scenes voice configuration.",
+    "methods_in_priority_order": [
+      {
+        "method": "exact_phrase",
+        "weight": 1.0
+      },
+      {
+        "method": "keyword",
+        "weight": 0.95
+      },
+      {
+        "method": "synonym",
+        "weight": 0.9
+      },
+      {
+        "method": "token_overlap",
+        "weight": 0.8
+      },
+      {
+        "method": "fuzzy",
+        "weight": 0.7
+      },
+      {
+        "method": "llm",
+        "weight": "dynamic"
+      }
+    ],
+    "confidence_thresholds": {
+      "accept": 0.8,
+      "clarify": 0.55,
+      "fallback": 0.0
+    },
+    "requirements": [
+      "Match hele ord hvor muligt.",
+      "Undgå naive substring matches der giver falske positive resultater.",
+      "Flere keywords for samme intent skal øge confidence.",
+      "Conflicting intents skal ikke automatisk vælges hvis scores er næsten ens.",
+      "Returnér debug metadata server-side.",
+      "Matching skal være unit-testable uden Flask."
+    ]
+  },
+
+  "fuzzy_matching": {
+    "recommended_library": "RapidFuzz",
+    "use_cases": [
+      "STT transcription typo",
+      "child pronunciation approximated by STT",
+      "singular/plural differences",
+      "minor spelling deviations"
+    ],
+    "rules": [
+      "Fuzzy match må kun sammenligne med ord og phrases i aktive intents.",
+      "Lav fuzzy confidence alene må ikke auto-acceptes.",
+      "Korte ord skal have strengere threshold end lange ord."
+    ],
+    "example": {
+      "transcript": "skåven",
+      "candidate": "skoven",
+      "result": "possible forest intent"
+    }
+  },
+
+  "child_language_handling": {
+    "principle": "Et barns svar behøver ikke matche de ord, en voksen ville bruge.",
+    "examples": [
+      {
+        "question": "Hvor skal vi lede efter kaninen?",
+        "child_answer": "der hvor alle træerne er",
+        "expected_intent": "forest"
+      },
+      {
+        "question": "Hvordan kommer vi over floden?",
+        "child_answer": "vi kan flyve",
+        "expected_intent": "fly"
+      },
+      {
+        "question": "Hvem skal hjælpe os?",
+        "child_answer": "den lilla pony",
+        "expected_behavior": "match character alias if purple pony is a valid current choice"
+      }
+    ]
+  },
+
+  "llm_fallback": {
+    "enabled": true,
+    "model": "Qwen3.6-27B",
+    "purpose": "Klassificér kreative eller indirekte børnesvar til én af de allerede tilladte intents.",
+    "critical_rules": [
+      "Qwen må ikke opfinde nye scene-intents.",
+      "Qwen skal vælge blandt en eksplicit liste eller returnere no_match.",
+      "Qwen skal ikke styre state direkte.",
+      "Qwen output skal være strict JSON.",
+      "Backend skal validere Qwen output.",
+      "Hvis modellen returnerer invalid JSON, behandles det som no_match.",
+      "LLM må ikke være nødvendig for at gennemføre spillet."
+    ],
+    "input_minimization": {
+      "send": [
+        "scene question",
+        "child transcript",
+        "allowed intent IDs",
+        "short descriptions of allowed intents"
+      ],
+      "do_not_send": [
+        "entire game source code",
+        "entire adventure",
+        "unrelated player information"
+      ]
+    },
+    "system_prompt": "Du klassificerer korte danske svar fra et barn omkring 4 år. Barnets sprog kan være upræcist, kreativt eller grammatisk ukorrekt. Du må kun vælge blandt de intents, du får udleveret. Forsøg at forstå betydningen uden at kræve eksakt ordmatch. Hvis svaret ikke med rimelig sikkerhed matcher en mulighed, returner no_match. Returnér kun valid JSON.",
+    "input_example": {
+      "question": "Hvor skal vi lede efter kaninen?",
+      "transcript": "der hvor alle træerne står",
+      "allowed_intents": [
+        {
+          "id": "forest",
+          "description": "lede i skoven eller omkring træerne"
+        },
+        {
+          "id": "garden",
+          "description": "lede i haven eller blomsterne"
+        },
+        {
+          "id": "house",
+          "description": "lede inde i huset"
+        }
+      ]
+    },
+    "required_output_schema": {
+      "intent": "forest|garden|house|no_match",
+      "confidence": 0.0,
+      "reason": "short internal classification explanation"
+    },
+    "game_rule": "reason må aldrig vises direkte til barnet."
+  },
+
+  "response_strategy": {
+    "principle": "Spillet skal understøtte barnet fremfor at bedømme barnet.",
+    "result_types": {
+      "accepted": {
+        "behavior": "Bekræft positivt og fortsæt.",
+        "examples": [
+          "Ja! Lad os gøre det!",
+          "God idé!",
+          "Det prøver vi!",
+          "Woohoo! Afsted!"
+        ]
+      },
+      "creative_accepted": {
+        "behavior": "Anerkend barnets formulering og map den til nærmeste valide handling."
+      },
+      "clarify": {
+        "behavior": "Gentag spørgsmålet med 2-3 konkrete muligheder."
+      },
+      "no_match": {
+        "behavior": "Sig at ponyen ikke helt hørte/forstod og hjælp barnet med valgmuligheder."
+      },
+      "stt_error": {
+        "behavior": "Bed barnet prøve igen uden at antyde at barnet gjorde noget forkert."
+      }
+    },
+    "forbidden_child_responses": [
+      "Forkert",
+      "Du svarede forkert",
+      "Ugyldigt svar",
+      "Error",
+      "Invalid input",
+      "Speech recognition failed"
+    ]
+  },
+
+  "retry_logic": {
+    "attempt_1": {
+      "strategy": "normal voice question"
+    },
+    "attempt_2": {
+      "strategy": "simpler wording and explicit choices"
+    },
+    "attempt_3": {
+      "strategy": "show large visual buttons and optionally read them aloud"
+    },
+    "rule": "Voice recognition må aldrig blokere historien permanent."
+  },
+
+  "example_interaction_1": {
+    "scene": "Fluttershy leder efter Angel Bunny.",
+    "pony": "Hvor tror du, Angel gemmer sig?",
+    "child": "I skoven!",
+    "transcript": "i skoven",
+    "matched_intent": "forest",
+    "response": "Ja! Lad os kigge mellem træerne!",
+    "result": "continue"
+  },
+
+  "example_interaction_2": {
+    "pony": "Hvordan kommer vi over den store flod?",
+    "valid_intents": [
+      "bridge",
+      "fly",
+      "boat"
+    ],
+    "child": "Rainbow Dash kan bare tage os op!",
+    "deterministic_match": "no_match",
+    "llm_result": {
+      "intent": "fly",
+      "confidence": 0.92
+    },
+    "response": "Ja! Vi kan flyve over floden!",
+    "result": "continue"
+  },
+
+  "example_interaction_3": {
+    "pony": "Hvilken vej skal vi gå?",
+    "valid_intents": [
+      "left",
+      "right"
+    ],
+    "child": "Jeg vil hen til slottet!",
+    "result": "clarify",
+    "response": "Okay! Skal vi gå denne vej eller denne vej?",
+    "ui": "highlight two large visual direction buttons"
+  },
+
+  "example_interaction_4": {
+    "pony": "Hvilken farve er æblet?",
+    "valid_intents": [
+      "red",
+      "green"
+    ],
+    "child": "Det er et kæmpe æble!",
+    "result": "clarify",
+    "response": "Ja, det er et stort æble! Er det rødt eller grønt?"
+  },
+
+  "tts": {
+    "phase": "recommended after core voice input works",
+    "objective": "Gør spillet næsten fuldt læsefrit.",
+    "features": [
+      "Read scene narration aloud.",
+      "Read pony dialogue aloud.",
+      "Read questions aloud.",
+      "Read retry prompts aloud.",
+      "Read positive reactions aloud."
+    ],
+    "architecture": {
+      "interface": "TextToSpeechProvider",
+      "provider_specific_logic": "isolated adapter"
+    },
+    "controls": [
+      "mute",
+      "voice volume",
+      "music volume",
+      "SFX volume"
+    ],
+    "important": "TTS skal integreres med eksisterende SceneMusic/audio system så tale ikke overdøves af baggrundsmusik."
+  },
+
+  "audio_ducking": {
+    "required_if_tts_enabled": true,
+    "behavior": [
+      "Reduce background music volume when pony speaks.",
+      "Restore volume gradually after speech ends.",
+      "Pause listening while TTS is speaking to avoid the game transcribing itself."
+    ]
+  },
+
+  "scene_data_extension": {
+    "objective": "Voice skal være content-driven og ikke hardcoded i React.",
+    "example": {
+      "id": "everfree_01",
+      "title": "Den forsvundne kanin",
+      "voice": {
+        "enabled": true,
+        "question": {
+          "id": "where_bunny",
+          "text": "Hvor tror du, kaninen gemmer sig?",
+          "intents": [
+            {
+              "id": "forest",
+              "choice_id": "forest_path",
+              "keywords": [
+                "skov",
+                "skoven",
+                "træ",
+                "træerne"
+              ]
+            },
+            {
+              "id": "garden",
+              "choice_id": "garden_path",
+              "keywords": [
+                "have",
+                "haven",
+                "blomst",
+                "blomster"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "rule": "Voice intents skal mappe til de samme underlying choice IDs som touch/mouse UI bruger."
+  },
+
+  "game_engine_integration": {
+    "critical_rule": "Voice er en alternativ inputmetode, ikke et separat gameplay-system.",
+    "existin
