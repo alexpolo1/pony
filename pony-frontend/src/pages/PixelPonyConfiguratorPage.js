@@ -1,5 +1,7 @@
 /**
- * Pixel Pony Configurator — design your own pixel-art pony.
+ * Pixel Pony Configurator — build your pony in steps: type, mane, colors,
+ * then tail/horn/wings. Replaces the old plain pony-type select screen;
+ * finishing the wizard starts the game with the chosen type.
  */
 
 import React, { useEffect, useState } from 'react';
@@ -10,30 +12,59 @@ import FloatingBg from '../components/FloatingBg';
 import Narrator from '../components/Narrator';
 import SpeakButton from '../components/SpeakButton';
 import PixelPonySprite from '../components/PixelPonySprite';
-import { MANE_STYLES, COLOR_OPTIONS, IDLE_FRAME, IDLE_FRAME_2 } from '../pixelPony/spriteData';
+import { MANE_STYLES, COLOR_OPTIONS, PONY_TYPES, IDLE_FRAME, IDLE_FRAME_2 } from '../pixelPony/spriteData';
 import { loadAppearance, saveAppearance } from '../services/ponyAppearance';
 
-export default function PixelPonyConfiguratorPage({ volume, setVolume, onNavigate }) {
+const STEPS = ['type', 'mane', 'colors', 'extras'];
+const STEP_TITLES = {
+  type: 'Vælg din Pony! 🐴',
+  mane: 'Vælg manke 💇',
+  colors: 'Vælg farver 🎨',
+  extras: 'Hale, horn & vinger ✨',
+};
+
+export default function PixelPonyConfiguratorPage({ ponies, onSelectType, volume, setVolume, onNavigate }) {
+  const [step, setStep] = useState(0);
+  const [typeIdx, setTypeIdx] = useState(null);
   const [appearance, setAppearance] = useState(loadAppearance);
   const [bobFrame, setBobFrame] = useState(false);
-  const [saved, setSaved] = useState(false);
 
   useEffect(() => {
     const id = window.setInterval(() => setBobFrame(b => !b), 500);
     return () => window.clearInterval(id);
   }, []);
 
-  const set = (key, value) => {
-    setSaved(false);
-    setAppearance(prev => ({ ...prev, [key]: value }));
+  const set = (key, value) => setAppearance(prev => ({ ...prev, [key]: value }));
+
+  const handlePickType = (idx) => {
+    const type = PONY_TYPES[idx] || PONY_TYPES[0];
+    setTypeIdx(idx);
+    setAppearance(prev => ({ ...prev, ponyType: type.id, hasHorn: type.hasHorn, hasWings: type.hasWings }));
+    setStep(1);
   };
 
-  const handleSave = () => {
+  const goBack = () => {
+    if (step === 0) {
+      onNavigate('home');
+    } else {
+      setStep(s => s - 1);
+    }
+  };
+
+  const goNext = () => setStep(s => Math.min(s + 1, STEPS.length - 1));
+
+  const handleStart = () => {
     saveAppearance(appearance);
-    setSaved(true);
+    onSelectType(typeIdx ?? 0);
   };
 
-  const narration = 'Design din egen pixel pony. Vælg manke, farver, horn og vinger. Tryk på gem-knappen når du er glad for din pony.';
+  const stepName = STEPS[step];
+  const narration = {
+    type: 'Vælg din pony type. Tryk på den pony du vil være.',
+    mane: 'Vælg en manke til din pony.',
+    colors: 'Vælg farver til krop, manke og hale.',
+    extras: 'Vælg om din pony skal have hale, horn og vinger. Tryk på start eventyr når du er klar.',
+  }[stepName];
 
   return (
     <motion.div
@@ -46,122 +77,167 @@ export default function PixelPonyConfiguratorPage({ volume, setVolume, onNavigat
       className="pixel-configurator"
     >
       <SceneMusic sceneType={volume > 0 ? 'home' : 'none'} />
-      <Narrator text={narration} volume={volume} narrationKey="pixel-configurator" />
+      <Narrator text={narration} volume={volume} narrationKey={`pixel-configurator-${stepName}`} />
       <div className="top-bar">
         <VolumeControl volume={volume} onChange={setVolume} />
       </div>
       <FloatingBg />
       <motion.h1 initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="title">
-        Pixel Pony 🎨
+        {STEP_TITLES[stepName]}
       </motion.h1>
+      <p className="pixel-configurator-progress">Trin {step + 1} af {STEPS.length}</p>
       <SpeakButton text={narration} volume={volume} label="Læs siden højt" />
 
-      <div className="pixel-configurator-preview">
-        <PixelPonySprite
-          {...appearance}
-          frame={bobFrame ? IDLE_FRAME_2 : IDLE_FRAME}
-          scale={8}
-        />
-      </div>
+      {stepName !== 'type' && (
+        <div className="pixel-configurator-preview">
+          <PixelPonySprite
+            {...appearance}
+            frame={bobFrame ? IDLE_FRAME_2 : IDLE_FRAME}
+            scale={8}
+          />
+        </div>
+      )}
 
-      <section className="pixel-configurator-section">
-        <h2>Manke</h2>
-        <div className="pixel-mane-grid">
-          {MANE_STYLES.map(m => (
-            <button
-              key={m.id}
-              type="button"
-              className={`pixel-mane-swatch ${appearance.mane === m.id ? 'is-selected' : ''}`}
-              onClick={() => set('mane', m.id)}
-              aria-label={`Vælg manke: ${m.label}`}
-              aria-pressed={appearance.mane === m.id}
-              title={m.label}
+      {stepName === 'type' && (
+        <div className="pony-choices">
+          {ponies.map((p, i) => (
+            <motion.div
+              key={p.navn || p.name}
+              whileHover={{ scale: 1.08, y: -8 }}
+              whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.15 }}
+              className="pony-card"
+              style={{ borderColor: p.color }}
+              onClick={() => handlePickType(i)}
+              role="button"
+              tabIndex={0}
+              aria-label={`Vælg ${p.navn || p.name} - ${p.bonus}`}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handlePickType(i); }}
             >
-              <PixelPonySprite
-                {...appearance}
-                mane={m.id}
-                hasHorn={false}
-                hasWings={false}
-                frame={IDLE_FRAME}
-                scale={2}
-              />
-              <span>{m.label}</span>
+              <div className="pony-emoji">{p.emoji}</div>
+              <h3>{p.navn || p.name}</h3>
+              <p className="pony-bonus">{p.bonus}</p>
+            </motion.div>
+          ))}
+        </div>
+      )}
+
+      {stepName === 'mane' && (
+        <section className="pixel-configurator-section">
+          <div className="pixel-mane-grid">
+            {MANE_STYLES.map(m => (
+              <button
+                key={m.id}
+                type="button"
+                className={`pixel-mane-swatch ${appearance.mane === m.id ? 'is-selected' : ''}`}
+                onClick={() => set('mane', m.id)}
+                aria-label={`Vælg manke: ${m.label}`}
+                aria-pressed={appearance.mane === m.id}
+                title={m.label}
+              >
+                <PixelPonySprite
+                  {...appearance}
+                  mane={m.id}
+                  hasHorn={false}
+                  hasWings={false}
+                  hasTail={false}
+                  frame={IDLE_FRAME}
+                  scale={2}
+                />
+                <span>{m.label}</span>
+              </button>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {stepName === 'colors' && (
+        <>
+          <section className="pixel-configurator-section">
+            <h2>Krop-farve</h2>
+            <div className="pixel-color-row">
+              {COLOR_OPTIONS.map(c => (
+                <button
+                  key={c.id}
+                  type="button"
+                  className={`pixel-color-swatch ${appearance.bodyColor === c.id ? 'is-selected' : ''}`}
+                  style={{ filter: c.filter, backgroundColor: '#b5533f' }}
+                  onClick={() => set('bodyColor', c.id)}
+                  aria-label={`Kropsfarve: ${c.label}`}
+                  aria-pressed={appearance.bodyColor === c.id}
+                  title={c.label}
+                />
+              ))}
+            </div>
+          </section>
+          <section className="pixel-configurator-section">
+            <h2>Manke- og hale-farve</h2>
+            <div className="pixel-color-row">
+              {COLOR_OPTIONS.map(c => (
+                <button
+                  key={c.id}
+                  type="button"
+                  className={`pixel-color-swatch ${appearance.maneColor === c.id ? 'is-selected' : ''}`}
+                  style={{ filter: c.filter, backgroundColor: '#f3a13f' }}
+                  onClick={() => set('maneColor', c.id)}
+                  aria-label={`Mankefarve: ${c.label}`}
+                  aria-pressed={appearance.maneColor === c.id}
+                  title={c.label}
+                />
+              ))}
+            </div>
+          </section>
+        </>
+      )}
+
+      {stepName === 'extras' && (
+        <section className="pixel-configurator-section">
+          <div className="pixel-toggle-row">
+            <button
+              type="button"
+              className={`pixel-toggle ${appearance.hasTail ? 'is-selected' : ''}`}
+              onClick={() => set('hasTail', !appearance.hasTail)}
+              aria-pressed={appearance.hasTail}
+            >
+              🐎 Hale
             </button>
-          ))}
-        </div>
-      </section>
-
-      <section className="pixel-configurator-section">
-        <h2>Krop-farve</h2>
-        <div className="pixel-color-row">
-          {COLOR_OPTIONS.map(c => (
             <button
-              key={c.id}
               type="button"
-              className={`pixel-color-swatch ${appearance.bodyColor === c.id ? 'is-selected' : ''}`}
-              style={{ filter: c.filter, backgroundColor: '#b5533f' }}
-              onClick={() => set('bodyColor', c.id)}
-              aria-label={`Kropsfarve: ${c.label}`}
-              aria-pressed={appearance.bodyColor === c.id}
-              title={c.label}
-            />
-          ))}
-        </div>
-      </section>
-
-      <section className="pixel-configurator-section">
-        <h2>Manke-farve</h2>
-        <div className="pixel-color-row">
-          {COLOR_OPTIONS.map(c => (
+              className={`pixel-toggle ${appearance.hasHorn ? 'is-selected' : ''}`}
+              onClick={() => set('hasHorn', !appearance.hasHorn)}
+              aria-pressed={appearance.hasHorn}
+            >
+              🦄 Horn
+            </button>
             <button
-              key={c.id}
               type="button"
-              className={`pixel-color-swatch ${appearance.maneColor === c.id ? 'is-selected' : ''}`}
-              style={{ filter: c.filter, backgroundColor: '#f3a13f' }}
-              onClick={() => set('maneColor', c.id)}
-              aria-label={`Mankefarve: ${c.label}`}
-              aria-pressed={appearance.maneColor === c.id}
-              title={c.label}
-            />
-          ))}
-        </div>
-      </section>
+              className={`pixel-toggle ${appearance.hasWings ? 'is-selected' : ''}`}
+              onClick={() => set('hasWings', !appearance.hasWings)}
+              aria-pressed={appearance.hasWings}
+            >
+              🪽 Vinger
+            </button>
+          </div>
+        </section>
+      )}
 
-      <section className="pixel-configurator-section">
-        <h2>Ekstra</h2>
-        <div className="pixel-toggle-row">
-          <button
-            type="button"
-            className={`pixel-toggle ${appearance.hasHorn ? 'is-selected' : ''}`}
-            onClick={() => set('hasHorn', !appearance.hasHorn)}
-            aria-pressed={appearance.hasHorn}
-          >
-            🦄 Horn
-          </button>
-          <button
-            type="button"
-            className={`pixel-toggle ${appearance.hasWings ? 'is-selected' : ''}`}
-            onClick={() => set('hasWings', !appearance.hasWings)}
-            aria-pressed={appearance.hasWings}
-          >
-            🪽 Vinger
-          </button>
-        </div>
-      </section>
-
-      <motion.button
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-        className="btn-start"
-        onClick={handleSave}
-        aria-label="Gem min pony"
-      >
-        {saved ? '✅ Gemt!' : '💾 Gem min pony'}
-      </motion.button>
-
-      <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} className="btn-back" onClick={() => onNavigate('home')} aria-label="Tilbage til forsiden">
-        Tilbage
-      </motion.button>
+      <div className="pixel-configurator-nav">
+        <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} className="btn-back" onClick={goBack} aria-label="Tilbage">
+          Tilbage
+        </motion.button>
+        {stepName !== 'type' && stepName !== 'extras' && (
+          <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} className="btn-start" onClick={goNext} aria-label="Næste trin">
+            Næste ➡️
+          </motion.button>
+        )}
+        {stepName === 'extras' && (
+          <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} className="btn-start" onClick={handleStart} aria-label="Start eventyr">
+            Start eventyr! 🎮
+          </motion.button>
+        )}
+      </div>
     </motion.div>
   );
 }

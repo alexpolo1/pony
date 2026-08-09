@@ -164,24 +164,6 @@ body {
   transform: scale(1.05);
 }
 
-.btn-secondary {
-  background: rgba(255, 255, 255, 0.85);
-  color: var(--color-accent);
-  border: none;
-  padding: var(--space-sm) var(--space-lg);
-  border-radius: var(--radius-pill);
-  font-size: 1rem;
-  cursor: pointer;
-  box-shadow: var(--shadow-sm);
-  margin-top: var(--space-md);
-  transition: transform 0.2s;
-}
-
-.btn-secondary:hover {
-  transform: scale(1.05);
-  background: var(--color-white);
-}
-
 .btn-back {
   background: rgba(255, 255, 255, 0.2);
   color: var(--color-white);
@@ -396,6 +378,21 @@ body {
 }
 
 /* --- Pixel pony configurator --- */
+.pixel-configurator-progress {
+  color: var(--color-white);
+  opacity: 0.85;
+  font-size: var(--font-small);
+  margin-bottom: var(--space-sm);
+}
+
+.pixel-configurator-nav {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  align-items: center;
+  margin-top: var(--space-lg);
+}
+
 .pixel-configurator-preview {
   display: flex;
   justify-content: center;
@@ -668,6 +665,57 @@ body {
   gap: clamp(1.5rem, 8vw, 5rem);
   width: 100%;
   min-height: 132px;
+}
+
+.interaction-prompt {
+  margin: var(--space-sm) 0;
+  padding: 0.65rem;
+  border-radius: var(--radius-sm);
+  background: #fff4c7;
+  color: #4a3975;
+  font-weight: 800;
+}
+
+.interaction-feedback {
+  margin-top: var(--space-sm);
+  color: #a24600;
+  font-weight: 800;
+}
+
+.interaction-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(120px, 1fr));
+  gap: 0.55rem;
+  width: min(430px, 62vw);
+}
+
+.interaction-option {
+  min-height: 58px;
+  padding: 0.45rem 0.65rem;
+  border: 3px solid rgba(255, 255, 255, 0.9);
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--option-color, #f093fb), color-mix(in srgb, var(--option-color, #667eea) 65%, #333));
+  color: #fff;
+  font: inherit;
+  font-weight: 900;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+}
+
+.interaction-option:disabled { opacity: 0.55; cursor: wait; }
+.interaction-option-emoji { display: block; font-size: 1.35rem; }
+
+.interaction-number .interaction-option,
+.interaction-memory .interaction-option {
+  font-size: 1.2rem;
+  background: linear-gradient(135deg, #55c7ff, #667eea);
+}
+
+@media (max-width: 600px) {
+  .game-controls { gap: 0.8rem; }
+  .interaction-options { width: min(310px, 66vw); }
+  .interaction-option { min-height: 52px; padding: 0.3rem; font-size: 0.8rem; }
 }
 
 .scene-number {

@@ -4,12 +4,11 @@ import SceneMusic, { playClick, playRoll, playSuccess, playFail, playSelect, pla
 import TutorialOverlay from './components/TutorialOverlay';
 import HomePage from './pages/HomePage';
 import ThemeSelectPage from './pages/ThemeSelectPage';
-import PonySelectPage from './pages/PonySelectPage';
 import PixelPonyConfiguratorPage from './pages/PixelPonyConfiguratorPage';
 import GameScenePage from './pages/GameScenePage';
 import GameEndPage from './pages/GameEndPage';
 import Narrator from './components/Narrator';
-import { prepareDanishSpeech } from './services/tts';
+import { prepareDanishSpeech, speakDanish } from './services/tts';
 import { buildResultNarration } from './services/narration';
 import * as api from './services/api';
 import * as achievements from './services/achievements';
@@ -68,6 +67,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [diceRolling, setDiceRolling] = useState(false);
+  const [interactionBusy, setInteractionBusy] = useState(false);
   const [volume, setVolume] = useState(0.5);
   const [showAchievements, setShowAchievements] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(false);
@@ -148,6 +148,27 @@ function App() {
       if (lastResult) lastResult.success ? playSuccess() : playFail();
     }
     return result;
+  };
+
+  const handleInteraction = async (selection) => {
+    setInteractionBusy(true);
+    setError(null);
+    try {
+      const json = await api.chooseInteraction(selection);
+      setData(json);
+      if (json.interactionProgressed) {
+        const lastResult = json.history?.[json.history.length - 1];
+        prepareDanishSpeech(buildResultNarration(lastResult));
+        playSuccess();
+      } else {
+        playFail();
+        await speakDanish(json.interactionFeedback, volume);
+      }
+    } catch (e) {
+      setError('Kunne ikke vælge: ' + e.message);
+    } finally {
+      setInteractionBusy(false);
+    }
   };
 
   const handleRetryRoll = async () => {
@@ -314,16 +335,8 @@ function App() {
             />
           )}
 
-          {page === 'pixelConfigurator' && (
-            <PixelPonyConfiguratorPage
-              volume={volume}
-              setVolume={setVolume}
-              onNavigate={navigateTo}
-            />
-          )}
-
           {page === 'start' && (
-            <PonySelectPage
+            <PixelPonyConfiguratorPage
               ponies={content.ponies}
               onSelectType={handleSelectPonyType}
               volume={volume}
@@ -337,7 +350,9 @@ function App() {
               data={data}
               onRollDice={handleRollDice}
               onVoiceAnswer={handleVoiceAnswer}
+              onInteract={handleInteraction}
               rolling={diceRolling}
+              interactionBusy={interactionBusy}
               volume={volume}
               setVolume={setVolume}
             />

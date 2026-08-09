@@ -1,6 +1,9 @@
 /**
  * Data for the pixel pony configurator: sprite sheet layout and available
- * customization options. Sheets are 8x8 grids of 32x32 pixel frames.
+ * customization options. Body/mane/tail sheets are 8x8 grids of 32x32
+ * frames. Horn/wing are small single-frame accent overlays (the source
+ * asset pack's horn/wing sheets are just 1-3px alignment markers, not
+ * visible art, so those two are hand-drawn flat 32x32 overlays instead).
  */
 
 export const TILE = 32;
@@ -13,8 +16,19 @@ export const IDLE_FRAME = { row: 0, col: 0 };
 export const IDLE_FRAME_2 = { row: 0, col: 1 };
 
 export const BASE_SPRITE = '/sprites/pony/base.png';
+// Flat single-frame overlays (not sheets) — always drawn at the same spot.
+// The source pack's horn/wing/tail sheets are just 1-3px alignment markers,
+// not visible art, so these three are hand-drawn accents instead.
+export const TAIL_SPRITE = '/sprites/pony/tail.png';
 export const HORN_SPRITE = '/sprites/pony/horn.png';
 export const WING_SPRITE = '/sprites/pony/wing.png';
+
+export const PONY_TYPES = [
+  { id: 'jordpony', label: 'Jordpony', hasHorn: false, hasWings: false },
+  { id: 'pegasus', label: 'Pegasus', hasHorn: false, hasWings: true },
+  { id: 'enhjorning', label: 'Enhjørning', hasHorn: true, hasWings: false },
+  { id: 'alicorn', label: 'Alicorn', hasHorn: true, hasWings: true },
+];
 
 export const MANE_STYLES = [
   { id: 'bookish', label: 'Boglig', file: '/sprites/pony/mane-bookish.png' },
@@ -49,10 +63,12 @@ export const COLOR_OPTIONS = [
 ];
 
 export const DEFAULT_APPEARANCE = {
+  ponyType: PONY_TYPES[0].id,
   mane: MANE_STYLES[0].id,
   bodyColor: COLOR_OPTIONS[1].id,
   maneColor: COLOR_OPTIONS[6].id,
-  hasHorn: true,
+  hasTail: true,
+  hasHorn: false,
   hasWings: false,
 };
 
@@ -62,4 +78,8 @@ export function getManeStyle(id) {
 
 export function getColorOption(id) {
   return COLOR_OPTIONS.find(c => c.id === id) || COLOR_OPTIONS[0];
+}
+
+export function getPonyType(id) {
+  return PONY_TYPES.find(t => t.id === id) || PONY_TYPES[0];
 }

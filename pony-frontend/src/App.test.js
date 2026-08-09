@@ -45,6 +45,7 @@ jest.mock('./services/tts', () => ({
   speakDanish: jest.fn(),
   cancelSpeech: jest.fn(),
   prepareDanishSpeech: jest.fn(),
+  NARRATION_STATUS_EVENT: 'pony-narration-status',
 }));
 
 // Mock Narrator
@@ -125,6 +126,16 @@ function mockMultiFetch(responses) {
 
 const findByText = (t) => screen.getByText(t);
 
+// Clicking a pony type on the configurator's first step only selects the
+// type and advances to the mane step; two more "Næste" clicks reach the
+// final step, whose "Start eventyr" button actually starts the game.
+async function pickPonyAndStartGame(name = 'Jordpony') {
+  await userEvent.click(screen.getByText(name));
+  await userEvent.click(screen.getByRole('button', { name: 'Næste trin' }));
+  await userEvent.click(screen.getByRole('button', { name: 'Næste trin' }));
+  await userEvent.click(screen.getByRole('button', { name: 'Start eventyr' }));
+}
+
 const CONTENT = {
   ponies: [
     { navn: 'Jordpony', emoji: '🐴', bonus: 'Stærk 💪', tekst: 'x', img: 'jordpony.png' },
@@ -139,6 +150,21 @@ const GAME_SCENE = {
   sceneNum: 1, tema: 'Eventyr', sceneText: 'Du møder en drage.',
   actionText: 'Kæmp', difficulty: '⭐⭐', ponyName: 'Jordpony',
   ponyType: 'Jordpony', ponyImg: '/static/images/jordpony.png', history: [],
+};
+
+const CHOICE_SCENE = {
+  ...GAME_SCENE,
+  sceneNum: 2,
+  interaction: {
+    type: 'choice',
+    prompt: 'Hvordan vil du komme videre?',
+    options: [
+      { id: 'modig', label: 'Vær modig', emoji: '🦁' },
+      { id: 'klog', label: 'Tænk dig om', emoji: '💡' },
+      { id: 'ven', label: 'Bed en ven om hjælp', emoji: '🤝' },
+      { id: 'magi', label: 'Brug pony-magi', emoji: '✨' },
+    ],
+  },
 };
 
 const VICTORY = {
@@ -230,7 +256,7 @@ test('calls /api/start when selecting a pony', async () => {
   await dismissSoundPrompt();
   await userEvent.click(findByText('🎮 Start Nyt Spil!'));
   await userEvent.click(findByText('Skyggen'));
-  await userEvent.click(screen.getByText('Jordpony'));
+  await pickPonyAndStartGame();
   expect(SFX.playSelect).toHaveBeenCalled();
   await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(2));
 });
@@ -244,7 +270,7 @@ test('shows error when /api/start fails', async () => {
   await dismissSoundPrompt();
   await userEvent.click(findByText('🎮 Start Nyt Spil!'));
   await userEvent.click(findByText('Skyggen'));
-  await userEvent.click(screen.getByText('Jordpony'));
+  await pickPonyAndStartGame();
   await waitFor(() => expect(screen.getByText(/Kunne ikke starte spil/)).toBeInTheDocument());
 });
 
@@ -269,7 +295,7 @@ test('renders scene information', async () => {
   await dismissSoundPrompt();
   await userEvent.click(findByText('🎮 Start Nyt Spil!'));
   await userEvent.click(findByText('Skyggen'));
-  await userEvent.click(screen.getByText('Jordpony'));
+  await pickPonyAndStartGame();
   await waitFor(() => expect(screen.getByText('Eventyr')).toBeInTheDocument());
   expect(screen.getByText('Du møder en drage.')).toBeInTheDocument();
 });
@@ -283,8 +309,23 @@ test('shows roll button in game', async () => {
   await dismissSoundPrompt();
   await userEvent.click(findByText('🎮 Start Nyt Spil!'));
   await userEvent.click(findByText('Skyggen'));
-  await userEvent.click(screen.getByText('Jordpony'));
+  await pickPonyAndStartGame();
   await waitFor(() => expect(screen.getByRole('button', { name: 'Kast terningerne' })).toBeInTheDocument());
+});
+
+test('shows four story choices instead of dice in a choice scene', async () => {
+  mockMultiFetch([
+    { body: CONTENT },
+    { body: CHOICE_SCENE },
+  ]);
+  render(<App />);
+  await dismissSoundPrompt();
+  await userEvent.click(findByText('🎮 Start Nyt Spil!'));
+  await userEvent.click(findByText('Skyggen'));
+  await pickPonyAndStartGame();
+  await waitFor(() => expect(screen.getByText('Hvordan vil du komme videre?')).toBeInTheDocument());
+  expect(screen.getAllByRole('button', { name: /^Vælg / })).toHaveLength(4);
+  expect(screen.queryByRole('button', { name: 'Kast terningerne' })).not.toBeInTheDocument();
 });
 
 test('calls /api/kast when rolling dice', async () => {
@@ -297,7 +338,7 @@ test('calls /api/kast when rolling dice', async () => {
   await dismissSoundPrompt();
   await userEvent.click(findByText('🎮 Start Nyt Spil!'));
   await userEvent.click(findByText('Skyggen'));
-  await userEvent.click(screen.getByText('Jordpony'));
+  await pickPonyAndStartGame();
   await waitFor(() => expect(screen.getByRole('button', { name: 'Kast terningerne' })).toBeInTheDocument());
   await userEvent.click(screen.getByRole('button', { name: 'Kast terningerne' }));
   expect(SFX.playRoll).toHaveBeenCalled();
@@ -315,7 +356,7 @@ test('shows victory message', async () => {
   await dismissSoundPrompt();
   await userEvent.click(findByText('🎮 Start Nyt Spil!'));
   await userEvent.click(findByText('Skyggen'));
-  await userEvent.click(screen.getByText('Jordpony'));
+  await pickPonyAndStartGame();
   await waitFor(() => expect(screen.getByRole('button', { name: 'Kast terningerne' })).toBeInTheDocument());
   await userEvent.click(screen.getByRole('button', { name: 'Kast terningerne' }));
   await waitFor(() => expect(screen.getByText('🌟 SEJR! 🌟')).toBeInTheDocument());
@@ -332,7 +373,7 @@ test('shows defeat message for non-victory', async () => {
   await dismissSoundPrompt();
   await userEvent.click(findByText('🎮 Start Nyt Spil!'));
   await userEvent.click(findByText('Skyggen'));
-  await userEvent.click(screen.getByText('Jordpony'));
+  await pickPonyAndStartGame();
   await waitFor(() => expect(screen.getByRole('button', { name: 'Kast terningerne' })).toBeInTheDocument());
   await userEvent.click(screen.getByRole('button', { name: 'Kast terningerne' }));
   await waitFor(() => expect(screen.getByText('💪 Prøv igen! 💪')).toBeInTheDocument());
@@ -348,7 +389,7 @@ test('Spil Igen navigates to pony selection', async () => {
   await dismissSoundPrompt();
   await userEvent.click(findByText('🎮 Start Nyt Spil!'));
   await userEvent.click(findByText('Skyggen'));
-  await userEvent.click(screen.getByText('Jordpony'));
+  await pickPonyAndStartGame();
   await waitFor(() => expect(screen.getByRole('button', { name: 'Kast terningerne' })).toBeInTheDocument());
   await userEvent.click(screen.getByRole('button', { name: 'Kast terningerne' }));
   await waitFor(() => expect(screen.getByText('🌟 SEJR! 🌟')).toBeInTheDocument());
@@ -366,7 +407,7 @@ test('Forside button navigates to home', async () => {
   await dismissSoundPrompt();
   await userEvent.click(findByText('🎮 Start Nyt Spil!'));
   await userEvent.click(findByText('Skyggen'));
-  await userEvent.click(screen.getByText('Jordpony'));
+  await pickPonyAndStartGame();
   await waitFor(() => expect(screen.getByRole('button', { name: 'Kast terningerne' })).toBeInTheDocument());
   await userEvent.click(screen.getByRole('button', { name: 'Kast terningerne' }));
   await waitFor(() => expect(screen.getByText('🌟 SEJR! 🌟')).toBeInTheDocument());
@@ -387,7 +428,7 @@ test('home -> theme -> pony -> game -> end -> home', async () => {
   expect(screen.getByText('Vælg et eventyr! 📖')).toBeInTheDocument();
   await userEvent.click(findByText('Skyggen'));
   expect(screen.getByText('Vælg din Pony! 🐴')).toBeInTheDocument();
-  await userEvent.click(screen.getByText('Jordpony'));
+  await pickPonyAndStartGame();
   await waitFor(() => expect(screen.getByRole('button', { name: 'Kast terningerne' })).toBeInTheDocument());
   await userEvent.click(screen.getByRole('button', { name: 'Kast terningerne' }));
   await waitFor(() => expect(screen.getByText('🌟 SEJR! 🌟')).toBeInTheDocument());
