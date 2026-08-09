@@ -21,7 +21,7 @@ export default function DiceRoll({ dice }) {
       <div className="dice-row">
       <ReactDice
         ref={reactDice}
-        numDice={dice?.length || 2}
+        numDice={dice?.length ?? 2}
         sides={6}
         dieSize={48}
         faceColor="#ffffff"
