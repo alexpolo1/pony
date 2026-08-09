@@ -1,0 +1,661 @@
+{
+  "goal": {
+    "name": "MLP Pony Game - Full Improvement and Production Readiness Plan",
+    "agent": "Hermes",
+    "target_model": "Qwen3.6-27B",
+    "project_path": "/home/alex/Documents/Obsidian Vault/Projects/MLP-Pony",
+    "documentation_path": "/home/alex/Documents/Obsidian Vault/Projects/MLP-Pony/Dokumentation.md",
+    "primary_objective": "Gennemgå, refaktorér og udbyg MLP Pony Game fra et fuldt funktionelt prototypeprojekt til en robust, vedligeholdelig og produktionsklar applikation uden at ødelægge eksisterende funktionalitet.",
+    "execution_mode": "autonomous_iterative",
+    "language": {
+      "communication": "Danish",
+      "code": "English",
+      "comments": "English",
+      "documentation": "Danish"
+    }
+  },
+
+  "current_state": {
+    "architecture": {
+      "reverse_proxy": "Nginx :8082",
+      "backend": "Flask :5001",
+      "frontend": "React :3001"
+    },
+    "backend": {
+      "framework": "Flask",
+      "api_endpoints": [
+        "/api/start",
+        "/api/scene",
+        "/api/kast"
+      ],
+      "jinja_templates": 4,
+      "known_issue": "Ingen server-side memory/state"
+    },
+    "game_system": {
+      "dice": {
+        "type": "d6 pool",
+        "scoring": {
+          "6": 2,
+          "4-5": 1,
+          "1-3": 0
+        },
+        "difficulty_levels": 3
+      },
+      "pony_types": [
+        "Jordpony",
+        "Pegasus",
+        "Enhjørning",
+        "Alicorn"
+      ],
+      "adventure_content": {
+        "themes": 5,
+        "scenes_per_theme": 5,
+        "total_scenes": 25
+      }
+    },
+    "frontend": {
+      "pages": 4,
+      "animations": "Framer Motion",
+      "dice": "3D animated dice",
+      "audio": [
+        "procedural SFX",
+        "background music"
+      ],
+      "tutorial": true,
+      "achievements": true,
+      "known_issue": "Tema er hardcoded i React"
+    },
+    "cli_generator": {
+      "themes": 6,
+      "npcs": 8,
+      "locations": 10
+    },
+    "known_files": {
+      "app.py": 525,
+      "App.js": 813,
+      "SceneMusic.js": 280,
+      "App.css": 780,
+      "ny_spiller.py": 533
+    },
+    "status": {
+      "functional": true,
+      "debug_mode": true,
+      "production_ready": false
+    }
+  },
+
+  "core_rules": [
+    "Læs Dokumentation.md fuldt ud før større ændringer foretages.",
+    "Scan hele projektstrukturen før implementation starter.",
+    "Antag ikke at dokumentationen er 100 procent korrekt; verificér mod faktisk kode.",
+    "Bevar eksisterende gameplay medmindre en ændring eksplicit forbedrer eller retter det.",
+    "Foretag ændringer inkrementelt.",
+    "Efter hver større ændring skal relevante tests køres.",
+    "Hvis en test fejler, skal årsagen findes før næste fase fortsættes.",
+    "Undgå store rewrites hvis mindre refaktorering løser problemet.",
+    "Lav backups eller git commits ved stabile checkpoints.",
+    "Ingen secrets må hardcodes.",
+    "Debug mode må ikke anvendes i production.",
+    "API-kontrakter skal dokumenteres.",
+    "Frontend må ikke kende backend-intern implementering.",
+    "Game state skal have én tydelig source of truth.",
+    "Gameplay-regler skal så vidt muligt isoleres fra Flask routes og React UI.",
+    "Prioritér stabilitet, testbarhed og simpel arkitektur over unødvendig kompleksitet."
+  ],
+
+  "agent_workflow": {
+    "before_changes": [
+      "Læs Dokumentation.md.",
+      "Kør tree eller tilsvarende over projektet.",
+      "Find requirements.txt, package.json, nginx-konfiguration og eventuelle systemd-services.",
+      "Læs app.py.",
+      "Læs App.js.",
+      "Læs SceneMusic.js.",
+      "Læs ny_spiller.py.",
+      "Find eksisterende datafiler, templates og adventure definitions.",
+      "Identificér dupliceret game logic mellem backend, frontend og CLI.",
+      "Kør eksisterende applikation hvis muligt.",
+      "Test alle tre API endpoints manuelt.",
+      "Lav baseline af nuværende funktionalitet."
+    ],
+    "for_each_task": [
+      "Analyser nuværende implementation.",
+      "Beskriv kort problemet.",
+      "Lav minimal løsningsplan.",
+      "Implementér.",
+      "Kør tests.",
+      "Kontrollér regressions.",
+      "Dokumentér ændringen.",
+      "Commit ved stabil milepæl."
+    ],
+    "never": [
+      "Slet fungerende funktionalitet uden begrundelse.",
+      "Omskriv hele projektet uden først at evaluere eksisterende kode.",
+      "Ignorer exceptions.",
+      "Brug brede catch-all exception handlers uden logging.",
+      "Gem permanent spilstate kun i React state.",
+      "Brug Flask development server som endelig production deployment."
+    ]
+  },
+
+  "phases": [
+    {
+      "id": 1,
+      "name": "Project Audit and Baseline",
+      "priority": "critical",
+      "objective": "Få et verificeret billede af den faktiske kodebase før ændringer.",
+      "tasks": [
+        {
+          "task": "Kortlæg projektstruktur",
+          "actions": [
+            "Find alle Python-, JavaScript-, JSON-, CSS-, HTML- og konfigurationsfiler.",
+            "Identificér entrypoints.",
+            "Identificér statiske assets.",
+            "Identificér adventure/game data."
+          ]
+        },
+        {
+          "task": "Sammenlign dokumentation med kode",
+          "actions": [
+            "Verificér endpoints.",
+            "Verificér sceneantal.",
+            "Verificér pony bonuses.",
+            "Verificér dice scoring.",
+            "Verificér frontend routes.",
+            "Verificér achievement logic."
+          ]
+        },
+        {
+          "task": "Opret teknisk baseline",
+          "output": "docs/AUDIT.md"
+        },
+        {
+          "task": "Registrér teknisk gæld",
+          "categories": [
+            "architecture",
+            "security",
+            "state",
+            "frontend",
+            "backend",
+            "game_logic",
+            "testing",
+            "deployment",
+            "performance",
+            "accessibility"
+          ]
+        }
+      ],
+      "acceptance_criteria": [
+        "Alle centrale komponenter er identificeret.",
+        "Dokumentation og kodeafvigelser er registreret.",
+        "Applikationen kan startes reproducerbart.",
+        "Eksisterende funktionalitet er baseline-testet."
+      ]
+    },
+
+    {
+      "id": 2,
+      "name": "Git Safety and Development Workflow",
+      "priority": "critical",
+      "objective": "Gør autonome ændringer sikre og reversible.",
+      "tasks": [
+        "Kontrollér git status.",
+        "Opret repository hvis projektet ikke allerede bruger git.",
+        "Tilføj passende .gitignore.",
+        "Undgå node_modules, Python cache, virtualenv, secrets og runtime-data.",
+        "Lav baseline commit før refaktorering.",
+        "Brug små commits med forståelige commit messages."
+      ],
+      "suggested_commit_prefixes": [
+        "audit:",
+        "refactor:",
+        "feat:",
+        "fix:",
+        "test:",
+        "docs:",
+        "security:",
+        "deploy:"
+      ]
+    },
+
+    {
+      "id": 3,
+      "name": "Backend Modularization",
+      "priority": "high",
+      "objective": "Bryde app.py på cirka 525 linjer op i ansvarlige moduler.",
+      "target_structure": {
+        "backend": [
+          "app/__init__.py",
+          "app/config.py",
+          "app/routes/api.py",
+          "app/routes/pages.py",
+          "app/game/dice.py",
+          "app/game/pony.py",
+          "app/game/adventure.py",
+          "app/game/state.py",
+          "app/services/game_service.py",
+          "app/models/",
+          "app/data/",
+          "tests/"
+        ]
+      },
+      "tasks": [
+        "Indfør Flask application factory hvis det giver mening.",
+        "Flyt dice logic ud af routes.",
+        "Flyt ponytype logic ud af routes.",
+        "Flyt adventure selection ud af routes.",
+        "Flyt state management til dedikeret modul.",
+        "Hold routes tynde.",
+        "Indfør standardiserede JSON responses.",
+        "Tilføj global error handling."
+      ],
+      "acceptance_criteria": [
+        "Gameplay logic kan testes uden Flask request context.",
+        "Routes indeholder primært input validation og service calls.",
+        "Eksisterende API-resultater ændres ikke utilsigtet."
+      ]
+    },
+
+    {
+      "id": 4,
+      "name": "Game State Architecture",
+      "priority": "critical",
+      "objective": "Erstat manglende server-side memory med en tydelig session/state model.",
+      "recommended_initial_solution": {
+        "type": "server-side session game state",
+        "storage": "SQLite",
+        "reason": "Simpelt, lokalt, persistent og passende til projektets størrelse."
+      },
+      "future_option": "Redis hvis multiplayer eller høj samtidighed senere bliver relevant.",
+      "state_model": {
+        "game_id": "UUID",
+        "created_at": "timestamp",
+        "updated_at": "timestamp",
+        "player": {
+          "name": "string",
+          "pony_type": "string"
+        },
+        "adventure": {
+          "theme_id": "string",
+          "current_scene": "integer",
+          "completed_scenes": "array"
+        },
+        "stats": {
+          "rolls": "integer",
+          "successes": "integer",
+          "failures": "integer"
+        },
+        "achievements": "array",
+        "flags": "object"
+      },
+      "tasks": [
+        "Definér GameState model.",
+        "Generér game_id ved nyt spil.",
+        "Returnér game_id fra /api/start.",
+        "Kræv game_id ved stateful requests.",
+        "Gem current scene server-side.",
+        "Gem achievements server-side eller synkroniser dem deterministisk.",
+        "Implementér resume-game support.",
+        "Implementér game reset."
+      ],
+      "important": "Undgå Flask in-memory global dictionary som permanent løsning, da state forsvinder ved restart og giver problemer med flere workers."
+    },
+
+    {
+      "id": 5,
+      "name": "API v2",
+      "priority": "high",
+      "objective": "Gør API'et konsistent, valideret og klar til frontend/CLI.",
+      "proposed_endpoints": [
+        {
+          "method": "POST",
+          "path": "/api/v1/games",
+          "purpose": "Start nyt game"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/games/<game_id>",
+          "purpose": "Læs state"
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/games/<game_id>/roll",
+          "purpose": "Lav dice roll"
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/games/<game_id>/scene",
+          "purpose": "Advance scene"
+        },
+        {
+          "method": "DELETE",
+          "path": "/api/v1/games/<game_id>",
+          "purpose": "Reset/delete game"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/content",
+          "purpose": "Frontend configuration, pony types, themes og metadata"
+        },
+        {
+          "method": "GET",
+          "path": "/api/health",
+          "purpose": "Health check"
+        }
+      ],
+      "migration_rule": "Bevar gamle endpoints midlertidigt som compatibility wrappers hvis frontend stadig bruger dem.",
+      "response_format": {
+        "success": {
+          "ok": true,
+          "data": {}
+        },
+        "error": {
+          "ok": false,
+          "error": {
+            "code": "string",
+            "message": "string"
+          }
+        }
+      }
+    },
+
+    {
+      "id": 6,
+      "name": "Remove Hardcoded React Theme",
+      "priority": "critical",
+      "objective": "Backend/game state skal bestemme adventure theme fremfor hardcoded React-værdi.",
+      "tasks": [
+        "Find samtlige hardcoded theme references i React.",
+        "Returnér active theme via API.",
+        "Gem theme i game state.",
+        "Lad frontend rendere dynamisk ud fra API data.",
+        "Lav fallback UI hvis theme mangler.",
+        "Undgå at duplikere theme metadata i frontend."
+      ],
+      "acceptance_criteria": [
+        "Alle themes kan startes uden kodeændring.",
+        "Refresh ændrer ikke aktivt adventure.",
+        "Frontend kan resume eksisterende game."
+      ]
+    },
+
+    {
+      "id": 7,
+      "name": "Central Content Model",
+      "priority": "high",
+      "objective": "Fjern risikoen for at adventure-data eksisterer i flere inkompatible versioner.",
+      "recommended_format": "JSON eller YAML datafiler med schema validation.",
+      "suggested_structure": {
+        "data": [
+          "pony_types.json",
+          "themes.json",
+          "scenes.json",
+          "npcs.json",
+          "locations.json",
+          "achievements.json"
+        ]
+      },
+      "tasks": [
+        "Identificér dupliceret content mellem app.py, React og ny_spiller.py.",
+        "Opret én canonical content source.",
+        "Lad backend læse data.",
+        "Lad React hente metadata via API.",
+        "Lad CLI-generator genbruge samme models/content hvor relevant.",
+        "Tilføj IDs fremfor at bruge display names som keys.",
+        "Tilføj content schema validation ved startup."
+      ]
+    },
+
+    {
+      "id": 8,
+      "name": "Dice Engine Refactor",
+      "priority": "high",
+      "objective": "Gør terningesystemet deterministic-testable og nemt at udvide.",
+      "module": "app/game/dice.py",
+      "interface_example": {
+        "function": "roll_pool",
+        "inputs": [
+          "dice_count",
+          "difficulty",
+          "modifiers",
+          "rng"
+        ],
+        "outputs": [
+          "rolls",
+          "raw_successes",
+          "difficulty_target",
+          "result",
+          "critical"
+        ]
+      },
+      "tasks": [
+        "Isolér random number generation.",
+        "Muliggør seeded RNG i tests.",
+        "Test scoring 6=2, 4-5=1 og 1-3=0.",
+        "Test alle sværhedsgrader.",
+        "Test pony-type bonuses.",
+        "Undgå at frontend selv beregner authoritative success."
+      ]
+    },
+
+    {
+      "id": 9,
+      "name": "Pony Type System",
+      "priority": "medium",
+      "objective": "Gør ponytyper data-drevne og lettere at balancere.",
+      "pony_schema": {
+        "id": "earth_pony",
+        "name": "Jordpony",
+        "description": "string",
+        "base_bonus": 0,
+        "bonuses": [],
+        "abilities": [],
+        "ui": {
+          "icon": "string",
+          "theme_class": "string"
+        }
+      },
+      "tasks": [
+        "Flyt bonuses til data/config.",
+        "Dokumentér præcis hvornår hver bonus gælder.",
+        "Tilføj unit tests per ponytype.",
+        "Kontrollér især Alicorn balance.",
+        "Undgå special-case if-statements spredt gennem kodebasen."
+      ]
+    },
+
+    {
+      "id": 10,
+      "name": "Adventure Engine",
+      "priority": "high",
+      "objective": "Skil fortællingsindhold fra engine så adventure-content nemt kan udvides.",
+      "features": [
+        "theme selection",
+        "scene progression",
+        "branching choices",
+        "difficulty",
+        "required roll",
+        "NPC references",
+        "location references",
+        "rewards",
+        "achievement triggers"
+      ],
+      "scene_schema": {
+        "id": "string",
+        "theme_id": "string",
+        "sequence": "integer",
+        "title": "string",
+        "description": "string",
+        "choices": [],
+        "challenge": {
+          "enabled": true,
+          "difficulty": "easy|normal|hard",
+          "base_dice": 1
+        },
+        "next": []
+      },
+      "future_extension": "Tillad branching adventures i stedet for kun lineære 5-scene flows."
+    },
+
+    {
+      "id": 11,
+      "name": "React Architecture Refactor",
+      "priority": "high",
+      "objective": "Reducer App.js fra cirka 813 linjer og isolér UI-ansvar.",
+      "suggested_structure": {
+        "src": [
+          "pages/",
+          "components/",
+          "components/dice/",
+          "components/audio/",
+          "components/tutorial/",
+          "components/achievements/",
+          "hooks/",
+          "services/api.js",
+          "context/GameContext.jsx",
+          "utils/",
+          "styles/"
+        ]
+      },
+      "tasks": [
+        "Flyt API calls til service layer.",
+        "Flyt global game state til GameContext eller tilsvarende.",
+        "Opdel App.js i routes/pages.",
+        "Isolér dice animation.",
+        "Isolér achievements.",
+        "Isolér tutorial.",
+        "Isolér audio.",
+        "Reducer prop drilling.",
+        "Implementér loading states.",
+        "Implementér API error states.",
+        "Implementér reconnect/resume behavior."
+      ]
+    },
+
+    {
+      "id": 12,
+      "name": "Audio Engine Refactor",
+      "priority": "medium",
+      "objective": "Reducer SceneMusic.js og undgå browser/audio edge cases.",
+      "tasks": [
+        "Opret central AudioManager.",
+        "Respektér browser autoplay restrictions.",
+        "Start audio først efter brugerinteraktion.",
+        "Tilføj global mute.",
+        "Tilføj separat music og SFX volume.",
+        "Stop gamle audio nodes ved scene transition.",
+        "Cleanup AudioContext ved component unmount.",
+        "Undgå memory leaks.",
+        "Gem lydindstillinger i localStorage."
+      ]
+    },
+
+    {
+      "id": 13,
+      "name": "CSS Refactor",
+      "priority": "medium",
+      "objective": "Gør cirka 780 linjer CSS mere struktureret.",
+      "tasks": [
+        "Identificér døde selectors.",
+        "Opdel CSS efter komponent eller feature.",
+        "Definér fælles CSS variables.",
+        "Reducer duplicerede animationer.",
+        "Kontrollér mobile breakpoints.",
+        "Kontrollér overflow ved små displays.",
+        "Respektér prefers-reduced-motion."
+      ]
+    },
+
+    {
+      "id": 14,
+      "name": "Achievement System",
+      "priority": "medium",
+      "objective": "Gør achievements deterministic og persistente.",
+      "achievement_schema": {
+        "id": "string",
+        "name": "string",
+        "description": "string",
+        "hidden": false,
+        "trigger": "string"
+      },
+      "tasks": [
+        "Flyt trigger logic væk fra tilfældige UI-komponenter.",
+        "Centralisér achievement evaluation.",
+        "Persistér unlocked achievements.",
+        "Undgå duplicate unlock events.",
+        "Tilføj achievement API/state.",
+        "Test unlock conditions."
+      ]
+    },
+
+    {
+      "id": 15,
+      "name": "CLI Generator Integration",
+      "priority": "medium",
+      "objective": "Reducer ny_spiller.py fra cirka 533 linjer og genbrug fælles game/content models.",
+      "tasks": [
+        "Adskil CLI input/output fra generator logic.",
+        "Genbrug NPC-, location- og theme-data.",
+        "Indfør argparse.",
+        "Tilføj --seed option.",
+        "Tilføj --json output.",
+        "Tilføj --theme.",
+        "Tilføj --pony-type.",
+        "Tilføj validation.",
+        "Tilføj unit tests."
+      ],
+      "example": "python3 ny_spiller.py --theme friendship --pony-type pegasus --seed 42 --json"
+    },
+
+    {
+      "id": 16,
+      "name": "Testing",
+      "priority": "critical",
+      "objective": "Opbyg regression protection før større features tilføjes.",
+      "backend": {
+        "framework": "pytest",
+        "tests": [
+          "dice scoring",
+          "difficulty handling",
+          "pony bonuses",
+          "theme selection",
+          "scene progression",
+          "invalid game_id",
+          "API input validation",
+          "game persistence",
+          "achievement triggers"
+        ]
+      },
+      "frontend": {
+        "recommended": [
+          "Vitest",
+          "React Testing Library"
+        ],
+        "tests": [
+          "page rendering",
+          "game start",
+          "scene transition",
+          "dice interaction",
+          "API failure handling",
+          "tutorial state"
+        ]
+      },
+      "e2e": {
+        "recommended": "Playwright",
+        "flows": [
+          "start new game",
+          "select pony",
+          "complete adventure",
+          "reload browser",
+          "resume adventure"
+        ]
+      },
+      "minimum_target": {
+        "critical_game_logic_coverage": "90%",
+        "overall_backend_coverage": "70%"
+      }
+    },
+
+    {
+      "id": 17,
+      "name": "Input Valida

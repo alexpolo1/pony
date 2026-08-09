@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% block title %}{{ sp.tema.titel }} - My Little Pony{% endblock %}
+{% block content %}
+{% set STAT_NAVNE = {"krop": "Krop", "sind": "Sind", "charme": "Charme"} %}
+{% set STAT_EMOJI = {"krop": "💪", "sind": "🧠", "charme": "💕"} %}
+{% set SVAERHED_NAVNE = {"let": "Nem 🌟", "normal": "Lidt svært 🌟🌟", "svaert": "Svært 🌟🌟🌟"} %}
+
+<div class="game">
+
+    {% if sp.færdig %}
+    <!-- === SLUT === -->
+    <div class="game-end {% if sp.succeser > sp.fiaskoer %}victory{% elif sp.succeser == sp.fiaskoer %}mixed{% else %}defeat{% endif %}">
+        <h1>
+            {% if sp.succeser > sp.fiaskoer %}
+            🌟 SEJR! 🌟
+            {% elif sp.succeser == sp.fiaskoer %}
+            ⚖️ Blant resultat! ⚖️
+            {% else %}
+            💪 Prøv igen! 💪
+            {% endif %}
+        </h1>
+        <p class="end-text">
+            {% if sp.succeser > sp.fiaskoer %}
+            {{ sp.pony.navn }} har reddet dagen! Alle i Equestria er glade! ✨
+            {% elif sp.succeser == sp.fiaskoer %}
+            {{ sp.pony.navn }} har kæmpet hårdt — næste gang bliver det endnu bedre!
+            {% else %}
+            {{ sp.pony.navn }} lærer af det — næste eventyr bliver fantastisk!
+            {% endif %}
+        </p>
+        <p class="score">Succeser: {{ sp.succeser }} 🌟 | Mislykkes: {{ sp.fiaskoer }} 🤔</p>
+
+        <div class="history">
+            <h2>📖 Hvad skete der? 📖</h2>
+            {% for h in sp.historie %}
+            <div class="history-item {% if h.succes %}success{% else %}fail{% endif %}">
+                <div class="history-action">{{ h.aktion }}</div>
+                <div class="dice-row">
+                    {% for d in h.dice %}
+                    <div class="die {% if d == 6 %}fantastic{% elif d >= 4 %}success{% elif d == 1 %}fail{% endif %}">{{ d }}</div>
+                    {% endfor %}
+                </div>
+                <div class="history-result">
+                    {% if h.succes %}✅ Ja! Det lykkedes!{% else %}🤔 Ops! Prøv igen næste gang!{% endif %}
+                </div>
+                {% if h.tekst %}
+                <p class="history-story">{{ h.tekst }}</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="actions">
+            <a href="{{ url_for('igen') }}" class="btn btn-start">🎲 Spil Igen!</a>
+            <a href="{{ url_for('index') }}" class="btn btn-home">🏠 Forside</a>
+        </div>
+    </div>
+
+    {% else %}
+    <!-- === AKTIV SCENE === -->
+    {% set scn = sp.tema.scener[sp.scene] %}
+    {% set scene_num = sp.scene + 1 %}
+    {% set total_scenes = sp.tema.scener|length %}
+
+    <div class="scene-header">
+        <div class="progress">{{ scene_num }} / {{ total_scenes }}</div>
+        <h1>{{ sp.tema.emoji }} {{ sp.tema.titel }}</h1>
+    </div>
+
+    <!-- Pony kort -->
+    <div class="pony-card-mini">
+        {% set pony_img_map = {'Jordpony': 'jordpony', 'Pegasus': 'pegasus', 'Enhjørning': 'enhjorning', 'Alicorn': 'alicorn'} %}
+        {% set pony_img = pony_img_map.get(sp.pony.type, 'jordpony') %}
+        <img src="/static/images/{{ pony_img }}.png" alt="{{ sp.pony.navn }}" class="pony-mini-img">
+        <div class="pony-info">
+            <strong>{{ sp.pony.navn }}</strong>
+            <span class="pony-type-badge">{{ sp.pony.type }}</span>
+        </div>
+        <div class="mini-stats">
+            <span>💪 {{ sp.pony.krop }}</span>
+            <span>🧠 {{ sp.pony.sind }}</span>
+            <span>💕 {{ sp.pony.charme }}</span>
+        </div>
+    </div>
+
+    <!-- Scene -->
+    <div class="scene-card">
+        <div class="scene-number">Scene {{ scene_num }}</div>
+        <p class="scene-text">{{ scn.tekst }}</p>
+        <div class="scene-action">
+            <span class="action-label">Du skal:</span>
+            <span class="action-text">{{ scn.aktion }}</span>
+        </div>
+        <div class="scene-difficulty">
+            Sværhed: {{ SVAERHED_NAVNE.get(scn.svaer, scn.svaer) }}
+            ({{ STAT_NAVNE.get(scn.stat, scn.stat) }} {{ STAT_EMOJI.get(scn.stat, '') }})
+        </div>
+
+        {% if sp.historie %}
+        <div class="previous-results">
+            <h3>Forrige scener:</h3>
+            {% for h in sp.historie %}
+            <div class="mini-result {% if h.succes %}success{% else %}fail{% endif %}">
+                {{ h.aktion }}: {% if h.succes %}✅ Lykkedes!{% else %}🤔 Prøv igen!{% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Kast terninger -->
+    <form method="POST" action="{{ url_for('kast') }}">
+        <button type="submit" class="btn btn-roll">
+            🎲 KAST TERNINGERNE! 🎲
+        </button>
+    </form>
+
+    {% endif %}
+</div>
+{% endblock %}

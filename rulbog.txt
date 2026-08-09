@@ -1,0 +1,2428 @@
+
+--- PAGE 1 ---
+Fortællespillet
+My Little Pony: Halerne i Equestria
+En bog for børn og forældre at lege sammen med
+
+--- PAGE 2 ---
+Kære prinsesse Celestia, Jeg er glad for at kunne meddele, at dragen har forladt vores
+messe land, og at det var mit gode ven, Fluttershy, der fik ham til at rejse sig. Dette eventyr
+har lært mig, at dine venner kan hjælpe dig overvinde selv din største frygt. Altid, din
+trofaste elev, Twilight Sparkle
+Hvad er denne bog?
+Hej! Så jeg forestiller mig, at du har hentet denne bog ved at vide lidt om My Little Pony:
+Friendship is Magic. du har sikkert haft et hurtigt blad gennem bogen og spekulerer på
+præcis, hvad det er. Denne bog er en manual til et fortællespil, som giver dig og dine
+venner mulighed for at skabe dine helt egne ponyfigurer at udforske den fantastiske og
+magiske verden af Equestria - vil du være en dynamisk eventyrer som Daring Do eller en
+fed skat jæger som Rarity? Vent, vent, vent! Du sagde, at dette er et spil, men det er helt
+klart en bog! Du har ret, men det er faktisk både en bog og et spil. Denne bog indeholder
+regler og en historie. Regler, der fortæller dig hvordan at lave en stærk, klog eller
+charmerende pony. En historie, som du og dine venner vil nyde, hvor de valg, I træffer, vil
+ændre selve historien, indtil du fortæller historien lige så meget som bogen eller GM.
+GM... hvad er det?
+En GM (gamemaster) er en spiller ved bordet, men i stedet for at spille som en pony, vil
+han eller hun spille som historiefortæller, efterligne alle de ponyer, du møder, de udyr, du
+står over for, og de udfordringer, du skal overvinde. Tænk på GM som en fortæller i en film
+- det er hans eller hendes rolle at fortælle spillerne præcis, hvad der sker i historien, og
+hvad resultaterne er af deres handlinger er, afhængigt af deres valg.
+Kønt! Hvordan vinder jeg?
+At vinde et fortællespil er meget nemt; du skal bare have det sjovt! Tails of Equestria
+handler ikke om at komme til slutningen af en bord eller have flest point, men alt om at
+have fantastiske eventyr og bruge venskabets magi til at overvinde eventuelle
+forhindringer, der står i vejen. Du og dine venner, inklusive GM, er alle på det samme hold
+- så længe alle har det sjovt, alle vinder! Så åbn Tails of Equestria og vær forberedt på at
+komme ind i en verden af ​magi og venskab. River Horse og River Horse Games er
+handelsnavne for River Horse (Europe) Ltd (River Horse). flod Horse, River Horse-logoet
+er enten ®, TM og/eller © 2019 River Horse. HASBRO og dets logo, MY LITTLE PONY og
+alle relaterede karakterer er varemærker tilhørende Hasbro og bruges med tilladelse. ©
+2019 Hasbro. www.riverhorsegames.com Licenseret af:
+Forord Jeg ønskede at skrive Tails of Equestria, fordi efter at have set hvert eneste afsnit
+af tv-programmet (gentagne gange!) med min unge datter er jeg virkelig blevet til at elske
+My Little Pony, Friendship is Magic. Jeg elsker også rollespil og fortællespil, og jeg tror på,
+at Equestrias verden er perfekt rammer for dem. Det er mit største håb, at du vil nyde at
+spille dette spil med din familie og venner for mange glade timer sammen. Tak, fordi du
+spiller Tails of Equestria – god fornøjelse!
+Indhold
+
+--- PAGE 3 ---
+Kapitel 1—Introduktion. . . . . . . . . . . . . . . . . . . . 4
+Kapitel 2—Oprettelse af din ponykarakter. . . . . 12
+Kapitel 3 — Ponytyper. . . . . . . . . . . . . . . . . . . . 20
+Kapitel 4—Elementer af harmoni . . . . . . . . . . . 32
+Kapitel 5 – Egenskaber og udholdenhed. . . . . . . . . .
+. . . . . . 38
+Kapitel 6 – Venskab . . . . . . . . . . . . . . . . . . . . 44
+Kapitel 7 – Tests og udfordringer. . . . . . . . . . . . . . 50
+Kapitel 8 – Talenter og særheder. . . . . . . . . . . . . . . .
+62
+Kapitel 9—Ponynavne, søde mærker og portrætter .
+74
+Kapitel 10—Udstyr og penge. . . . . . . . . . . 78
+Kapitel 11—Niveauer og niveauer op. . . . . . . . . . . 84
+Kapitel 12—Tip og tricks til eventyr. . . . . . 90
+Eventyrmodul – kæledyrsproblemerne. . . . 100 Appendiks – Andre ting. . . . . . . . . . . . . . . .
+. . . 140 Kreditter Skrevet af: Alessio Cavatore, Dylan Owen & Jack
+Cæsar Cover Art: Amy Mebberson Intern kunst: Luigi Terzi & Hasbro Studios Boglayout og
+grafisk design: Dylan Owen & Pete Borlace Korrekturlæsning: Tracie Walsh Tak til:
+Heather Hopkins, Marion Bardou, Matt Walford, Hugo Pritchard-Law, Criz Jamers, Luna,
+Minnie & Holly, Giovanni & Sara, Shinobi 7, og alle de andre ponytestere ISBN:
+978-1-9160115-0-2 Produktkode: RH_TOE_E01 River Horse og River Horse Games er
+handelsnavne for River Horse (Europe) Ltd (River Horse). River Horse, River Horse-logoet
+er enten ®, TM og/eller © 2019 River Horse. HASBRO og dens logo, MY LITTLE PONY og
+alle relaterede karakterer er varemærker tilhørende Hasbro og bruges med tilladelse. ©
+2019 Hasbro.
+
+--- PAGE 4 ---
+Hvad er et fortællespil?
+Tails of Equestria er et fortællespil, som også er kendt som et rollespil (eller RPG). Spil
+som disse kan spilles af to eller flere spillere. Én spiller er altid historiefortælleren, også
+kaldet fortæller eller gamemaster (GM), mens alle andre spillere er ponyfigurer (pc'er). I
+vores bøger har vi gået til 'rollespil' (RPG) og 'gamemaster' (GM). Det er bedst, hvis GM er
+en voksen, som en mor eller far, bedstefar eller bedstemor, en storesøster eller bror, en
+babysitter osv. Den bedste størrelse for en gruppe er fire personer: gamemasteren og tre
+ponykarakterer (ideelt set én jord pony, en enhjørning og en pegasus.) Selvfølgelig kan
+mindre eller større grupper fungere lige så godt, men vi ville anbefaler ikke at have mere
+end seks ponyfigurer, da spillet kan blive lidt rodet. Når du og dine venner er samlet for at
+spille, måske siddende rundt om et bord eller på gulvet, vil de Den første ting,
+gamemasteren vil gøre, er at hjælpe hver spiller med at skabe en ponyfigur. Det er rigtig
+sjovt, som du og dine venner skal svare på spørgsmålet: "Forestil dig, at du var en ny
+karakter i My Little Pony, venskab er magi. Hvordan ville din pony være? Hvad ville dine
+farver være, dit talent, dit søde mærke...?" For eksempel kan du sige: “Jeg skal være en
+enhjørning ved navn Firebrand, som er rød med en orange man og hale. Mit søde mærke
+er en flamme, og mit talent er at kontrollere brande, så jeg kan være brandmand i
+Ponyville, men jeg bliver også god til at lave det smukkeste fyrværkeri!” Med hjælp fra
+gamemasteren udfylder du et karakterark til din nye pony, som optager hans eller hendes
+evner, styrker og svagheder, som forklaret senere i denne bog. Når alle ponyfigurer er
+blevet oprettet, begynder gamemasteren at fortælle jer alle en historie, sætter ind Ponyville
+eller et andet af de mange fantastiske steder i Equestria. Og du og dine venner vil være
+karakterer i denne historie!
+Ting du får brug for For at spille Tails of Equestria har du brug for et par ting ud over denne
+bog. Bare rolig, hvis du ikke have dem med det samme, da de fleste af dem nemt kan
+erstattes med gratis eller meget billige erstatninger, som beskrevet nedenfor. En blyant og
+et viskelæder Ideelt set vil du have en af hver pr. spiller, men af selvfølgelig kan du dele
+blyanter og viskelædere, hvis der ikke er nok til at gå rundt. Spillemesteren kan også skal
+bruge nogle blanke ark papir til at lave noter på. Pony lagner Du kan fotokopiere ponyarket
+på side 152. Hvis du foretrækker det, kan du downloade disse ark fra River
+Horse-webstedet - www.riverhorsegames.com - og print dem ud. Eller du kan købe en af
+vores Haler af Equestria Pony Ladepuder. Du kan dog begynde at spille med det samme
+ved at skrive dit ponyark ud på et blankt ark papir. Tokens af Venskab Tokens af Venskab
+(se side 44-49 for flere detaljer) kan repræsenteres af enhver tæller, der ikke bliver let
+forveksles med noget andet. Perler eller knapper fungerer perfekt.
+Rollespilsterninger Disse specielle terninger bruges i de fleste rollespil. De er beskrevet
+nedenfor. Du kan købe vores Tails of Equestria-terninger, eller andre rollespilsterninger,
+online eller fra boghandlere, tegneserier butikker eller hobbyspilbutikker. Der er også en
+række gratis terningkast-apps, som du kan downloade på din telefon – kig efter nøgleord
+som 'rollespil', 'RPG', 'terninger', 'rulle' og så videre. Hvis du ikke har nogen af
+ovenstående, kan du bruge en blyant og terningerne på side 142-147 i denne bog. The
+Tails of Equestria rollespilsterninger Disse specielle terninger bruges i spillet til at se, om
+de handlinger, din karakter forsøger, vil udføre være vellykket eller ej. Dette kaldes en test
+
+--- PAGE 5 ---
+eller en udfordring og er forklaret på side 50-61. Nedenfor kan du se hver terning, listet fra
+den bedste til den værste: Den bedste terning er den blå terning, som har tyve sider og så
+kaldes en D20. Når du ruller den, det vil give dig et tal fra 1 til 20. Den sorte terning har tolv
+sider og kaldes derfor en D12. Når du ruller den, vil den give dig en nummer fra 1 til 12.
+Den lilla terning har ti sider og kaldes derfor en D10. Når du ruller den, vil den give dig en
+tal fra 1 til 10 (nullet tæller som en ti). Den gule terning har otte sider og kaldes derfor en
+D8. Når du ruller den, vil den give dig en nummer fra 1 til 8. Den grønne terning har seks
+sider og kaldes derfor en D6. Når du ruller den, vil den give dig et nummer fra 1 til 6. Den
+værste terning er den røde terning, som har fire sider og så kaldes en D4. Når du ruller
+den, er den vil give dig et tal fra 1 til 4 (resultatet vises ved det tal, der vender mod 'højre'
+vej op' - så terningen afbilledet til venstre har fået et '4').
+Andet udstyr Der er andre ting, der almindeligvis bruges i rollespil, som ikke er
+nødvendige, men kan forbedre spillet
+erfaring. Gamemaster skærm Dette er en Tails of Equestria foldbar papskærm bruges af
+gamemasteren til skjule hans eller hendes kort, noter, og de terninger han eller hun kaster.
+Der er også nogle nyttige referenceoplysninger om siden vender mod spilmesteren.
+Kosttilskud og eventyr Nogle gamemastere elsker at skrive eller improvisere deres eget
+eventyr, quests og historier. De kunne godt tænke sig at lede efter vores tillæg, der tilbyder
+yderligere information om Equestria og de skabninger, der bor der. Andre foretrækker at
+købe færdiglavede Tails of Equestria-eventyr, som består af et eller flere eventyr, som
+gamemasteren kan læse og så lege med gruppen. De omfatter alt gamemasteren skal
+spille, såsom kort, indstillinger, karakterer og skabninger, pc'erne vil møde, og så videre. Et
+kort eventyr, The Pet Predicament, er inkluderet i denne bog og starter på side 100.
+Figurer Nogle rollespilsgrupper kan godt lide at visualisere spillerfigurerne og de andre
+karakterer og skabninger de kommer til at interagere med ved hjælp af figurer. Mange
+figurer, der repræsenterer karakterer fra My Little Pony, Friendship is Magic fås hos
+Hasbro.
+Opretter din Pony karakter I dette kapitel finder du ud af, hvordan du skaber din
+ponykarakter. Hvad du har brug for • Et tomt ponyark. Spørg en voksen til fotokopi Pony
+Sheets bagerst i denne bog (side 152), eller for at downloade og udskrive en ark fra
+www.riverhorsegames.com. Pads of Pony Sheets kan også købes fra River Hest—i så fald
+kan du vælge et ark til en Earth pony, en Pegasus pony eller en Unicorn pony, eller brug
+en helt blankt Ponyark, hvis du vil tegne din egen pony uden hjælp. • En blyant og
+viskelæder. OPRET DIN PONY For at oprette din pony skal du fuldføre hver instruktion i
+den rækkefølge, der er angivet nedenfor. 1) Vælg Pony Type Vil du spille som en jordpony,
+en enhjørning eller en Pegasus? Hvis du har valgt en bestemt type pony Sheet, du har
+allerede truffet dit valg! Se side 20-30 for at finde ud af mere om hver type pony. A n
+Jorden s o n y i s
+st ro ng a nd b r a v e ! A U ni c o r n
+c a n
+os e ma gi c! A P e g a s u s ca n flyve !
+2) Niveau Alle starter normalt på niveau 1 - niveauet for unge ponyer, der lige har fortjent
+deres søde mærke - så skriv 1 for din ponys niveau på dit ponyark. 3) Element af harmoni
+
+--- PAGE 6 ---
+Der er seks elementer af harmoni i Equestria. Du kan vælge et element til din pony som en
+del af karakterskabelse. Vil din pony være venlig som Fluttershy, ærlig som Applejack,
+generøs som Rarity, loyal som Rainbow Dash, sjov som Pinkie Pie eller klog som Twilight
+Sparkle? Elementerne i harmoni er: Vælg en og skriv den i Element of Harmony-linjen på
+dit ponyark. Du kan finde mere om Elements of Harmony på side 32-37. VENLIGHED
+GENERØSITET LATTER LOYALITET MAGI ÆRLIGHED
+4) Krop og sind Vil din pony være stærk og modig, beslutsom og god til ting som at løbe,
+klatre og løfte tunge ting? Eller vil du have din pony til at være smart og bedre til at tænke,
+lære og løse gåder? Stærk Hvis du vil have din pony til at være stærk, så skriv D6 i
+BODY-boksen på din Pony Sheet (eller D8, hvis din pony er en jordpony!) og D4 i
+MIND-boksen. Brainy Hvis du vil have din pony til at være smart, så skriv D6 i
+MIND-boksen på dit ponyark og D4 i BODY-boksen (eller D6, hvis din pony er en
+jordpony!). 5) Charme Charm-resultatet viser, hvor sød, høflig, smuk eller smuk, blid og
+charmerende din pony er. Din pony bruger Charm til at blive venner med andre ponyer og
+væsner. Everypony starter med en Charm på D6 – skriv D6 i Charm-boksen på dit Pony
+Sheet. 6) Udholdenhed Stamina-resultatet viser dig, hvor hård din pony er. Alle starter med
+et antal Stamina-point (se side 42-43). • Hvis din pony er en enhjørning eller en pegasus,
+så skriv 10 i boksen Maksimal udholdenhed. • Hvis din pony er en jordpony, så skriv 12 i
+boksen Maksimal udholdenhed. Under spillet, hvornår
+ting går galt, din pony kan miste staminapoint, men det er nemt at få dem tilbage gennem
+hvile og helbredelse. Hvis din pony nogensinde når nul Stamina-point, er han eller hun for
+træt til at fortsætte, og må stoppe og hvile for at komme sig.
+7) Talenter Nu skal du beslutte dig for, hvad din ponys bedste talent skal være. Husk, at
+det talent, du vælger, bliver afbilledet på din pony ved hans eller hendes Cutie Mark, og vil
+påvirke livet af din pony og muligvis også din ponys navn - dette er en meget vigtigt valg!
+Vælg et talent blandt dem, der er anført på side 66-70, eller du kan lav en af dine egne
+med hjælp fra gamemasteren. Når du opnår dette talent, har det en score på D6. Skriv
+Talents navn på Cutie Mark-linjen i boksen Talenter på dit ponyark, og skriv D6 ved siden
+af talentet. Jord pony Hvis din pony er en jordpony, så er han eller hun får også Stout
+Heart-talentet (se side 69). Skriv Stout Heart (D6) på anden linje i talentboksen på dit
+ponyark. Hvis du allerede har givet din pony Stout Heart-talentet, øge scoren for dette
+talent til Stout Heart (D8). Enhjørning Hvis din pony er en enhjørning, får han eller hun
+også Telekinesis Magisk talent (se side 70). Skriv Telekinesis (D6) på anden linje i
+talentboksen på dit ponyark. Hvis du allerede har givet din pony Telekinesis-talentet, øge
+scoren for dette talent til Telekinesis (D8). Pegasus Hvis din pony er en Pegasus, får han
+eller hun også fluetalentet (se side 67). Skriv Fly (D6) på anden linje i talentboksen på dit
+ponyark. Hvis du allerede har givet din pony fluetalentet, øge scoren for dette Talent to Fly
+(D8).
+8) Nøjelser Du skal nu vælge en Quirk til din pony. Finheder gør din pony skiller sig ud fra
+flokken, og sjovere at lege. Er din pony nogle gange for let at skræmme som Fluttershy?
+Eller er han eller hun er lidt for glad for ædelstene som Spike? En Quirk kunne være noget
+din pony er bange for, eller noget han eller hun finder det ekstremt svært at gøre eller kan
+virkelig ikke lide. Du kan vælge en Quirk blandt dem, der er anført på side 72-73, eller du
+
+--- PAGE 7 ---
+kan lav en af dine egne med hjælp fra gamemasteren. Skriv navnet på din Quirk på den
+første linje i Quirks-boksen på din Pony Sheet. 9) Portræt og Cutie Mark Det er tid til at
+tegne din pony i portrætboksen på dit ponyark. Du skal også tegne dit cutie-mærke i Cutie
+Mark-boksen på din pony Ark – husk, at dit søde mærke skal have noget at gøre med dit
+hovedtalent. 10) Ponynavn Nu skal du navngive din pony. Din ponyens navn kan have
+noget at gøre gøre med det Talent du har valgt, eller måden du ser ud eller opfører dig på.
+For eksempel beslutter Emily sig for at navngive hendes enhjørning (vist her til venstre)
+'Ildbrand', fordi hun både er brændende- tempereret og dygtig til at lave fantastisk
+fyrværkeri! 11) Udstyr Til sidst skal du beslutte, hvilke varer du ønsker din pony at bære.
+Din pony starter af med 400 bit. Se kapitlet 10—Udstyr og penge—til beslutte, hvad du vil
+bruge dine penge på. hvis der er noget du vil købe, der ikke er på listen der, spørg
+spilmesteren, om han eller hun kan lade dig købe den vare, du ønsker, og hvor meget det
+vil koste.
+TOKENS PÅ VENSKAB Din niveau 1 pony karakter starter med 1 Venskabstegn pr spiller i
+gruppen, herunder spilmester. Så hvis det bare er dig og gamemasteren, du starter med 2
+poletter, men hvis det er dig og to andre venner begynder at spille sammen som en
+gruppe, så starter alle med 4 poletter af venskab! Venskab er nok den mest værdifulde af
+dine evner - Tokens of Friendship giver dig og dine venner mulighed for at komme ud af
+problemer - men når du først bruger dem, er de væk for altid. Se side 44-49 for mere
+information om Tokens of Friendship. Selvfølgelig kan du altid få flere Tokens of Friendship
+under dine eventyr i Equestria. For at holde styr på, hvor mange venskabstegn du har, kan
+du skrive det ned på din pony Sheet, eller dig
+kan bruge en lille genstand som tegn på venskab – knapper, perler, skaller eller småsten
+for eksempel. Du kan også købe River Horses helt egne Tokens of Friendship.
+Pony slags I dette kapitel vil du finde ud af mere information om de tre slags ponyer i
+Equestria—Earth ponyer, enhjørninger og Pegasi. Når du starter en gruppe for at spille
+spillet, er det bedst, hvis du og dine venner vælg forskellige slags ponyer - på den måde
+kan I regne med hinandens styrker. Selvfølgelig, det er slet ikke en streng regel, og du kan
+have en hvilken som helst blanding af ponyarter i gruppen – også en gruppe, hvor alle er
+for eksempel en enhjørning. Jord ponyer Jordponyer er kendt for deres styrke og for at
+være 'nede på jorden'. De dyrker det meste af den mad, der spises i Equestria. Forbundet
+til naturen og ind tune med landet, Jordens ponyer er en vital del af at opretholde
+rækkefølgen af årstiderne. Fra at sikre, at bladene falder til at pakke vinteren ind, virker de
+utrætteligt for at hjælpe med at holde Equestria i harmoni. Mange jordponyer lever i gårde
+og landdistrikter, selvom det ikke er at sige, at de viger tilbage fra store byer som
+Manehattan og Fillydelphia. Faktisk uanset hvor du kigger i Equestria du vil ofte finde
+jordponyer der bor, da deres store udholdenhed betyder, at de kan trives i, hvad andre
+ponyer kan kalde golde ødemarker! En jordponys kraftige hjerte gør det muligt for dem at
+modstå store strabadser uden at bremse, og midler at de har en masse kærlighed at give
+deres venner. Jordponyfigurer er ofte rygraden i en gruppe af ponyer, der er en sten, som
+andre ponyer kan læne sig op ad. Selvom de nogle gange kan ses som lidt 'ru rundt om
+kanterne', er Pegasi og Unicorns enige om, at jordponyer er nogle af de mest pålidelige
+venner, du kan bede om.
+
+--- PAGE 8 ---
+STOUT HJERTE (D6) Jordponyfigurer starter med et gratis ekstra talent: Stout Heart (D6).
+Dette talent opgraderer en ponyens kropsegenskab, hvilket gør den stærkere og sejere.
+Talenter er fuldt forklaret på side 64-65. Som startkarakter, hvis du vælger at have en Krop
+på D6, øges denne egenskab til Krop D8. Hvis du i stedet vælger at have en Krop af D4,
+øges egenskaben til Krop D6. Derudover starter en jordpony spillet med Stamina 12 (i
+stedet for Stamina 10, som andre slags af ponyer starter med). Stout Heart (D6)-talentet
+betyder også, at du én gang pr. spilsession kan spørge GM om du kan tilføje en ekstra D6
+til en test, der bruger din kropsegenskab (tests forklares senere - se siderne 50-61). Dette
+repræsenterer din pony, der presser sig selv hårdere uden at miste modet - hvilket gør
+jordponyer meget seje og gode til at overkomme vanskeligheder. En jordpony med Body
+D8 er bedre til atletik og hårdt arbejde, men ikke så god til opgaver som f.eks. studerer (lidt
+ligesom Applejack). En Earth pony med Body D6 er en meget afbalanceret pony med D6
+for både krop og sind (mere som Pinkie Pie). Begge valg er lige fine, men giver dig
+mulighed for at spille to meget forskellige typer karakterer – lige så forskellige som Pinkie
+Pie er fra Applejack!
+Enhjørninger Mystiske og magiske, enhjørninger kan let skelnes fra de andre ponyer af
+Equestria ved det smukke horn på panden. Selvom horn kan bruges som et almindeligt
+horn, dets hovedanvendelse er den kraftfulde magi som enhjørninger er berømte for. De
+fleste enhjørninger kan bruge telekinesis, evnen til at flytte objekter med deres sind, og
+nogle andre kan teleportere, ændre objekter ind i andre objekter, og spræng kraftige
+bedøvelsesstråler fra deres horn! Meget sjældent får enhjørninger et sødemærke, der
+viser, at deres særlige talent er magi sig selv. Mens de fleste enhjørninger kun kender lidt
+magi i forhold til deres søde mærke, disse enhjørninger kender masser af magi og kan
+blive nogle af de mest magtfulde magiske væsner i alle af Equestria. Mange enhjørninger
+er meget stolte af deres arv og ses ofte som ædle og majestætiske - eller en lille smule
+arrogant, alt efter hvem du spørger! Enhjørninger bruger deres magi til at beskytte
+borgerne i
+Equestria, hjælp til deres kunst og løse eventuelle problemer, der ikke kan løses med
+verdslige midler. Enhjørningsfigurer er meget nyttige i en gruppe eventyrlige ponyer, der er
+i stand til at bruge deres vid og magi at hjælpe med de sværeste gåder og problemer.
+Mange rejsende Unicorn ponyer fokuserer på en af deres magiske evner, men nogle lærer
+mange besværgelser, så de kan hjælpe deres venner i enhver situation!
+TELEKINESE (D6) Unicorn-ponyfigurer starter med et gratis ekstra magisk talent:
+Telekinesis (D6). Magisk talenter er fuldstændig forklaret på side 65. Denne meget nyttige
+evne gør det muligt for en enhjørning at flytte rundt på lette genstande - da deres horn
+lyser med en farverigt lys, begynder objektet at gløde med en lignende farve og svæver
+rundt i luften. Det giver også enhjørningen mulighed for blot at tænde sit horn op for at
+kunne se på mørke steder. Efterhånden som dette magiske talent stiger i niveau, kan
+enhjørningen begynde at flytte objekter og væsner er langt tungere, som en pony eller
+endda en gruppe ponyer!
+Pegasi Pegasi er de bevingede fætre til jordponyer og enhjørninger, kendt for deres
+luftakrobatik og fantastiske smidighed. Oprindeligt en stamme af krigere ponyer, Pegasi er
+en stor og ædel race af ponyer, som nu har til opgave opretholde vejret i Equestria. Bruger
+
+--- PAGE 9 ---
+deres vinger og deres medfødte evner, de kan flytte skyer og skabe vinde, hvilket er sådan
+de har skabte Cloudsdale. Cloudsdale er det fantastiske hjem for mange Pegasi høje oppe
+i himlen. Det er her, de opbevarer meget af det maskineri, der kræves for at lave sne og
+skyer. Mange Pegasi elsker sport og de har opfundet flere som kun Pegasi kan konkurrere
+i pga deres flyveevner. Dette har givet Pegasi ry for at være den mest konkurrencedygtige
+af de ponyløb. Men enhver Pegasus ved inderst inde, at ingen konkurrence er mere værd
+end venner, og selvfølgelig nyder mange Pegasi at flyve i et langt mere roligt tempo.
+Pegasus-karakterer kan ofte finde på at hjælpe deres venner fra oven – deres evne til at
+flyve kan være meget nyttig i mange eventyr, uanset om du spejder efter problemer eller
+ræser mod uret! De er meget gode til at handle hurtigt, advare deres venner om problemer,
+og når det er nødvendigt, dykke ned i en kamp fra oven! En Pegasus kan være en hurtig
+ven, og de er ofte villige til at kaste sig ind i forsvaret af deres kammerater. Jordponyer og
+enhjørninger ser nogle gange Pegasi som et lille udslæt, lidt for ivrig efter det gå til
+handling uden at tænke - hvilket kan give problemer, hvis de ikke forstår alle fakta!
+FLY (D6) Pegasus ponyfigurer starter med et gratis ekstra talent: Flyv (D6). Talenter er
+fuldt forklaret på side 64-65. At flyve er naturligvis en meget nyttig færdighed at have, da
+det er til stor hjælp til at bevæge sig rundt, samles information ved at se på situationer
+oppe fra, og undslippe mange former for fare som f.eks vrede væsner, der ikke kan flyve.
+Flytalentet tillader også en pony at gå på skyer! Bemærk, at Fly (D6) ikke lader dig flyve så
+hurtigt og dygtigt som Rainbow Dash – hun har Fly (D20)! Fly (D6) tillader en Pegasus at
+flyve ret langsomt, lidt ligesom Fluttershy.
+En note om Alicorns Lidt er kendt om Alicorns som race, bortset fra at de er meget
+sjældne. Alicorn magi er ikke fuldt ud forstået, men det er kendt, at Alicorns har
+Enhjørningernes magiske kræfter, Pegasis flyveevner og styrken af de gode, oprigtige
+jordponyer. Det er af denne grund, at andre typer af ponyer henvender sig ofte til Alicorns
+for at løse stridigheder mellem hinanden. I modsætning til de andre typer pony, er en
+Alicorn normalt ikke født som en Alicorn, men optjener retten til at blive det ved at vise en
+stor handling, der betegner hans eller hende særlige beføjelser. Lidt vides om, hvordan
+dette sker, bortset fra at det er meget sjældent, og det sker kun, når Equestria mangler en
+ny prinsesse. For eksempel blev Twilight Sparkle en Alicorn, da Equestria mere end
+nogensinde havde brug for hendes venskabskræfter! For nylig, fødslen af
+Byg Hjerte var det første tilfælde af en pony, der blev født som en Alicorn. Selvom de er
+kraftfulde og smukke, er Alicorns lige så følsomme som andre ponyer, og elsker oftest at
+være det behandlet som enhver anden pony. Mange ponyer har det svært, idet de altid
+ønsker at vise respekt og høflighed, hvilket kan betyde, at Alicorns kan finde det svært at
+finde rigtige venner. Men med lidt vedholdenhed kan de danner de stærkeste bånd. I Tails
+of Equestria kan din karakter ikke være en Alicorn.
+Elementer af harmoni Du kan frit vælge et af de seks Elements of Harmony til din pony
+karakter. Bemærk, at dette ikke har nogen reglereffekt overhovedet. Dette er snarere en
+måde at fortælle gamemaster og dine medspillere, hvad du vil have din ponys
+personlighed til være ligesom. Læs beskrivelserne af hvert element af harmoni på side
+36-37, og så vælg en til din pony. Hver ponykarakter i Tails of Equestria er på linje til et af
+de seks elementer af harmoni. Disse er ærlighed, latter, generøsitet, Loyalitet, venlighed
+
+--- PAGE 10 ---
+og magi. Bare rolig - du behøver ikke at opføre dig hele tiden som beskrevet for ponyer af
+dit valgte element. Dette er fint, så længe din ponys adfærd matcher hans eller hendes
+Element ofte nok. f.eks. Pinkie Pie er munter og sjov det meste af tiden, ligesom elementet
+af latter, som hun er født til. Nogle gange kan hun dog have øjeblikke af alvor, vrede eller
+endda tristhed! Hvis du senere vil ændre dit Element of Harmony, skal du bare fortælle
+gamemasteren det og ændre din pony ark – din pony er lige kommet ind i en anden del af
+hans eller hendes liv, måske vokset fra en teenager pony til en voksen pony, for eksempel.
+Det er sjovt, hvis alle medlemmer af gruppen tilhører et andet Element of Harmony, og det
+kunne det være nyttig i et eventyr, når det kan være nyttigt at have en pony, der hører til
+den rigtige type Element i en bestemt situation. For eksempel kunne en magisk kiste kun
+åbnes, hvis den berøres af en pony tilhører generøsitetselementet, eller et væsen, du
+møder, kunne være lettere at blive ven, hvis nogen hører til elementet venlighed og så
+videre. Så måske kan du blive enige med dine venner om, at I alle vælger forskellige
+Elements of Harmony til jeres ponyfigurer. Det er dog helt fint for to eller flere karakterer at
+dele det samme element.
+Venlighed Ponyer knyttet til dette element er de sødeste, mest blide af skabninger.
+Venlighed kan være vanskelig, og det er det ikke alle, der har samme mening om, hvad
+venlighed betyder. Disse ponyer skal passe på ikke at forvirre venlighed med at være en
+pushover! Farve: Pink Sidste pony at besidde element af venlighed: Fluttershy Generøsitet
+Ponyer knyttet til dette element har de største hjerter og er altid parat til at hjælpe deres
+venner og dele alt, hvad de har, med dem. Disse ponyer nogle gange skal man passe på
+andre ville tage deres generøsitet for givet, og kan have svært ved at finde ud af, hvem
+man skal give til, når de ikke kan give til alle. Farve: Lilla Sidste pony at besidde
+generøsitetselementet: sjældenhed Latter Ponyer knyttet til dette element er sjoveste og
+mest muntre ledsagere dig nogensinde kan håbe på - de ser altid på det lyse siden af
+tingene. Nogle gange omfavner ponyer latterelementet kan have problemer med at lave
+sikker på at alle nyder deres humor, siden latter er kun fantastisk, når alle griner! Farve:
+Blå Sidste pony at besidde til Latterelementet: Pinkie Pie
+Loyalitet Ponyer knyttet til dette element er mest pålidelige af venner. Det vil de aldrig
+forlad en vens side i nød og aldrig forråde et givet løfte. En pony, der er meget loyal kan
+være i problemer, hvis han eller hun har givet loyalitet til den forkerte pony, eller når
+loyalitet er i konflikt! Farve: Rød Sidste pony at besidde Loyalitetselementet: Rainbow
+Dash Magi Ponyer knyttet til dette element er følsomme til den mest magtfulde af alle
+elementer - den Venskabets magi. Magi er mest
+svært Element at bruge, og kan kun eksistere, hvis den anden fem elementer er til stede.
+Disse ponyer har en vanskeligt arbejde med at balancere alle de andre elementer af
+Harmony for at holde venskabet stærkt. Farve: Magenta Sidste pony at besidde Element of
+Magic: Twilight Sparkle Ærlighed Ponyer knyttet til dette element kan være betroet med dit
+liv. De altid sige deres mening og aldrig skjule sandheden af enhver grund. Nogle gange
+kan sandheden være en svær ting at fortælle, og endnu sværere at fortæl det uden at
+skade nogen. Disse ponyer forstå det bedre end nogen anden! Farve: Orange Sidste pony
+at besidde elementet af ærlighed: Applejack
+
+--- PAGE 11 ---
+Træk – krop, sind og charme De tre egenskaber på dit ponyark hjælper med at beskrive,
+hvilken slags pony du er. Vil du være stærk, hurtig og atletisk som Rainbow Dash eller
+Applejack, eller klog, klog og intelligent som Rarity eller Twilight Glitrende? Kunne du være
+lige så sød som Pinkie Pie eller Fluttershy? Startponykarakterer begynder normalt med
+værdierne D4 eller D6 for deres egenskaber, men efterhånden som de vokser fra en ungt
+føl (føl eller hoppeføl) til voksne ponyer, vil deres egenskaber også stige til højere værdier -
+D8, D10 eller endda højere. At øge værdien af egenskaber er forklaret på side 86.
+Egenskaber, som alle andre færdigheder baseret på en terningværdi, bruges i test som
+forklaret på side 52. Indtil videre husk, at D4 er den svageste terning, og D20 er den
+stærkeste. Krop Kropsegenskaben viser, hvor stærk du er - hvor meget vægt du kan løfte
+og bære f.eks. Den måler også, hvor hård du er, hvor længe du kan holde løber efter, hvor
+nemt det er for dig at blive forkølet og så videre. Derudover er det viser, hvor smidig du er,
+når du bevæger dig, hvor god du er til at undvige ting, og hvor godt du kan balancere, så er
+det nyttigt når du skal gennemføre en forhindringsbane eller ønsker at vise dine
+danseevner. Små dyr og unge ponyer har en krop på D4 eller D6. Voksne ponyer og større
+dyr har en krop på D8, D10 eller endnu mere i tilfælde af meget stærke eller atletiske
+ponyer som Big Macintosh eller Rainbow Dash. Selvfølgelig kan andre skabninger have en
+meget høj kropsværdi... en minotaur, for eksempel, kunne have en krop af D20, og en
+drage kan gå endnu højere.
+Sind Mind-egenskaben viser, hvor intelligent din ponykarakter er, hvor godt du er huske
+ting, og hvor god du er til at studere og vinde en argument. Sind-egenskaben er nyttig til at
+løse gåder, finde vej ud af en labyrint og taler andre sprog. Derudover ponyer med en høj
+Mind value er mindre tilbøjelige til at gå i panik eller blive trist eller bange. De kan skubbe
+sig selv til at fortsætte, hvor andre måske giver op. Mind-egenskaben viser også, hvor god
+en ponys følsomhed er. En pony med et godt Sindværdi kan registrere, om andre er kede
+af det, gæt hvad de måske tænker om, og finde ud af, hvad de vil gøre næste gang – kald
+det en 'sjette sans...' eller endda en Pinkie-sans! Unge ponyer starter med en Mind of D4
+eller D6, men efterhånden som de lærer nye ting gennem studier og erfaring, deres
+Mind-værdi vil stige til D8, D10 og mere, op til de meget høje niveauer, som Twilight
+Sparkle og Zecora har. Andre væsner og enestående ponyer, såsom prinsesse Luna eller
+prinsesse Celestia, kan have forbløffende stærke sind, endda stærkere end en D20.
+Charme Charme handler ikke kun om, hvor smuk eller sød du er. Det handler om din
+personlighed – hvor meget andre mennesker kan lide dig, lytter til dig og ønsker at være
+din ven og tilbring tid med dig. Charmerende ponyer gør alle andre kan lide dem ved altid
+at være sød og være opmærksom på andres følelse. Denne egenskab er den sværeste at
+måle og kan være meget forskellig for forskellige ponyer. For eksempel kan man sige, at
+både Rarity og Fluttershy er charmerende, men de er så på meget forskellige måder.
+Charm er nyttig til at blive venner med andre ponyer og væsner, du møder på dine eventyr,
+og at påvirke andres meninger, såsom når du skændes om
+prisen på en kurv kirsebær med en butiksejer på markedet. Din Charm starter normalt ved
+D6, da selv de yngste ponyer kan være meget charmerende ved at være det yndig (faktisk
+bliver nogle af dem mindre charmerende med alderen). Efterhånden som din personlighed
+udvikler sig og du lærer at være sød, karismatisk og overbevisende, kan din charme stige
+til D8, D10 og endda højere. Nogle karakterer har en charme på D20 eller endnu højere,
+
+--- PAGE 12 ---
+såsom Princess Cadence.
+Udholdenhed Din ponykarakters udholdenhed er ikke baseret på en terning; snarere er det
+et antal Udholdenhedspoint. Udholdenhed måler, hvor sund, både i krop og sind, din pony
+er pt. Hvis du er helt frisk, udhvilet og fuld af energi, kan din Udholdenhedspoint er
+maksimalt. Mister udholdenhed Hvis du rejser og bliver meget træt, eller bliver såret, eller
+bliver trist eller forvirret, vil du miste en række Stamina-point. Skriv ned på dit ponyark
+under 'Aktuel udholdenhed' antallet af Udholdenhedspoint du står tilbage med. For
+eksempel har du en maksimal værdi på 10 Stamina-point, og efter en lang dag på vandring
+på tværs af på landet er du så udmattet, at du mister 2 Stamina-point. Det betyder, at din
+nuværende udholdenhed point bliver 8—du skriver dette ned på dit ponyark. Hvis du også
+vred en ankel på en stejl bjergsti, kan du ende med at miste 1 eller flere ekstra point af
+Stamina. Nul udholdenhed! Hvis din udholdenhed nogensinde kommer til 0 eller mindre,
+besvimer din pony eller kan ikke fortsætte længere - træthed får bedre af dig, og du har
+brug for lidt hvile lige nu! Dette kan være irriterende, da det kan forhindre dig i at afslutte en
+opgave. Det kan også give problemer, da nogle slemme fyre kunne tage dig til fange,
+mens du sover, og du kan vågne op i en celle eller et bur! Derfor er det normalt en god idé
+ikke at gå på eventyr alene - at have venner rundt omkring for at hjælpe dig, når du er nede
+eller i problemer, er bedst!
+Genvinder udholdenhed Udholdenhed genoprettes normalt naturligt ved at hvile, spise
+sund mad og drikkevarer eller endda ved magi med brug af eliksirer eller talenter (som
+forklaret på side 67). Alle disse måder at helbrede vil tilføje en antal Stamina-point til dit
+samlede antal, op til dine Maksimale Stamina-point. Som en tommelfingerregel vil en nats
+søvn ude i naturen give dig 1 point af udholdenhed tilbage, mens du hviler i en komfortabel
+seng i hjemmet eller på en kro eller anden dejlig bolig giver dig 2 point tilbage. Et godt
+varmt måltid vil ligeledes give dig 1 point af udholdenhed tilbage, mens noget koldt hø
+under regnen måske være nok til at holde dig i gang, men vil ikke hjælpe dig med at
+genoprette nogen udholdenhed. At gå lang tid uden at spise vil have den modsatte effekt -
+du kan endda miste udholdenhed som dig blive svag og sulten, så sørg altid for at pakke
+noget mad med til lange ture i vildmarken. Maksimal udholdenhed Dine maksimale
+staminapoint vil stige, efterhånden som din ponykarakter udvikler sig, som forklaret
+nedenfor.
+Hvad er min maksimale udholdenhedsværdi?
+Det er nemt at finde ud af din maksimale udholdenhedsværdi. Se på værdierne af din
+ponys krops- og sindtræk. Ignorer bogstavet 'D' i disse værdier og læg sammen de to
+numre. Denne samlede score svarer til din maksimale udholdenhedsværdi. Så for
+eksempel, en pony med en Mind of D4 og Body of D6 summer 4 plus 6 for at få 10.
+Ponyens Maksimal udholdenhedsværdi er 10. En pony med et sind på D6 og en krop på
+D6 ville have et maksimum Udholdenhedsværdi på 12. Når din pony stiger i niveau, vil
+hans eller hendes krops- eller sindværdi stige, hvilket får en bedre die. Dette vil få også din
+ponys maksimale udholdenhedsværdi til at stige. For eksempel en pony med en krop på
+D10 og en Mind of D12 stiger et niveau og øger hendes Mind til D20. Hendes nuværende
+maksimale udholdenhedsværdi på 22 stiger til 30 (Krop 10 plus Sind 20).
+
+--- PAGE 13 ---
+Venskab Lad os tale om det vigtigste i din ponys liv i Tails of Equestria - Venskab! Ligesom
+udholdenhed er venskab ikke en værdi. I stedet har din ponykarakter en lille antal meget
+værdifulde og kraftfulde Tokens of Friendship, som du kan beslutte dig for brug på ethvert
+tidspunkt under dine eventyr i
+Equestria. Startende tegn på venskab En ponykarakter på niveau 1 starter med 1
+venskabstegn pr. person gruppen, der tæller alle spillere og gamemasteren. Så hvis det
+kun er dig og gamemasteren i gruppen, starter du med 2 tokens, men hvis det er dig, to
+andre venner og gamemasteren, så starter alle med 4 venskabstegn. Brug af
+venskabstegn Tokens of Friendship er utroligt kraftfulde, men de er svære at tjene, så brug
+dem med omtanke. Ved enhver punkt under et eventyr, kan du beslutte at give GM en eller
+flere Tokens of Friendship og ændre noget, der lige er sket, for at få et andet resultat.
+Udskiftning af en terningkast Det mest almindelige eksempel på noget, som du måske
+ønsker at ændre ved at give et token tilbage Venskab er en terningkast. Måske har du eller
+en ven lige slået en terning for din pony i en udfordringstest (se side 57) og har undladt at
+rulle højt nok til en succes - det duer bare ikke!
+Du har tre måder at ændre terningen ved at bruge Tokens of Friendship som vist i boksen
+nedenfor. At give 1 tegn på venskab tilbage Ved at give 1 venskabstegn tilbage til GM, kan
+du ignorere resultatet og slå terningen igen. At give 2 tegn på venskab tilbage Ved at give
+tilbage 2 Tokens of Friendship til GM, kan du ignorere resultatet og prøve testen igen, men
+ved at kaste en D20 i stedet for terningen, kastede du tidligere. At give tilbage 3 tegn på
+venskab Ved at give 3 venskabstegn tilbage til GM, består du testen eller vinder
+udfordringen automatisk - ingen re-roll er nødvendig! Det er vigtigt at huske på, at dette
+kun er et eksempel, og gamemasteren kan altid bestemme hvordan mange tegn på
+venskab er nødvendige for at ændre en terningkast, afhængigt af vigtigheden af testen
+eller Udfordring og resultaterne af en succes eller fiasko. Gamemasteren kan beslutte, at
+det er lettere at ændre nogle resultater og sværere at ændre andre - det er altid op til
+gamemasteren, og hans eller hendes ord er lov. Ændrer historien Tokens of Friendship
+bruges ikke kun til at skifte terningkast. Du kan også bruge dem til at spørge
+gamemasteren at ændre lidt på, hvad der sker i historien! For eksempel er du på
+markedet, og du har virkelig brug for det købe en rebrulle, men du har ikke penge nok til at
+have råd til det. Du har allerede prøvet at tigge med sælgeren for at lade dig få rebet til en
+billigere pris, men bestod din Charm Test. Det kunne du godt spørg spilmesteren, om du
+kan give et venskabstegn tilbage og derefter finde de penge, du har behov på jorden...
+hvilket held!
+Eller måske har din karakter glemt rebet derhjemme, og du har brug for det reb hurtigst
+muligt at klatre i en brønd. Du kan spørge gamemasteren, om du kan give et venskabstegn
+tilbage for at sige, at du huskede faktisk rebet i sidste øjeblik, og du har det i din
+sadeltaske. Spillemesteren kunne sige på dette tidspunkt, at et tegn på venskab ikke er
+nok, men at du kan 'har husket' rebet, hvis alle dine venner også bruger et venskabstegn.
+Grundlæggende giver Tokens of Friendship dig mulighed for at foretage enhver ændring,
+så længe gamemasteren er enig, og du og dine venner har den mængde af Tokens of
+Friendship, som gamemasteren siger, du har brug for. Blanding af tegn på venskab Der er
+en ting mere, du bør huske - når du bruger venskabstegn, så er du kan blande dem med
+tokens fra dine venner, og jo mere du gør dette, jo mere kraftfulde bliver de! Så selvom du
+
+--- PAGE 14 ---
+kun har én token tilbage, kan du bruge flere tokens til at ændre en enkelt terningkast eller
+begivenhed, hvis dine venner accepterer også at give nogle af deres Tokens tilbage og
+smide dem ind med dine. Da dette er venskabets ultimative kraft – deling og omsorg og
+forenet kræfter for at overvinde problemer – Tokens brugt sammen på denne måde er
+mere værd. Gamemasteren bør huske dette, når han beslutter sig mængden af tokens,
+som du skal give tilbage for et bestemt resultat. For at fortsætte vores dø roll-eksempel kan
+gamemasteren beslutte det
+hvis både du og en ven bruger en Token of Friendship on a roll, disse tokens tæller i alt
+som tre tokens i stedet for kun to. Optjening af venskabstegn Så hvordan tjener du Tokens
+of Friendship? Nå, den nemmeste måde at gøre det på er ved at stige i niveau. Når som
+helst hvis du stiger i niveau, får alle et antal venskabstegn svarende til antallet af venner,
+de er niveau op med. For eksempel er der to ponyfigurer i en gruppe - de stiger begge på
+samme tid, så begge få 1 venskabstegn. Se side 84-89 for mere information om level up.
+En anden måde at tjene Tokens of Friendship på er, at din pony opfører sig som en meget,
+meget god ven til deres venner, især når de er i nød, fordi, som du ved: "En sand, sand
+ven hjælper en ven i nød, En ven vil være der for at hjælpe dig med at se, En sand, sand
+ven hjælper en ven i nød, At se lyset, der skinner fra en sand, sand ven." Spilmesteren bør
+altid belønne gode venskabshandlinger med gratis venskabstegn for ponykarakter, der
+opfører sig på sådan en venlig måde. For eksempel er du og dine venner til Grand
+Galloping Gala i Canterlot, når du bemærker, at en store skål fuld af appelsinjuice er ved at
+vælte, og vil spilde al juicen på din ponys nye kjole ven. Du skynder dig ind og lægger dig i
+vejen for juicen, ødelægger dit eget tøj, men redder hendes, fordi du ved hvor meget hun
+holder af den kjole! Det er et fantastisk venskabsshow, hvor du ofre noget for dine venner
+på den mest generøse måde - så gamemasteren tildeler dig en gratis Et tegn på venskab!
+Med andre ord, når du spiller Tails of Equestria, så prøv altid at være lige så hjælpsom og
+sød ved dine venner som det kan du muligvis være – husk, at hvis du smiler, vil verden
+smile tilbage (hvorfor ikke også prøve dette i det virkelige liv?). En anden stor ting ved
+Tokens of Friendship er, at der ikke er nogen maksimal mængde af Tokens – det kan du
+har så mange som du kan tjene! Nye venner! Når en ny ven slutter sig til gruppen, tilføjes
+der straks et venskabstegn til hver spillers pulje – jo mere jo mere er hoppen! Når en ven
+forlader gruppen eller ikke kan komme til en spilsession, gruppemedlemmer mister ikke et
+tegn på venskab, da denne person stadig er en ven i ånden, selvom de kan ikke være der i
+pony!
+Tests og udfordringer På et tidspunkt i løbet af dine eventyr vil du og dine venner blive
+konfronteret med nogle problemer eller problemer - hvis alt altid gik godt, ville det alligevel
+ikke være et eventyr! Der er to forskellige ting, der kan opstå: tests og udfordringer. Lad os
+se på dem hver for sig. Tests En test er, når din pony står i en vanskelig situation som at
+sparke en låst dør op, undvige et fald kokosnød, løse et vanskeligt puslespil eller huske en
+tale. Gamemasteren indstiller en sværhedsgrad til den prøve, du skal bestå, som er et tal
+fra 2 (den nemmeste) til 20 (det sværeste), og vil fortælle dig, hvilken egenskab du skal
+bruge til testen. For at bestå testen du skal rulle lig med eller højere end sværhedsgraden.
+For eksempel, for at undvige en faldende kokosnød kunne gamemaster beslutte, at du skal
+teste på din Kropsegenskab, mod en sværhedsgrad på 4. Det betyder, at du slår terningen
+for din kropsegenskab (f.eks. at det er en D8), og hvis du scorer 4 eller mere, er testen
+
+--- PAGE 15 ---
+bestået – du undviger den faldende kokosnød og er okay. Hvis du kaster 3 eller derunder,
+mislykkes testen, og du bliver ramt i hovedet af kokosnødden – øv, tab 1 point of stamina!
+Selvfølgelig, hvis din kropsegenskab var højere, som en D10 eller bedre, ville testen være
+lettere. Hvis der i stedet var noget, der gjorde testen sværere, såsom at dine ben blev
+bundet sammen, gamemaster ville sætte sværhedsgraden lidt højere - en 5 eller endda 6.
+Ulykke! Bemærk, at minimumssværhedsgraden for en test er 2, så hvis du slår en 1, er
+testen altid mislykket. Ikke nok med det, at slå en 1'er er virkelig dårligt, og gamemasteren
+kan lave nogle meget underholdende
+effekter når dette sker. For eksempel kan spilmesteren beslutte, at du har sprunget ved at
+slå en 1 for at undvige kokosnødden til siden så hurtigt, at du faktisk undgik kokosnødden,
+men styrtede virkelig hårdt ind i stammen på palme – mister ikke 1 men 2 point af
+udholdenhed – uheld! Fantastisk succes! Nogle gange lykkes det virkelig spektakulært, og
+i så fald får du eller gamemasteren fortalt det til alle hvor var du fantastisk succesfuld.
+Dette sker, når kast med din terning er dobbelt eller mere af Prøvens sværhedsgrad. For
+eksempel, hvis testen var sværhedsgrad 4, og du slår en 8 eller mere, var testen
+forbløffende vellykket. I eksemplet ovenfor, hvis du slog en 8'er på testen for at undvige
+kokosnødden (sværhedsgrad 4), så du og gamemaster kunne finde på noget virkelig fedt -
+for eksempel kan du sige det i stedet for bare undviger du kokosnødden, du ødelagde med
+perfekt timing, da den faldt og sparkede den lige oven på vognen forsyninger, der er bag
+dig - godt træk! Sværhedsgrad diagram Dette diagram viser, hvilken sværhedsgrad GM
+skal bruge til en test, afhængigt af hvor let eller svær testen er. Opgave Sværhedsgrad
+Opgave Sværhedsgrad Meget let Ekstremt hårdt Nemt Utroligt hårdt Ganske nemt
+Ubeskriveligt hårdt Ganske hårdt Næsten umuligt Hårdt Du må lave sjov! Meget hårdt
+Har nogen nogensinde gjort dette?
+13 til 20
+Ingen fingre? Intet problem!
+Ofte i My Little Pony: Friendship is Magic kan ponyer ses gøre ting med deres hove, der
+ikke giver mening i vores lidt mindre fantastiske verden. De binder knob, samler op ting, flyt
+små genstande, og spil endda klaver! Det er det samme i Tails of Equestria— generelt kan
+en pony bruge en kombination af tænder, hove og magi til at gøre hvad en væsen med
+hænder kan gøre. Som en generel tommelfingerregel ... fejl ... hov, hvis der kommer et
+spørgsmål op om, hvorvidt en pony er i stand til at gøre noget ved hjælp af hove, er det
+bedst at simpelthen ikke tænke meget over det. Equestria afhænger trods alt langt mere af
+magi end videnskab!
+Brug af talenter til test I nogle tilfælde, når de står over for nogle svære tests, kan nogen i
+din gruppe have et talent, der kunne give en fordel i den test. For eksempel, hvis du har
+den særlige evne (Bucking) talent (se side 69), kommer du til at slå en ekstra terning, når
+du kaster, hvilket ville passe fint til at sparke en dør ned! Nogle talenter giver dig mulighed
+for at opgradere eller genkaste den terning, du kaster til en bestemt test, som beskrevet
+senere. Nogle andre talenter giver dig mulighed for at kaste en ekstra terning til testen –
+bare kast denne ekstra terning ved siden af terningen du normalt ville bruge og vælge det
+
+--- PAGE 16 ---
+bedste resultat. For eksempel forsøger du at sparke en dør ned, og gamemasteren
+beslutter, at sværhedsgraden er 4. Normalt ville du bruge din ponys kropsværdi til at gøre
+dette. Lad os sige, at din krop er D6, men at du har også Bucking (D8) talentet. Dette vil
+give dig mulighed for at rulle en D8 såvel som en D6. Du kaster begge terninger og vælg
+derefter det højeste resultat. Lidt hjælp fra dine venner Hvis mere end én pony forsøger
+den samme test, må I alle slå terningen og vælge den højeste. For eksempel kunne mere
+end én pony slå sig sammen for at forsøge at sparke en dør ned, den ene efter den anden.
+Hver pony tager testen. Hvis en pony lykkes, så er opgaven vellykket, og antallet af ponyer
+succes kan hjælpe gamemasteren med at beslutte, hvor vellykket testen er blevet bestået.
+Nogle gange kan flere ponyer slå sig sammen alle på samme tid i stedet for én ad gangen.
+Dette gør bestå testen endnu lettere, og kan give gruppen mulighed for at lykkes med
+opgaver, der ville være umulige for en enkelt pony. Forestil dig for eksempel, at du skulle
+flytte et meget tungt bord - en pony kunne ikke engang løfte det, men hvis fire af jer hver
+tog fat i det ene ben, så kan I sammen løfte det og flytte det. I denne situation sænker
+spilmesteren opgavens sværhedsgrad, og så tager alle ponyerne testen som beskrevet
+ovenfor. Sværhedsgraden er normalt reduceret med et point pr pony, der hjælper, men den
+spilmester kan øge dette, hvis han eller hun synes, det er passende (såsom hvis en af
+hjælperne er en drage!).
+For eksempel er løft og flytning af det tunge bord sværhedsgrad 7, så en enkelt pony med
+Body D6 og no. talent, der ville hjælpe ham eller hende med at løfte bordet, ville finde det
+umuligt. Men hvis ponyen blev samlet af en ven kunne GM beslutte at sænke
+sværhedsgraden til 6. Hvis vennen har Body D4, løftes bordet ville nu være muligt for en af
+ponyerne, men ikke for begge. Men hvis i alt tre venner var hjælper den første pony med at
+løfte bordet, sværhedsgraden kunne reduceres med 3 ned til 4, så selv venner med Body
+D4 kunne lykkes. Tænk ud af boksen Nogen i gruppen kunne have et talent, der kunne
+bruges til at løse et problem ved hjælp af en fuldstændig anden test, hvis GM er enig. For
+eksempel, en enhjørning i din gruppe, at se hvordan det er meget svært eller ligefrem at
+bryde en tung dør ned umuligt for gruppen, kunne sige: "Vent et øjeblik! Kan jeg få et kig
+gennem nøglehullet? Er nøglen i nøglehullet på den anden side af døren?” Spillemesteren
+ville svare: "Ja, du skal se og se, at nøglen faktisk er i nøglehullet på den anden side."
+Enhjørningen kunne så spørge: "Kan jeg bruge mit Telekinesis-talent til at prøve at dreje
+nøglen i låsen?" Gamemasteren kunne sige: "Ja, det er en test mod en sværhedsgrad på 3
+for din Telekinesis, som er en D6." Så ved at bruge din fantasi og dine talenter kan du finde
+en løsning på næsten ethvert problem!
+Umulige tests Så hvad sker der, hvis sværhedsgraden af en test er for høj til, at nogen i din
+gruppe kan bestå? For eksempel hvis du prøvede at slå en dør lavet af tykke
+egetræsplanker forstærket med metalstrimler ned, vanskeligheden kunne være 10. Hvis du
+har en krop på D8, har du ingen chance for at slå en 10'er, hvilket betyder, at testen er
+umuligt for dig. Hvis du ønsker det, kan du stadig prøve en umulig test - der er en
+hemmelig teknik, der giver din pony en meget lille chance for succes. Denne gamle teknik,
+der gik gennem århundrederne fra mester til discipel, kaldes den eksploderende hov! Når
+du prøver Exploding Hoof-teknikken til en umulig test, vælg en enkelt terning, som din pony
+kan bruge (enten fra en af hans eller hendes karakteristika eller et relevant talent) og rul til
+testen som normalt. Hvis du kaster den maksimale værdi på din terning, kan du kaste den
+
+--- PAGE 17 ---
+næstbedste terning. For eksempel, hvis du slår en 6'er på en D6, slår du derefter en D8.
+Og hvis D8 også ruller sit maksimum (8), så du rulle en D10, og så videre. Når en terning
+ikke kaster sit maksimum, eller du har kastet en D20, stopper du med at rulle og vælg det
+højeste resultat, du har scoret i den serie af kast, som dit endelige resultat. Bemærk, at
+Exploding Hoof-teknikken ikke kan gøre en rulning værre. For eksempel, hvis du slår en 1
+på din D8, ville du bruge de 6, der tidligere blev rullet på D6. Selvfølgelig er der ofte andre
+veje uden om umulige tests. For eksempel hvis man står over for det tunge ovenstående,
+kan du bruge Tokens of Friendship til at øge dine chancer for at sparke den ned (se side
+46-47), eller du kan bede en stærkere ven om at prøve det, hvis deres krop var D10 eller
+bedre. Alternativt kan der selvfølgelig være andre retninger, du kan udforske i stedet for at
+prøve at gå gennem døren ... måske er der et vindue på vid gab et sted!
+Udfordringer En udfordring er en særlig form for test, hvor der er to sider, der konkurrerer
+om at opnå det bedste resultat. For en udfordring kan for eksempel være et terrænløb, en
+stavekonkurrence eller et spil skak. I en udfordring bruger de to karakterer, der er
+involveret i konkurrencen, den samme egenskab eller det samme talent for at se hvem
+vinder. De to sider ruller begge, og den, der ruller højest, vinder udfordringen. Hvis rullerne
+er lige store GM afgør, om udfordringen er uafgjort, og vil fortælle dig, hvad effekterne af
+lodtrækningen er, eller vil spørge de to sider for at kaste deres terninger igen. Lad os tage
+en stavekonkurrence som eksempel. Din pony
+og en rival konkurrerer, og GM bestemmer at det bliver en Mind challenge. Det betyder, at
+du både kaster din Mind terning og den højeste rullende resultat er vinderen af
+udfordringen. I tilfælde af et løb kan GM beslutte, at du skal tage en udfordring ved at
+bruge din kropsegenskab. Hvis udfordringen involverer at overbevise nogen om at give dig
+nogle oplysninger, eller du prøvede at vinde en argument, kan GM beslutte, at du skal tage
+en Charm-udfordring. Hvis det er en udfordring, der involverer et talent, så ville du bruge
+terningen til det talent. For eksempel i en flyvende løb ville du bruge terningen du får fra dit
+Fly-talent. Som i normale tests er det at slå en 1'er lig med et Bad Luck-resultat, med
+dårlige effekter besluttet af GM. Og på samme måde, hvis du slår modstanderens score
+med to gange eller mere deres score, er du lykkedes så godt i udfordringen, at GM vil
+beskrive nogle fede, ekstra effekter.
+Slags Et andet (temmelig ubehageligt) eksempel på en situation, der kan involvere flere
+udfordringer, er, når du får involveret i en kamp mod en eller flere slemme fyre, der ønsker
+at fange dig... eller måske mod sultne skabninger, der vil spise dig! Kan du huske, da Mane
+Six blev angrebet af Dronning Crysalis og hendes Changelings? Tingene bestemt blev
+ophedede, og vores ponyhelte måtte kæmpe for deres frihed og for sikkerheden i hele
+Equestria. Et andet eksempel på et slagsmål var troldmandsduellen mellem Twilight
+Sparkle og Lord Tirek… desværre, der er tilfælde, hvor du ikke har andet valg end at
+kæmpe for at forsvare dig selv og dine venner. Husk, at det er vigtigt aldrig at opsøge en
+kamp, ​og om muligt at løse skænderier ved at tale. At prøve at forstå, hvorfor din
+modstander er ked af det, kan betyde, at du kan hjælpe dem med at blive glade igen, og
+derfor bliver I måske endda venner! Fluttershy viste os, hvordan man gør dette, da hun trak
+tornen ud af manticores pote og forvandlede det vrede, oprørte monster til en stor,
+spindende killing! Hvis du ikke har noget valg, bliver du dog nødt til at deltage i et slagsmål.
+"Det ser ud til, at vi bliver nødt til at gøre dette på den hårde måde!" - Rainbow Dash
+
+--- PAGE 18 ---
+Deltager i et slagsmål I et slagsmål vil GM guide dig gennem en række udfordringer, enten
+individuelt eller alle sammen som en gruppe (eller begge), der vil føre til et resultat, hvor
+din gruppe vinder eller dine modstandere vinder. Karaktererne, der deltager i slagsmålet,
+kaldes scufflers. Kampen slutter normalt, når alle på den ene side er reduceret til nul
+udholdenhed (det er alle også hårdt såret at kæmpe på), eller når den ene side beslutter
+sig for at overgive sig.
+En-til-en slagsmål Et typisk slagsmål mellem to scufflere involverer en udfordring ved at
+bruge kropsegenskaben og ethvert passende talent (Bucking er en god en). Den tabende
+scuffler mister et antal Stamina-point svarende til den score, vinderen har kastet. I tilfælde
+af uafgjort, skal GM beslutte en af to ting: enten er kampspillerne lige matchede og få en
+chance for at tænke over tingene og stoppe med at kæmpe, eller hvis de vil prøve igen,
+kan de rulle igen. Alternativt kan GM beslutte, at begge scufflere tæller som 'vindere', så
+hver af dem mister stamina lig med scoret rullet - for en mulig dobbelt knockout! For
+eksempel er en pony med Body D8 og Bucking (D6) talentet i et slagsmål med en lille
+diamant hund, der har Body D6. Ponyen slår en 3'er og en 6'er (vælger 6'eren), mens
+diamanthunden slår en 4'er. ponyen vinder slagsmålet, og diamanthunden mister 6 point af
+udholdenhed. Bemærk, at rustninger, hjelme og nogle evner kan reducere antallet af tabte
+Stamina-point på grund af en slagsmål (se afsnittet Udstyr på side 81-82). For eksempel
+hvis diamanthunden var iført lys rustning, ville han kun miste 5 Stamina-point. Store
+skænderier og sammenstød Hvis et slagsmål involverer mange håndgemænger på hver
+side, skal du dele slagsmålet op i separate, mindre slagsmål. I hver separat scuffler vil der
+altid være en scuffler på den ene side og en eller flere scufflers på den anden side. Siden
+med de fleste scufflere kan normalt vælge, hvordan de skal opdeles scufflers, medmindre
+GM siger noget andet. Fordelen ved at slå sig sammen på én scuffler er, at den side, der
+slår sig sammen, kaster flere terninger og vil derfor have større chance for at kaste et højt
+tal eller score et eksploderende hov resultat. Bemærk, at hvis gruppespilleren taber
+slagsmålet, så deler vinderen udholdenhedstabet blandt alle tøserne på den tabende side
+på nogen måde, han eller hun kan lide.
+For eksempel står to ponyer over for fem skiftninger. Forandringerne, der er onde,
+bestemmer for at opdele skænderier som følger: fire skiftlinger slår sig sammen på en
+pony, og den sidste veksler beholder anden pony optaget. Lad os se på slagsmålet med
+fire udskiftninger mod en pony. Hvis skifterne kast en 2,3,5,6, og ponyen kaster en 5,
+vekslerne vinder og ponyen mister 6 point af Stamina. Hvis changelings kaster 2, 3, 4, 4,
+og ponyen slår en 5'er, vinder ponyen og deler 5 point af staminatab blandt
+udskiftningerne, på hvilken måde ponyen kan lide. GM ønsker måske at få dette skænderi
+og det andet, mindre, skænderi til at ske i rækkefølge, og udspille sig det mindre slagsmål
+først og derefter videre til det større slagsmål. Dette kan skabe et underholdende øjeblik
+såsom ponyen, der skændes med den enlige udskiftning, der besejrer sin fjende og
+derefter kommer heroisk til redning af ponyen, der er omringet, ved at tage en eller flere
+skiftebørn ud af slagsmålet. Utrænede tests og udfordringer Normalt kan simple opgaver
+forsøges ved blot at bruge dine krops-, sind- og charmetræk, men i nogle tilfælde, hvor en
+test eller udfordring kan have brug for et bestemt talent. For eksempel, hvis det er en test
+eller udfordring i at flyve, ponyer, der ikke har det talent, kan ikke tage testen eller
+udfordringen, eller hvis testen involverer en magisk talent, så kan kun ponyer med det
+
+--- PAGE 19 ---
+talent prøve det. I nogle tilfælde, hvis GM er enig, kan du prøve at prøve en udfordring eller
+test, der endda kræver et talent hvis du ikke har det talent! I dette tilfælde skal du bruge en
+D4 til den pågældende test eller udfordring. For for eksempel kan du prøve at bruge
+Unicorn-magi til at styre vejret på et afgørende tidspunkt, selvom du blev aldrig trænet i
+vejrmanipulation, men dine chancer for at lykkes ville være meget lave. Hvis GM tillader
+det, du kan prøve det, men du ville bruge en D4, hvilket ville være meget hårdt!
+Opgradering og nedgradering af terningkast Når en regel eller evne tillader dig at
+opgradere et terningkast, betyder det, at du kaster en terning, der er et trin bedre end du
+plejer. For eksempel, hvis du normalt kaster en D8, og dette kast er opgraderet, kaster du i
+stedet en D10. Hvis en regel fortæller dig at nedgradere et kast, er den terning, du bruger
+et trin dårligere – for eksempel hvis et D6 kast er nedgraderes, bliver det til en D4. Nogle
+regler kan opgradere eller nedgradere et kast med to eller flere trin i stedet for et enkelt trin
+(f opgrader for eksempel en D6 til en D8 og derefter en D10), men det er sjældent. Hvis en
+D20 er opgraderet, kan du beslutte at genrulle resultatet i stedet for (se nedenfor). Hvis en
+D4 nedgraderes, vil du skal genrulle resultatet, hvis det lykkes - synd! Genruller Når en
+regel eller GM tillader dig at slå en terning igen, betyder det, at du kan vælge ikke at
+acceptere den første resultat du kastede, kasser den score, og kast igen. Det andet
+resultat står altid, selvom det var værre end den første, og kan aldrig genrulles.
+Talenter Et talent er noget din pony er rigtig god til, bedre end de fleste andre ponyer. Der
+er mange, mange forskellige talenter; i dette kapitel skal vi fortælle dig, hvordan de
+fungerer, og du vil finde en liste over talenter på side 66-70. Et talent er en færdighed eller
+evne, eller noget du kender rigtig godt til. Faktisk er du så god til det det adskiller dig fra
+dine venner og de fleste andre ponyer. For eksempel er Raritys bedste talent at skabe
+smukke kjoler, Rainbow Dash kan flyve rigtig, rigtig hurtigt og med fantastisk kontrol er
+Twilight Sparkle god til at lære besværgelser, Fluttershy
+kan tale med dyr, Applejack er fremragende til at drive en gård, og Pinkie Pie er fantastisk
+til at holde fester. En pony kan selvfølgelig have mere end ét talent og vil sandsynligvis
+lære mere end et par stykker, som han eller hun niveauer op under deres eventyr i
+Equestria. Talenter bedømmes med en terningværdi. Normalt starter de ved D4 og stiger i
+rating, efterhånden som du stiger i niveau til en mægtig D20. En pony med D20 i et talent
+er en mester i den færdighed eller viden – ikke mange af dem indbyggere i Equestria kan
+nå det niveau af færdigheder i et talent! For mere information om, hvordan du bruger
+talenter til at gennemføre prøver og udfordringer, se side 54. Cutie mark talenter Din ponys
+hovedtalent er den, du opdagede lige før du fik dit søde mærke. Når du fandt ud af, hvad
+dette talent var, dukkede dit søde mærke på magisk vis op. Dette talent er det, der skal
+påvirke din pony – det definerer ofte en ponys job eller mission i livet. For eksempel hvis du
+opdager, at du har en gave til at heale andre, og du føler, at healing og medicin er det, du
+ønsker at gøre mere end noget andet ellers vil det være dit talent, og dit søde mærke vil
+afspejle det. Alle voksne ponyer har et cutie mark talent, og vores spil starter lige efter din
+pony har fået sin.
+Talentudvikling Når du stiger i niveau som et resultat af dine eventyr i Equestria, vil dine
+talenter forbedres - jo mere du bruger dem, jo mere vil de stige i rating, og en dag kan du
+kalde dig selv en mester, mens du opnår D20 i et talent. Men det er ikke alt. Du kan også
+
+--- PAGE 20 ---
+lære nye talenter, når du opdager nye ting, der interesserer dig og det du er god til. For
+eksempel kan du lære at spille et instrument eller blive rigtig god til en sport, eller lære et
+nyt erhverv eller hobby. På side 66-70 er der en liste over talenter, som du kan vælge at
+udvikle efterhånden som du stiger i niveau, men denne liste er bestemt ikke komplet. Du
+og gamemasteren er frie til at skabe nye talenter og udvikle dem sammen - god fornøjelse!
+Magiske talenter og andre begrænsede talenter Nogle talenter er normalt kun begrænset til
+en bestemt slags pony - dette vil være tydeligt skrevet ved siden af en talentbeskrivelse.
+For eksempel er magiske talenter normalt begrænset til enhjørninger. Nogle andre talenter
+er begrænset til Pegasi, da de kræver ponykarakteren for at kunne flyve. Andre talenter er
+begrænset til Jordponyer, da de er afhængige af jordponyernes naturlige harmoni med dyr
+og planter. Bemærk, at hvis der er en god grund til det, og din GM er enig, kan du lære
+talenter, som normalt ikke er det tilgængelig for din slags pony – begrænsningerne kan
+lempes i sjovens navn. For eksempel en Jord pony kan finde en magisk genstand, der
+giver ham eller hende mulighed for at bruge et magisk talent, eller en enhjørning kunne
+lære fra en Pegasus hvordan man kalder regnskyer ved hjælp af magi.
+Liste over talenter Cloud Wrangling – kun Pegasi Pegasi har den meget vigtige pligt at
+sørge for, at vejret i Equestria ikke kommer ud af kontrol. Det gør de ved at flytte skyer,
+hvor de skal være og bruge dem til at skabe regn. De kan endda skabe tornadoer og
+tilkalde en storm, hvis de har brug for det! GM angiver sværhedsgraden af tests der
+involverer at rydde skyer eller lave regn. Rydning af en enkelt sky kan kun være
+sværhedsgrad 3, hvorimod at stilne en hel storm (eller skabe en) ville være mere som
+sværhedsgrad 10 - kun muligt for en meget talentfuld sky-wrangler. Pony Of All
+Trades—Kun Jordpony Nogle ponyer er mestre i deres håndværk og fokuserer på deres
+kunst, indtil de har nået toppen af færdigheder og talent. Andre vælger i stedet at blive
+rigtig gode til mange ting, ikke så fokuserede, men mere dygtige. afrundet! Hver gang du
+tager en test, kan du kaste din Pony of all trades terning ud over enhver anden dø og vælg
+et hvilket som helst resultat. Hvis du vælger at bruge ponyen af alle handler dør, så kan du
+ikke kaste den for nogen flere tests denne session. Kreativ flair Uanset om det er bagning,
+kunst eller drama, er du fremragende til at udføre dette talent. Når du vælger
+dette talent, skal du vælge en flair for din pony. Nogle eksempler på flairs er anført
+nedenfor. Du er velkommen til at vælge fra listen eller tale med din GM om at finde på din
+egen. Flairs: Bagning; Komedie; Drama; Mode; Musik; Maleri; Skulptering. Hver gang du
+tager en charmetest, hvis du og GM tror, at din flair ville være nyttig til at gøre det test, rul
+din kreative flair terning ud over din charme terning og vælg det højeste resultat. Du kan
+tage dette talent mere end én gang, men du skal vælge en anden flair hver gang du gør
+det. Forcefield - Kun enhjørninger Nogle enhjørninger kan bruge deres kræfter til at skabe
+magiske skjolde kaldet forcefields, som kan beskytte deres venner fra skade. For at skabe
+et kraftfelt skal du være i stand til at koncentrere dig og bestemme, hvor stor kraftfelt bliver.
+GM indstiller sværhedsgraden for en test for at skabe et kraftfelt. For eksempel et kraftfelt
+omkring en lille genstand som en bog ville være sværhedsgrad 4, en der beskytter en
+pony- størrelse objekt ville være sværhedsgrad 6, mens en afskærmning af en by ville
+være sværhedsgrad 12 eller flere. Et kraftfelt varer så længe, som ponyen, der skabte det,
+koncentrerer sig om det, eller indtil den er i stykker. Hvis en karakter ønsker at bryde et
+kraftfelt, bliver han eller hun nødt til at teste deres kropsegenskab med en sværhedsgrad,
+
+--- PAGE 21 ---
+der er lig med terningværdien på forcefield talent af ponyen, der skabte den. For eksempel
+en pony, der forsøger at bryde et kraftfelt skabt af en pony med Forcefield D6 skulle tage
+en kropstest mod sværhedsgrad 6.
+Flyv – kun Pegasi Dette talent tillader ponyen at flyve. Tests og udfordringer, der involverer
+flyvning, bruger terningværdien af dette talent (altså en pony med Fly D8 ville bruge en D8
+til sådanne tests eller udfordringer). Jo bedre dette talent bliver, jo hurtigere og mere
+manøvredygtigt er flyeren. GM sætter sværhedsgraden af tests, der involverer
+flyvehastighed eller færdigheder, og udfordringer er lavet ved hjælp af modstanderens
+Fly-talent tegn. For eksempel kan et flyvende løb mod Fluttershy være en Fly-udfordring
+mod en D6, mens kapløb mod Rainbow Dash eller en af Wonderbolts ville være en
+Fly-udfordring mod en D20. Helbredende berøring Nogle jordponyer er så i harmoni med
+andre skabningers livskraft, at de har den fantastiske evne at helbrede deres venner med
+en berøring. En gang pr. spilsession kan du rulle din Healing Touch terning for at give en
+enkelt pony et antal Stamina-point svarende til den score, du kaster. Den pony kan ikke
+vinde mere end hans eller hendes maksimale udholdenhed. Spændende viden Du er
+ponyen, du skal henvende dig til, når det kommer til et bestemt emne - måske ved du alt,
+hvad der skal til kender til æbler eller måske er du ekspert i historie. Når du vælger dette
+talent, skal du vælge en viden til din pony. Nogle eksempler på viden er anført nedenfor.
+Du er velkommen til at vælge fra listen eller tale med din GM om at finde på din egen.
+kundskaber: Kunst; biologi; kemi; geografi; historie; magisk viden; matematik; fysik; pony
+lov. Hver gang du tager en Mind test, hvis du og GM tror, at din viden ville være nyttig til at
+lave denne test, kast din Keen Knowledge-terning ud over din Mind-terning og vælg det
+højeste resultat. Du kan tage dette talent mere end én gang, men du skal vælge en anden
+viden hver gang du gør det.
+Find – kun enhjørninger Ved at bruge deres horn som detektor kan Enhjørningen finde ting
+uden at skulle bruge sin almindelige sanser. Når du først opnår denne færdighed, og hver
+gang du opgraderer den, kan du vælge en ny type genstand fra listen nedenfor, som du er
+god til at opdage. Spilmesteren bestemmer sværhedsgraden af forsøg på at lokalisere
+tingen/genstanden afhængigt af hvor fjern, hvor sjælden og hvor godt beskyttet den er. •
+Brand; ædelstene; metal; træ; vand. Ponysans Ingen ved, hvorfor din hale rykker, når
+noget falder ned fra himlen, eller du får en øreklap, flagren i øjnene, og knæ-rykker, når du
+skal passe på, hvem der kan være bag en dør! Under en spilsession, du kan 'fornemme'
+problemer, der kommer lige før det påvirker dig eller dine
+venner et antal gange lig med terningen værdien af dette talent. Pony Sense kan kun give
+dig en vag fornemmelse, ikke en specifik forudsigelse af fremtiden. For eksempel, hvis du
+har Pony Sense (D6), og i starten af sessionen sprang en drage ud på dig fra bag en sten
+for at give dig en forskrækkelse, kan du spørge GM: "Kan jeg prøve at bruge min Pony
+Sense til at advare mig af dragen, før han ankommer, så jeg er ikke så overrasket?" GM
+svarer måske: "Det er absolut fint. Sværhedsgraden for at fornemme dragen er 4; rulle din
+D6. Husk også at notere, at du kun har 5 gange tilbage." En anden måde, som GM kan
+bruge Pony Sense på, er ved at anvende en af en ponys Pony Sense bruger til at fortælle,
+at pony hvad der kan ske i den nærmeste fremtid. Dette kan være en fantastisk måde for
+GM at give gruppen en smule information, når de har problemer, eller for at få historien til
+at gå fremad. Tal med dyr Du er så i harmoni med naturen, at du kan tale med dyr og forstå
+
+--- PAGE 22 ---
+dem. Når du først vinder dette talent, kan du vælge en type dyr fra listen nedenfor, og hver
+gang du opgraderer det, kan du evt vælge en anden type. Dyretype: Fugle; fisk; insekter;
+pattedyr; mytiske skabninger; krybdyr. Dette talent lader dig tale med de dyr, du har valgt,
+og bruge dit charmetræk til at overtale dem.
+Særlig færdighed Måske er du en talentfuld atlet, eller god til at løbe eller danse. Når du
+vælger dette talent, skal du vælg en færdighed til din pony. Nogle eksempler på
+færdigheder er angivet nedenfor. Du er velkommen til at vælge fra listen eller tale med din
+GM om at finde på din egen. færdigheder: Bucking; klatring; dans; flyvende; jonglering;
+hoppe; løb; snige. Hver gang du afvikler en krops- eller talenttest, hvis du og GM tror, at
+dine færdigheder ville være nyttige lav den test, kast din Special Skill terning ud over din
+Body eller talent terning og vælg den højeste resultat. Du kan tage dette talent mere end
+én gang, men skal vælge en anden færdighed hver gang du gør det. Stout Heart—Kun
+jordponyer Du er stærk, sej og modig. Intet ser ud til at trække dig ned, og du kan
+fortsætte, selv når andre ponyer ville have givet op. Din startkropsegenskab opgraderes
+med et trin, hvilket også betyder at din startudholdenhed i alt er 12 i stedet for 10.
+Derudover betyder Stout Heart-talentet også, at du én gang pr. spilsession kan spørge GM
+om du kan tilføje din Stout Heart-die, når du tager en test eller udfordrer ved at bruge din
+kropsegenskab. Dette repræsenterer din pony presser sig selv hårdere uden at miste
+modet - hvilket gør Jordens ponyer meget robust og fremragende til at overkomme
+vanskeligheder. Stun Ray – kun enhjørninger Når du bruger dette talent, kan du lave en
+udfordring mod et mål, som du kan se, ved at bruge din Stun Stråletalent versus målets
+kropsegenskab. Målet mister et antal Stamina-point svarende til beløb, som dit kast slog
+målets kast. Men hvis du slår en 1, giver Stun Ray bagslag på dig, og du mister et antal
+Stamina-point svarende til det beløb, som målets kast slog din.
+Telekinese - Kun enhjørninger Dette talent giver dig mulighed for at flytte objekter ved
+hjælp af magi. Jo bedre dette talent bliver, jo tungere bliver genstandene at du kan løfte og
+flytte rundt. GM indstiller en sværhedsgrad baseret på, hvor tung den genstand, du vil løfte,
+er. For eksempel at løfte en flok af nøgler fra en krog og flydende dem til din fængselscelle
+kunne være sværhedsgrad 3, men hvis du vil flyde en nøgle, mens du kigger gennem et
+nøglehul, og sæt derefter nøglen ind i låsen og drej den fra den anden side af en dør, der
+kunne være en 5'er eller en 6'er. At bevæge en enkelt pony langsomt gennem luften ville
+være en vanskelighed 7 test, mens du gør det samme med en gruppe på seks ponyer, ville
+være sværhedsgrad 13 eller endnu mere. Kun det meste kraftfulde ponyer kan prøve
+sådan en bedrift. Dette talent kan også bruges af enhjørningen til simpelthen at generere
+lys fra hans eller hendes horn uden at bevæge sig enhver genstand. Ved D6 er lyset det
+samme som en lanterne, men på højere niveauer bliver det
+lysere og GM kan lade dig bruge den til midlertidigt at fortumle nogle skabninger, især dem
+der ikke er vant til stærkt lys. Stirren Du har evnen til at se på nogen... til virkelig at se. Når
+du bruger stirren, skal du holde øje kontakt med dit mål og lav derefter en udfordring ved at
+bruge dit Stare-talent mod deres sindtræk. Hvis du lykkes, er de frosne, ude af stand til at
+gøre noget. Hvis du får en fantastisk succes, vil de adlyde simple kommandoer - vær bare
+ikke for ond! Stare virker kun i kort tid og kan kun bruges på samme mål én gang pr.
+eventyr. Teleporter – kun enhjørninger Du kan teleportere dig selv korte afstande ved
+hjælp af din Unicorn-magi. Teleportering er svært at kontrollere og kan nogle gange
+
+--- PAGE 23 ---
+forårsage flere problemer, end det løser! At teleportere dig selv et par fod er sværhedsgrad
+5, og hver få fod derefter tilføjer en ekstra 1 til sværhedsgraden. At fejle en Teleport-test
+betyder, at du teleporterer til et sted, du ikke havde til hensigt, selvom det stadig kan spare
+dig fra problemer! Grundsværhedsgraden på 5 for selv en kort teleportering betyder, at du
+måske ønsker at opgradere dette talent til mindst D6, før du forsøger at teleportere.
+Påstande Påstande er som talenter, men de har en dårlig effekt på din pony. Alle starter
+med et hovedindlæg, men du kan få mere under dine eventyr. Påstande er ting som frygt
+(højdeskræk, frygt for insekter, frygt for mørke...), dårlige vaner (lette at vrede, for genert,
+doven ...) eller fysiske svagheder (nærsynet, dårlige tænder, ildelugtende ...). En liste over
+almindelige særheder og deres effekter findes på side 72-73, men du og GM kan have det
+sjovt med at skabe nye og unikke særheder. Påstande er meget vigtige, fordi de gør din
+ponykarakter mere interessant - ingen er perfekte, og det er dejligt, at du kan stole på, at
+dine venner hjælper dig med dine særheder, ligesom du kan hjælpe dem ud med deres.
+De er også nyttige for gamemastere, da GM kan bruge særheder til at skabe vigtige
+øjeblikke af historien mere udfordrende eller spændende. Sig for eksempel, at din karakter
+skal nå en hov dybt ind i et hul i væggen for at flytte en håndtag der åbner en hemmelig dør
+i fangehullerne på et slot. Let nok, men GM ved, at du er bange for edderkopper, så han
+eller hun fortæller dig, at der er nogle meget tykke spindelvæv omkring håndtaget og din
+hov skal gå gennem spindelvævene for at nå håndtaget... det er når din særhed - din frygt
+for edderkopper – slår ind, hvilket gør det meget svært for dig at lykkes med den meget
+enkle opgave. Hvis du var på din egen, ville det kræve en svær Mind-test at tvinge dig selv
+til at se din frygt i øjnene. Heldigvis kan du dog har venner med dig, som blot kan nå
+håndtaget i stedet for dig. I modsætning til talenter bedømmes særheder ikke med en
+terningværdi. I stedet er effekten af hver særhed angivet i dens beskrivelse. Egenskaber er
+ikke alle dårlige - når en særhed forhindrer en pony i at gøre noget meningsfuldt, giver GM
+spiller et tegn på venskab – det er lige så meget vores særheder som vores styrker, der
+gør vores venskaber så specielle! I eksemplet ovenfor, hvis du ikke kunne nå den vigtige
+håndtag på grund af din frygt, så ville du vinde et tegn på venskab. GM'en bør kun uddele
+Tokens of Friendship, når der kommer et særpræg i en vigtig måde. Ved at bruge vores
+eksempel fra oven, nogle spindelvæv i hjørnet af et rum, som din karakter ønsker at
+undgå, men som ikke forhindrer dig i at gå videre, ville ikke give dig et venskabstegn! At
+vælge en ekstra finurlighed Hvis GM beslutter at tillade denne regel, kan du beslutte at
+have et ekstra særpræg, når du opretter din ponykarakter – vælg det ekstra særpræg som
+beskrevet ovenfor, og skriv det ned under dit vigtigste særpræg. Til GM: Vanskelige
+finurligheder Nogle gange har ponyer en særhed, der ikke er på denne liste og er meget
+svær at spille. nogle eksempler kan være ponyer, der er blinde eller ude af stand til at gå.
+Selvom disse særheder ikke er opført direkte, kan en GM beslutte, at hans eller hendes
+gruppe af ponyer er moden nok til at nærme sig at spille sådan en pony
+med respekt. Det kan Tails of Equestria faktisk være et fremragende sted at udforske
+sådanne ideer i sikkerhed, hvilket giver spillerne mulighed for at føle med problemer andre
+ponyer har, eller endda rollespil deres egne kampe i en positiv og fantastisk verden.
+Liste over særheder Allergi Akhoo! Uanset om det er drage-nyse træer eller bier, er du
+allergisk over for noget, der gør dig syg eller nyser. Hvis din allergi er meget slem, vil du
+måske holde noget ponybalsam klar til nødsituationer. Astma Hvis du har denne særhed,
+
+--- PAGE 24 ---
+har du nogle gange problemer med at trække vejret på grund af dine følsomme luftveje.
+Ponyer med denne særhed har du som regel noget ponybalm med sig, som ret nemt kan
+fjerne symptomerne. Blunt Det er rigtigt, at ærlighed er vigtigt, men så er det også at være
+opmærksom på alles følelser. Med dette underlig du siger, hvad du tænker, selv når det
+ikke nødvendigvis hjælper dig og måske gør ondt nogens følelser. Bossy Måske er du
+virkelig en god leder, men du tror også, at du er den eneste, der burde lave beslutningerne.
+En pony med denne særhed har svært ved at lade sine venner træffe beslutninger for sig
+selv og hader at føle, at han eller hun er hjælpeløs. Frygt En pony med denne særhed
+bliver skræmt af mange ting, eller er måske meget bange for én ting. Måske er det slanger,
+måske er det højder, men hvad end det er, køler dig ind til benet og får din man til at rejse
+sig. Denne særhed kan tages flere gange - hver gang du tager denne særhed, skal du
+vælge en anden frygt. Glemsom Du ville glemme dine hestesko, hvis de ikke var fastgjort
+til dine fødder! En pony med denne særhed ofte glemmer vigtig information, og du kan
+bestemt ikke regne med, at han eller hende husker at medbringe rebet til dit klatreeventyr,
+medmindre han eller hun er meget omhyggelig med at skrive det ned. Mememememe!
+Hvor nogle ponyer ikke kan lide rampelyset, kan andre lide det lidt for meget, og elsker at
+være centrum for opmærksomhed. Du kan ikke lide det, når andre ponyer bliver rost, når
+du ikke er, eller måske endda går ud af din måde at fange alles øjne. Rodet Du har ikke
+noget imod møget, og du kan nogle gange glemme at vaske det af med det samme - din
+manke er lidt af en rod! Andre ponyer kan være lidt ubehagelige omkring dig, medmindre
+du gør en indsats for at gøre rent op, især hvis de er pæne freaks! Naiv Man ser det bedste
+i enhver, hvilket selvfølgelig er en vidunderlig ting, men det kan føre til situationer, hvor
+nogen kan drage fordel af dig. Din pony er særligt sårbar over for shirelataner og
+conmares. Pæn freak Du kan lide orden og perfektion, og du kan ikke holde det ud, når
+tingene ikke er helt perfekte. Dette kan gøre det svært når andre ponyer er mindre optaget
+af perfektion end dig, eller hvis de har en anden stil end din pony.
+Har brug for briller En pony, der har brug for briller, kan være nærsynet eller langsynet,
+men begge veje har problemer med at klare det rundt uden deres briller. Hvis du har brug
+for briller, kan du måske ikke engang skelne andre ponyer fra hinanden uden dem, hvilket
+kan føre til nogle interessante problemer! Åååååh... Skinnende! Ponyer med denne
+særhed vil lejlighedsvis blive overvundet af grådighed og deres ønske om det skinnende
+ting, de elsker - det være sig ædelstene eller gammelt, moderigtigt tøj... Du skal være enig
+med din GM hvad præcis det er, at din pony kan lide så meget. Overmodig Racing, mode
+eller dans – hvad end det er, ved du, at du er den bedste og tør nogen til at teste det
+faktum. Dette kan give problemer, når en anden er bedre end dig, eller når du tror, at du
+kan klare det noget du bare ikke kan. Kort opmærksomhedsspænd Ponyer med denne
+særhed har svært ved at fokusere på én ting i lang tid. Der er bare så meget i verden, som
+de er interesseret i! Du kan blive distraheret af fugle eller spil, når du burde arbejde hårdt
+på at studere til en test, eller du kan begynde at tænke på matematikproblemer, når du
+burde virkelig fokusere på det hovboldspil, du er i! Kort sikring Man kan bare ikke lade
+være med at blive vred fra tid til anden,
+eller endda hele tiden! Med denne særhed er du hot- tempereret, hurtig til vrede og klar til
+at blæse når som helst. Du har nogle gange svært ved at huske hvem dine venner er, men
+med lidt tålmodighed kan de altid minde dig om det. Super-genert Du lider af overdreven
+
+--- PAGE 25 ---
+generthed, er lidt af en pushover og bliver let mobbet af grimme skabninger. Utilpas ved at
+tale offentligt og generelt hader opmærksomhed, kan du fryse ind disse omstændigheder,
+selvom noget vigtigt er på spil. For fjollet Hvis du er for fjollet, kan du blive fundet
+irriterende af dine mere seriøse venner. Ikke alle er med Equestria er glad for løjer og
+drillerier, især når de prøver at få noget arbejde gjort. Nogle gange finder man det svært at
+gennemskue om det er det rigtige tidspunkt for en fjollet joke eller alvorlig tavshed.
+Pony navne, Cutie mærker og portrætter Din ponys navn, søde mærke og udseende er
+alle knyttet til hinanden. Sammen maler de en klar forestil alle, hvordan din ponyfigur ser
+ud. De har hver især ofte noget at gøre med dit hovedtalent, men det er ikke en streng
+regel - tænk på din ponykarakters krop, sind, charme, talenter, særheder, Element of
+Harmony og så videre... For eksempel har Emily skabt en karakter, der er en pige Unicorn,
+ikke særlig stærk, men meget klog. Det er hun meget talentfuld til at lave det mest
+spektakulære fyrværkeri. Hendes element af harmoni er helt sikkert magi. Så Emily
+beslutter sig for, at hendes Cutie Mark er et eksploderende fyrværkeri og tegner det på sit
+ponyark. I betragtning af denne 'ildhed' beslutter Emily sig for, at hendes ponys pels og
+manke skal være en blanding af rød og orange (lidt ligesom Sunset Shimmers), og hun
+farver Pony-arket for at vise en enhjørnings silhuet ved hjælp af røde, gule og orange
+pasteller. Til sidst fortæller Emily gamemasteren og hendes gruppe venner, at hun gerne
+vil have et navn til sin pony får folk til at tænke på ild og positiv, sjov energi. I tænker alle
+over det og kommer med en række forslag til Emily: "Spark!" "Hjerte!" "Fyrværkeri!"
+"Gløder!" "Ildbrand!"... Emily beslutter sig for, at hun virkelig elsker Firebrand, da det navn
+får hende til at tænke på ild og noget hærdet, energisk pony - så hendes karakter hedder
+Firebrand og Emily skriver det navn på arket. Færdig!
+Navn Din ponys navn skal være let at huske, sjovt og interessant og give et hint om, hvad
+din pony er handler om. Der er ingen strenge regler for at navngive din pony, men du kan
+hente inspiration fra My Little Pony, Friendship er magisk tv-serie, og spørg gamemasteren
+om hjælp. For eksempel, hvis din karakter er en meget stærk mandlig pony og har en
+forholdsvis enkel karakter (lidt som Big Macintosh), måske baseret på Loyalty Element of
+Harmony, du kunne kalde ham "Strong Oak" og giv ham et egetræ eller et egeblad som et
+cutie-mærke, med en brun og sort manke. søde Mark Din ponys søde mærke er normalt
+inspireret af dit talent, men igen er der ingen strenge regler for dette. Det kan i stedet
+forbindes med dit navn, eller dit Element of Harmony eller noget andet hjælper med at gøre
+din ponykarakter unik og hjælper med at beskrive hans eller hendes karakter for alle andre.
+Tænk igen på de søde mærker fra karaktererne i tv-serien og se, hvordan de matcher
+deres ponyens talenter, navn eller karakter. Du kan tegne dit cutie-mærke i boksen på
+Pony Sheet, eller du kan finde et billede, du rigtig godt kan lide og bed gamemasteren om
+at hjælpe dig med at fotokopiere eller udskrive det, så du derefter kan klippe det ud og lime
+det fast dit ark … det er helt op til dig. Portræt Når det kommer til at tegne din karakter, kan
+du starte med et ponyark, der allerede viser dig omrids af en jordpony, enhjørning eller
+pegasus, eller du kan i stedet bruge en helt blank, hvis du eller gamemasteren er rigtig
+gode til at tegne. Du kan finde et tomt ponyark på side 152 i denne bog, som
+gamemasteren kan fotokopiere. Andre kan downloades fra River Horses hjemmeside.
+Endelig,
+
+--- PAGE 26 ---
+ark kan købes som en del af vores første eventyrboks: statuetternes forbandelse blokke af
+fortrykte ark. Selvfølgelig, ligesom i tilfældet med cutie-mærkerne, kan du bruge et
+eksisterende billede af en pony, som du finder et andet sted og klip det og indsæt det på
+arket, og brug det så som det er, eller modificer det, tegning eller lim på alt slags udstyr og
+tøj... hav det sjovt!
+Udstyr og penge Det meste af tiden behøver ponyer intet udstyr eller penge for at gå i
+deres daglige liv, eller endda på eventyr, så du er velkommen til at springe dette afsnit over
+helt, især første gang du spiller Tails of Equestria. I nogle tilfælde, som en del af et eventyr,
+skal dine ponyer muligvis have penge eller en bestemt type udstyr, der kan købes i en af
+Equestrias butikker eller markedsboder - som et langt reb, en vogn, noget tøj, en eliksir... I
+dette kapitel finder du en liste over tilgængeligt udstyr, deres spileffekter og deres typiske
+omkostninger, men husk på, at dette ikke kan være en komplet liste, og gamemasteren
+bliver nødt til at lave nogle effekter og omkostninger for alt andet udstyr, der ikke er anført
+her. Startpenge og indkomst I landet Equestria kaldes mønter 'bits'. Alle nye ponyfigurer
+starter spillet med 400 bits i deres punge (ofte holdt skjult i deres maner). Ind imellem
+eventyr kan du antage, at din pony vil arbejde og tjene 200 bits om måneden, plus eller
+minus et antal bits svarende til kast af en D20, som styret af gamemasteren. Selvfølgelig
+gamemaster kan ændre denne værdi, så meget han eller hun vil. Ud over dette vil du
+under et eventyr nogle gange finde stumper, ædelstene og sjældne genstande, der kan
+hentes en god pris, hvis du beslutter dig for at sælge dem.
+Eksempel på prisliste (Ponyville) Nedenfor er en liste over gennemsnitspriser på varer i
+Ponyville. Priserne kan variere afhængigt af mange ting - det er det sandsynligt, at alt
+bliver dyrere på fancy steder som Canterlot eller Manehattan. Det er ret almindeligt i
+Equestria at skændes om priser (dette er kendt som 'prutning'), så hvis du viser en
+markedsbodejer, som du virkelig har brug for hans kirsebær, kunne han beslutte at
+opkræve mere for dem ... det er tid til at bruge din Charm! Du kan også beslutte dig for at
+bytte varer, du ejer, med varer, du har brug for... du ved aldrig, du kan få nogle meget gode
+tilbud på den måde. Udstyrs navn Omkostninger Beskrivelse Barding (let) Denne
+ponyrustning giver din pony modstand mod nogle af stødene og skrammer han eller hun
+kan lide - mens du bærer lys barding, taber du 1 mindre point of Stamina, når du mister
+Stamina fra en fysisk kilde, til minimum 1. Rustningen forstyrrer at flyve og bruge noget
+magi, dog, så dine Fly- og Telekinesis-talenter nedgraderes, mens du har den på. Barding
+(metal) Denne ponypanser har metalplader og er meget tykkere end let barding. Mens du
+bærer denne rustning, mister du 2 mindre point af udholdenhed, hver gang du miste
+Stamina fra en fysisk kilde, til minimum 1. Ud over nedgradere din Fly og Telekinesis som
+let barding, denne barding er sådan tungt, at du også nedgraderer din Kropsegenskab, når
+du løber, hopper eller svømning, mens du har den på. Bog (almindelig) Bøger er meget
+vigtige for ponyer i hele Equestria, og at læse dem kan løse mange af dine problemer. En
+almindelig bog kan indeholde Ponyvilles historie eller måske en af Daring Dos mange
+fortællinger. Bog (sjælden) Sjældne bøger kan være meget gamle, eller de kan dække et
+meget specifikt emne. De kan være meget nyttige for ponyer, der ønsker at lære
+hemmeligheder, som kun en få andre ponyer ved det! Spand Vigtigt, når du vil have noget
+mælk med eller måske en skæppe æbler. Vogn En vogn, som ponyer kan bruge til at bære
+en masse ting, som Applejacks' æble høst eller endda andre ponyer. Ur Et lille ur, der kan
+
+--- PAGE 27 ---
+bruges til at fortælle klokkeslættet - nyttigt, når du laver planer. Tøj (elegant) En elegant
+kjole eller måske et flot jakkesæt, perfekt til Grand Galoperende galla. Tøj
+(simpelt) Hestestøvler, en regnfrakke eller en lækker solhat - den bedste måde at holde din
+manke på flot og skinnende, mens du stadig hygger dig i selv det værste vejr. Husk, der er
+ikke noget der hedder dårligt vejr, kun det forkerte tøj! Mad (ekstravagant måltid) En fest
+for de ponyer, der er lige så sultne som en hest! Dette kunne være et meget større måltid
+eller det kunne være et meget fancy måltid på en fin restaurant i Canterlot. Mad (simpelt
+måltid) En æbletærte eller en stor høsandwich, der skal holde rumlen på afstand. Mad
+(snack) Et æble eller en anden hurtig snack. Ædelstene 20+ Ædelstene er nyttige til
+dressmaking eller spisning, alt efter om du spørger Sjældenhed eller Spike. De varierer i
+pris, men 20 bits ville være omkring beløbet nødvendig for at lave en glitrende kjole eller
+tilfredsstille en babydrage.
+Udstyrs navn Omkostninger Beskrivelse Hjelm Uanset om det er til sport eller kamp, er
+hjelme meget vigtige for ponyer, der insister på at gøre farlige ting! Mens du har hjelm på,
+taber du 1 mindre point of Stamina, når du mister Stamina fra en fysisk kilde, til minimum 1.
+Bemærk at dette kan kombineres med barding, reducerende Udholdenhedstabet med 2
+eller 3 point, til et minimum på 1. Hjelmen delvist dækker dine ører og øjne, så du
+nedgraderer dit Mind-træk, når du tester at se, høre eller observere ting, mens du har den
+på. Kit (kunstartikler) Dette sæt har pensler, ler, stykker lærred og mere. Alt er en pony
+kunne have lyst til at skabe kunst, hvad enten det er ler, skulpturstykker eller smukt
+malerier. Der er endda nogle pailletter og lim derinde for at gøre din kreationer pop. Dette
+sæt lader dig opgradere din die, når du bruger den til at skabe kunst. Sæt
+(rengøringsmidler) Alle skal gøre noget godt rent, selvom ikke alle vil til! Dette sæt
+indeholder en moppe, en børste, masser af farverige sæber og scrubbere til gør selv det
+mest rodede rod til en leg at fortryde. Dette sæt giver dig mulighed for at opgradere din
+dør, når du bruger den til at rydde op i et hårdt rod. Kit (madlavning) Med masser af dejlige
+krydderier, skåle og andre redskaber tillader dette sæt enhver med ingredienser til at lave
+de mest vidunderlige spiselige kreationer. Dette sæt lader du opgraderer din terning, når
+du bruger den til at lave mad. Kit (udklædning) Briller, et falsk overskæg og alt andet, du
+skal ligne en anden. Dette sæt lader dig opgradere din die, når du bruger den til skabe en
+forklædning til dig selv eller dine venner.
+Udstyrs navn Omkostninger Beskrivelse Kit (Grooming) Børster i alle størrelser,
+hovbehandlingsværktøjer og fine shampoo og lotioner til at holde en ponys manke
+skinnende og glat. Dette sæt lader dig opgradere din die når du bruger det til at give dig
+selv eller dine venner en makeover. Kit (hobby) Ligesom de andre sæt på denne liste, har
+dette sæt masser af forsyninger til en specifik hobby, det være sig til syning, tømrerarbejde
+eller andet. Tal med din GM om, hvad du synes kunne være passende. Når du bruger et
+sæt til dets korrekte brug kan du opgradere din die! Kit (Joke) Dette nysgerrige sæt er fyldt
+til randen med buzzers, whoopee-puder og andre praktiske vittigheder - hvis det er sjovt, er
+det derinde! Dette sæt giver dig mulighed for at opgradere din dør, når du bruger den til at
+lave en praktisk joke. Kit (fest) Streamere, balloner og festhatte, alt hvad en pony behøver
+for at sætte en improviseret fest - alt undtagen gæster, selvfølgelig. Dette sæt giver dig
+mulighed for opgrader din terning, når du bruger den til at arrangere en fest. Sæt (Rul)
+Dette lille sæt har masser af blæk, ruller og voks, så enhver kan skabe en håndskrevet
+
+--- PAGE 28 ---
+brev; nyttigt for ponyer, der ønsker at skrive til deres venner, lave to do lister eller måske
+endda tegne et kort. Dette sæt lader dig opgradere din dø, når du bruger det til at oprette et
+bogstav. Stige Til ponyer, der gerne vil højere op, men ikke har gavn af vinger, bør denne
+stige lade dig nå den anden etage i enhver bygning. Husk at have en pony i bunden for at
+stabilisere den! Lampe En glas- og metallampe med en olieflamme indeni, denne lampe er
+den perfekte værktøj, når du skal finde vej gennem huler eller uhyggelige skove. Musikalsk
+Instrument 50+ En guitar, en fløjte, en trombone eller endda et klaver. Et musikinstrument
+er perfekt til ponyer, der er musikalsk begavede og er sjove for ponyer, der er ikke. Det er
+især nyttigt at have en af disse i nærheden, hvis du løber ind i enhver paraspriter! Et
+musikinstrument lader dig opgradere din dør, når du bruger den til at lave en sang. stang
+Denne ti fods stang er et af de vigtigste redskaber til en eventyrlig ponydåse har. Til at
+stikke farligt udseende ting på lang afstand eller til stangspring på tværs af floder er den ti
+fod lange stang et must for enhver seriøs ponyeventyrer. Ponybalsam (5 anvendelser)
+Denne balsam er meget beroligende for ponyer og kan hjælpe med virkningerne af allergi,
+astma og endda små ridser og sår. Ved brug ponybalsam, opnår en pony 1 point af
+udholdenhed, op til dens maksimale udholdenhed. Ponybalsam kan kun bruges til denne
+effekt én gang dagligt. Reb Meget nyttig til at klatre dybt ned i brønde og op ad klipper, når
+du ikke kan flyve. Også nyttig til at binde skurke! Sadeltasker Disse robuste og rummelige
+sadeltasker er nyttige til opbevaring af mange af de andre elementer på denne liste. Skovl
+Et værktøj til at flytte grus, sand og andet løst materiale, en skovl normalt har et fladt
+firkantet hoved, der vender lidt op i siden. Spade Et værktøj til at grave i jorden, en spade
+har normalt en skarp spids ende for at hjælpe den til at gennembore jorden. Der, nu kan du
+kalde en spade for en spade! Teleskop Et teleskop giver dig mulighed for at se ting, der er
+langt væk - virkelig langt væk. Lav sørg for at kigge ind i den rigtige ende, ellers vil det få
+alt til at se mindre ud!
+Niveauer og niveauer op Tillykke, du har formået at afslutte et eventyr med succes! Nu er
+det tid til at gå tilbage til dit hyggelige hjem i Ponyville, putte sig under et tæppe med en
+dejlig kop kakao, og reflekter over, hvad du og din ponykarakter har lært i det sidste
+eventyr. Du vil måske endda skrive et brev, måske til prinsesse Celestia, eller måske til en
+af dine ponyer venner – enten dem, der lige har delt eventyret med dig eller nogle, der ikke
+kunne, men måske slutte sig til dig i den næste. Din gamemaster vil mere end gerne
+hjælpe dig med dette. Tænk tilbage på eventyret, tænk på de hårde tests og både de
+vellykkede og udfordrende øjeblikke. Hvad lavede din karakter? Hvilke egenskaber og
+talenter brugte hun eller han? Dette kaldes 'erfaring', og ved at akkumulere erfaring vil dine
+talenter og naturlige evner vokse og forbedres. Følg nedenstående trin: 1) Niveau Du kan
+nu få et nyt niveau. Opdater dit karakterark og øg dit niveau med 1. 2) Træk Du kan
+opgradere en af terningernes værdier blandt dine tre egenskaber. Vælg en hvilken som
+helst egenskab (krop, sind, charme) og øge den med et trin. For eksempel kan du vælge at
+øge dit nuværende Mind-træk fra en D4 til en D6 eller din nuværende Charm of D6 til en
+D8. Der er ingen strenge regler for, hvilken egenskab man skal vælge. Du kan tænke over,
+hvilken egenskab du har brugt mest i det sidste eventyr, og øg det - en klar effekt af at lære
+af erfaring. På på den anden side kan du forestille dig, at din pony, da hans eller hendes
+krop var lidt svag for nogle af de test, din gruppe skulle overstå, kan beslutte at træne hårdt
+i et par uger for at få en stærkere/hurtigere krop og vær klar til det næste eventyr. Eller du
+
+--- PAGE 29 ---
+kan vælge at studere hårdt for at forbedre dig dit sind, eller tag sang- eller skuespillertimer
+for at forbedre din charme... det er helt op til dig!
+3) Udholdenhed Efterhånden som du udvikler dig, bliver din udholdenhed også større – at
+blive ældre betyder at blive hårdere! Hvis du enten har opgraderet Sind eller krop, øg din
+maksimale udholdenhed, så den er summen af dine krops- og sindværdier. Da du har
+masser af hvile mellem eventyrene, går dine nuværende Stamina-point til det maksimale—
+dit nye og opgraderede maksimum. For eksempel, hvis du havde Body D6 og Mind D4, var
+din tidligere maksimale udholdenhed 10. Opgradering dit sind til D6 betyder, at din
+maksimale udholdenhed går op til 12. Hvis du afsluttede eventyret mangler nogle
+Stamina-point
+(f.eks. på 5 point af udholdenhed) går dine nuværende udholdenhedspoint til det nye
+maksimum (12). 4) Venskab Ligesom da du begyndte at spille, får du 1 venskabstegn pr.
+spiller, der var i den sidste eventyr, inklusive dig selv og gamemasteren. Disse føjes til dit
+nuværende antal tokens af venskab tilbage efter det sidste eventyr. For eksempel har
+Emilys ponykarakter afsluttet sit eventyr med 2 venskabstegn tilbage. Emily spillede
+eventyret med to af sine venner, så hun tjener 4 Tokens of Friendship (tre spillere i
+gruppen, plus gamemaster). Disse ekstra 4 tokens føjes til de resterende 2 tokens, så
+Emily's ponykarakteren er klar til at starte det nye eventyr med 6 venskabstegn. 5) Talenter
+Opgrader alle de talenter, du har brugt Alle de talenter, du har brugt i eventyret, forbedres
+automatisk med et terningniveau. På grund af dette, vil du måske optage under eventyret,
+når du bruger et talent – uanset om det er lykkedes eller uden held lærer en pony lige så
+meget af fiasko som af succes. Sæt bare et flueben ud for et talent hvornår du bruger det
+under et eventyr. Opgrader et enkelt ubrugt talent, eller lær et nyt talent Når du har
+opgraderet alle de talenter, du har brugt, kan du enten opgradere et talent mere som du
+ikke har brugt (hvis nogen), eller lære et nyt talent. At opgradere et talent, du ikke har
+brugt, repræsenterer det faktum, at din ponykarakter vil føle behovet for det forbedre dette
+talent og vil bruge lidt tid på at øve det mellem eventyrene. Alternativt kan du beslutte, at
+det ville være mere nyttigt at lære et nyt talent, måske noget dig ville ønske, at du havde
+vidst, hvordan du gjorde i det sidste eventyr, eller noget, du så i tv-serien, eller endda en
+aktivitet, færdighed eller hobby, som du lærer i dit virkelige liv, såsom ballet, tennis eller
+skak. Vælg fra listen over talenter i denne bog (side 66-70), eller tal med din gamemaster
+om at skabe talenter som ikke er opført der. Alle talenter har en værdi knyttet til sig, og alle
+nye talenter opnås kl D4 niveauet. Til GM: Nogle ponyer vil måske bare være rigtig gode til
+én ting, og selvom det er tilladt, vi foreslår, at ponyer forsøger at have et afrundet sæt træk.
+Generelt en god regel hov er, at ingen egenskab skal være mere end to trin højere end den
+næsthøjeste egenskab. Så hvis du har en Body of D8 og en Mind and Charm af D4, er det
+bedst at opgradere enten Sind eller charme.
+6) Portræt Endelig kan du ændre din karakters portræt for at vise eventuelle ændringer i
+tøjstil, udstyr (måske relateret til et nyt talent), og så videre. Du er nu klar til dit næste
+eventyr! Valg af yderligere særheder (valgfrit) Du eller gamemasteren kan beslutte, at din
+pony har fået et nyt særpræg under eventyret. Måske har du oplevet noget virkelig
+skræmmende (som at falde i en pit fuld af giftige slanger), eller måske har du lidt en skade,
+der vil forblive hos dig i lang tid, eller måske endda for resten af dit liv (som at beskadige dit
+venstre knæ slemt). Disse ting sker, og en pony skal lære det komme videre og fortsæt
+
+--- PAGE 30 ---
+med livets eventyr, lære af erfaring og tilpasse sig. Vælg en passende finurlighed fra listen
+på side 72-73, eller opret en ny med gamemasteren – skriv den nede under dit vigtigste
+særpræg. Denne særhed er præcis som alle andre særheder, som din pony kan have, når
+den tjener Tegn på venskab som normalt. Vi foreslår, at du kun meget sjældent vælger
+yderligere særheder, måske en eller to gange i en ponys liv - en eller to ekstra særheder
+gør din karakter interessant at spille, men for mange kan gøre det meget svært! Niveau 10
+og derover – episke quests Efter at have nået niveau 10, kan ponyer beslutte at trække sig
+tilbage, da de nu er meget erfarne og kraftfulde og foretrækker måske at overlade
+eventyrlivet til yngre og mere ivrige ponyer. Det betyder det du kan starte en anden
+ponykarakter og prøve en anden ponytype med et andet sæt færdigheder og talenter.
+Dette er ofte sjovt, som
+det giver dig mulighed for at genfinde den friske følelse, når du ruller en D8 føltes som en
+dur præstation. På den anden side kan du beslutte dig for at fortsætte eventyret som en
+veteranpony på niveau 10 eller mere. Dette vil betyder at stå over for meget sværere
+quests, som vi nogle gange kalder 'episke quests.' Gamemasteren vil skal du være
+forsigtig, da disse 'store' eventyr kan række længere hjemmefra.
+Niveau 0 - Cutie Mark Crusaders-missionen Når du starter en ny ponyfigur, beslutter du
+måske, at du vil spille som et meget ungt hingsteføl eller hoppeføl, en der endnu ikke har et
+sødt mærke! Dit første eventyr (eller eventyr) handler om at finde dit talent og få dit søde
+mærke. Så du vil fortsætte med at eventyr uden at stige i niveau mellem eventyr, indtil det
+øjeblik, hvor gamemaster beslutter, at det er på tide, at du får dit søde mærke, og at du kan
+komme op i niveau for første gang. Når du opretter en Cutie Mark Crusader pony, skal du
+følge proceduren for en niveau 1 karakter, med følgende undtagelser: • Både din krop og
+sind er D4 (men jordponyer har krop D6). • Du har kun 8 Stamina-point (men jordponyer
+har 10). • Du har endnu ikke noget hovedtalent (cutie mark). • Jordponyer har talentet Stout
+Heart (D4), Pegasi har fluetalentet (D4), og Unicorns har talentet Telekinesis (D4) talent,
+hvilket betyder, at de ikke er rigtig gode til deres talenter... • Din cutie mark-boks forbliver
+tom indtil videre. Når du endelig får dit søde mærke, får du opgraderet enten din krop eller
+sind med et trin, din Staminapoint bliver 10 (Jordponyer 12), Stout Heart, Fly og
+Telekinesis når D6, og selvfølgelig du tegner dit søde mærke og skriver dit nye talent –
+tillykke!
+Tips til at lave en pony karakter Før du kan spille Tails of Equestria, skal du oprette din
+karakter ved at bruge trinene på siderne 12-19. Nedenfor har vi lavet en liste med nogle
+tips og tricks til at lave din første ponyfigur. Stil nogle spørgsmål Når du laver en pony, skal
+du være klar til at svare på nogle spørgsmål om din pony. Disse spørgsmål vil gøre det
+lettere at forstå, hvordan din pony tænker. Hun eller han kunne være meget lig dig eller helt
+anderledes! Tag et kig på disse spørgsmål og se, om du kan besvare dem alle. • Hvad er
+det sødeste din pony gør hver dag? • Hvad er din ponys mest værdsatte besiddelse, og
+hvorfor? • Hvem eller hvad føler din pony sig mest loyal over for? •
+Har din pony en hemmelighed?
+•
+
+--- PAGE 31 ---
+Hvad får din pony til at grine højt?
+• Hvem er din ponys venner og familie, og hvor bor han eller hun?
+Vær anderledes... Equestria er en verden, hvor du kan være næsten enhver type pony, du
+ønsker at være, så tag gerne en lidt vildt. Måske kan din pony lide rock and roll, eller
+måske foretrækker han eller hun en stille bog, selvom ingen siger, at din pony ikke kan lide
+begge dele. Når du laver din ponykarakter, så prøv at sikre dig, at du ikke er det at træde
+på en anden spillers hove - tre Unicorn ponyer, der alle kan lide dans og musik kan være
+sjove, men det kan være endnu sjovere, hvis I alle er forskellige fra hinanden. Måske er du
+selv en Fluttershy og vil prøve at være som Rainbow Dash, eller måske er du en
+Applejack, der gerne vil prøve at være som Fluttershy? Dette er din chance for at prøve at
+være noget anderledes! ...men ikke for anderledes Når det er sagt, laver vi ponyer, der
+skal arbejde sammen og være venner. Din pony har brug for at være villig til at arbejde
+som en del af et team og være venner med alle andres ponyfigurer. At vælge en karakter,
+der ikke ønsker andet end at læse en god bog i fred, er en fed idé, men en pony, der er flad
+ud at nægte nogensinde at forlade hans eller hendes hus ville være lidt af et problem hver
+session! Udvælgelse af særheder Du har måske læst afsnittet om særheder og indset, at
+du kunne være lidt klog ved at vælge en særhed det vil aldrig være et problem for dig.
+'Frygt for asteroider' for eksempel! Men husk det, hvis du vælger en særhed, der aldrig vil
+komme op, så får du aldrig de venskabstegn, der
+kommer fra at stå overfor din frygt og problemer. Oven i det er en del af det sjove ved et
+rollespil at sætte dig selv i hestesko af din pony og overvinde deres problemer. Hvis din
+pony ikke har nogen problemer, så har du det gå glip af denne interessante del af spillet.
+Sådan spiller du Tails of Equestria Så din ponykarakter er klar og klar - nu er det tid til at
+begynde at spille! Din GM vil køre din eventyr og fortælle dig, hvad du ser, og hvad
+resultaterne af dine handlinger er. Husk, at GM har ansvaret – ingen skænderier med ham
+eller hende (gamemasteren er alligevel på din side)! Du burde prøve at lære så mange af
+reglerne som muligt, selvom din GM vil hjælpe dig med dette. Når du begynder en eventyr,
+tingene kan virke lidt skræmmende, men husk disse punkter, og du vil være i orden. Vær
+kreativ Mange gange i dine eventyr vil du støde på forhindringer og problemer. Ofte svaret
+på disse problemer vil ikke være indlysende, og nogle gange kan de virke umulige. I Tails
+of Equestria, som i virkeligheden livet, der er meget lidt, du ikke kan arbejde igennem ved
+at bruge din forstand og dine evner. Når du støder på en låst dør, der er for tung til, at
+nogen kan bryde sammen, kan du beslutte dig for at prøve at finde en nøgle, at bygge en
+slags vædder til at vælte den ned, eller for blot at banke! Dette spil har ikke et fast antal
+handlinger du kan tage, men lader dig i stedet komme med mange løsninger på dine
+problemer. At fejle er sjovt! Nogle gange slår du en 1. Det sker, og nogle gange sker det på
+de vigtigste tidspunkter. Dig burde ikke føle sig nede, når den gør det, for hver historie har
+lige så meget brug for sine fiaskoøjeblikke som sin øjeblikke af triumf. At blive fanget af
+paladsvagten kan føre til spændende situationer og få Flov kan føre til at få nye venner -
+det ville være en meget kedelig historie, hvis heltene lykkedes med alt, hvad de
+nogensinde prøvede. Så du bør acceptere, at du nogle gange vil være uheldig, og hvis du
+bliver ved med at fejle, måske er det tid til at tænke på at gribe problemerne an på en
+anden måde.
+
+--- PAGE 32 ---
+Vent på din tur Rollespil kan være spændende, og i modsætning til de fleste brætspil har
+det ofte ikke tur – hver spiller siger, hvad de vil gøre, når de vil gøre det, og det meste af
+tiden virker dette. Nogle gange, dog kan de mere generte medlemmer af gruppen have
+problemer med at få et ord ind, så det er meget vigtigt at alle spillere giver alle en chance
+for at tale og handle. Efter at have sagt, hvad du vil gøre, skal du altid give alle andre en
+chance for at svare og forsøge ikke at afbryde en anden spillers handlinger. Teamwork Der
+er mange vanskeligheder, du vil møde i Equestria, og din pony vil simpelthen ikke være i
+stand til at håndtere med dem alle. Din pony vil ikke være i stand til at klatre i træer og
+læse ældgamle sprog og skabe den mest fantastiske mode, men med dine venner kan du
+opnå næsten alt. Når man prøver at løse problemer, tænk altid lige så meget på dine
+venner og deres evner som dine egne. Den mest udfordrende af forhindringer kræver, at
+du bruger alle dine færdigheder kombineret. Rollespil er ikke en konkurrence Vi siger det
+mange gange i denne bog, men det skal siges: den eneste vinder i Equestria er ponyen
+have det sjovt! Du skal ikke bekymre dig om, hvem der gør det bedst, eller hvem der har
+ansvaret, for hvis nogen gør det jamen så har alle det godt - så længe alle arbejder
+sammen. Husk harmoniens elementer Hold latterånden i live ved bordet og gør tingene
+sjove. Prøv at forblive tro og ærlig over for din karakter. Brug venskabstegn generøst til at
+hjælpe ponyer med at få succes. Vis din loyalitet til dine venner ved ikke at lade dem være
+alene, medmindre du er nødt til det. Vær venlig mod alle ved bordet, også selvom
+karaktererne i spillet er ikke så pæne. Husk at holde venskabet i live ved bordet, for
+venskab er magi!
+Hvordan man kører en Tails of Equestria spil Tillykke! Du er blevet udvalgt til at spille en
+afgørende rolle i dette spil. At være gamemaster kan involverer noget arbejde, men det er
+det samtidig
+uhyre givende. Hvert spil er forskelligt, og det vil du skal læse hvert eventyr omhyggeligt,
+før du deler det med spillerne, men hvis du beholder følgende tip i tankerne, bør du være i
+stand til at holde et spil kørende. Efter du har spillet et par eventyr, du vil kunne se,
+hvordan tingene fungerer og måske endda begynde at skrive dine egne eventyr. Nogle
+vilkår for at komme i gang Igennem denne bog bruger vi nogle udtryk, som du måske er ny
+til. Her er et par af disse udtryk: • GM (gamemaster): Dette er sandsynligvis dig.
+Gamemasteren fortæller historien, uddeler hemmeligheder og handler som dommer for
+kampen. • PC (ponykarakter): En enkelt pony, der styres af en af spillerne rundt om bordet.
+• NPC (non-player character): Sådan omtales alle karakterer, hvis de ikke er styret af
+spillerne, men af GM. • Session: Tiden mellem en gruppe spillere, der sætter sig ned for at
+spille, og til at rejse sig igen - normalt a få timer. • Eventyr: En historie fortalt fra start til slut,
+ligesom en episode af My Little Pony. Mange eventyr kan vare mere end én session. •
+Kampagne: Når et eventyr er slut, vil ponyer gerne tage på endnu en og endnu en og
+endnu en! En kampagne er, hvad vi kalder en række eventyr, der opleves efter hinanden af
+den samme gruppe af ponyer.
+Trinene til at køre et vellykket første eventyr Trin 1: Læs denne bog Du vil gerne sikre dig,
+at du forstår spillets regler så godt som muligt. Det behøver du ikke kender hver enkelt linje
+udenad, men at vide, før du spiller, kan spare en masse tid ved bordet. Trin 2: Læs
+eventyrmodulet Så skal du selvfølgelig læse det eventyrmodul, du vil køre. Eventyrmodulet
+i denne bog, på side 100-138, er perfekt til dit første spil. Mens du læser, kan det være
+
+--- PAGE 33 ---
+meget nyttigt at skrive ned et par noter for at minde dig selv om navne og steder. Grunden
+til, at det er vigtigt at læse et eventyr før du kører det, er det så du fuldt ud kan forstå
+historien, der fortælles, motivationerne bag alle karakterer, og vær klar til eventuelle
+overraskelser, der kan komme hen ad vejen. Trin 3: Saml dine spillere og lav nogle ponyer!
+Bemærk, at dette er den første fase, som kræver de andre spillere. Indtil nu har du været
+stille læser for dig selv, indtil du er sikker på reglerne og det eventyr, du vil løbe. Nu er det
+tid til at tilføje lidt kaos! Saml dine spillere sammen, og sørg for, at du har mindst en eller to
+timers uafbrudt tid til at spille, og kør dem derefter gennem afsnittet "Opret en
+ponykarakter" i denne bog (som du selvfølgelig allerede har læst). Der er et par tips til at
+skabe ponyfigurer i det forrige afsnit, så sørg for dine spillere læs det godt, eller læs det
+endda højt for dem. Når dine ponyer er blevet lavet, er det tid at begynde på eventyr...
+Trin 4: Kør eventyret! Så du ved, hvordan du spiller, du ved, hvordan historien går, og du
+har dine venner omkring dig. Nu du er nødt til at dele den historie med dem! At køre et
+eventyr kan være en enormt tilfredsstillende oplevelse, men det kan det også være lidt
+skræmmende din første gang. Vi har samlet en kort liste med tips, du skal huske på, når du
+er køre dit eventyr. Regel nul Rule Zero: Rollespil er underholdning. Dit mål som gruppe er
+at gøre dine spil som underholdende som muligt. Denne regel gælder for alle spillere,
+inklusive dig. Hvis du ikke har det sjovt, så find ud af hvorfor det er og ændre det. Nogle
+gange vil det betyde, at man ændrer eller ignorerer reglerne i denne bog, og til det siger vi:
+GÅ FOR DET! Det lyder måske mærkeligt i en bog, der er 90% optaget af regler for denne
+situation og den situation, men vi mener det. Hvis en regel ikke hjælper dig med at have
+det sjovt, så bør du gøre op med den, ændre den eller finde på en ny regel. Vi vil ikke have
+noget imod det – hver gruppe er anderledes, og hver gruppe fortjener at have det sjovt.
+Spillerne har ikke læst eventyret, og du er deres eneste måde at se verden på Denne
+virker indlysende i starten, men den kan
+være svært at se præcis, hvorfor det er vigtigt. I et rollespil spil, vil du fortælle spillerne,
+hvad deres ponyer ser, hvor tingene er, og hvordan NPC'er reagerer. Faktisk dig er den
+eneste måde, de vil vide disse ting, og det er vigtigt, at du fortæller dem så meget om
+situationen efter behov, og besvare deres rimelige spørgsmål så fuldstændigt som muligt.
+Det kan til tider virke som om spillerne handler irrationelt eller endda nogle gange lidt
+tåbeligt. Når en spiller gør dette, prøv at tænke hvorfor; hvad der for dig kan virke som et
+indlysende spor, kan være blevet fejlfortolket eller en spiller har måske ikke indset, hvad et
+ord betyder. Dette er dine muligheder for at spørge dem, hvorfor de opfører sig sådan og
+enten give dem information om, hvad de misforstod eller måske finde ud af, at de gør
+noget, du ikke engang havde tænkt på.
+NPC'er er smag NPC'er er en uhyre vigtig del af Equestrias verden, med ponyer af alle
+forskellige typer og forskellige personligheder, der interagerer. Når du udspiller en NPCs
+del, er det vigtigt at kunne skelne hvilken NPC du er. Nogle GM'er bruger accenter og
+ændrer deres stemme; andre angiver NPC's navn før de siger deres linjer. Prøv at bruge
+NPC'er til at interagere med pc'erne så meget som muligt. Vær fan af spillerne Det kan
+nogle gange være let at falde i fælden med at tro, at rollespil har to hold: spillerne og GM.
+Når du spiller alle de udfordringer og monstre, som spillerne er overfor, kan du begynde at
+tro, at spillerne er fjenden - det er meget vigtigt, at du ikke gør dette. Rollespil er ikke en
+konkurrence, og de eneste vindere er dem, der har det sjovt. Så hvad er det en fan af
+
+--- PAGE 34 ---
+spillernes middelværdi? Det betyder at sætte dem i situationer, hvor de vil skinne, prøv
+ikke at 'besejre' dem, og blive begejstret for deres præstationer. Når det lykkes partiet
+endelig at hente den tredje magiske kugle, bør du være begejstret for spillerne, ikke brokke
+sig over, hvordan de formåede at komme forbi dine udfordringer. Løb med dine fejl Der
+sker fejl. Uanset om det er lille, som at glemme Exploding Hoof-teknikken, eller stort, som
+glemmer, at Pegasi kan flyve, er det vigtigt at rulle med fejlene og prøve at sikre, at de
+bland ikke for meget i spillet. Kun i de mest spilbrydende scenarier bør du 'rulle' tilbage,
+hvad der skete - prøv altid at flytte plottet og handlingen fremad, måske kom med en
+grunden til, at det skete (for eksempel har den pågældende Pegasus skadet sin vinge og
+kan derfor ikke flyve). Hvis en fejl gjorde en spiller mindre effektiv, end de burde have
+været, kan du behandle den som en Quirk og giv dem et venskabstegn. Spiller mod pony
+En spiller bør ikke få sin ponykarakter til at handle baseret på, hvad de ved, snarere end
+hvad deres pony ved. For eksempel en spiller, der ved, at titlen på et eventyr er 'Curse of
+the Vampony!' bør ikke, så snart spillet begynder, beslutte sig for at undersøge
+vampyrponyer og købe en masse hvidløg. Denne form for beslutningstagning bør frarådes,
+da spilleren ikke tænker på, hvordan deres karakter ville handle i situationen, men hvordan
+de kan 'vinde'. Der er to måder at fraråde denne slags af adfærd. Den ene er at forsøge at
+sikre, at spillerne ikke ved mere om eventyret end deres ponyer. Den anden er at forklare
+dine spillere, at deres pony ikke ved alt, hvad spilleren gør, og at det er sjovere, hvis alle
+handler så tæt som muligt på, hvordan deres ponyer ville opføre sig. God fornøjelse Vi har
+været inde på dette lidt tidligere i dette afsnit, men vi kan ikke understrege dette nok. Dette
+spil er designet til at stimulere og udfordre dig og dine spillere, men frem for alt er det
+designet til at du skal have det sjovt! Lav dumme stemmer, grin af vittigheder, og kom på
+fantastiske måder at underholde jer selv på. Hver gruppe er forskellig, men hver gruppe
+kan have det sjovt!
+Equestria, et fantastisk land af magi og vidunder, en land med en meget magisk og et
+vidunderligt problem, en problem
+der har endda klogeste ponyer stødt... Forbandelsen af hvad? Statuetterne!
+Du har sikkert hørt?
+Det er simpelthen forfærdeligt! Dig kunne trave med ganske glad og så 'pof'... 'Puf' og du er
+vendt ind i lidt, øh, statue... ting. Ingen har fået gør ondt endnu og de altid vende tilbage til
+ponyer igen, men det er skræmmende, at vi ved ikke hvorfor dette er sker. Ikke længe! Jeg
+har trianguleret det kendte hændelser og udpegede fluktuerende magisk resonans på
+tværs Equestria for at lokalisere mulige oprindelser af forbandelse. Jeg førte så
+sorteringsmatrixen igennem placeringerne på Cutie-kortet for at give os routing
+muligheder. En hurtig ansøgning af Dijkstras algoritme og et hold af… Hej! The Cutie Map
+burde kunne fortælle os hvor vi har brug for at gå...
+Forbandelsen af statuetterne...
+Twilight Sparkle så bekymret ud, da Cutie Map blinkede op over Badlands. "Åh nej! Det ser
+ud til, at vi har har en lang tur foran os..." "Øh... os alle sammen?" hviskede Fluttershy.
+"Alle os!" sagde Rainbow Dash bestemt. "Se, alle vores søde mærker vises der. Og vi skal
+passe på hinanden, hvis vi skal ind i Badlands." Fluttershy rystede ved navnet. "Men hvad
+
+--- PAGE 35 ---
+med den forkælelsesfest, vi lovede vores kæledyr i Fluttershys sommerhus?" sagde Rarity,
+kaster hendes manke. "Min elskede Opalescence vil få det hele i et humør, hvis jeg svigter
+hende, og hun vil nægte at spis i en uge!" "Og min stakkels lille Gummy vil græde
+krokodilletårer," hvinede Pinkie Pie. "Han har fortalt mig alt uge hvor meget han ser frem til
+det!" "Jeg tror, ​jeg bliver nødt til at blive og kæledyr," sagde Spike håbefuldt. "Nej, vi skal
+bruge dig med os, Spike," sagde Twilight Sparkle. "Jeg har mistanke om denne mission
+om forbandelsen af statuetterne kan være virkelig udfordrende, og hvis jeg har ret, skal vi
+alle holde sammen, især hvis vi skal til Badlands." Der faldt stilhed over ponyerne, mens
+de stirrede på kortet. På tværs af Equestria havde ponyer poppet til miniaturefigurer af sig
+selv uden nogen åbenbar grund! Det meste af tiden dukkede de tilbage efter et stykke tid
+huskede de intet af deres prøvelser. "Hej, jeg har en idé, allesammen!" piped op Applejack.
+"Hvorfor spørger vi ikke rundt i Ponyville efter nogle mægtige fine ponyer, der passer vores
+kæledyr for os?" "Lyder som en plan," smilede Twilight Sparkle. "Vores kæledyr kan holde
+deres fest, mens vi er væk. Kom lad os finde nogle ponyer, der kan hjælpe os..."
+Vigtigt! Læs dette først! 'The Pet Predicament' er et eventyr for My Little Pony: Tails of
+Equestria. Det er til ponyfigurer (pc'er) på niveau 1 – karakterer på et højere niveau kan
+finde eventyret for let, så hvis du vil spille med ponyer på højere niveau, bør
+gamemasteren (GM). gøre eventyret mere udfordrende ved at gøre testene sværere,
+hvilket gør onde fyre mere magtfulde, eller ved at tilføje ekstra møder. Nu er det meget
+vigtigt at forstå, at hvis du har til hensigt at deltage i dette eventyr som ponykarakter, og du
+fortsætter med at læse, vil du ødelægge overraskelserne historien har i vente til dig. Så
+medmindre du er GM, så sørg for at stoppe med at læse nu! Læser du stadig? Fræk pony!
+Stop med at læse! Hej spilmester. Du kan fortsætte med at læse. Faktisk, hvis det er første
+gang, du har spillet dette eventyr, læs det hele før du starter, så du er fortrolig med
+historien. Det vil også være meget nyttigt, hvis du er fortrolig med de grundlæggende
+spilleregler, så du behøver ikke at stoppe op og slå regler op, mens du spiller. Faktisk er
+historien vigtigere end reglerne, så hvis du glemmer en regel, skal du ikke sætte spillet på
+pause! Tag en beslutning 'om hov’ og føre historien glat videre. Som GM er din opgave at
+sikre historien er spændende for alle, der spiller - hvis du får et par regler forkert, vil ingen
+have noget imod det. Husk, at dette ikke er et spil, hvor nogen vinder eller taber – det er et
+fortællespil, og det sjove kommer fra, hvordan spillerne reagerer på hver begivenhed, løser
+de problemer, de har ansigt og interagere med hver
+andre og de karakterer, du bringer til live i historien. Så ... det er tid til at starte. Lad
+spillerne skabe deres ponyer, hvis de ikke allerede har gjort det, start derefter med at læse
+'Læs højt'-teksten i boksen nedenfor – læs ikke [teksten ind parentes] dog!
+Læs højt: Det er en smuk, solrig dag i Ponyville. Du er kommet til markedspladsen for at
+handle dagligvarer og hænge ud med dine venner. Markedspladsen myldrer med ponyer i
+alle former og størrelser - det det ser ud til, at solen har bragt hele Ponyville frem! Du har
+afsluttet dine indkøb og din sadeltasker er fyldt med mad og lækkerier. [GM: Spørg hver
+spiller, hvad deres pony har købt]. Du bliver tiltrukket af en stor skare nær springvandet,
+der klapper af en gadekunstner - en ung enhjørning viser sine magiske tricks frem til alles
+glæde. Du har travlt med at se Enhjørningen trylle æbler fra den blå luft, træk farverige
+blomster fra hans højhat, og skab glitrende regnbuer ovenover hans hoved. Så du kigger
+ikke på dine indkøbsposer. En af jer [GM: Vælg pc'en med lækreste godbidder i deres
+
+--- PAGE 36 ---
+taske] føler din taske bliver tungere og tungere! Når du kigger i din taske, ser du en
+bedårende sød, hvid fluffy bunny kanin med store, store sorte øjne. På en eller anden
+måde er det lykkedes at krybe ind i din taske og har travlt med at gumle i den lækreste
+mad du har købt!
+Hvad skal du lave?
+Der er en kanin i min taske! Kaninen er Fluttershys kæledyr, Angel. Fluttershy har taget
+ham med sig til markedet for at lede efter passende ponyer til at tage sig af kæledyrene,
+når hun og hendes venner rejser på deres mission. Kaninen ser sød ud, men er langt fra
+velopdragen. Hvis en pc forsøger at få fat i kaninen, eller tage maden væk fra det, vil han
+knurre voldsomt og stirre vredt på dem og modstå ethvert forsøg på at tage ham væk fra
+maden. Lad pc'erne bruge et par øjeblikke på at forsøge at håndtere den stædige, uvenlige
+kanin, og introducer derefter... Fluttershy! En pigepony, en Pegasus med gul pels og
+lyserød manke og hale, traver hen til pc'erne. Hun har stor blå øjne, der stirrer genert på
+dem, og hendes søde mærke er tre lyserøde sommerfugle. Det er Fluttershy! Læs højt
+"Undskyld," siger Fluttershy med en meget stille stemme. "Tak, fordi du reddede min kanin,
+Angel. Han sprang væk fra mig, og jeg har ledt efter ham overalt! Hun tager forsigtigt
+kaninen og nusser ham. Han stirrer på dig og laver et rasende ansigt. Fluttershy fortsætter.
+"Du har åbenbart godt med dyr," smiler hun genert. "Jeg tror min lille Angel kan virkelig
+godt lide dig!" Ved dette ryster Angel kraftigt på hovedet, mens han stadig stirrer på dig.
+Fluttershy bemærker det ikke. "Jeg tror, I er bare de ponyer, som mine venner og jeg har
+ledt efter. Vi tager afsted på en vigtig mission, og vi har brug for nogen til at passe vores
+kæledyr, mens vi er væk. Ville du gerne hjælpe os?”
+Hele eventyret afhænger af, at pc'erne siger ja. Hvis de siger 'Ja!' med det samme, stilles
+der ingen spørgsmål, beløn den første spiller, der siger ja, med et venskabstegn.
+Men hvad hvis de siger nej?
+Hvis dette sker, skal du understrege over for pc'erne, hvilken ære det er at blive bedt om at
+hjælpe Fluttershy og hendes venner, som omfatte den berømte Alicorn, Princess Twilight
+Sparkle. Hvis de stadig ikke vil hjælpe, og nægter Fluttershy, bliver Fluttershy grædende
+og begynder at hulke. "Åh min! Jeg finder ingen til at tage sig af vores kæledyr! Vi skal ud
+på en vigtig mission, men vi kan ikke forlade vores kæledyr alene! Vi lovede dem en
+forkælelsesfest i mit sommerhus, og de vil blive så skuffede, hvis vi kan ikke holde vores
+løfte til dem!" Hvis Fluttershys tårer ikke bevæger pc'erne for at tilbyde deres hjælp, så har
+de selvfølgelig brug for et par lektioner i Venskab! Hvis nogen er ond mod hende, kan du
+endda tage et tegn på venskab fra dem. Fluttershy vil endelig forsøge at overtale pc'erne
+med et tilbud om en belønning. "Jeg er sikker på, at prinsesse Twilight Sparkle vil belønne
+dig godt, hvis du hjælper os! Hun vil være meget, meget taknemmelig!” Hvis dette ikke
+virker, bliver du nødt til at prøve at få pc'erne til at udforske
+Everfree Forest på en eller anden måde - det kan de så mød hvert tabt kæledyr og få en
+chance for at redde dem. Måske bliver pc'erne væk i skoven senere på, mens de leder
+efter noget vigtigt for dem gemt der. Måske enhjørningen på markedet square får sine
+besværgelser rodet og får en magisk hvirvelvind til at dukke op, som får pc'erne væk til
+
+--- PAGE 37 ---
+skovens dybder. Jeg er sikker på, at du vil finde på en måde at få historien tilbage på
+sporet. Held og lykke! Ja, vi vil meget gerne hjælpe dig! Så snart pc'erne er enige om at
+hjælpe, flagrer Fluttershy med øjenvipperne til dem og sender dem et stort smil. "Tak, mine
+venner! Kom og mød mig i morgen tidlig i mit sommerhus i udkanten af Everfree Skov. Jeg
+vil præsentere dig for mine venner og vores kæledyr. De vil elske at møde dig! Vi ses i
+morgen!" Fluttershy vender sig og vandrer ud i markedsmængderne. Angel, hendes kanin,
+stirrer på pc'erne fra oversiden Fluttershys skulder, stikker tungen ud mod dem og ryster
+med knytnæven. Lad pc'erne diskutere deres møde med Fluttershy et stykke tid, så kan du
+bede dem om at beskrive kort hvad de vil lave resten af dagen, før de går videre til næste
+scene...
+Fluttershy's Cottage Næste morgen skulle pc'erne tage til Fluttershys sommerhus for at
+møde Mane Six og passe deres kæledyr. Fluttershys sommerhus ligger i udkanten af
+Everfree Forest - et vildt, skovklædt og mystisk område, undgås af ponyer som et
+skræmmende sted. Sommerhuset nås ved at krydse en lille bro over en hurtigt
+strømmende flod. Det bemærkelsesværdige ved Fluttershys hjem er, at det har et tag af
+grønne blade - det ligner lidt et træhus. Snesevis af fuglekasser og fugleborde hænger fra
+tagets grene og fra træer spredt rundt om hytten, og luften er levende med lyden af smuk
+fuglesang. Vilde kaniner og egern, der er bundet og spøger langs stien, der fører op til
+hytten, flyver væk som ponyerne tilgang. Fluttershy åbner døren. "Jeg er så glad for, at du
+kunne klare det. Kom ind! Kom og mød mine venner!" Sommerhuset er meget hyggeligt
+indeni. Der er komfortable sæder til ponyer og flere sengekurve på gulvet for når
+Fluttershys dyrevenner kommer på besøg. Flere fuglehuse hænger fra loftet, med farverige
+fugle, der flagrer rundt om pc'ens hoveder. Fodlister er oversået med musehuller, hvorfra
+nysgerrige mus stirrer op på pc'erne, når de kommer ind. Der er masser af bøger om
+kæledyr og dyreliv på de forskellige hylder fastgjort til væggene. Fluttershy holder sit
+sommerhus meget pænt og ryddeligt, på trods af tilstedeværelsen af det mange dyr og
+fugle. The Mane Six Venter på at møde pc'erne inde i sommerhuset er Fluttershys særlige
+venner: Applejack, Pinkie Pie, Rarity, Rainbow Dash og Twilight Sparkle, og hendes lille
+dragekammerat Spike ved siden af hende. Det er jeg sikker på, at de ikke gør har brug for
+nogen introduktion - deres egenskaber, talenter og så videre kan findes på side 136-137.
+Twilight Sparkle træder op til pc'erne og begynder at tale: "Vi takker dig af hele vores hjerte
+for dit generøse tilbud om at passe vores kæledyr, mens vi er det væk. Vi lovede dem en
+forkælelsesfest, og nu hvor du er her, skal de have en forkælelsesfest.” Bemærk, at hvis
+pc'erne spørger Twilight Sparkle om Mane Six' næste eventyr, vil hun fortælle dem
+historien af statuetternes forbandelse (se side 102 for detaljer om forbandelsen), og sig, at
+hun og hendes venner nødt til at tage til Badlands på et eventyr, der måske kan hjælpe
+med at løse mysteriet. Efter Twilight Sparkle har talt, introducerer hun og hendes venner
+deres kæledyr til pc'erne (læs teksten op i boksene overfor, når hver pony introducerer
+deres kæledyr).
+Twilight Sparkle "Dette er mit kæledyr, Owlowiscious." Twilight holder en lys- øjenbrun
+ugle. "Sig hej, Owlowisk." Uglen tuder og vipper høfligt med hovedet. "Han er meget
+velopdragen. Han elsker bliver kildet lige bag hans ørefjer, og hans favorit godbidder er
+chokolademus." Pinkie tærte "Hvad sagde du, Gummy?" Pinkie Pie rejser babyalligatoren
+hun holder til
+
+--- PAGE 38 ---
+hendes øre. "Du kan lide disse ponyer? Tja, hvis du kan lide dem, kan jeg lide dem!"
+Porten, som ikke har udtalt en ord, stirrer tomt på dig. "Gummy siger, at han gerne vil have
+dig at fodre ham med fiskefrikadeller, og hans yndlingsspil er Snap, af selvfølgelig!"
+Rainbow Dash "Hej, Tank! Sig hej til din nye venner!" smiler Rainbow Dash. En stor grøn
+skildpadde ser langsomt ud op mod dig fra gulvet. Han har på luftfartsbriller, og har en
+helikopterrotor fastspændt til sin skal. "Giv ham rigeligt med salat og lad ham gå en tur en
+gang imellem, og det bliver han så fin som dollarbomuld!" Applejack "Sig hej til Winona!"
+griner Applejack. En brun og hvid hund iført et rødt halsbånd med et guldnavneskilt hopper
+rundt om Applejacks ben legende. "Giv hende en knogle at tygge på og hun vil være så
+glad som en orm i en æbletønde," siger Applejack. "Og hendes yndlingsting alle...
+maveridser!” Sjældenhed "Opalescens er ekstremt følsomme, og du skal tage fuld pas på
+min lille skat." Sjældenhed er at pudse en hvid, fluffy kat iført en opal-besat krave om
+hendes hals, en lilla bånd ovenpå hendes hoved og bærer en legetøjsmus i munden. "Hun
+vil kun røre ved det fineste kattegodbidder, og det skal du jævnligt rede hendes pels bare
+som hun kan lide det." Fluttershy "Du har allerede mødt Angel. Jeg kan se, at han kan lide
+dig..." siger Fluttershy sagte. Den hvide kanin håner dig og stikker ud hans tunge. "Han er
+sådan en kærlig lille væsen. Alt hvad han behøver er et par saftige gulerødder, hans hale
+fluffet forsigtigt, og masser af kram og søde ord."
+Kærlige farvel Efter Mane Six har introduceret deres kæledyr til pc'erne, giver Twilight
+Sparkle pc'erne deres instruktioner: "Ok, jeg ved ikke, hvor længe vi skal være væk - vi
+skal rejse til Badlands, langt mod syd. Du skal blive boende i Fluttershys sommerhus og
+tage sig af kæledyrene, indtil vi kommer tilbage. Sørg for, at de har det godt fodret og
+underholdt. Vi lovede dem en forkælelsesfest i dag, så det er dit første job - for at være
+sikker de er godt og grundigt forkælede! Hold også Fluttershys sommerhus rent og
+ryddeligt - hun har været meget venlig over for lad dig blive her, mens hun er væk. Vi vil
+ikke have, at hun bliver ked af noget rod, når hun kommer hjem. Nu er jeg sikker på, at alt
+vil være godt - du virker som søde, venlige ponyer, der er gode med dyr. det er tid for os at
+gå. Pas på, og vigtigst af alt, hav det sjovt!” Twilight og hendes fem venner kysser og
+nusser alle deres kæledyr farvel, så vinker de og Spike farvel til pc'erne og tager af sted på
+deres mission. Snack tid Efter Twilight og hendes venner er gået, bliver sommerhuset
+stille. Owlowiscious er fløjet til at sidde på ryggen af en stol, og ser klogt på dyrepasserne.
+Winona klør sig og ser kedet ud. Gummy stirrer lige på pc'erne med ublinkende øjne. Opal
+ser ud til at se dem op og ned, og krøller derefter læberne ind afsky og snuser hovmodigt.
+Tank ser ud til at være faldet i søvn, mens Angel kniber øjnene sammen og ordner PC'er
+med et voldsomt genskin. Bed hver spiller om at teste deres sindegenskab (sværhedsgrad
+2). Enhver, der består denne test, indser det måske den bedste måde at vinde kæledyrets
+hengivenhed på er at give dem noget mad. Det er lidt tidligt til frokost, men måske er det tid
+til en snack? Forhåbentlig lyttede spillerne grundigt tidligere og husker, hvad hvert
+kæledyrs yndlingsfoder er. Fluttershys sommerhus har masser af madskabe med
+alverdens mad til alle slags dyr - måske pc'erne kan være heldige og finde de godbidder,
+de leder efter.
+< < En knogle til Winona og salat til Tank er lette at finde - en vellykket tanketest
+(sværhedsgrad 2) vil finde disse fødevaretyper. < < Fiskefrikadeller til Gummy og
+chokolademus til Owlowiscious er lidt sværere at finde, kræver en vellykket tanketest
+
+--- PAGE 39 ---
+(sværhedsgrad 3). < < Det er nemt at finde gulerødder til Angel, ikke? Ingen! Angel
+efterspørger den helt rigtige type gulerod - bare enhver gammel gulerod vil sandsynligvis
+gøre ham vred! En vellykket Mind-test (Sværhedsgrad 4) vil finde den rigtige
+gulerødder! < < Opal er den sværeste at behage. Hun vil vende næsen op mod alt andet
+end det fineste, mest saftige, dyreste kattegodbidder - en vellykket sindtest (sværhedsgrad
+5) er nødvendig! En mislykket test betyder, at maden ikke kan findes i Fluttershys hytte -
+hver pc kan prøve at kigge én gang. Hvis pc'erne ikke formår at fodre et kæledyr med dets
+foretrukne foder, vil det være sværere at kontrollere - for de resten af eventyret skal
+pc'erne nedgradere enhver terning, de bruger til en Charm-test, der er lavet til det kæledyr.
+Kæledyrs personligheder Hvert kæledyr har sin egen unikke personlighed. Disse er
+opsummeret nedenfor. Engel Forkælet, bossy og meget krævende. Korthjertet og tilbøjelig
+til barnlige raserianfald. Meget kræsen med mad. Nyder at plage sine dyrepassere.
+Kommunikerer i knirkende. Gummy Han har et tomt, tomt blik. Han vil gribe alt, hvad der
+kommer inden for rækkevidde hans tandløse kæber og nægter at give slip! Tavs, men
+Pinkie Pie er overbevist om han taler med hende. Opalescens Egoistisk, manipulerende og
+irritabel. Hun gnider sig mod velklædte ponyer, men spytter efter dem, der udviser en
+fashion faux pas. Spinder hvis glad, men ywls og hvæser når man er vred. Owlowisk En
+meget velopdragen fugl. Han er meget intelligent og kan forstå og følge ordrer.
+Kommunikerer ved at tude. Natlig, så normalt søvnig under dagen. Tank Langsomt, men
+meget trofast, hjælpsomt og bestemt. Han har en magisk- fremdrevet helikopterrotor
+fastspændt til hans granat, hvilket giver ham mulighed for at flyve. Det er han altid stille.
+Winona En venlig, loyal og trofast arbejdshund. Hun bliver vild, hvis hun ikke får hende
+daglig motion. Hun gøer, klynker, bukser og ypper som enhver anden almindelig hund.
+Forkælelsesfesten Når pc'erne har fodret (eller forsøgt at fodre) kæledyrene, er det tid til at
+starte forkælelsesfesten. Den PC'er skal beslutte, hvordan de skal underholde og forkæle
+kæledyrene, og det er her, det virkelige problem starter. Hvis pc'erne ikke forsøger at
+underholde kæledyrene, så lad alle kæledyrene opføre sig utålmodigt eller frækt: f.eks.
+Owlowiscious flyver ind i hovedet på en pc og tuder højt; Winona kører ringe rundt om
+dyrepasserne og gøer energisk; Tank begynder at flyve rundt i rummet, hans
+helikopterblade suser og støder ind i hylder og vælte bøger og ornamenter; Gummy låser
+stædigt sine kæber på en pcs ben; Opal hyler og spytter og begynder at ridse møbler;
+mens Angel forsøger at flygte fra sommerhuset og forsøger at sparke åbne døre og
+vinduer, eller klatre op ad skorstenen til friheden! Hvis pc'erne ikke indser, at kæledyrene
+skal underholdes, skal du få hver pc til at teste deres sindegenskab (sværhedsgrad 2) - en
+succes får dem til at indse, at kæledyrene opfører sig, fordi de ikke bliver forkælet. Pc'erne
+skal forsøge at huske, hvad hvert kæledyr kan lide. Når en pc forsøger at forkæle et
+kæledyr, skal de prøve det overtale den til at lade dem forkæle den. Dette kræver en
+vellykket Charm-test - ved sværhedsgrad 2 for hvert kæledyr bortset fra Angel
+(Sværhedsgrad 8), som virkelig ikke vil samarbejde.
+Læs højt: Det er umuligt at holde øje med Angel - han er så fræk! Han blæser et stort
+hindbær mod dig hopper højt op i luften og lander på en bogreol. Han skubber rækken af
+pæne bøger, hvilket får dem til vælte som dominobrikker. Bogen for enden af hylden falder
+på gulvet, lander på Tank, indstilling slukket for motorerne på hans helikopterblade.
+Skildpadden skyder op i luften og smadrer gennem en vindue og suser op i himlen.
+
+--- PAGE 40 ---
+Winona giver alarm og springer ud af det knuste vindue at forsøge at redde Tank. Uglade
+skriger og flyver i panik op ad skorstenen i en sky af sod, hvilket får Gummy til at nyse højt.
+Hans kæber klemmer sig fast på Opalescences hale, som vinker lige foran ham. Opal
+skriger og springer i panik, hendes udstrakte kløer rives i gardiner på vinduet nærmest dig.
+Gardinskinnen vælter ned og banker på et skab lige mod dig! Læs højt: Fluttershys
+sommerhus er et komplet rod! Udover de kollapsede gardiner og nedfaldne skab, der er
+puder,
+pynt, og vippede stole over hele gulvet. En af ruderne er smadret og der er sod fra
+skorstenen overalt. Kattelemmen i hoveddøren svinger løs. Der er ingen tegn på nogen af
+​kæledyrene! Fanget! PC'erne skal teste deres kropsegenskaber (sværhedsgrad 5). Hvis
+de fejler, bliver de fanget inde i skabet og mister D8 Stamina. Hvis det lykkes, undviger de
+af vejen for skabet, men bliver viklet ind oppe i gardinerne og er fanget – de kan ikke gøre
+noget, før de kæmper sig fri (se nedenfor). Ponyer fanget i skabet kan teste deres
+kropsegenskaber (sværhedsgrad 5) for at skubbe over skabet og frigør sig selv – hver
+gang en pony fejler denne test mister han eller hun 1 udholdenhed. Hvis fangede ponyer
+virker sammen reducerer testens sværhedsgrad med 1 for hver hjælpende pony. Fordi
+skabet er så tungt, det tager omkring en halv time at komme sig fri. Ponyer, der er viklet ind
+i gardinerne, vil til sidst frigøre sig efter cirka en halv times kamp uden behov for test.
+Hvor er alle kæledyrene blevet af?
+Så snart mindst én pony er kommet fri af gardinerne eller skabet, læs følgende tekst op:
+Kæledyrene er alle flygtet. Der er ingen tegn på dem inde i sommerhuset. Sørg for, at
+pc'erne indser at de har to meget vigtige opgaver at udføre - først skal de finde kæledyrene
+og bringe dem tilbage sikkert til sommerhuset (se del 2 af eventyret). For det andet skal de
+rydde op i sommerhuset før Fluttershy og hendes venner kommer tilbage (se del 3 af
+eventyret). Pc'erne bør gøres opmærksomme på, at redning af kæledyrene er den vigtigste
+af disse opgaver, og det bør den udføres først. Hvis en pc på en eller anden måde formår
+at kontrollere Angel, så belønn gruppen med et velfortjent venskabstegn. Problemet er, at
+de bliver nødt til at blive ved med at teste for at kontrollere Angel, og til sidst vil de fejle.
+Hvis og når de ikke formår at holde Angel charmeret, læs følgende tekst op:
+I denne del af eventyret skal pc'erne opspore kæledyrene og redde hver enkelt fra
+problemerne de har sat sig ind i. Modsat finder du en oversigt over, hvad der er sket med
+hvert kæledyr. Husk at holde denne information hemmelig for spillerne! De skal selv finde
+hvert kæledyr efter de spor, der er uden for sommerhuset. Kæledyrdetektiver Hvis pc'erne
+leder efter dyrene uden for Fluttershys sommerhus, vil de opdage spor, der vil pege på
+dem mod hvert kæledyr. < < Et spor af kaninfodspor fører fra kattelemmen mod sydvest
+ind i Everfree Forest. < < Alligatorspor fører fra kattelemmen til kanten af floden, der løber
+forbi hytten. < < Snakket på en busk i nærheden af sommerhuset er en lilla sløjfe. < < Et
+spor af sod fører fra sommerhuset mod øst ind i Everfree Forest. < < I det fjerne, dybt i
+Everfree Skov mod syd, stiger en røgsky op mod himlen. < < I det fjerne, dybt i Everfree
+Skov mod vest, kan man næsten høre et svagt, trist hundehyl. Tillad pc'erne at gå på
+opdagelse rundt i hytten og opdage hvert spor, før de lader dem bestemme hvilket ledetråd
+til at følge først.
+
+--- PAGE 41 ---
+Bunny Footprints PC'erne kan følge disse fodspor mod sydvest ind i Everfree Forest. På et
+tidspunkt, efter at have fulgt sporet i en time, det forsvinder næsten. Hver pc skal teste
+deres sind-egenskab (sværhedsgrad 4) for at fortsætte følger fodsporene - hvis de alle
+fejler, farer de vild (se Lost in the Woods). Hvis de med succes følger sporet, eller efter at
+have løst et "Lost in the Woods"-møde, vil pc'erne til sidst nå mundingen af en stor, mørk
+hule, hvor stien ender - se Finding Angel. Alligator spor Sporene fører til floden, der løber
+sydpå ind i Everfree Forest. På det tidspunkt, sporene forsvinde. Hvis spillerne ikke selv
+kan finde ud af det, så tillad pc'erne at teste deres egenskaber (Sværhedsgrad 2) for at
+finde ud af, at Gummy må være hoppet i floden, og at han må have svømmet ned ad
+floden, fordi vandet flyder så hurtigt, at babygatoren ikke ville
+har været stærke nok til at svømme mod strømmen. Der er en lille robåd på bredden af
+​floden, lige stor nok til, at alle pc'er kan klemme sig ind i. Op til to pc'er kan ro båden - dette
+kræver, at de tester deres kropsegenskaber (sværhedsgrad 3) for at kontrollere det - ellers
+snurrer den ud af kontrol, og alle i båden bliver ramt rundt og mister 1 Stamina. Til sidst,
+efter cirka en time, løber floden ud i en sø, hvor pc'erne opdager Pinkie Pies kæledyr – se
+Find Gummy. Den lilla sløjfe Den lilla sløjfe, som Opalescence bar på toppen af hendes
+hoved, er fanget på en busk i nærheden af sommerhus. Lidt længere væk ligger en blå
+opal midt på en smal sti, der fører sydøst ind i Altid fri Skov. Hvis pc'erne følger denne vej
+gennem underskoven, finder de efter cirka femten minutter en anden opal på stien. Hvis de
+fortsætter ad stien, finder de hvert kvarter eller deromkring en anden opal. Efter når man
+finder den fjerde opal, åbner stien sig i en lille lysning – se Find opalescens.
+Sodsporet PC'erne kan følge sporet af sod østpå ind i Everfree Forest. Undervejs finder de
+nu og da en sodet uglefjer langs stien. Sporet er nogle gange svært at følge. Cirka en time
+ad den hver PC'er skal teste deres sind-egenskab (sværhedsgrad 4) for at fortsætte med
+at følge fodsporene - hvis de alle fejler, får de tabt (se Lost in the Woods). Hvis de med
+succes følger sporet, eller efter at have løst et "Lost in the Woods"-møde, vil pc'erne til
+sidst nå en lysning med gulvtæppe med mærkelige blå blomster - se Find Owlowiscious.
+Røgskyen Hvis pc'erne går i retning af røgen, fører det dem sydpå ind i Everfree Forest.
+Efter ca en time mister de skyen af syne, fordi træer blokerer deres syn. For at fortsætte
+skal de lokalisere retning af røgskyen igen; ellers skal hver pc teste deres sindegenskab
+(sværhedsgrad 6) for at prøve at finde ud af, i hvilken retning skyen ligger. Hvis de alle
+fejler, farer de vild (se Lost in the Woods). Den den bedste måde at lokalisere skyens
+retning er ved at klatre i et træ – dette kræver en vellykket kropstest (Sværhedsgrad 5) –
+og ja, i Equestria kan ponyer klatre i træer. Hvis de med succes følger skyen, eller efter at
+have løst et "Lost in the Woods"-møde, vil pc'erne finde til sidst kilden til røgen - se Finding
+Tank. Hundehylen Hvis pc'erne går i hylens retning, ender de med at gå vestpå ind i
+Everfree Forest. Hylen er nem at følge, og bliver højere, jo dybere pc'erne begiver sig ind i
+skoven. Efter omkring en time støder pc'erne til sidst på en gammel hytte i en lysning – se
+Finding Winona.
+Altid fri Skov Everfree Forest er et vildt skovområde, der ligger lige uden for Ponyville.
+Forsigtige ponyer undgå dette mystiske sted. Det er skræmmende og underligt og fuld af
+mærkelig magi. Selvfølgelig skal pc'erne ind i skoven for at redde kæledyrene. Sørg for, at
+de forstå, hvilket skræmmende sted dette er for en nervøs pony. Mens de kryber igennem
+mørk skov, beskriv skovens syn, lyde og lugte: < < De uhyggelige træer, der ligner
+
+--- PAGE 42 ---
+misdannede monstre, der tårner sig op over dem og blokerer ud af himlen og sollys; < < De
+klo-lignende grene, der ser ud til at række ud og hakke ponyernes maner og haler; < < De
+hæslige sorte, tornede vinstokke, der synes at krybe og krybe langsomt i underskoven; < <
+De voldsomme røde øjne, der blinker og stirrer fra skyggerne; < < De mærkelige dyrelyde
+og fuglekald, der grynter, skælker og skriger fra grene og buske; < < Den irriterende
+summen og drønen af insekter, der flyver over pc'ernes hoveder; < < Den muggen stank af
+fugtig jord og våde, rådnende blade.
+Lost in the Woods Hver gang pc'erne forsvinder i Everfree Forest, skal du vælge en af
+begivenhederne fra listen nedenfor til forekomme. Alternativt kan du rulle en D6 for at finde
+ud af, hvad der sker. Du kan også introducere nogen af disse begivenheder, selvom
+pc'erne ikke bliver væk for at øge udfordringen (eller hjælpe
+pc'erne i tilfælde af Zecora). Disse begivenheder er ikke dækket i detaljer - det er helt op til
+dig, hvordan du spiller dem ud. 1. Marshy Pool. En eller to (men ikke alle) af pc'erne
+snubler ind i et sumpområde. De vil sidde fast, indtil deres venner samarbejder om at
+trække dem ud. Efter deres redning Pc'er, der faldt i marsken, vil være meget stinkende -
+de skal forringe deres charme et skridt, indtil de bliver ryddet op. Ugh! 2. Klæbende torne.
+Pc'erne bommer sig i en plet af tornede tonser, der klæber sig til deres maner og haler og
+river i deres tøj. De kan ikke gå frem eller tilbage uden at være det ridset. Medmindre de
+kan finde ud af en måde at komme igennem tornene uden at være såret, vil de hver især
+miste D4 Stamina, når de forsøger at flygte. 3. Rabid Rhododendron. De enorme planter
+omkring pc'erne begynder pludselig at stimle sammen omkring dem og bevæger sig med
+deres egen vilje. Bladrige ranker slanger sig rundt om deres ben, og planternes hoveder
+snapper efter dem som sultne kæber. Medmindre pc'erne har en bedre plan, de skal hver
+især lave en udfordring ved at bruge deres kropsegenskab mod planternes
+Kropsegenskab af D6. Hvis de består, kæmper de sig fri, men hvis de fejler, mister de 1
+Stamina og skal prøve igen. 4. Cragadile. PC'erne skal krydse en lille sø med ildelugtende
+grønt vand. Der er store trædesten over søen, som let kan krydses. Men halvvejs på
+tværs, en af stenene viser sig at være bagsiden af en cragadile - et enormt og voldsomt
+krybdyr med
+stenede skæl! Den er sulten og vil forsøge at snappe på pc'erne. Vil de få øje på cragadile
+før de træder på den? Hvis de forstyrrer det, hvordan kan de så slippe væk eller
+overmande det? Dig kan finde statistikken for en cragadile på side 133. 5. Timberwolves.
+En frygtelig hylen fylder luften. Ud af underskoven springer en pakke af glubske
+tømmerulve med kroppe af kviste, træstammer og blade, deres øjne skinnede med et
+uhyggeligt grønt lys. Pc'erne skal forsøge at overmande dem, narre dem eller løbe væk.
+Dig kan finde statistikken for en tømmerulv på side 135. 6. Zecora. Hver pc mærker deres
+manke stå på spidsen og har følelsen af, at de er det bliver overvåget. De kan se store,
+gule øjne skinne fra de skyggefulde dybder af skoven. De uhyggeligt udseende øjne
+begynder at bevæge sig, kommer tættere og tættere på... hvad gør pc'erne det? Heldigvis
+for dem er det en ven - men lad ikke pc'erne vide det før i sidste øjeblik. det er
+Zecora—hendes beskrivelse og statistik kan findes på side 135. Hvis pc'ens charme
+hende, hun giver dem information om skoven (hver pc opgraderer deres Mind die by et
+skridt næste gang de tester for at se, om de farer vild i skoven). Hun giver dem også en
+potion, der indeholder nok medicin til, at hver pony kan helbrede D6 point af udholdenhed -
+
+--- PAGE 43 ---
+men hvis en pony drikker mere end deres enkeltandel, får de ondt i maven og må
+nedgradere deres kropsegenskab med et trin indtil slutningen af eventyret. Zecora kan
+også helbrede enhver pc af virkningerne af
+Poison Joke-forbandelsen (se senere).
+Elementerne af harmoni Hvert kæledyrs ejer er et godt eksempel på hvert Element of
+Harmony, som angivet nedenfor. < < Fluttershy (Engels ejer) - venlighed. < < Pinkie Pie
+(Gummys ejer) – latter. < < Sjældenhed (Opals ejer) - generøsitet. < < Twilight Sparkle
+(Owlowisciouss ejer) - magi (skabt af kombinationen af andre elementer). < < Rainbow
+Dash (tankens ejer) - loyalitet. < < Applejack (Winonas ejer) – ærlighed. Den bedste måde
+at redde hvert kæledyr på er at bruge Element of Harmony, der er forbundet med deres
+ejer. Dette er nok et svært koncept for pc'erne selv at finde ud af, men hvis de går i stå,
+mens de forsøger at redde et kæledyr, så bed dem om at teste deres sindegenskab
+(sværhedsgrad) 5). Enhver, der består testen, får et fingerpeg om, hvordan de skal handle
+for at overvinde problem de står over for. For eksempel, hvis de ikke kan finde ud af,
+hvordan de skal redde Angel fra Ursa minor, og de består deres sind-egenskabstest, kan
+du sige, "Jamen, I ved alle, at Angel er det Fluttershys kæledyr, og Fluttershy er kendt for
+hende
+venlighed - måske er venlighed svar på at redde Angel?”
+At finde engel Stien ender ved en hule. Kaninens fodspor fører ind i mørket. Hvis pc'erne
+beslutter sig for at gå ind hulen, læs afsnittet nedenfor højt (de skal bruge et lys for at
+skinne vejen frem): Hvordan vil pc'erne få Angel tilbage fra Ursa? Ursa er på trods af sin
+enorme størrelse en meget ung en, og har adopteret Angel som sin nye baby dolly. Hun vil
+ikke lade kaninen gå! Få pc'erne til at teste deres sindtræk (Sværhedsgrad 3). Enhver, der
+passerer, indser, at dette enorme monster er bare en Ursa minor – en baby – og at hendes
+mor, en Ursa major (endnu større og voldsommere!), må være kommer snart tilbage for at
+passe sin unge. PC'erne har kun en begrænset tid til at redde Angel. Pc'erne vil nok
+komme med flere kloge ideer til, hvordan man kan redde Angel. Vi skal dog klare det med
+disse to tilgange her: at bruge venlighed og ved at bruge uvenlighed. Venlighed Den
+bedste måde at redde Angel på er at behandle Ursa mindre med venlighed. Hun vil bare
+have sit eget kæledyr at lege med og tage sig af, og det gør hun ikke indse, at Angel
+tilhører en anden. Først skal pc'erne vise Ursa mindre, at de er venlige og blide og gør dem
+ikke noget ondt. For at gøre dette skal de teste deres Charmegenskab (Sværhedsgrad 5
+pga Ursa stoler ikke på dem). Læs højt: Det er meget mørkt inde i hulen. Kulden får dig til
+at ryste. Dit lys danser på klippevæggene, som skinner vådt. Jordens underhov er stenet.
+Den eneste lyd du kan høre er dryppen... dryp... dryp... af vand, der falder ned fra loftet.
+Luften er muggen og fugtig. Tunnelen munder til sidst ud i en stor grotte, der lyser, som om
+den var oplyst af en lysende stjerneklarhed nattehimlen. Lyset kommer fra et gigantisk
+bjørnelignende væsen med en gennemsigtig krop, midnat- blå farve, der skinner, som om
+den består af snesevis af stjerner. En hvid stjerne lyser på dens panden og den har
+voldsomme gule øjne og skarpe, skinnende hvide hugtænder. Du har hørt om disse
+monstre i historier - det er en Ursa: en monstrøs, magisk bjørn. På trods af dets
+skræmmende udseende har Ursa et venligt smil på læben og vugger forsigtigt en lille, hvidt
+skælvende dyr - det er engel, der ser helt forskrækket ud. Kaninen prøver at kæmpe sig fri,
+
+--- PAGE 44 ---
+knirker af frygt. Du bemærker, at Ursaen har lagt engel i ble og ryster ham blidt tilbage og
+frem. En lav knurren buldrer fra Ursa's hals - synger hun en slags bjørnevoggevise?
+De bliver også nødt til at finde en erstatning for Angel at give til Ursa minor. Måske skal de
+gå ind i skoven for at lede efter et dyr, der ville være et passende kæledyr til en ung Ursa.
+Eller måske de kunne lave et legetøjskæledyr af de materialer, de finder i skoven. Ursaen
+vil blive henrykt over sit nye kæledyr eller legetøj og erstatter det med glæde for Angel.
+Uvenlighed Den værste måde at behandle den lille Ursa på er med uvenlighed. Det vil kun
+gøre ham vred, og ingen ønsker at møde en vred Ursa, selv en 'lille'. Hvis pc'erne formår at
+tage Angel væk fra Ursa ved at bruge nogen form for uvenlighed, tricks, luskeri, løgne,
+eller enhver anden metode, der vil såre hendes følelser, vil Ursa minor brøle og knurre
+heftigt, straks at bringe sin mor tilbage til hulen (se nedenfor). Den mindreårige vil slutte sig
+til sin mor jagter efter pc'erne - dobbelte problemer! mors hjem! Hvis pc'erne tager for lang
+tid at forsøge at løse dette møde, kommer den mindreåriges mor måske hjem, og være
+meget vred over at finde pc'erne indtrængen! Ursa major vil også dukke op, så snart
+hendes baby får det forstyrret af pc'ernes handlinger (se ovenfor). For at afgøre, om Ursa
+majoren kommer hjem, hver gang du vurderer, at pc'erne også tager længe om at gøre
+noget under dette møde, kast en terning – hvis du kaster den højest mulige score, Ursa
+major dukker op. Start med at kaste en D20, og forring derefter terningerne med et trin,
+næste gang du kaster til se om mor kommer hjem. Når Ursa major
+vises, vil pc'erne have endnu sværere ved at forsøge at redde Angel, hvis de ikke allerede
+har. Hvis de generer bjørnene, vil begge jage pc'erne væk fra deres hule - hvis pc'erne får
+det taget til fange af Ursa majoren vil de ende som den lille Ursa minors legetøj, klædt ud
+som engel i bleer og behandlet som babydukker, indtil de finder ud af en måde at flygte på.
+Engle engel?
+Hvis og når pc'erne redder Angel, vil han gøre alt, hvad han kan for at irritere dem imens
+han er i deres selskab. Når pc'erne skal lave et vigtigt terningkast, skal du kaste et D6 og
+se tabellen nedenfor for at finde ud af, hvordan Angel opfører sig (eller du kan bestemme
+dig selv, hvordan han opfører sig dårligt). D6 Score Resultat
+Angel har et raserianfald! Medmindre pc'erne lukker ham, vil han tjene lige så meget larm
+som muligt - brast i gråd og stamper lige så højt med fødderne som han kan.
+Angel forsøger at flygte. Pc'en, der bærer ham, skal gøre en udfordring imod hans
+Sindtræk (D4). Hvis Angel vinder udfordringen, kæmper han for frihed og skal jages og
+genfanges.
+3-4 Angel opfører sig dårligt på den måde, at han gør det sværere for pc'erne at gøre det
+fuldføre deres opgave. Til dette terningkast forringer hver pc deres terning med et trin.
+5-6 Angel opfører sig - puha!
+At finde Gummy Efter floden når pc'erne til sidst en lille sø med en træbeklædt ø i sin
+center. Læs afsnittet nedenfor højt for at sætte scenen: Pc'erne har flere forskellige
+problemer her: hvordan får de Gummy ned til jorden uden gør ham ondt, og hvordan får de
+Gummy til at slippe uden at skade mohawken? Læs højt: Floden munder ud til en lille sø, i
+hvis centrum er en lille ø dækket af træer og buske. Du kan ikke undgå at bryde ud i grin,
+
+--- PAGE 45 ---
+når du ser en komisk udseende rovfugl med en latterlig lysegrøn mohikan-lignende kam på
+sit skaldede hoved, flyvende højt i luften i cirkler og skrigende i panik som en baby alligator
+klamrer sig stædigt fast i sine halefjer med sine kæber. Fuglen er en mohawk, og du kan
+se, at 'gator'en er ingen ringere end Gummy.
+Hvordan vil du få ham sikkert ned?
+Latter Den bedste måde at få Gummy til at give slip på er at få ham til at grine! Men
+alligatorer er ikke kendt for deres sanser af humor. Alle pc'er, der forsøger at få ham til at
+grine med sjove fjollerier eller dumme vittigheder, skal teste deres charme (Sværhedsgrad
+5). De kan prøve igen og igen, så længe de fortæller en anden vittighed eller beskriver en
+anden fjols. Hvis pc'erne lykkes, vil Gummy fnise, skråle og derefter åbne munden for at
+udstøde et stort narre og lade gå af mohawkens hale og falde ned til jorden (mohawken vil
+give et lettet squawk og flyve af, dens halefjer pjuskede). Det er dog kun den første del!
+Mohawken er et godt stykke op, og Pinkie Pie vil blive ked af det, hvis hende dyrebare
+kæledyr kommer til skade af det lange efterår. Én pc kan prøve at fange Gummy ved at
+teste hans eller hendes kropsegenskab (sværhedsgrad 4). Eller pc'erne kan forsøge at
+lave mohawken flyver fra over øen til over søen, så når Gummy griner, har han en blød (og
+våd) landing. Men så snart Gummy lander i vandet, svømmer han så hurtigt han kan, og
+pc'erne bliver nødt til at vinde en svømmeudfordring (ved at bruge hans kropsegenskab
+D4) for at fange ham. Enhver pony der prøver og taber vil miste 1 Stamina af udmattelse.
+Han vil svømme rundt og rundt om øen, indtil han endelig bliver fanget. Ingen grinende
+sag! Hvis pc'erne gør noget, der forstyrrer eller sårer mohawken, vil fuglen hakke vredt på
+pc'erne, hvilket forårsager dem til at miste 1 Stamina. Øv! Går tilbage opstrøms Når
+pc'erne har fanget Gummy, bliver de nødt til at rejse opstrøms for at komme tilbage til
+Fluttershys sommerhus. Dette er sværere, da de bliver nødt til at ro båden mod flodens
+strøm. Det er ret udmattende arbejde, og alle ponyerne skal tage deres tur med at ro
+båden opstrøms. Inden de kommer tilbage til sommerhuset, de er alle trætte og mister 1
+Stamina hver. Gator kæber Gummy har en dårlig vane med at stramme kæberne rundt
+alt inden for rækkevidde. Dette inkluderer ponyernes ben, haler og manker. Heldigvis har
+han ingen tænder, så hans greb har ikke gør ondt, men han vil holde stædigt fast, så
+længe han kan. Den første pony, der henter Gummy, skal vinde en udfordring mod ham
+ved at bruge sin kropsegenskab (D4); ellers vil Gummy gribe ponyen med kæberne og ikke
+give slip, og ponyen skal gøre alt med Gummy knyttet til ham eller hende (dette betyder, at
+hans kropsegenskabs dør er forringet med et trin indtil Gummy giver slip). Gummy vil kun
+give slip, når han har fodret sin yndlingsgodbidder - fiskefrikadeller - eller hvis pc'erne
+finder på en snedig måde at få ham til at åbne munden. Hvis Gummy ikke har noget i
+kæberne, dig kan beslutte, at han forsøger at snappe på en nærliggende pc kl når som
+helst i scenariet (som beskrevet ovenfor).
+At finde opalescens At følge stien afsløret af sporet af Opals tilbehør fører til en lille skov
+rydning, i hvis centrum er en vandbrønd. Læs afsnittet nedenfor højt: Opal er faldet i
+brønden - hendes nysgerrighed fik hende til at gå for tæt på kanten. Den bange miaver den
+PC'er kan næsten høre er hendes. PC'erne skal forsøge at finde ud af, hvordan de får
+hende op af brønden, som er en magi ønsker godt. For lang tid siden, før denne del af
+
+--- PAGE 46 ---
+Everfree Forest voksede omkring brønden, ponyer plejede at besøge det og falde i
+guldstykker i håb om ønsker. Først opfyldte brønden disse ønsker, men den voksede
+grådige og krævede flere og flere tilbud, før de gav dem. Ponyerne holdt op med at besøge
+godt og efterhånden voksede den evige skov omkring den. Efter at være blevet forladt og
+glemt i så lang tid, brønden er blevet ensom, og den vil ikke frigive Opal, medmindre
+pc'erne smider deres mest dyrebare genstande ind. Digtet Skriften på brønden er ret svær
+at læse. Det kræver, at pc'erne tester deres sindtræk (sværhedsgrad 5). Hvis de fejler, kan
+de ikke læse den – medmindre de bruger Tokens of Friendship for at genrulle eller bestå
+testen automatisk. Digtet lyder: Jeg er en ønskebrønd, og jeg ønsker dig alt godt, Du søger
+et smukt spindende kæledyr, som faldt ned af mig. Min dybde er stor og mine sider er
+stejle, Det, jeg har taget, er mit at beholde. Hvis du ønsker at redde din katteven Hos mig
+skal dine nipsgenstande slutte. Jeg ønsker mig rigeligt med guld eller et yndlingslegetøj.
+En skattet halskæde, der bringer dig glæde. Den mest hemmelige opskrift eller et par
+ringe, Hvad det er, er ligegyldigt, det er bare ting. Hvad jeg virkelig ønsker og vil bringe mig
+stor lyksalighed Er for dig at give mig det, du vil savne. Læs højt: Brøndens kant består af
+en lav, cirkulær stenmur. Et skifertag, dækket af mos, læ brønden fra himlen. Der er et
+gammelt, vakkelvornt træhåndtag fastgjort til hjulet, brugt at hæve og sænke rebet, der
+falder ned i brøndens dybde. Kigger ned over brøndens væg kigger du ind i mørket og kan
+ikke se bunden. De skyggefulde vægge i godt forsvinde dybt under jorden. Du kan høre en
+svag mjauen komme op fra mørket. Der er et gammelt bræt fastgjort på forsiden af
+​brønden. Skrabende spindelvæv og snavs væk, du kan se nogle ord skrevet i gammeldags
+skrift, der ser ud til at ændre sig foran dine øjne! I et øjeblik er de blevet til et digt!
+Gaver Generøsitet er nøglen til succes her. For hver dyrebare genstand enhver pc
+beslutter sig for at smide i brønden skrivning på brønden ændres på magisk vis til takkeord
+og en gurglende lyd (samt noget mjau) kan høres, når vandstanden i brønden stiger
+langsomt. Hvis pc'erne giver en gave hver, den vandstanden og spanden vil stige til toppen
+og afsløre en meget fugtig moggy-Opalescence. Efter at Opal er hentet, forsvinder skriften
+fra tavlen på brønden, for at blive erstattet af endnu et digt! Med gaver og vovemod har du
+reddet katten. Den hylede og brokkede sig som en aristokrat! Nu efterlad mig ponyer, til
+min skatteforsamling, til min ensomme tilværelse, tavs og keder sig. Ingen pony
+nogensinde besøgt i længst tid, undrer det mig
+hvorfor jeg gider at rime! På dette tidspunkt kan pc'erne beslutte, at de vil tale og
+interagere med brønden, som vil tale med dem ved at ændre skriften på dens tavle. Den er
+grådig, men ensom, og kan overbevises med en charmetest (Sværhedsgrad 4) at give
+pc'ernes genstande tilbage for at være så slemme. Alternativt, hvis ponyerne lover at
+komme på besøg brønden fra tid til anden, så vil brønden gladeligt returnere deres varer
+samt give dem 25 bits hver! Brønden henter disse genstande ved at sænke sin spand dybt
+ned i vandet og fylde den med det ønskede genstande og trækker den op igen. Klatring
+ned af brønden Brøndens indre vægge er ekstremt våde og glatte og umulige at klatre ned.
+Brønden er også for smal til, at nogen Pegasus kan flyve ned (og flyve op igen).
+Håndtaget, designet til at trække spanden op, er så gammel, at den går i stykker, så snart
+nogen forsøger at bruge den. Medmindre pc'erne laver en genial plan, er den eneste måde
+at komme ned i brønden (og op igen) ved at klatre ned ad rebet. Rebet er meget gammelt
+og flosset og ser ud som om det kan knække når som helst. A pony, der ønsker at klatre
+
+--- PAGE 47 ---
+ned ad rebet, har brug for en lyskilde (for at se, hvor de skal hen i mørket af brønden) og
+skal teste deres kropsegenskab (sværhedsgrad 4) fire separate gange (fire 'trin'). Det skal
+de lav en test mindre for hver gave, gruppen har givet brønden (se gaveuddeling ovenfor).
+Brønden gør det ekstremt svært for nogen at klatre op eller ned ved hjælp af rebet - det vil
+vride og dreje voldsomt og svinge fra side til side, mens du slår klatreren ind i siderne af
+brønden. Enhver, der består testene, klatrer forsigtigt i rebet (op eller ned) et trin. Hvis de
+når bunden af rebet, kan de redde Opal ved at fiske hende op af spanden, hvor flyder hun
+og kigger elendige. Enhver, der fejler en test, kan ikke klatre op eller ned i rebet og bliver,
+hvor de er, og taber 1 Udholdenhed ved at ramme siden af brønden. De kan prøve igen, så
+meget de tør. Enhver, der lider uheld, mens de forsøger at klatre ned eller op ad rebet, vil
+falde i med et plask, og bob rundt i det kolde vand i bunden af skaftet! De mister D4
+Stamina fra efteråret. Opal vil klatre op på ponyens hoved, mens han eller hun træder
+vandet, og sidde der, indtil den bliver reddet, hyler, våd og elendige. PC'er i bunden af
+brønden kan få fat i rebet, der er fastgjort til spanden, der flyder i vand og prøv at klatre op i
+sikkerhed, som beskrevet ovenfor. Soggy Kitty Efter at være blevet reddet, vil Opal være
+våd og gnaven. Hun ligner en fugtig karklud indtil hun tørrer ud. Selv efter udtørring i solen
+vil Opal være i et ekstremt dårligt humør. Hun hader den evige skov og hyler konstant af
+frygt, medmindre pc'erne finder ud af en måde at pacificere hende. Hun gør det umuligt for
+pc'erne at udføre enhver opgave stille og roligt.
+At finde Owlowiscious Den sodede sti ender ved en dyster lysning, tyk med træer rundt
+omkring. Et hektisk tuden kommer frem fra lysningen. Når pc'erne kommer ind, skal du
+læse afsnittet nedenfor højt: De blå planter kaldes 'gift joke'. Alt, hvad der ånder i denne
+blomsts mikroskopiske sporer vil blive forbandet - planten spiller en praktisk vittighed med
+sine ofre (se nedenfor). Uglen er blevet forbandet af planterne og er blevet fuldstændig
+dum! Problemet for pc'erne er dette: hvordan de kan redde uglen uden at blive forbandet
+selv (se 'Forbandet' nedenfor). Nøglen her er ’harmoni.’ Pc'erne skal arbejde sammen for
+at undgå at blive ofre for planternes ’prank.’ At arbejde sammen skaber harmoni, på
+samme måde som Twilight Sparkles magi er udløses kun, når alle de andre Elements of
+Harmony er til stede. Læs højt: Ved at skille de lave grene, der indrammer indgangen til
+lysningen, ser du, at jorden er dækket med en masse smukke blå planter - blå kronblade,
+blå blade og blå stilke stribet med mørke blå årer. Der er et højt egetræ midt på lysningen
+og flyver gentagne gange ind i stammen af dette træ, tuder
+vanvittigt, er Owlowiscious, cross-eyed og dumt udseende.
+Opløsningen til dette møde er stort set bestemt af styrkerne af hver pc i gruppen. Til redde
+uglen, skal pc'erne samarbejde på en eller anden måde. Det er op til dig at finde ud af,
+hvordan de samarbejder. For eksempel hvis der er tre pc'er, en med The Stare, en med
+Creative Flair-talentet og en med speciale i spring, kan du beslutte, at pc'erne lykkes, hvis
+de bruger en kombination af disse talenter til at redde uglen. Ponyen med The Stare
+fikserer uglen på plads i kort tid, mens den ekspert i at hoppe kunne springe over
+planterne, undvige dem og gribe uglen. Ponyen med Creative Flair har lavet en provisorisk
+trampolin af vinstokke, træ og hoppende mos, som vil hjælpe hoppe pony spring videre. Så
+længe hver pc skal gøre noget forskelligt for at redde uglen, kan du lade dem slippe af sted
+med hvad som helst – jo mere fantasifuld deres plan er, jo bedre. Reglen er, hvis en eller
+flere ponyer ikke deltager i planen virker planen ikke. Du vil måske bruge lidt tid, før
+
+--- PAGE 48 ---
+eventyret starter (men efter at spillerne har skabt deres karakterer) tænker på denne del af
+scenariet, og hvordan hver pony kan interagere for at redde uglen. Forbandelsen Hvis
+pc'erne rører ved de blå planter, bliver de forbandede. En Pegasus kan flyve over
+planterne uden bliver påvirket, men for at få fat i uglen skal dens fluetalent teste
+(sværhedsgrad 7) - hvis Pegasus fejler, vil uglen flagrer uden for rækkevidde og Pegasus
+mister 1 Stamina af udmattelse. Hvis det lider uheld, flyvende pony vælter ind i
+giftjoken og bliver ramt af forbandelsen! Det er op til dig, hvordan hver pony påvirkes. Vælg
+den ting, der ville være mest irriterende for den berørte pony - for eksempel kan en pony
+altid lide uheld, hvis den forsøger at bruge sit talent, eller den kan skrumpe, vokse til en
+enorm størrelse, nyse konstant, miste sine magiske kræfter, eller hans evne til at flyve
+ligeud, nødt til at tale baglæns, lugter dårligt og så videre - hvad der er sjovest og pinligt for
+ponyen. Modgift Zecora (se side 135) har kuren mod giftjoke-forbandelsen. Hvis nogen af
+pc'erne er forbandede, og det har de endnu ikke mødt Zecora, sørg for at de møder hende
+i skoven på et tidspunkt, før de forlader Everfree Skov. Hvis de allerede har mødt hende,
+bør de møde hende igen, så hun kan helbrede de forgiftede ponyer. Kuren er et hætteglas
+med urteboblebad, som berørte ponyer skal bade i. Måske vil Zecora kun giv dem
+modgiften, hvis pc'erne lover at udføre en opgave for hende, når hun kalder på dem - at
+plante frø til et eventyr af din egen skabelse for pc'erne at deltage i på en fremtidig dato.
+Klog fugl Hvis pc'erne har reddet Owlowiscious og helbredt ham af forbandelsen (ved at
+give ham et bad indeholdende Zecoras modgift), mens han er hos dem, vil Owlowiscious
+hjælpe Pc'er løser ethvert problem, der kræver list og tænkning. hver gang PC'erne skal
+teste deres Mind-egenskab, hvis alle PC'erne fejler, test også ved at bruge Owlowiscious's
+Mind-træk (D4). Problemet er, at hvis Owlowiscious har succes,
+pc'erne skal give mening om hans tuder og tegnsprog (husk at han ikke kan tale). Dette
+kræver en af dem for at bestå en test ved at bruge hans eller hendes sindegenskab
+(sværhedsgrad 4). Owlowiscious vil ikke af Prøv selvfølgelig denne test, hvis pc'erne fejler
+den, da det ville være dumt!
+Finde tank Hvis pc'erne går i retning af røgen, kommer de til sidst til en stor afgrund, der
+splitter skoven ad som et stenet ar. Læs afsnittet nedenfor højt: Stakkels Tank har formået
+at styrte ned nær hulen af en enorm stenbrudsål (se side 134)! Ålen heldigvis hviler den i
+sin hule, men hvis den bliver forstyrret, vil den springe ud ved enhver klatring nær dens
+hule. Det er præcist positionen er ikke fast i starten af dette møde, men afhænger af,
+hvilken pony der bliver overfaldet først - altså Ponyen er tilfældigvis lige ved hulen, der er
+ålens hule, som forbliver dens hule for resten af mødet. At nå tanken Dette vil
+være let, hvis pc'ernes gruppe inkluderer en flyvende pony; ikke så let, hvis de skal kravle
+ned den smuldrende klippevæg. For at bestige klippen skal en pc bestå en test mod hans
+eller hendes kropsegenskab (Sværhedsgrad 5). Hvis ponyen lider uheld, glider den og
+falder, mister D4-udholdenhed og bliver overfaldet af stenbrud, mens den rejser sit grimme
+hoved ud af sin hule! Læs højt: Ser du ned i den klippefyldte kløft, ser du straks røgkilden -
+halvvejs nede den venstre væg af kløften, skildpadden, Tank, dingler ved remmen på sine
+briller, som er fanget på et takket stykke sten, der rager ud fra klippekanten. Han må have
+styrtet ind i klippe, mens tykke sorte dampe strømmer fra den ødelagte rotormotor på hans
+flyvemaskine. Klinten ser ud til at kunne bestiges, men Tank er meget langt nede. Du
+
+--- PAGE 49 ---
+bemærker også flere huler prikker klippefladen.
+Redningstank Den første pony, der når tanken (uanset om den klatrer eller flyver) skal
+prøve at skille den ud strop fangst Tank til klippen. Dette kræver, at ponyen forsøger en
+test mod hans eller hendes Sindtræk (Sværhedsgrad 3). Hvis ponyen ikke består testen,
+tager det for lang tid at finde ud af, hvordan man løsner remmen— stenbrudsålen titter ud
+af sin hule i nærheden og overfalder ponyen. Hvis ponyen består testen, glider Tank fri af
+stenen og vælter ned ad klippen og lander forbløffet på det stenede gulv i kløften. Tank
+forårsager dog en lille lavine, da han glider ned ad klippen ansigt. Dette vækker ålen, som
+lurer uset inde i sin hule, som tilfældigvis er tæt på, hvor Tank landede. Den første pony,
+der når Tank er overfaldet af ålen! Hulerne Enhver pony, der undersøger en af hulerne, må
+snige sig stille og roligt forbi chancen vælger den hulen, der er ålens hule, og ponyen skal
+forbi en test mod dens kropsegenskab (sværhedsgrad 3). Hvis ponyen fejler, han eller hun
+vækker ålen indeni og bliver overfaldet. En pony inde i en hule kan ikke se, medmindre den
+har en lyskilde. Som så snart den kaster et lys ind i hulen, forstyrrer den ålen, som angriber
+den. Baghold! Hvis en pc bliver overfaldet af ålen, skal pc'en teste mod dens
+kropsegenskab (sværhedsgrad 6) for at undgå at blive slugt hel af ålen! Hvis ålen ikke
+formår at snappe pc'en, vil den forsøge at snappe enhver anden pc, der kommer i
+nærheden af dens hule (eller hvis pc'en, der udløste bagholdet, beslutter sig
+tåbeligt for at blive i nærheden af hulen). Bemærk, at så snart en pc er overfaldet, kan
+ingen anden pc blive overfaldet. Der er kun én ål og én hule i dette område. Det eneste
+væsen, der ikke vil udløse et baghold, er Tank - ålen er ikke interesseret i at knække
+tænderne på skildpaddens hårde skal. En pc, der sluges hel er okay, men befinder sig i
+ålens hule bug, fugtig og ildelugtende, som f.eks. en lang hule med rødt, ribbet tag,
+modbydeligt slimede vægge og ildelugtende væske op til ponyens knæ. Ponyen er fanget
+inde i ålen, indtil den bliver reddet. Redning af fangede ponyer Ingen tvivl om, at pc'erne vil
+redde deres venner fra ålen, og vil finde på alle mulige skøre ideer til at gøre det - at få
+ålen til at nyse er en god en! Der er dog en god chance for det som hver pony kommer tæt
+på ålen, vil den også sluge dem, og alle ponyerne bliver fanget inde i den ildelugtende,
+fugtigt fængsel inde i monsteret. Hvis dette sker, vil Tanks loyale streak komme til
+undsætning - han vil pløje ind i hulen, forbi ålen, som vil ignorere ham, helt til enden af
+hulen, hvor ålens hale hviler. Tanken vil bide fast i ålen halen, hvilket får den til at brøle af
+smerte og får ponyerne til at flyve ud, én efter én, fra ålens bug! Tank vil puffer derefter
+langsomt ud af hulen og ignorerer den brølende, tæskende ål, som har for meget smerte til
+at prøve at få fat i pc'erne igen. Enhver pc'er, der endte i ålens mave, vil lugte ulækkert og
+må nedbryde deres charme dø af én trin, indtil de bliver
+ryddet op.
+At finde Winona Hvis pc'erne følger lyden af gøen og hylen, kommer de tættere og tættere
+på, indtil de til sidst finde kilden
+af støjen. Læs afsnittet nedenfor højt: Hytten tilhører tre diamanthunde – Rover, Fido og
+Spot (se side 134). De er i minerne, nås af hullerne i jorden og graver efter ædelstene.
+Inde i hytten har diamanthundene gemt sig deres gemmer af ædelstene, og da de fandt
+Winona, besluttede de at beholde hende og bruge hende som vagthund at skræmme
+potentielle tyve væk. Hvis pc'erne siger, at de søger jorden og er i stand til at bestå en test
+
+--- PAGE 50 ---
+mod deres sind-træk (Sværhedsgrad 3), de bemærker tre sæt friske hundefodspor, meget
+større end Winonas aftryk. Sætte Winona fri Pc'erne kan nemt løsne Winona - men
+medmindre de gør noget på forhånd for at stoppe hende, bjæffer hun med glæde, da hun
+ser dem, og ketsjeren advarer de tre diamanthunde, som snart springer fra minerne fra
+forskellige huller. Sommerhuset PC'erne får formentlig ikke en chance for at gå indenfor i
+sommerhuset, før Winonas gøen advarer diamanten hunde. Men hvis de gør det, er der
+intet indeni undtagen tre snavsede hundekurve, tyggede rester knogle, en tygget tøffel og
+et stort dåskål med vand på gulvet. Den hundes gemmer er for godt skjult til at blive fundet
+af pc'erne. Hullerne Enhver, der kigger ind i hullerne, har brug for en lyskilde. Den huller
+forsvinder dybt ned i jorden. Enhver, der går ned ind i hullerne vil komme ind i minerne, en
+labyrint af tunneler, og vil snart støde ind i diamanthundene, som jager dem op til
+overfladen og knurrer voldsomt, mens de løber. Diamanthundene De grimme, grimme,
+mistænkelige hunde er overbevist om, at PC'er kommer til at stjæle deres gemmer. De vil
+fange pc'erne og sætte dem til at arbejde i minerne som deres slaver, graver ædelstene ud
+i kulde og mørke for at fylde deres grådige lommer. Den bedste måde for PCS at komme
+ud af dette rod og til redning Winona er simpelthen at fortælle sandheden - men de kan
+også forsøge at lyve sig ud af problemet. Læs højt: Winona er bundet til en stolpe uden for
+en faldskur i en stor lysning dækket af stammerne af huggede træer og snesevis af huller
+gravet groft ned i jorden. Winona hyler elendigt og ser meget trist ud. Der er intet andet
+tegn på liv i lysningen. Døren til hytten er på klem, men der kommer ingen røg fra
+skorstenen.
+Tracker Hvis pc'erne har reddet Winona, vil hun trofast hjælpe dem med at opspore de
+andre kæledyr de mangler endnu at finde. Hver gang skal gruppen lave en test for at
+undgå at blive tabt i woods, kan den pc, der passer Winona, rulle sin terning igen for en
+mislykket test. Hvis pc'erne er ærlige over for hundene, skal hver pc teste mod deres
+charme (sværhedsgrad 5), men kun én skal bestå testen for at overbevise hundene om, at
+det eneste, de ønsker, er Winona. Hvis pc'erne forsøger at lyve, er hundene - da de selv er
+snydere og løgnere - gode til at opdage løgne, så hver eneste pc skal bestå Charm-testen
+for at overbevise hundene om at lade dem gå. Hvis testen eller testene mislykkedes, så
+tror hundene ikke på pc'erne - de vil forsøge at fange dem og binde dem op, og så tvinge
+dem til at arbejde i minerne. PC'erne bliver nødt til at prøve at løbe væk fra hundene, eller
+flygte fra minerne, hvis de bliver fanget, samt forsøge at redde Winona bagefter. Også
+selvom testen eller testene lykkes, og hundene tror på pc'erne og ikke forsøger at gøre
+dem til deres slaver, de hævder 'finders' keepere' på Winona og vil ikke lade hende gå.
+PC'erne bliver nødt til at prøve at finde ud af det ud af en måde at overtale hundene til at
+give Winona op - måske ved at tilbyde at købe hende tilbage. Hundene kræve en høj pris -
+1.000 bits! Måske tilbyder pc'erne at arbejde i hundenes miner et stykke tid gratis. De
+forsøger måske at narre hundene eller stjæle Winona fra dem, men hvis de gør hundene
+vrede på nogen måde, hunde vil forsøge at slavebinde dem som beskrevet ovenfor.
+Endelig vil pc'erne have reddet alle seks kæledyr og bragt dem tilbage til Fluttershys
+sommerhus. De bliver nødt til at finde ud af, hvordan de kan forhindre kæledyrene i at
+flygte igen, så pc'erne kan koncentrere sig om rydde op i sommerhuset og reparere
+alle skaderne! Måske kan de mere velopdragne kæledyr hjælpe dem. Hvis pc'erne har
+brugt lang tid på at genoprette kæledyrene, så gør dem nervøse ved at fortælle dem, at de
+
+--- PAGE 51 ---
+ikke gør det ved, hvornår Mane Six måske kommer hjem - de bliver nødt til at skynde sig
+for at få hyttekrydderet og spænd før kæledyrets ejere vender tilbage. Pc'erne skal også
+sørge for, at kæledyrene bliver passet godt på, underholdt, fodret og vandet, eller andet de
+risikerer at forstyrre Fluttershy og hendes venner ved at præsentere dem for elendige
+kæledyr. Dårlige nyheder Kort efter pc'erne har fået orden på tingene, banker det hurtigt på
+hoveddøren. Spike er tilbage! Han ser træt, forslået og forslået ud, og han er i panik. Læs
+følgende afsnit højt: Med det hvirvler Spike rundt og falder sammen på gulvet, bevidstløs. I
+næste afsnit… Hvad er der sket med Mane Six? Hvilke problemer er de i?
+Hvordan slap Spike væk? Skal pc'erne rejse til
+Badlands for at redde dem? Hvem skal passe kæledyrene? Alle disse spørgsmål og flere
+giver dig inspiration skab din egen helt nye, unikke My Little Pony episode (eller episoder,
+hvis det er en todelt!). Alternativt kan du også få fat i The Curse of the Statuetter, det
+allerførste eventyrmodul til Tails of Equestria. Dette hæfte ligner The Pet Predicament
+eventyr og vil guide dig på en mystisk redningsmission for Mane Six, lige ind i Badlands!
+Læs højt: "I er nødt til at hjælpe, gutter! Twilight Sparkle og de andre ponyer er i store
+problemer! Jeg er den eneste ene hvem undslap! De har brug for hjælp lige nu!" Niveau
+op! Nu hvor pc'erne har afsluttet dette eventyr, de kan få et nyt niveau og opdatere deres
+Pony lagner. Se side 84-89 for detaljer om hvordan pc'erne kan stige i niveau.
+Cragadile Krop: D20+D10 Sind: D4 Charm: D4 Udholdenhed: 34 Talenter: Særlige
+færdigheder: At bide (D12); Særlige færdigheder: Svømning (D10); Særlige færdigheder:
+Skjul (D10) Påstande: Dybest set en gående mave - tænker kun på at spise. Naturlig
+rustning: Cragadilens hårde skæl betyder, at den taber 3 færre point of Stamina, når den
+mister Stamina fra en fysisk kilde, til minimum 1. Cragadile er et gigantisk dyr dækket af
+stenede skæl, der nyder sover. Den kan ikke lide at blive forstyrret og angriber normalt
+hvad som helst der vækker den, uanset om de troede, det var en sten! På de næste par
+sider finder du detaljer om de ​ponyer, væsner og monstre​, som pc'erne vil støde på under
+eventyret.​Du vil også finde statistik for typiske jordponyer, Pegasi og Unicorns​,​ i tilfælde af
+at pc'erne interagerer med sådanne ponyer under eventyret (f.eks. på torvet kl.
+begyndelsen). Hver skabnings egenskaber for krop, sind og charme er tydeligt angivet
+sammen med deres udholdenhed, Talenter og særheder. Der er også en kort beskrivelse
+og et billede for at hjælpe GM'en med at beskrive pc'erne hvordan væsnet eller ponyen ser
+ud. Statistikken, talenterne og særheder repræsenterer en typisk pony, et væsen eller et
+monster af den slags. Hvis du ønsker at gøre et væsen eller en pony stærkere eller
+svagere, er du velkommen til at justere scores eller ændre talenter og Quirks. Du kan
+endda tilføje dine egne specielle regler for at gøre væsnet eller ponyen helt anderledes og
+ekstra speciel. Bemærk, at Zecora og hver af Mane Six er unikke – der er kun én af hver af
+dem!​ Nogle gange, vigtige navngivne unikke ponyer eller andre væsner, der slutter sig til
+pc'erne i nogen tid, kaldes NPC'er (en forkortelse for Non-Player Characters, fordi GM
+styrer dem). Bemærk også, at nogle væsner har mere end én dør i deres træk - det er fordi
+de kan være det enorme og stærke eller utrolig intelligente eller så utroligt overbevisende,
+at de kaster mere end en enkelt terning i test og udfordringer og vælge det bedste resultat.
+Til sidst undrer du dig måske over, hvorfor nogle grimme monstre får en høj charme... ja,
+tænk på det som deres evne til at påvirke andre ikke gennem venlighed og venlig
+
+--- PAGE 52 ---
+overtalelse som
+dejlige ponyer, men snarere gennem intimidering. Og hvis du finder et træk, der ikke er
+forklaret her, er det fordi du ikke får brug for det i kæledyret Predicament-eventyr – hold øje
+med Bestiary of Equestria-udvidelsesbogen for at få flere oplysninger!
+Mohawk Krop: D6 Mind: D4 Charm: D6 Udholdenhed: 10 Talenter: Fly (D20); Særlige
+færdigheder: Kunstflyvning (D12);
+Særlige færdigheder: Sang (D8) Påstande: Tiltrukket af støjende omgivelser; Oprørsk
+Denne seje kylling er tiltrukket af høje lyde, især høje musik! Mohawken elsker at rocke ud
+og vil fortsætte med at lav en ketsjer, uanset hvem der siger, at den skal være stille!
+Stenbrudsål Krop: D20 Mind: D4 Charm: D4 Udholdenhed: 24 Talenter: Særlige
+færdigheder: At bide (D10); Særlige færdigheder: Skjul (D12) Påstande: Forlader aldrig sin
+ålegrav Massive med grimme tænder spiser stenbrud alt, hvad der er tåbeligt nok til at
+komme i nærheden af deres hul. Stenbrudsål forlader aldrig deres gruber siderne af
+klipper, fordi de nyder det kølige og mørke indeni. Diamanthund Krop: D12 Mind: D8
+Charm: D8 Udholdenhed: 20 Talenter: Find ædelstene (D6); Særlige færdigheder: Grave
+(D12) Kærligheder: Grådig; Elsker ædelstene Disse grådige hunde kan tale, men de har
+kun én ting, de vil have at tale om: ædelstene! De bruger det meste af deres tid på at finde
+ud af hvordan man får flere ædelstene eller klager over, at de ikke har nok.
+Ursa Minor Krop: 3D20 Mind: D6 Charm: D4 Udholdenhed: 66 Talenter: Særlige
+færdigheder: Ferocious Fighter (D20) Særdeleshed: Cranky; Altid sulten Specielt: Ursaens
+overnaturlige natur betyder, at den mister 3 færre
+point of Stamina, når den mister Stamina fra en fysisk kilde, til minimum 1. Ursas, både mol
+og dur, er massive, overnaturlige bjørne misforstås ofte som glubske monstre. I
+virkeligheden er de er dyr som alle andre - men når de bliver sure er der en forfærdelig
+mange af dem at bekymre sig om! På trods af sin størrelse, Ursa minor er bare en baby, og
+vil reagere på ting som ethvert andet babydyr. Zecora Unik Krop: D12 Mind: D20+D6
+Charm: D20 Udholdenhed: 38 Talenter: Healing Touch (D20); Kreativ flair: Undervisning
+(D10); Keen Knowledge: Historie (D20); Ivrigt Viden: Planter (D20); Stor viden: potions
+(D20) Quirks: Mystisk; Skal tale på rim! Zecora er en zebra; klog, kraftfuld og venlig, Hun er
+en mester i eliksirer og siger sin mening. Selvom hun er skræmmende for mange ponyer i
+starten, De finder hurtigt ud af, at hun ikke vil gøre dem forbandede. Hendes tale er
+mærkelig, og den er altid på rim, Men hun bliver forstået næsten hele tiden! Timberwolf
+Krop: D12 Mind: D6 Charm: D4 Udholdenhed: 18 Talenter: Særlige færdigheder: At bide
+(D8); Særlige færdigheder: Løb (D12) Egenskaber: Sårbar over for brand; Frygter ild
+Timberwolves arbejder sammen i teams for at jagte ponyer, der kommer ind deres skove.
+De er snedige og hurtige, for ikke at nævne, at de har en grimt bid!
+Applejack Unik Krop: D20 Mind: D12 Charm: D10 Udholdenhed: 32 Talenter: Stout Heart
+(D20); Særlige færdigheder: Bucking (D20);
+Stor viden: Landbrug (D20); Specialfærdighed: Løb (D12);
+Særlige færdigheder: Spring (D12); Specialfærdighed: Hyrde (D20);
+Creative Flair: Bagning (D8); Stor viden: Business (D12) Egenskaber: Stump; Rodet
+Applejack, der beroligede Twilight Sparkle, da hun var med tvivl, repræsenterer
+
+--- PAGE 53 ---
+ærlighedens ånd. Fluttershy Unik Krop: D10 Mind: D10 Charm: D20 Udholdenhed: 20
+Talenter: Tal med dyr (D20); flue (D6); Creative Flair: Sang (D12); The Stare (D20);
+Creative Flair: Mode (D12); Stor viden: Dyrepleje (D20) Egenskaber: Super-genert; Frygt
+(det meste!) Fluttershy, der tæmmede den voldsomme manticore med sin medfølelse,
+repræsenterer Venlighedens ånd. Pinkie tærte Unik Krop: D12 Mind: D10 Charm: D20
+Udholdenhed: 22 Talenter: Stout Heart (D20); Creative Flair: Festplanlægning (D20);
+Ponysans (D20); Creative Flair: Bagning (D12); Creative Flair: Musik (D10); Kreativ flair:
+Dans (D10); Creative Flair: Komedie (D20)
+Kærligheder: Naiv; For dumt
+Pinkie pie,
+der fordrev frygten ved at fnise over for faren, repræsenterer latterens ånd!
+Twilight Sparkle Unik Krop: D10 Mind: D20 Charm: D12 Udholdenhed: 30 Talenter:
+Telekinesis (D20); Keen Knowledge: Magi (D20); bedøve stråle(D12); Kraftfelt (D12);
+Teleport (D12); flue (D6); Stout Heart (D6); Skabelse (D12); Keen Knowledge:
+Organisation (D20); Kreativ flair: Undervisning (D10);
+Keen Knowledge: Historie (D12); Stor viden: Videnskab (D12) Kærligheder: Bossy.
+Princess of Friendship (Alicorn Power): Når nogen bruger poletter af Venskab i Twilights
+tilstedeværelse, rul en D6 for hver brugt token. På en
+4 eller mere, bliver tokenet straks returneret til ponyen, der brugte det! "Når disse
+elementer antændes af gnisten, der bor i hjertet af os alle, det skaber det sjette element:
+elementet af... Magi!" Rainbow Dash Unik Krop: D20 Mind: D10 Charm: D10 Udholdenhed:
+30 Talenter: Fly (D20); Cloud Wrangling (D20);
+Særlige færdigheder: Kunstflyvning (D20); Keen Knowledge: Wonderbolts (D20); Keen
+Knowledge: Daring Do (D12); Specialfærdighed: Løb (D12); Særlige færdigheder:
+Kampsport (D20) Quirks: Mememememe!; Overmodig Rainbow Dash, som ikke kunne
+forlade sine venner for sine egne hjertes ønske, repræsenterer loyalitetens ånd!
+Sjældenhed
+Unik Krop: D8 Mind: D12 Charm: D20 Udholdenhed: 20 Talenter: Telekinesis (D12);
+Creative Flair: Mode (D20);
+Creative Flair: Whining (D20); Lokaliser (D12);
+Creative Flair: Persuasion (D20); Keen Knowledge: Kunsthistorie (D10); Kreativ flair: Kunst
+(D12); Stor viden: Business (D20) Quirks: Neat Freak; Frygt (natur) Rarity, der beroligede
+en sorgfuld slange med en meningsfuld gave, repræsenterer generøsitetens ånd!
+Typisk Pegasus Pony Krop: D6 Mind: D6 Charm: D6 Udholdenhed: 12 Talenter: Flue (D6);
+Vælg et passende Cutie Mark-talent Kærligheder: Vælg en
+Pegasi kan flyve højt på himlen ved hjælp af deres smukke vinger. Til skab en typisk
+Pegasus, vælg et talent og særegenhed, der er bedst repræsentere deres personlighed.
+Dette er en hurtig og nem måde at skabe de fleste af de borgere, som ponyfigurer vil
+mødes fra dag til dag. Typisk Unicorn Pony Krop: D6 Mind: D6 Charm: D6 Udholdenhed:
+12 Talenter: Telekinesis (D6); Vælg et passende Cutie Mark-talent Kærligheder: Vælg en
+Enhjørninger kan alle bruge telekinese magi til at flytte ting med deres sind gennem deres
+
+--- PAGE 54 ---
+horns kraft. At skabe en typisk enhjørning pony, vælg et talent og særegenhed, der bedst
+repræsenterer deres personlighed. Dette er en hurtig og nem måde at skabe de fleste af
+borgerne, der ponyer karakterer vil mødes fra dag til dag. Typisk jordpony Krop: D8 Mind:
+D6 Charm: D6 Udholdenhed: 14 Talenter: Stout Heart (D6); Vælg et passende Cutie
+Mark-talent Kærligheder: Vælg en Jordponyer har ikke vinger eller magi, men de har
+stærke hjerter og stærke kroppe. For at skabe en typisk jordpony skal du vælge en talent
+og særheder, der bedst repræsenterer deres personlighed. Dette er en hurtig og nem
+måde at skabe de fleste af de borgere, som ponyfigurer vil mødes fra dag til dag.
+STYKORT: D4 På de næste sider finder du terningerne, der giver dig mulighed for at 'rulle'
+en D4, D6, D8, D10, D12 eller D20, hvis du ikke ejer et sæt rollespilsterninger. Når du skal
+slå en terning, f.eks. en D8, skal du gå til det højre terningskema (D8 i denne etui), luk
+derefter øjnene og peg tilfældigt med en finger eller en blyant på siden. Åbn din øjne og
+blik; tallet under din finger eller blyant er det tal, du 'rullede'.
+DØKART:
+D6
+DIEKART: D8
+STYKORT: D10
+STYKORT: D12
+DIEKART: D20
+Indeks A Eventyr modul 3 Alicorns 30 Fantastisk succes! 53 B Ulykke! 53 Barding (let) 81
+Barding (metal) 81 Krops 16, 25, 40, 42, 43, 52, 54, 55, 56, 57, 59, 60, 66, 69, 76, 81, 86,
+87, 89 Bog (almindelig) 81 Bog (sjælden) 81 Spand 81 C Vogn 81 Udfordringer 3, 52, 57
+Charm 16, 40, 41, 47, 57, 60, 68, 76, 81, 86, 87 Ur 81 Tøj (elegant) 81 Tøj (enkelt) 81
+Cloud Wrangling 66 Oprettelse af din ponykarakter 14 Kreativ flair 66 Cutie Mark 17, 18,
+76, 77, 89 Cutie Mark Crusaders quest 89 Cutie mark talents 64 D Terning 9, 10, 40, 54,
+57, 59, 61, 64, 71 Sværhedsgrad 53 Nedgradering af terningkast 61 E Jordpony 6, 14, 16,
+17, 24, 25, 30, 65, 66, 67, 69, 77, 89 Elements of Harmony 3, 15, 34, 76, 77, 95 Udstyr 3,
+18, 59, 80, 81, 82, 83 Eksploderende hov 56 F Flyv 17, 29, 57, 67, 81, 89 Mad
+(ekstravagant måltid) 81 Mad (simpelt måltid) 81 Mad (snack) 81 Forcefield 66 G
+Gamemaster 6, 7, 8, 10, 19, 34, 46, 47, 48, 49, 52, 53, 54, 55, 65, 68, 76, 77, 80, 86, 87,
+88, 89, 96 Gamemaster skærm 10 Ædelsten 81 H Healing Touch 67 Hjelm 82 jeg Umulige
+tests 56 K Stor viden 67 Kit (kunstartikler) 82 Sæt (rengøringsmidler) 82 Sæt (madlavning)
+82 Kit (udklædning) 82 Kit (Grooming) 83 Sæt (hobby) 83 Kit (Joke) 83 Kit (fest) 83 Sæt
+(Rul)
+L Stige 83 Lampe 83 Niveau 0 89 Niveau op 86 Niveau 3, 86, 88, 89 Find 68 M Magiske
+talenter 65 Mind 16, 25, 40, 41, 42, 43, 57, 60, 66, 67, 70, 71, 76, 82, 86, 87, 89
+Musikinstrument 83 N Fortæller 6 P Pegasus 14, 16, 17, 24, 26, 28, 28, 29, 30, 65, 66, 67,
+77, 89, 99 stang 83
+Ponybalsam (5 anvendelser) 83 Ponykarakter 6, 14, 24, 25, 27, 29, 34, 40, 48, 80, 92, 93,
+97 Pony navn 18, 152 Pony i alle brancher 66 Pony Sense 68 Pony Sheet 14, 15, 16, 17,
+18 Pony type 14 Portræt 18, 77, 88, 152 Prisliste 81 Q Quirks 3, 18, 71, 72 R Omruller 61
+Begrænsede talenter 65 Rollespil 6, 7, 93, 98 Reb 83 S Sadeltasker 83 Slags 58 Skovl 83
+
+--- PAGE 55 ---
+Spade 83 Tal med dyr 68 Særlige færdigheder 69 Udholdenhed 16, 25, 42, 43, 46, 52, 53,
+58, 59, 60, 67, 69, 81, 82, 83, 87, 89 Stare (The) 70 Fortæller 6 Fortællespil 6 Stout Heart
+17, 25, 69, 89 Bedøve Ray 69 T Talenter 3, 17, 18, 25, 29, 64, 65, 66, 87 Telekinesis 17,
+27, 55, 70, 81, 89 Teleport 70 Teleskop 83 Test 3, 9, 46, 47, 52, 67 The Stare 70 Tokens of
+Friendship 8, 19, 46, 47, 48, 49, 56, 71, 87, 88 Træk 3, 40, 86 U Unicorn 6, 14, 16, 17, 18,
+24, 26, 27, 28, 30, 55, 65, 66, 68, 70, 76, 77, 89, 93 Utrænede udfordringer 60 Utrænede
+tests 60 Opgradering af terningkast 61
+Og der er mere! Fortsæt med at udforske Equestria og nyd dine eventyr med vores udvalg
+af nyttige spillehjælpemidler og udvidelsesbøger til Tails of Equestria. Bemærk, at nogle af
+de viste kunstværker kan variere hvornår produktionen er afsluttet. Eventyr Hver af disse
+bøger giver dig en ny historie og det hele detaljerne GM skal bruge for at køre en sjov og
+udfordrende eventyr. Den første kan findes i The Curse of the Statuettes udvidelsessæt,
+som også inkluderer en pude med Pony Sheets, et sæt rollespilsterninger, og en
+GM-skærm – skærmen gør det muligt for GM at beholde alt information, som spillerne ikke
+(endnu) kan se hemmelige. Det også indeholder kerneoplysninger til hurtig reference.
+Tokens af Venskab Disse fragmenter af ren krystalliseret Venskab tillade dig at holde styr
+på Tegn på venskab dig har tjent. Og det er meget pænere faktisk at uddele en skinnende
+krystal, når du giver det som en gave til en ven.
+Tails of Equestria Rollespilsterninger Dette er tre forskellige sæt Tails of
+Equestria-rollespilsterninger – sæt specifikke for Pegasi, Unicorns, og jordponyer. Hvert
+sæt inkluderer et mini-eventyr. Pony lagen Pad Inkluderet i statuetternes forbandelse
+udvidelsessæt, denne pude giver dig mange afrivede ponyark. Hvert ark er enten blank
+eller inkluderer en tegning af en Pegasus, Unicorn eller Earth pony (enten en hoppeføl eller
+et hingsteføl), så du kan farvelægge det, så det matcher din karakters udseende. En
+udvidelsesbog til B es tia r y af
+E q u e s t r i a B es tia r y af
+E q u e s t r i a Den Den Udvidelsesbøger Disse kosttilskud er vitale guider og indsamlinger
+af oplysninger til GM og både spillere. Det første eksempel på disse er The Bestiary of
+Equestria - en kilde til viden om de mange væsner og racer, der bebo det magiske land
+Equestria.
+Pony navn: ........................................................................................................ Spillerens
+navn: ........................................................................................ Pony type:
+................................................................................... Niveau:
+........................................................................................................................ Element af
+harmoni: ...................................................
+Maks Nuværende Udholdenhed: ................................................ ..........................................
+..............................................................................................................................
+Krop Sind Charme Talenter CM:........................................................................................
+T:........................................................................................
+T:........................................................................................
+T:........................................................................................
+T:........................................................................................ Portræt Påstande
+Hoved:................................................................................
+
+--- PAGE 56 ---
+Q:................................................................................................
+Q:................................................................................................
+Q:................................................................................................ søde Mark F r i e n d s h i s

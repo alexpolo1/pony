@@ -1,0 +1,577 @@
+/* My Little Pony: Tails of Equestria - Børnevenligt design */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #a18cd1 100%);
+    min-height: 100vh;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* === HOME === */
+
+.home { text-align: center; }
+
+.banner {
+    background: white;
+    border-radius: 20px;
+    padding: 40px 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 32px rgba(255, 105, 180, 0.3);
+}
+
+.banner h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 3rem;
+    color: #e91e8c;
+    margin-bottom: 10px;
+}
+
+.banner h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2rem;
+    color: #9b59b6;
+    margin-bottom: 10px;
+}
+
+.subtitle { font-size: 1.3rem; color: #666; }
+
+.pony-decoration {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+    font-size: 2rem;
+}
+
+.pony-emoji {
+    animation: bounce 2s ease-in-out infinite;
+}
+
+.pony-emoji:nth-child(2) { animation-delay: 0.2s; }
+.pony-emoji:nth-child(3) { animation-delay: 0.4s; }
+.pony-emoji:nth-child(4) { animation-delay: 0.6s; }
+.pony-emoji:nth-child(5) { animation-delay: 0.8s; }
+.pony-emoji:nth-child(6) { animation-delay: 1.0s; }
+.pony-emoji:nth-child(7) { animation-delay: 1.2s; }
+.pony-emoji:nth-child(8) { animation-delay: 1.4s; }
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* === BUTTONS === */
+
+.btn {
+    display: inline-block;
+    padding: 20px 40px;
+    font-size: 1.5rem;
+    font-family: 'Fredoka One', cursive;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin: 10px;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.btn-start {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4);
+}
+
+.btn-home {
+    background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(161, 140, 209, 0.4);
+}
+
+.btn-roll {
+    background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
+    color: #333;
+    font-size: 2rem;
+    padding: 25px 50px;
+    box-shadow: 0 6px 20px rgba(247, 151, 30, 0.5);
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* === INFO BOX === */
+
+.info-box {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    margin: 30px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.info-box h3 {
+    font-family: 'Fredoka One', cursive;
+    color: #e91e8c;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+/* === START PAGE === */
+
+.start-page {
+    text-align: center;
+}
+
+.start-page h1, .start-page h2 {
+    font-family: 'Fredoka One', cursive;
+    color: #e91e8c;
+    margin: 20px 0;
+}
+
+.start-page h2 {
+    color: #9b59b6;
+}
+
+.pony-choices, .adventure-choices {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.pony-choice, .adventure-choice {
+    cursor: pointer;
+}
+
+.pony-choice input, .adventure-choice input {
+    display: none;
+}
+
+.pony-grid, .adventure-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.pony-card, .adventure-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 3px solid transparent;
+    transition: border-color 0.2s, transform 0.2s;
+    min-width: 140px;
+    cursor: pointer;
+}
+
+.pony-radio, .adventure-radio {
+    display: none;
+}
+
+.pony-card.selected,
+.pony-radio:checked + .pony-img,
+.adventure-card.selected,
+.adventure-radio:checked + .adventure-emoji {
+    border-color: #e91e8c;
+    transform: scale(1.05);
+}
+
+.pony-card:hover, .adventure-card:hover {
+    border-color: #f093fb;
+    transform: scale(1.03);
+}
+
+.pony-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.big-emoji {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.pony-card strong, .adventure-card strong {
+    display: block;
+    color: #e91e8c;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.pony-card small, .adventure-card small {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.pony-desc, .adventure-desc {
+    display: block;
+    color: #666;
+    font-size: 0.95rem;
+    margin-top: 5px;
+}
+
+.adventure-scenes {
+    display: block;
+    color: #9b59b6;
+    font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+.section-title {
+    font-family: 'Fredoka One', cursive;
+    color: #9b59b6;
+    margin: 25px 0 15px;
+}
+
+/* === GAME === */
+
+.scene-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.scene-header h1 {
+    font-family: 'Fredoka One', cursive;
+    color: white;
+    font-size: 1.8rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.progress {
+    font-family: 'Fredoka One', cursive;
+    color: #ffd700;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Pony mini card */
+.pony-card-mini {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4);
+}
+
+.pony-mini-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.pony-card-mini .big-emoji {
+    font-size: 3rem;
+    margin: 0;
+}
+
+.pony-info {
+    flex: 1;
+}
+
+.pony-info strong {
+    font-family: 'Fredoka One', cursive;
+    color: white;
+    font-size: 1.3rem;
+    display: block;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.pony-type-badge {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.85);
+    background: rgba(255,255,255,0.2);
+    padding: 2px 10px;
+    border-radius: 10px;
+}
+
+.mini-stats {
+    display: flex;
+    gap: 10px;
+    font-size: 1.2rem;
+}
+
+/* Scene card */
+.scene-card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #f5576c;
+}
+
+.scene-number {
+    font-family: 'Fredoka One', cursive;
+    color: #f5576c;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.scene-text {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 15px;
+    line-height: 1.6;
+    background: linear-gradient(135deg, #fff9e6 0%, #fff3e0 100%);
+    border-radius: 12px;
+    padding: 15px;
+    border: 1px solid #ffe0b2;
+}
+
+.scene-action {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+    border: 2px solid #a5d6a7;
+}
+
+.action-label {
+    font-family: 'Fredoka One', cursive;
+    color: #f5576c;
+    font-size: 1.1rem;
+}
+
+.action-text {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #2e7d32;
+    margin-top: 5px;
+}
+
+.scene-difficulty {
+    text-align: center;
+    color: #888;
+    font-size: 1rem;
+    background: #f3e5f5;
+    border-radius: 10px;
+    padding: 8px;
+}
+
+.previous-results {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 2px dashed #eee;
+}
+
+.previous-results h3 {
+    font-family: 'Fredoka One', cursive;
+    color: #9b59b6;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.mini-result {
+    padding: 8px 12px;
+    margin: 5px 0;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.mini-result.success {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    color: #2e7d32;
+    border-left: 3px solid #4caf50;
+}
+
+.mini-result.fail {
+    background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+    color: #e65100;
+    border-left: 3px solid #ff9800;
+}
+
+/* Game end */
+.game-end {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.game-end h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.game-end.victory {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    border: 3px solid #4caf50;
+}
+.game-end.victory h1 { color: #27ae60; }
+
+.game-end.mixed {
+    background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+    border: 3px solid #ffc107;
+}
+.game-end.mixed h1 { color: #f57f17; }
+
+.game-end.defeat {
+    background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+    border: 3px solid #e91e63;
+}
+.game-end.defeat h1 { color: #c2185b; }
+
+.end-text {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: #555;
+    line-height: 1.5;
+}
+
+.score {
+    font-size: 1.1rem;
+    color: #888;
+    margin-bottom: 20px;
+}
+
+/* History */
+.history {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.history h2 {
+    font-family: 'Fredoka One', cursive;
+    color: #9b59b6;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.history-item {
+    background: #f8f4ff;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.history-item.success {
+    border-left: 4px solid #27ae60;
+    background: linear-gradient(135deg, #e8f5e9 0%, #f3e5f5 100%);
+}
+.history-item.fail {
+    border-left: 4px solid #f39c12;
+    background: linear-gradient(135deg, #fff3e0 0%, #f3e5f5 100%);
+}
+
+.history-action {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.dice-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.die {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.3rem;
+    color: white;
+    background: #95a5a6;
+}
+
+.die.success {
+    background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+}
+
+.die.fantastic {
+    background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
+}
+
+.die.fail {
+    background: linear-gradient(135deg, #e74c3c 0%, #f39c12 100%);
+}
+
+.history-result {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.history-story {
+    margin-top: 10px;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    font-style: italic;
+}
+
+.history-item.success .history-story {
+    background: rgba(76, 175, 80, 0.1);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    color: #2e7d32;
+}
+
+.history-item.fail .history-story {
+    background: rgba(255, 152, 0, 0.1);
+    border: 1px solid rgba(255, 152, 0, 0.3);
+    color: #e65100;
+}
+
+.actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .banner h1 { font-size: 2rem; }
+    .banner h2 { font-size: 1.5rem; }
+    .btn { padding: 15px 25px; font-size: 1.2rem; }
+    .btn-roll { font-size: 1.5rem; padding: 20px 35px; }
+    .pony-card-mini { flex-direction: column; text-align: center; }
+    .pony-choices, .adventure-choices { flex-direction: column; align-items: center; }
+}

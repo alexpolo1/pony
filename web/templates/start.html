@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Vælg dit eventyr - My Little Pony{% endblock %}
+{% block content %}
+<div class="start-page">
+    <h1>🦄 Vælg din pony! 🦄</h1>
+
+    <form method="POST" action="{{ url_for('start') }}">
+        <div class="pony-grid">
+            {% for i, pt in enumerate(ponytyper) %}
+            <label class="pony-card {% if i == 0 %}selected{% endif %}">
+                <input type="radio" name="type" value="{{ i }}" {% if i == 0 %}checked{% endif %} class="pony-radio">
+                <img src="/static/images/{{ ['jordpony','pegasus','enhjorning','alicorn'][i] }}.png" alt="{{ pt.navn }}" class="pony-img">
+                <div class="pony-emoji">{{ pt.emoji }}</div>
+                <strong>{{ pt.navn }}</strong>
+                <span class="pony-desc">{{ pt.tekst }}</span>
+            </label>
+            {% endfor %}
+        </div>
+
+        <h2 class="section-title">📖 Vælg dit eventyr!</h2>
+        <div class="adventure-grid">
+            {% for i, th in enumerate(themaer) %}
+            <label class="adventure-card {% if i == 0 %}selected{% endif %}">
+                <input type="radio" name="tema" value="{{ i }}" {% if i == 0 %}checked{% endif %} class="adventure-radio">
+                <div class="adventure-emoji">{{ th.emoji }}</div>
+                <strong>{{ th.titel }}</strong>
+                <span class="adventure-desc">{{ th.beskrivelse }}</span>
+                <span class="adventure-scenes">{{ th.scener|length }} scener</span>
+            </label>
+            {% endfor %}
+        </div>
+
+        <button type="submit" class="btn btn-start">🚀 Start Eventyret!</button>
+    </form>
+</div>
+{% endblock %}
