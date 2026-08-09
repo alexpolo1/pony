@@ -36,7 +36,7 @@ THEMAER = [
             {
                 "tekst": "Pinkies festkanon er blevet viklet ind i serpentiner. Hvis den ikke bliver fri, kan overraskelsen ikke begynde.",
                 "aktion": "Gør Pinkies festkanon klar",
-                "stat": "krop", "svaer": "normal",
+                "stat": "krop", "svaer": "svaert",
                 "succes": "Du får alle serpentinerne fri. Festkanonen siger et lille glad plop og er klar til den store overraskelse!",
                 "fiasko": "En serpentin sidder fast, men Pinkie trækker den ud med et grin. Festkanonen er klar i sidste øjeblik.",
             },
