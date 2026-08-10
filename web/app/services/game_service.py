@@ -2,7 +2,7 @@
 Game service: orchestrates dice rolls, scene progression, and result formatting.
 """
 
-from app.game.dice import resolve_test
+from app.game.dice import resolve_test, _result_text
 from app.game.state import create_game
 from app.data.pixel_assets import get_scene_icon
 
@@ -80,6 +80,32 @@ def resolve_scene_interaction(game, selection):
     interaction_type = interaction["type"]
     correct = interaction_type == "choice" or selection == interaction.get("target")
     if not correct:
+        retries = game.setdefault("interaction_retries", {})
+        scene_key = str(game["scene"])
+        retries[scene_key] = retries.get(scene_key, 0) + 1
+        max_retries = interaction.get("max_retries", 2)
+        if retries[scene_key] >= max_retries:
+            # After too many wrong tries, reveal the answer and advance with a small penalty
+            target = interaction.get("target")
+            target_opt = next((o for o in interaction.get("options", []) if o.get("id") == target), None)
+            label = target_opt.get("label") if target_opt else (target or "")
+            story = f"Du fik det til sidst! {label} var svaret. {scene['succes']}"
+            outcome = {
+                "aktion": scene["aktion"], "stat": scene["stat"], "svaer": scene["svaer"],
+                "dice": [], "succes": True, "tekst": story,
+                "interaction_type": interaction_type, "selection": label,
+            }
+            game["historie"].append(outcome)
+            game["udfald_tekst"] = story
+            game["scene"] += 1
+            if game["scene"] >= len(scenes):
+                game["færdig"] = True
+            retries.pop(str(game["scene"]), None)
+            return game, {
+                "accepted": True, "correct": True, "progressed": True,
+                "feedback": f"Det var {label}! Du fik det til sidst! ✨",
+                "selection": label,
+            }
         return game, {
             "accepted": True, "correct": False, "progressed": False,
             "feedback": f"Næsten! Prøv igen. {interaction['prompt']}",
@@ -161,6 +187,9 @@ def format_scene_data(game):
         result["actionText"] = scn.get("aktion", "")
         result["difficulty"] = diff_map.get(scn.get("svaer", ""), "")
         result["voice"] = scn.get("voice")
+        # Pass through any clue number from this scene (for memory reminders)
+        if scn.get("clueNumber") is not None:
+            result["clueNumber"] = scn["clueNumber"]
         interaction = scn.get("interaction", {"type": "dice"})
         result["interaction"] = {
             "type": interaction.get("type", "dice"),
@@ -181,7 +210,7 @@ def format_scene_data(game):
             "action": h.get("aktion", ""),
             "dice": h.get("dice", []),
             "success": h.get("succes", False),
-            "result": "\u2705 Succes!" if h.get("succes") else "\U0001f308 Godt forsøg!",
+            "result": _result_text(h),
             "story": h.get("tekst", ""),
             "interactionType": h.get("interaction_type", "dice"),
             "selection": h.get("selection"),

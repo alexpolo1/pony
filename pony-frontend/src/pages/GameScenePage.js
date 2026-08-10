@@ -195,6 +195,16 @@ export default function GameScenePage({
             className="story-window scene-card"
           >
             <div className="scene-number">{data.sceneNum}</div>
+            {data.clueNumber != null && (
+              <motion.div
+                className="clue-number-badge"
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+              >
+                <span aria-hidden="true">🔢</span> {data.clueNumber}
+              </motion.div>
+            )}
             <p className="scene-text">{data.sceneText}</p>
             <SpeakButton
               text={buildCurrentSceneNarration(data)} volume={volume}

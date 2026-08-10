@@ -26,6 +26,30 @@ DIFFICULTY_TEXT = {
     "svaert": "Sv\u00e6rt \U0001f31f\U0001f31f\U0001f31f",
 }
 
+SUCCESS_TEXTS = [
+    "\u2b50 Fantastisk!",
+    "\U0001f3af Super!",
+    "\U0001f389 Fantastisk!",
+    "\u2728 Flot!",
+    "\U0001f441 Du klarede det!",
+]
+
+FAIL_TEXTS = [
+    "\U0001f308 Godt fors\u00f8g!",
+    "\U0001f3af N\u00e6sten!",
+    "\U0001f44e Pr\u00f8v noget andet!",
+    "\u2728 Du gjorde dit bedste!",
+    "\U0001f3af Ponyer hj\u00e6lper hinanden!",
+]
+
+
+def _result_text(h):
+    """Generate a child-friendly result text based on the outcome."""
+    import random
+    if h.get("succes"):
+        return random.choice(SUCCESS_TEXTS)
+    return random.choice(FAIL_TEXTS)
+
 
 def roll_d6(rng=None):
     """Roll a single six-sided die."""

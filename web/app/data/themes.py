@@ -17,6 +17,7 @@ THEMAER = [
                 "stat": "charme", "svaer": "normal",
                 "succes": "Mrs. Cake smiler. 'En hjælpsom pony! Applejack har havre på Sweet Apple Acres, som vi kan male til mel.' Du får et kort over vejen.",
                 "fiasko": "Mrs. Cake kan ikke finde mere mel, men Pinkie opdager et lille kort til Sweet Apple Acres under en bageplade.",
+                "clueNumber": 3,
             },
             {
                 "tekst": "På Sweet Apple Acres har Applejack en sæk havre, men møllehjulet står stille. I må vælge, hvordan I får hjulet i gang igen.",
@@ -61,6 +62,7 @@ THEMAER = [
                 "stat": "krop", "svaer": "normal",
                 "succes": "Bag en stor solsikke finder du en lille gulerod og friske kaninspor. Angel er løbet videre mod Ponyville!",
                 "fiasko": "Du finder kun sommerfugle, men Fluttershy opdager små kaninspor, der fører ud gennem havelågen.",
+                "clueNumber": 2,
             },
             {
                 "tekst": "Du følger sporene gennem Ponyville. Applejack står ved markedsboden, Rarity er på vej fra Carousel Boutique, og Twilight ordner bøger. Har nogen set Angel?",
@@ -105,6 +107,7 @@ THEMAER = [
                 "stat": "krop", "svaer": "normal",
                 "succes": "Du griber æbler med hovene, halen og en kurv. Applejack råber begejstret, at halvdelen allerede er reddet!",
                 "fiasko": "Æblerne ruller for hurtigt! Du griber nogle få, men de fleste fortsætter ned ad bakken...",
+                "clueNumber": 4,
             },
             {
                 "tekst": "Mange æbler er landet i det høje, gyldne græs. Apple Bloom kommer løbende, og I må vælge den bedste måde at samle dem på.",
@@ -149,6 +152,7 @@ THEMAER = [
                 "stat": "sind", "svaer": "normal",
                 "succes": "Under en stofrulle finder du glitrende støv, som fører ud mod Ponyvilles torv. I har et spor!",
                 "fiasko": "Værkstedet er for rodet! Du finder nåle, knapper og glitter \u2014 men ikke glimmer-stenen.",
+                "clueNumber": 3,
             },
             {
                 "tekst": "På Ponyvilles torv spørger du Spike, Applejack og de andre ponyer, om de har set et usædvanligt magisk glimt.",
@@ -193,6 +197,7 @@ THEMAER = [
                 "stat": "sind", "svaer": "let",
                 "succes": "Discord er umulig at overse! Han svæver i luften med en marshmallow-hat. 'Hej, lille pony! Vil du lege?' spørger han.",
                 "fiasko": "Skumfiduserne hopper overalt, men du følger lyden af Discords grin til en sky af candyfloss.",
+                "clueNumber": 1,
             },
             {
                 "tekst": "Discord griner. 'Hvis du kan overraske mig, vil jeg måske rydde op!' Fluttershy minder ham om, at en god spøg også skal være sjov for vennerne.",
@@ -237,6 +242,7 @@ THEMAER = [
                 "stat": "krop", "svaer": "normal",
                 "succes": "Du opdager, at bogstaverne danner små pile mod torvet. Sporet er tydeligt!",
                 "fiasko": "Bogstaverne kilder dig på næsen, men Spike finder en lille pil mellem dem, som viser vej.",
+                "clueNumber": 2,
             },
             {
                 "tekst": "På torvet danser en hel sky af ord rundt om rådhuset. Bogen må have fløjet denne vej, men ordene blokerer stien.",
@@ -281,6 +287,7 @@ THEMAER = [
                 "stat": "krop", "svaer": "let",
                 "succes": "Stjernestøvet lyser under dine hove og fører dig sikkert ind mellem træerne.",
                 "fiasko": "Sporet forsvinder kort, men en ugle viser dig, hvor glimmeret fortsætter.",
+                "clueNumber": 4,
             },
             {
                 "tekst": "Skovens træer hvisker alle på én gang. Den lille stjerne gemmer sig, fordi den er blevet bange for mørket.",
@@ -325,6 +332,7 @@ THEMAER = [
                 "stat": "sind", "svaer": "let",
                 "succes": "Du ser vognen bag en sky formet som en cupcake og finder den hurtigste vej derop.",
                 "fiasko": "Skyerne ligner alle kager, men Pinkie opdager til sidst vognen gennem kikkerten.",
+                "clueNumber": 1,
             },
             {
                 "tekst": "Ballonerne trækker vognen mod Everfree-skoven. I må hurtigt vælge, hvordan I kan få fat i den nederste snor.",

@@ -39,6 +39,16 @@ export default function GameEndPage({ data, onNavigate, volume, setVolume }) {
       >
         {data.victory ? '🌟 SEJR! 🌟' : '🌈 FLOT EVENTYR! 🌈'}
       </motion.h1>
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+        className="end-stars"
+      >
+        {data.history?.filter(h => h.success).length >= 4 && <span>⭐⭐⭐⭐⭐</span>}
+        {data.history?.filter(h => h.success).length >= 3 && data.history?.filter(h => h.success).length < 4 && <span>⭐⭐⭐</span>}
+        {data.history?.filter(h => h.success).length < 3 && <span>⭐⭐</span>}
+      </motion.div>
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

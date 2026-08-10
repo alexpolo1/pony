@@ -757,8 +757,14 @@ body {
   margin-bottom: var(--space-sm);
 }
 
-.result-window.success { border: 4px solid var(--color-success); }
-.result-window.fail { border: 4px solid var(--color-fail); }
+.result-window.success {
+  border: 4px solid var(--color-success);
+  background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+}
+.result-window.fail {
+  border: 4px solid var(--color-fail);
+  background: linear-gradient(135deg, #fff3e0, #fff8f0);
+}
 
 .narration-status {
   display: grid;
@@ -932,6 +938,16 @@ body {
   margin-top: var(--space-sm);
   color: #a24600;
   font-weight: 800;
+  background: #fff4e0;
+  padding: var(--space-md);
+  border-radius: var(--radius-sm);
+  border: 2px solid #ffb74d;
+  animation: feedback-pulse 1s ease-in-out;
+}
+
+@keyframes feedback-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
 }
 
 .interaction-options {
@@ -1017,6 +1033,22 @@ body {
   margin-bottom: var(--space-md);
 }
 
+.clue-number-badge {
+  background: linear-gradient(135deg, #ffd54f, #ffb300);
+  color: #5d4037;
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: 15px;
+  font-size: var(--font-large);
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: var(--space-md);
+  box-shadow: 0 2px 8px rgba(255, 179, 0, 0.4);
+}
+
+.clue-number-badge span {
+  font-size: var(--font-xl);
+}
+
 .scene-text {
   margin-bottom: var(--space-md);
 }
@@ -1089,8 +1121,9 @@ body {
 }
 
 .feed-result {
-  color: var(--color-muted);
-  font-size: var(--font-xsmall);
+  color: var(--color-primary);
+  font-size: var(--font-medium);
+  font-weight: 700;
   margin-top: var(--space-sm);
 }
 
@@ -1150,6 +1183,13 @@ body {
   color: var(--color-white);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   margin-bottom: var(--space-md);
+}
+
+.end-stars {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: var(--space-md);
+  letter-spacing: 0.3rem;
 }
 
 .end-text {
