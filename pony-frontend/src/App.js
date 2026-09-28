@@ -8,6 +8,7 @@ import PixelPonyConfiguratorPage from './pages/PixelPonyConfiguratorPage';
 import GameScenePage from './pages/GameScenePage';
 import GameEndPage from './pages/GameEndPage';
 import StatsPage from './pages/StatsPage';
+import PonyFarmPage from './pages/PonyFarmPage';
 import Narrator from './components/Narrator';
 import FullscreenButton from './components/FullscreenButton';
 import { prepareDanishSpeech, speakDanish } from './services/tts';
@@ -387,6 +388,14 @@ function App() {
 
           {page === 'stats' && (
             <StatsPage onNavigate={navigateTo} />
+          )}
+
+          {page === 'farm' && (
+            <PonyFarmPage
+              onNavigate={navigateTo}
+              volume={volume}
+              setVolume={setVolume}
+            />
           )}
         </>
       )}

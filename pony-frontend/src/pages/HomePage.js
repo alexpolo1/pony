@@ -107,6 +107,15 @@ export default function HomePage({ volume, setVolume, stats, showAchievements, s
         >
           🎮 Start Nyt Spil!
         </motion.button>
+        <motion.button
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.95 }}
+          className="btn-start btn-farm"
+          onClick={() => onNavigate('farm')}
+          aria-label="Gå til ponystalden"
+        >
+          🐴 Ponystalden
+        </motion.button>
       </motion.div>
     </motion.div>
   );

@@ -1,0 +1,132 @@
+.farm-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #2a2e35;
+}
+
+.farm-topbar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.farm-topbar .btn-back {
+  flex: 0 0 auto;
+}
+
+.farm-title {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.farm-title-emoji {
+  font-size: 1.3rem;
+}
+
+.farm-hud {
+  flex: 0 0 auto;
+}
+
+.farm-vol {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: #fff;
+}
+
+.farm-vol input[type='range'] {
+  width: 80px;
+}
+
+.farm-stage {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  min-height: 0;
+}
+
+.farm-canvas {
+  width: 100%;
+  max-width: 640px;
+  aspect-ratio: 320 / 220;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  background: #6fb95a;
+  touch-action: none;
+}
+
+.farm-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 0.9rem 0.9rem;
+}
+
+.farm-dpad {
+  display: grid;
+  grid-template-columns: repeat(3, 44px);
+  grid-template-rows: repeat(3, 44px);
+  gap: 4px;
+}
+
+.farm-dpad .farm-dpad-mid {
+  align-self: center;
+  justify-self: center;
+  font-size: 1.6rem;
+}
+
+.farm-dpad > span {
+  display: block;
+}
+
+.farm-dir {
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 10px;
+  background: #f7c948;
+  color: #3a2c10;
+  font-size: 1.1rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.3);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.farm-dir:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+  background: #ffd968;
+}
+
+.farm-hint {
+  flex: 1 1 auto;
+  color: #cfd4dc;
+  font-size: 0.9rem;
+}
+
+.farm-hint p {
+  margin: 0;
+}
+
+@media (max-width: 420px) {
+  .farm-hint {
+    display: none;
+  }
+}
