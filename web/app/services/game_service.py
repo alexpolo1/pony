@@ -108,7 +108,7 @@ def resolve_scene_interaction(game, selection):
             }
         return game, {
             "accepted": True, "correct": False, "progressed": False,
-            "feedback": f"Næsten! Prøv igen. {interaction['prompt']}",
+            "feedback": "Næsten! Prøv igen.",
             "selection": option.get("label", selection),
         }
 

@@ -43,12 +43,18 @@ FAIL_TEXTS = [
 ]
 
 
+SUCCESS_TEXT = SUCCESS_TEXTS[0]
+FAIL_TEXT = FAIL_TEXTS[0]
+
+
 def _result_text(h):
-    """Generate a child-friendly result text based on the outcome."""
-    import random
-    if h.get("succes"):
-        return random.choice(SUCCESS_TEXTS)
-    return random.choice(FAIL_TEXTS)
+    """Return a child-friendly result text for the outcome.
+
+    Fixed (not random) on purpose: every result line is then a constant the
+    server pre-renders with the Danish voice once, so the game never synthesizes
+    at play time and never falls back to a robotic browser voice.
+    """
+    return SUCCESS_TEXT if h.get("succes") else FAIL_TEXT
 
 
 def roll_d6(rng=None):
