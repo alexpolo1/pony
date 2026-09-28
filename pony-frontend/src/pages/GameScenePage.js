@@ -17,7 +17,7 @@ import { DEFAULT_APPEARANCE } from '../pixelPony/spriteData';
 
 export default function GameScenePage({
   data, onRollDice, onVoiceAnswer, onInteract, rolling = false,
-  interactionBusy = false, volume, setVolume, avatarConfig,
+  interactionBusy = false, volume, setVolume, avatarConfig, onNavigate,
 }) {
   const previousHistoryLength = useRef(data.history?.length || 0);
   const [narrationStatus, setNarrationStatus] = useState('idle');
@@ -106,6 +106,13 @@ export default function GameScenePage({
     >
       <SceneMusic sceneType={volume > 0 ? 'game' : 'none'} />
       <div className="top-bar">
+        <button
+          className="topbar-farm"
+          onClick={() => { onNavigate && onNavigate('farm'); }}
+          aria-label="Gå til Ponystalden og styr ponyen"
+        >
+          <span aria-hidden="true">🌾</span> Ponystalden
+        </button>
         <VolumeControl volume={volume} onChange={setVolume} />
       </div>
       <FloatingBg />

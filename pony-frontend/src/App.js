@@ -367,6 +367,7 @@ function App() {
               volume={volume}
               setVolume={setVolume}
               avatarConfig={avatarConfig}
+              onNavigate={navigateTo}
             />
           )}
 
