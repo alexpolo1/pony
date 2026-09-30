@@ -9,6 +9,7 @@ import GameScenePage from './pages/GameScenePage';
 import GameEndPage from './pages/GameEndPage';
 import StatsPage from './pages/StatsPage';
 import PonyFarmPage from './pages/PonyFarmPage';
+import PonyvillePage from './pages/PonyvillePage';
 import Narrator from './components/Narrator';
 import FullscreenButton from './components/FullscreenButton';
 import { prepareDanishSpeech, speakDanish } from './services/tts';
@@ -393,6 +394,14 @@ function App() {
 
           {page === 'farm' && (
             <PonyFarmPage
+              onNavigate={navigateTo}
+              volume={volume}
+              setVolume={setVolume}
+            />
+          )}
+
+          {page === 'ponyville' && (
+            <PonyvillePage
               onNavigate={navigateTo}
               volume={volume}
               setVolume={setVolume}

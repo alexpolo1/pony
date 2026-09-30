@@ -83,8 +83,8 @@ function PonyFarmPage({ onNavigate, volume, setVolume }) {
       arrowup: 'up', w: 'up', arrowdown: 'down', s: 'down',
       arrowleft: 'left', a: 'left', arrowright: 'right', d: 'right',
     };
-    const kd = (e) => { if (map[e.key.toLowerCase()]) { e.preventDefault(); keysRef.current[e.key.toLowerCase()] = true; } };
-    const ku = (e) => { if (map[e.key.toLowerCase()]) keysRef.current[e.key.toLowerCase()] = false; };
+    const kd = (e) => { if (map[e.key.toLowerCase()]) { e.preventDefault(); keysRef.current[map[e.key.toLowerCase()]] = true; } };
+    const ku = (e) => { if (map[e.key.toLowerCase()]) keysRef.current[map[e.key.toLowerCase()]] = false; };
     window.addEventListener('keydown', kd);
     window.addEventListener('keyup', ku);
     return () => { window.removeEventListener('keydown', kd); window.removeEventListener('keyup', ku); };

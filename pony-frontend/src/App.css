@@ -173,6 +173,15 @@ body {
   box-shadow: 0 4px 14px rgba(255, 90, 163, 0.4);
 }
 
+/* The third, clearly-separate option: the walkable Ponyby town. */
+.btn-ponyby {
+  background: linear-gradient(135deg, #b6a3d8, #8a6fc0);
+  color: #ffffff;
+  font-size: 1.05rem;
+  margin-top: var(--space-md);
+  box-shadow: 0 4px 14px rgba(138, 111, 192, 0.45);
+}
+
 .btn-back {
   background: rgba(255, 255, 255, 0.2);
   color: var(--color-white);
