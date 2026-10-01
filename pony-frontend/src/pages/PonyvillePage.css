@@ -188,6 +188,44 @@
 .pv-celebrate-card p { margin: 0.4rem 0; }
 .pv-next { font-weight: 700; color: #6a3f5a; }
 
+/* roll dialog (NPC gives task → child walks to target → roll + voice) */
+.pv-dialog-backdrop {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8, 5, 14, 0.62);
+  z-index: 8;
+  padding: 1rem;
+}
+.pv-dialog-card {
+  width: min(92%, 430px);
+  background: linear-gradient(135deg, rgba(70, 50, 120, 0.97), rgba(40, 28, 60, 0.97));
+  border: 3px solid #d7bfff;
+  border-radius: 18px;
+  padding: 1rem 1.1rem 1.2rem;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.55);
+}
+.pv-dialog-head { display: flex; align-items: center; gap: 0.6rem; justify-content: center; margin-bottom: 0.5rem; }
+.pv-dialog-emoji { font-size: 1.9rem; }
+.pv-dialog-title { font-weight: 800; font-size: 1.2rem; color: #ffe9f5; }
+.pv-dialog-objective { margin: 0.2rem 0 0.5rem; font-size: 1rem; line-height: 1.35; color: #efe6ff; }
+.pv-dialog-prompt { margin: 0.6rem 0 0.2rem; font-weight: 800; font-size: 1.05rem; color: #fff2c2; }
+.pv-dialog-target { margin: 0.2rem 0 0.7rem; font-size: 0.95rem; color: #e6d7ff; }
+.pv-dialog-roll { margin: 0 auto; }
+.pv-dialog-roll .roll-die-face { width: 64px; height: 64px; }
+.pv-dialog-roll .roll-die-face .pip { width: 11px; height: 11px; background: #fff; }
+.pv-dialog-roll-label { display: block; margin-top: 0.5rem; font-weight: 800; font-size: 1rem; color: #fff; }
+.pv-dialog-card.is-win { border-color: #7fe08a; }
+.pv-dialog-card.is-fail { border-color: #ff9ec4; }
+.pv-dialog-result { display: flex; align-items: center; justify-content: center; gap: 0.6rem; margin: 0.7rem 0 0.4rem; font-weight: 900; font-size: 1.2rem; }
+.pv-dialog-result .dice-row { margin: 0; }
+.pv-dialog-result .dice-values { font-size: 1.5rem; color: #fff2c2; }
+.pv-dialog-result-text { margin: 0.3rem 0 0; font-size: 1.02rem; line-height: 1.4; color: #f4ecff; }
+
 /* controls */
 .pv-controls {
   display: flex;

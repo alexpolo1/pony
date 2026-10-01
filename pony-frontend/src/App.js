@@ -68,7 +68,7 @@ const pageVariants = {
 };
 
 function App() {
-  const [page, setPage] = useState('home');
+  const [page, setPage] = useState('ponyville');
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -227,7 +227,7 @@ function App() {
   const handleTutorialClose = () => {
     markSeen();
     setSelectedTheme(0);
-    navigateTo('theme');
+    navigateTo('ponyville');
   };
 
   // === LOADING ===

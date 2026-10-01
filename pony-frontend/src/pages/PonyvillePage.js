@@ -15,15 +15,17 @@
  */
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { loadAppearance } from '../services/ponyAppearance';
 import {
   getManeStyle, getTailStyle, getHornStyle, getWingStyle, getPonyType,
 } from '../pixelPony/spriteData';
-import { playClick, playSuccess } from '../SceneMusic';
-import { speakDanish } from '../services/tts';
+import { playClick, playRoll, playFail, playSuccess } from '../SceneMusic';
+import { speakDanish, prepareDanishSpeech } from '../services/tts';
+import DiceRoll from '../components/DiceRoll';
 import {
   STORIES, getStory, loadProgress, computeActive, completeStory,
-  starsEarned, countDone,
+  starsEarned, countDone, ROLL_PROMPT, FAIL_LINES,
 } from '../ponyville/stories';
 import './PonyvillePage.css';
 
@@ -105,6 +107,7 @@ export default function PonyvillePage({ onNavigate, volume, setVolume }) {
   const [activeId, setActiveId] = useState(() => computeActive(loadProgress()));
   const [banner, setBanner] = useState(null);
   const [inRange, setInRange] = useState(false);
+  const [dialog, setDialog] = useState(null); // { story, roll, result } — the roll+voice dialog
   const [celebrate, setCelebrate] = useState(null);
   const [journalOpen, setJournalOpen] = useState(false);
   const [stars, setStars] = useState(() => starsEarned(loadProgress()));
@@ -122,6 +125,7 @@ export default function PonyvillePage({ onNavigate, volume, setVolume }) {
   const inRangeRef = useRef(false);
   const activeRef = useRef(activeId);
   activeRef.current = activeId;
+  const openDialogRef = useRef(null);
 
   // Fit the canvas into the stage at a 3:2 ratio, uniformly, on any viewport.
   // (Pointer mapping uses getBoundingClientRect, so a uniform CSS scale stays 1:1.)
@@ -173,7 +177,7 @@ export default function PonyvillePage({ onNavigate, volume, setVolume }) {
     const kd = (e) => {
       const key = e.key.toLowerCase();
       if (map[key]) { e.preventDefault(); keysRef.current[map[key]] = true; }
-      if (key === 'e' && activeRef.current) tryComplete();
+      if (key === 'e' && activeRef.current) openDialogRef.current();
     };
     const ku = (e) => { const key = e.key.toLowerCase(); if (map[key]) keysRef.current[map[key]] = false; };
     window.addEventListener('keydown', kd);
@@ -202,28 +206,63 @@ export default function PonyvillePage({ onNavigate, volume, setVolume }) {
     const r = canvas.getBoundingClientRect();
     const cx = ((e.clientX - r.left) / r.width) * VIEW_W;
     const cy = ((e.clientY - r.top) / r.height) * VIEW_H;
-    setGoal(camRef.current.x + cx, camRef.current.y + cy);
+    const wx = camRef.current.x + cx;
+    const wy = camRef.current.y + cy;
+    // A tap on the active story's target opens the roll dialog (if in reach).
+    const id = activeRef.current;
+    if (id) {
+      const lm = LANDMARKS.find((l) => l.id === getStory(id).target);
+      if (lm && Math.hypot(wx - lm.x, wy - lm.y) <= 64) {
+        if (Math.hypot(worldRef.current.x - lm.x, worldRef.current.y - lm.y) <= 110) {
+          openDialogRef.current();
+          return;
+        }
+      }
+    }
+    setGoal(wx, wy);
   };
 
-  const tryComplete = useCallback(() => {
+  // Open the roll dialog at the active story's target (must be within range).
+  const openDialog = useCallback(() => {
     const id = activeRef.current;
     if (!id) return;
     const story = getStory(id);
     const lm = LANDMARKS.find((l) => l.id === story.target);
     const w = worldRef.current;
     if (Math.hypot(w.x - lm.x, w.y - lm.y) > 92) return; // must be at the place
-    playSuccess();
-    const np = completeStory(id);
+    goalRef.current = null;
+    setDialog({ story, roll: null, result: null });
+    prepareDanishSpeech(ROLL_PROMPT);
+    if (volume > 0) speakDanish(ROLL_PROMPT, volume);
+  }, [volume]);
+
+  // Roll the d6 inside the open dialog, then resolve win/fail (with voice).
+  const dialogRef = useRef(null);
+  dialogRef.current = dialog;
+  const doRoll = useCallback(() => {
+    const d = dialogRef.current;
+    if (!d) return;
+    const roll = 1 + Math.floor(Math.random() * 6);
+    const success = roll >= d.story.diceTarget;
+    const result = success ? d.story.success : FAIL_LINES[roll % FAIL_LINES.length];
+    playRoll(); // the die clatters as it's thrown
+    const np = completeStory(d.story.id);
     setProgress(np);
     setStars(starsEarned(np));
     inRangeRef.current = false;
     setInRange(false);
     const nextId = computeActive(np);
-    setCelebrate({ story, next: nextId ? getStory(nextId) : null });
-    if (volume > 0) speakDanish(story.success, volume);
-    setActiveId(nextId);
-    goalRef.current = null;
+    const next = nextId ? getStory(nextId) : null;
+    setDialog({ story: d.story, roll, result });
+    setTimeout(() => { if (volume > 0) speakDanish(result, volume); }, 600);
+    setTimeout(() => {
+      if (success) playSuccess(); else playFail();
+      setDialog(null);
+      setCelebrate({ story: d.story, next });
+      setActiveId(nextId);
+    }, 2600);
   }, [volume]);
+  openDialogRef.current = openDialog;
 
   const getLayerCanvas = () => {
     if (!layerCanvasRef.current) {
@@ -342,10 +381,12 @@ export default function PonyvillePage({ onNavigate, volume, setVolume }) {
       camRef.current.y += (ty - camRef.current.y) * 0.2 * dt;
       // debug hook (harmless) — exposed so tests/tools can observe the pony
       try {
-        window.__ponyby_dbg = {
+        const dbg = {
           x: Math.round(world.x), y: Math.round(world.y),
           active: activeRef.current, moving,
+          setWorld: (x, y) => { world.x = clamp(x, 16, WORLD_W - 16); world.y = clamp(y, 16, WORLD_H - 16); },
         };
+        window.__ponyby_dbg = dbg;
       } catch (e) { /* ignore */ }
       // gait cadence
       if (moving && t - lastWalkTickRef.current > WALK_FPS_MS) {
@@ -436,11 +477,60 @@ export default function PonyvillePage({ onNavigate, volume, setVolume }) {
 
         <canvas ref={canvasRef} width={VIEW_W} height={VIEW_H} className="pv-canvas" onPointerDown={onPointer} />
 
-        {inRange && activeId && (
-          <button className="pv-do" onPointerDown={(e) => { e.preventDefault(); tryComplete(); }} aria-label="Hjælp!">
+        {inRange && activeId && !dialog && (
+          <button className="pv-do" onPointerDown={(e) => { e.preventDefault(); openDialog(); }} aria-label="Hjælp!">
             🙌 Hjælp!
           </button>
         )}
+
+        <AnimatePresence>
+          {dialog && (
+            <motion.div
+              key="pv-dialog"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="pv-dialog-backdrop"
+              role="dialog"
+              aria-label={dialog.story.title}
+            >
+              <motion.div
+                initial={{ scale: 0.8, y: 20 }}
+                animate={{ scale: 1, y: 0 }}
+                exit={{ scale: 0.8, y: -20 }}
+                transition={{ type: 'spring', stiffness: 260, damping: 24 }}
+                className={`pv-dialog-card ${dialog.result ? (dialog.roll >= dialog.story.diceTarget ? 'is-win' : 'is-fail') : ''}`}
+              >
+                <div className="pv-dialog-head">
+                  <span className="pv-dialog-emoji">{dialog.story.emoji}</span>
+                  <span className="pv-dialog-title">{dialog.story.title}</span>
+                </div>
+                <p className="pv-dialog-objective">{dialog.story.objective}</p>
+                {dialog.roll == null ? (
+                  <>
+                    <p className="pv-dialog-prompt">{ROLL_PROMPT}</p>
+                    <p className="pv-dialog-target">Skal du slå {dialog.story.diceTarget} eller højere 🎲</p>
+                    <button className="btn-roll pv-dialog-roll" onPointerDown={(e) => { e.preventDefault(); doRoll(); }} aria-label="Kast terningen">
+                      <span className="roll-die-face" aria-hidden="true">
+                        <i className="pip pip-1" /><i className="pip pip-2" /><i className="pip pip-3" />
+                        <i className="pip pip-4" /><i className="pip pip-5" />
+                      </span>
+                      <span className="pv-dialog-roll-label">Kast terningen</span>
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <DiceRoll dice={[dialog.roll]} />
+                    <div className="pv-dialog-result">
+                      <span>{dialog.roll >= dialog.story.diceTarget ? '🎉 Det lykkedes!' : '🌈 Næsten…'}</span>
+                    </div>
+                    <p className="pv-dialog-result-text">{dialog.result}</p>
+                  </>
+                )}
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {journalOpen && (
           <div className="pv-journal" role="dialog" aria-label="Historie-journal">
