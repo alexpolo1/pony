@@ -46,3 +46,11 @@ Thumbs.db
 arbejdslog.txt
 hermes_driver.sh
 runs/
+# Ponyby web: TTS runtime artifacts (63MB Piper voice, disk cache, helper scripts)
+web/instance/piper/
+web/instance/*.wav
+web/instance/*.mp3
+web/instance/start_waitress.sh
+web/start_waitress.sh
+web/piper_setup.sh
+web/run_retry.sh
