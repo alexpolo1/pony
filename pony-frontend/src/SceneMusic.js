@@ -246,6 +246,22 @@ export function playSuccess() {
   });
 }
 
+export function playSparkle() {
+  // A short bright "twinkle" for collecting a festive sparkle.
+  const { ctx, sfx } = audioManager.get();
+  if (!ctx || !sfx) return;
+  [1320, 1760, 2093].forEach((f, i) => {
+    const t = ctx.currentTime + i * 0.06;
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = 'sine'; o.frequency.value = f;
+    g.gain.setValueAtTime(0.14, t);
+    g.gain.exponentialRampToValueAtTime(0.001, t + 0.25);
+    o.connect(g); g.connect(sfx);
+    o.start(t); o.stop(t + 0.3);
+  });
+}
+
 export function playFail() {
   const { ctx, sfx } = audioManager.get();
   if (!ctx || !sfx) return;

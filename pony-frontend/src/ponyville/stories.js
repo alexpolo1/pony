@@ -5,23 +5,37 @@
  * location in the Ponyby world, and a little d6 challenge. The child completes
  * it by walking to the landmark, opening the dialog, and rolling the die — the
  * result is read aloud (voice). Progress persists to localStorage.
+ *
+ * Design note (kids 4-5, "gentle walk-around town" genre): a die roll is a
+ * CELEBRATION, never a failure. Every roll completes the story; the number
+ * just scales a small treat. There is no "you lost" state — only "jo højere,
+ * jo sjovere". This matches the genre: mistakes are recoverable, never a red X.
  */
 
 import { loadAppearance } from '../services/ponyAppearance';
 
 export const STORAGE_KEY = 'pony_ponyby_progress';
 
-// Shared voice lines (Danish, kid-friendly). Win line is per-story (success).
-export const ROLL_PROMPT = 'Kast terningen og se, om det lykkedes!';
-export const FAIL_LINES = [
-  'Næsten! Prøv igen, du kan det!',
-  'Hov, ikke helt. Giv den et mere!',
-  'Det var tæt på. Kast igen!',
-];
+// The one line the child sees when they tap "Kast terningen".
+export const ROLL_PROMPT = 'Kast terningen — jo højere, jo sjovere! 🎲';
+
+// The die is a reward: the number scales a small treat. Always a win.
+export const TREAT_LINES = {
+  1: 'Du slog en 1! Her er en lille smule sukker. 🍬',
+  2: 'Du slog en 2! Her er en slikke. 🍭',
+  3: 'Du slog en 3! Her er en lollipop. 🎀',
+  4: 'Du slog en 4! Her er en is. 🍦',
+  5: 'Du slog en 5! Her er en chokolade! 🍫',
+  6: 'DU SLOG EN 6! Den store pony-fest! 🎂',
+};
+
+export function treatForRoll(roll) {
+  return TREAT_LINES[roll] || TREAT_LINES[6];
+}
 
 // Landmark ids double as world coordinates (see PonyvillePage.js LANDMARKS).
-// Each story targets one landmark and has a d6 target number (higher = harder).
-// Ordered by difficulty so the walk-around ramps up: 3,3,4 then 4,4,5.
+// Each story targets one landmark. The die is a celebration (see TREAT_LINES);
+// there is no pass/fail gate. `stars` is how many stars the story is worth.
 export const STORIES = [
   {
     id: 'bog',
@@ -31,7 +45,6 @@ export const STORIES = [
     intro: 'Hej! Jeg hedder Twi. Jeg kan ikke finde min røde bog i biblioteket. Kan du hjælpe?',
     objective: 'Gå til biblioteket 📚 og find den røde bog.',
     target: 'library',
-    diceTarget: 3,
     success: 'Fantastisk! Her er min røde bog. Du er en rigtig hjælper!',
     stars: 1,
   },
@@ -43,7 +56,6 @@ export const STORIES = [
     intro: 'Min lille hest har fået ondt i benet. Kan du gå til stalden og give hende et kram?',
     objective: 'Gå til stalden 🐴 og giv hesten et kram.',
     target: 'stable',
-    diceTarget: 3,
     success: 'Aaaah, tak for krammet! Hesten er glad nu. Godt hjerte, du!',
     stars: 1,
   },
@@ -55,7 +67,6 @@ export const STORIES = [
     intro: 'Vupti! Mine balloner er flyvet op i parken! Få fat i den røde ballon for mig!',
     objective: 'Gå til parken 🌳 og fang den røde ballon.',
     target: 'park',
-    diceTarget: 4,
     success: 'WOOHOO! En fest! Tak for ballonen! 🎉',
     stars: 1,
   },
@@ -67,7 +78,6 @@ export const STORIES = [
     intro: 'Vau! Min kurv er fuld af æbler, men de ruller ned ad bakken. Hjælp mig med at fange dem!',
     objective: 'Gå til frugthaven 🍎 og fang de rullende æbler.',
     target: 'orchard',
-    diceTarget: 4,
     success: 'Tak! Nu har jeg alle mine æbler. Du kan ALT!',
     stars: 2,
   },
@@ -79,7 +89,6 @@ export const STORIES = [
     intro: 'Hej lille pony! Jeg har gemt en skøn glimmer-sten på skolen. Hent den til mig!',
     objective: 'Gå til skolen ✏️ og hent den glimrende sten.',
     target: 'school',
-    diceTarget: 4,
     success: 'Åh, den glimrer så smukt! Tusind tak for din hjælp!',
     stars: 2,
   },
@@ -91,7 +100,6 @@ export const STORIES = [
     intro: 'Kærlig hilsen fra slottet! Jeg har mistet min lille stjerne. Hent den for mig, kære pony?',
     objective: 'Gå til slottet 👑 og hent prinsessens stjerne.',
     target: 'castle',
-    diceTarget: 5,
     success: 'Den er tryg igen. Du er min helt i dag. 🌟',
     stars: 3,
   },

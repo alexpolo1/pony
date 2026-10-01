@@ -206,17 +206,21 @@ def api_stats():
 
 @api_bp.route("/api/tts", methods=["POST"])
 def api_text_to_speech():
-    """Read child-facing text with the same Danish female voice on every device."""
+    """Read child-facing text in Danish.  Uses Edge TTS (Christel) and, when
+    that remote service is down, falls back to the offline Piper engine — so a
+    voice is returned even during a Microsoft outage.  The content-type (MP3 vs
+    WAV) follows whichever engine produced the audio."""
     data = request.get_json(silent=True) or {}
     text = data.get("text")
     if not isinstance(text, str) or not text.strip() or len(text) > MAX_TTS_TEXT_LENGTH:
         return jsonify({"error": "invalid_text"}), 400
     try:
-        audio = synthesize_danish(text.strip())
+        result = synthesize_danish(text.strip())
     except TextToSpeechError:
         current_app.logger.exception("Danish TTS failed")
         return jsonify({"error": "tts_error"}), 503
-    return Response(audio, mimetype="audio/mpeg", headers={"Cache-Control": "private, max-age=86400"})
+    return Response(result.audio, mimetype=result.mimetype,
+                   headers={"Cache-Control": "private, max-age=86400"})
 
 
 def _active_voice_question(game):

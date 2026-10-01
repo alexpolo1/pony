@@ -168,7 +168,12 @@ function speakWithServer(text, volume, onSpeakingChange, generation) {
       const finish = () => {
         setMusicDucking(false);
         setNarrationStatus('idle', onSpeakingChange);
-        if (activeAudio === audio) activeAudio = null;
+        // Note: the local `audio` below is only created in the fallback branch
+        // (line ~188) and is deliberately NOT referenced here — in the Web Audio
+        // path that branch is skipped (early return), so a bare `audio` read
+        // here would throw a ReferenceError. Clearing the module-level
+        // singleton is safe: speakDanish() cancels any prior narration first.
+        if (activeAudio) activeAudio = null;
         if (activeAudioUrl) {
           window.URL.revokeObjectURL(activeAudioUrl);
           activeAudioUrl = null;

@@ -20,12 +20,12 @@ import { loadAppearance } from '../services/ponyAppearance';
 import {
   getManeStyle, getTailStyle, getHornStyle, getWingStyle, getPonyType,
 } from '../pixelPony/spriteData';
-import { playClick, playRoll, playFail, playSuccess } from '../SceneMusic';
+import { playClick, playRoll, playSuccess, playSparkle } from '../SceneMusic';
 import { speakDanish, prepareDanishSpeech } from '../services/tts';
 import DiceRoll from '../components/DiceRoll';
 import {
   STORIES, getStory, loadProgress, computeActive, completeStory,
-  starsEarned, countDone, ROLL_PROMPT, FAIL_LINES,
+  starsEarned, countDone, ROLL_PROMPT, treatForRoll,
 } from '../ponyville/stories';
 import './PonyvillePage.css';
 
@@ -34,6 +34,15 @@ const TILE = 32;
 // broken blob and column 7 is empty, so these columns are the clean frames.
 const WALK = [0, 1, 2, 4, 5, 6];
 const WALK_FPS_MS = 110;
+
+// A pony's own type nudges its dice (same idea as the main game's diceBonus):
+// a ground pony is plain, wings and horn give a little magic, an alicorn the most.
+const DICE_BONUS = {
+  jordpony: { bonus: 0, label: 'Jordpony' },
+  pegasus: { bonus: 1, label: 'Pegasus' },
+  enhjorning: { bonus: 1, label: 'Enhjørning' },
+  alicorn: { bonus: 2, label: 'Alicorn' },
+};
 
 const VIEW_W = 960;
 const VIEW_H = 640;
@@ -76,6 +85,23 @@ function scatter(seed, count) {
 const FLOWERS = scatter(1337, 46);
 const TREES = scatter(777, 16);
 
+// Replay ("fest") mode: once every story is done, the town fills with collectable
+// twinkles.  The child walks over them to collect them — an endlessly replayable
+//, gentle loop that lets the world keep rewarding them (the "valley remembers").
+const FEST_SPARKLE_COUNT = 12;
+function spawnSparkles() {
+  const out = [];
+  let s = (Date.now() % 100000) >>> 0;
+  const rnd = () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 0xffffffff; };
+  for (let i = 0; i < FEST_SPARKLE_COUNT; i++) {
+    let x = 48 + rnd() * (WORLD_W - 96);
+    let y = 48 + rnd() * (WORLD_H - 96);
+    if (Math.hypot(x - 470, y - 470) < 96) { x = 120 + rnd() * (WORLD_W - 240); y = 120 + rnd() * (WORLD_H - 240); }
+    out.push({ x: Math.round(x), y: Math.round(y), got: false });
+  }
+  return out;
+}
+
 function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
 
 function buildLayers(appearance, ponyType) {
@@ -111,7 +137,16 @@ export default function PonyvillePage({ onNavigate, volume, setVolume }) {
   const [celebrate, setCelebrate] = useState(null);
   const [journalOpen, setJournalOpen] = useState(false);
   const [stars, setStars] = useState(() => starsEarned(loadProgress()));
+  const [fest, setFest] = useState(false);
+  const [collected, setCollected] = useState(0);
 
+  // The pony the child chose also shapes its dice (see DICE_BONUS): wings/horn help.
+  const diceBonus = DICE_BONUS[ponyType.id] ? DICE_BONUS[ponyType.id].bonus : 0;
+  const bonusLabel = ponyType.label;
+
+  const sparklesRef = useRef(null);
+  const festRef = useRef(false);
+  festRef.current = fest;
   const canvasRef = useRef(null);
   const stageRef = useRef(null);
   const layerCanvasRef = useRef(null);
@@ -126,6 +161,8 @@ export default function PonyvillePage({ onNavigate, volume, setVolume }) {
   const activeRef = useRef(activeId);
   activeRef.current = activeId;
   const openDialogRef = useRef(null);
+  const progressRef = useRef(progress);
+  progressRef.current = progress;
 
   // Fit the canvas into the stage at a 3:2 ratio, uniformly, on any viewport.
   // (Pointer mapping uses getBoundingClientRect, so a uniform CSS scale stays 1:1.)
@@ -196,6 +233,18 @@ export default function PonyvillePage({ onNavigate, volume, setVolume }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeId]);
 
+  // Fest is endlessly replayable: once every sparkle is collected, a fresh batch spawns.
+  useEffect(() => {
+    if (!festRef.current || !sparklesRef.current) return;
+    const all = sparklesRef.current.every((s) => s.got);
+    if (all) {
+      sparklesRef.current = spawnSparkles();
+      setCollected(0);
+      if (volume > 0) speakDanish('Flere stjerner! Gå videre!', volume);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [collected]);
+
   const setGoal = useCallback((wx, wy) => {
     goalRef.current = { x: clamp(wx, 20, WORLD_W - 20), y: clamp(wy, 20, WORLD_H - 20), hit: false };
   }, []);
@@ -236,15 +285,19 @@ export default function PonyvillePage({ onNavigate, volume, setVolume }) {
     if (volume > 0) speakDanish(ROLL_PROMPT, volume);
   }, [volume]);
 
-  // Roll the d6 inside the open dialog, then resolve win/fail (with voice).
+  // Roll the d6 inside the open dialog. The die is a CELEBRATION, not a gate:
+  // every roll completes the story, and the number scales the treat. The pony's
+  // own type (DICE_BONUS) adds magic to the roll, so a better pony wins a bigger
+  // treat — a transparent, always-positive way to make the chosen pony matter.
   const dialogRef = useRef(null);
   dialogRef.current = dialog;
   const doRoll = useCallback(() => {
     const d = dialogRef.current;
     if (!d) return;
-    const roll = 1 + Math.floor(Math.random() * 6);
-    const success = roll >= d.story.diceTarget;
-    const result = success ? d.story.success : FAIL_LINES[roll % FAIL_LINES.length];
+    const baseRoll = 1 + Math.floor(Math.random() * 6);
+    const bonus = diceBonus; // constant for the session
+    const effective = Math.min(6, baseRoll + bonus);
+    const result = treatForRoll(effective);
     playRoll(); // the die clatters as it's thrown
     const np = completeStory(d.story.id);
     setProgress(np);
@@ -253,14 +306,15 @@ export default function PonyvillePage({ onNavigate, volume, setVolume }) {
     setInRange(false);
     const nextId = computeActive(np);
     const next = nextId ? getStory(nextId) : null;
-    setDialog({ story: d.story, roll, result });
+    setDialog({ story: d.story, roll: baseRoll, bonus, result });
     setTimeout(() => { if (volume > 0) speakDanish(result, volume); }, 600);
     setTimeout(() => {
-      if (success) playSuccess(); else playFail();
+      playSuccess();
       setDialog(null);
-      setCelebrate({ story: d.story, next });
+      setCelebrate({ story: d.story, next, roll: baseRoll, bonus, result });
       setActiveId(nextId);
     }, 2600);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [volume]);
   openDialogRef.current = openDialog;
 
@@ -282,9 +336,12 @@ export default function PonyvillePage({ onNavigate, volume, setVolume }) {
       const targetId = activeRef.current ? getStory(activeRef.current).target : null;
       const nearId = activeRef.current ? getStory(activeRef.current).target : null;
       const isNear = (lm) => Math.hypot(worldRef.current.x - lm.x, worldRef.current.y - lm.y) <= 92;
+      // The town "remembers": a gold star sits over every completed landmark.
+      const doneIds = {};
+      STORIES.forEach((s) => { if (progressRef.current.done[s.id]) doneIds[s.target] = true; });
       LANDMARKS.slice().sort((a, b) => a.y - b.y).forEach((lm) => {
         const isTarget = lm.id === targetId;
-        drawLandmark(ctx, lm, t, isTarget, isTarget && isNear(lm), nearId === lm.id);
+        drawLandmark(ctx, lm, t, isTarget, isTarget && isNear(lm), nearId === lm.id, !!doneIds[lm.id]);
       });
     };
 
@@ -387,6 +444,7 @@ export default function PonyvillePage({ onNavigate, volume, setVolume }) {
           setWorld: (x, y) => { world.x = clamp(x, 16, WORLD_W - 16); world.y = clamp(y, 16, WORLD_H - 16); },
         };
         window.__ponyby_dbg = dbg;
+        if (festRef.current && sparklesRef.current) dbg.sparkles = sparklesRef.current.map((s) => ({ x: s.x, y: s.y, got: s.got }));
       } catch (e) { /* ignore */ }
       // gait cadence
       if (moving && t - lastWalkTickRef.current > WALK_FPS_MS) {
@@ -401,6 +459,18 @@ export default function PonyvillePage({ onNavigate, volume, setVolume }) {
       }
       if (near !== inRangeRef.current) { inRangeRef.current = near; setInRange(near); }
 
+      // Fest (replay) mode: walking over a sparkle collects it (sound + counter).
+      if (festRef.current && sparklesRef.current) {
+        const sp = sparklesRef.current;
+        for (let i = 0; i < sp.length; i++) {
+          if (!sp[i].got && Math.hypot(world.x - sp[i].x, world.y - sp[i].y) <= 44) {
+            sp[i].got = true;
+            playSparkle();
+            setCollected((c) => c + 1);
+          }
+        }
+      }
+
       // ---- draw ----
       ctx.imageSmoothingEnabled = false;
       ctx.filter = 'none';
@@ -413,6 +483,19 @@ export default function PonyvillePage({ onNavigate, volume, setVolume }) {
       drawPond(ctx, 470, 470);
       drawBushes(ctx);
       drawLandmarks(ctx, t);
+      // Fest sparkles (replay mode) — drawn in world space, twinkling.
+      if (festRef.current && sparklesRef.current) {
+        sparklesRef.current.forEach((sp) => {
+          if (sp.got) return;
+          const tw = 0.5 + 0.5 * Math.sin(t / 180 + sp.x);
+          ctx.save();
+          ctx.globalAlpha = 0.5 + 0.5 * tw;
+          ctx.font = 'bold 30px system-ui';
+          ctx.textAlign = 'center';
+          ctx.fillText('✨', sp.x, sp.y - 6 + Math.sin(t / 240 + sp.x) * 3);
+          ctx.restore();
+        });
+      }
       drawPony(ctx, t, moving);
       ctx.restore();
       drawCompass(ctx);
@@ -446,7 +529,13 @@ export default function PonyvillePage({ onNavigate, volume, setVolume }) {
     playClick();
     setCelebrate(null);
     if (!activeId) {
-      setBanner({ text: '🎉 Du klarede alle historier i Ponyby! 🎉', sub: 'Gå rundt så længe du har lyst.', kind: 'done' });
+      // Every story is done — the town turns into a gentle, endless fest the
+      // child can replay: walk over the twinkling sparkles to collect them.
+      sparklesRef.current = spawnSparkles();
+      setCollected(0);
+      setFest(true);
+      setBanner({ text: '🎉 Du klarede dem alle — nu er der fest! 🎉', sub: 'Saml de glitrede stjerner ✨ i byen.', kind: 'fest' });
+      if (volume > 0) speakDanish('Hurra! Du klarede dem alle! Nu er der fest i byen!', volume);
     }
   };
 
@@ -455,6 +544,9 @@ export default function PonyvillePage({ onNavigate, volume, setVolume }) {
       <div className="pv-topbar">
         <button className="btn-back" onClick={() => { playClick(); onNavigate('home'); }} aria-label="Tilbage">←</button>
         <div className="pv-title"><span>🏰</span><span>Ponyby</span></div>
+        {diceBonus > 0 && (
+          <div className="pv-bonus" title="Din pony magi">✨ {bonusLabel} +{diceBonus}</div>
+        )}
         <button
           className="pv-journal-btn"
           onClick={() => { playClick(); setJournalOpen((o) => !o); }}
@@ -465,6 +557,9 @@ export default function PonyvillePage({ onNavigate, volume, setVolume }) {
         <div className="pv-stars" aria-label="Stjerner" title="Stjerner samlet">
           {'⭐'.repeat(stars)}{'·'.repeat(Math.max(0, 18 - stars))}
         </div>
+        {fest && (
+          <div className="pv-fest" title="Glitrede stjerner samlet">✨ {collected}/{FEST_SPARKLE_COUNT}</div>
+        )}
       </div>
 
       <div className="pv-stage" ref={stageRef}>
@@ -499,17 +594,19 @@ export default function PonyvillePage({ onNavigate, volume, setVolume }) {
                 animate={{ scale: 1, y: 0 }}
                 exit={{ scale: 0.8, y: -20 }}
                 transition={{ type: 'spring', stiffness: 260, damping: 24 }}
-                className={`pv-dialog-card ${dialog.result ? (dialog.roll >= dialog.story.diceTarget ? 'is-win' : 'is-fail') : ''}`}
+                className={`pv-dialog-card ${dialog.result ? 'is-win' : ''}`}
               >
                 <div className="pv-dialog-head">
                   <span className="pv-dialog-emoji">{dialog.story.emoji}</span>
                   <span className="pv-dialog-title">{dialog.story.title}</span>
                 </div>
                 <p className="pv-dialog-objective">{dialog.story.objective}</p>
+                {diceBonus > 0 && (
+                  <p className="pv-dialog-bonus">✨ Din {bonusLabel} magi giver +{diceBonus} på kastet!</p>
+                )}
                 {dialog.roll == null ? (
                   <>
                     <p className="pv-dialog-prompt">{ROLL_PROMPT}</p>
-                    <p className="pv-dialog-target">Skal du slå {dialog.story.diceTarget} eller højere 🎲</p>
                     <button className="btn-roll pv-dialog-roll" onPointerDown={(e) => { e.preventDefault(); doRoll(); }} aria-label="Kast terningen">
                       <span className="roll-die-face" aria-hidden="true">
                         <i className="pip pip-1" /><i className="pip pip-2" /><i className="pip pip-3" />
@@ -522,7 +619,8 @@ export default function PonyvillePage({ onNavigate, volume, setVolume }) {
                   <>
                     <DiceRoll dice={[dialog.roll]} />
                     <div className="pv-dialog-result">
-                      <span>{dialog.roll >= dialog.story.diceTarget ? '🎉 Det lykkedes!' : '🌈 Næsten…'}</span>
+                      <span>🎉 Det lykkedes!</span>
+                      {dialog.bonus > 0 && <span className="pv-dialog-bonus pv-dialog-bonus-inline">✨ +{dialog.bonus} magi → {dialog.roll + dialog.bonus}</span>}
                     </div>
                     <p className="pv-dialog-result-text">{dialog.result}</p>
                   </>
@@ -559,6 +657,17 @@ export default function PonyvillePage({ onNavigate, volume, setVolume }) {
               <div className="pv-celebrate-stars">{'⭐'.repeat(celebrate.story.stars)}</div>
               <h3>{celebrate.story.emoji} {celebrate.story.title}</h3>
               <p>{celebrate.story.success}</p>
+              {celebrate.roll != null && (() => {
+                const eff = Math.min(6, celebrate.roll + (celebrate.bonus || 0));
+                return (
+                  <p className="pv-treat">
+                    🎲 Du slog <b>{celebrate.roll}</b>
+                    {celebrate.bonus > 0 && <> ✨ +{celebrate.bonus} magi = <b>{eff}</b></>}
+                    {' — '}
+                    {treatForRoll(eff)}
+                  </p>
+                );
+              })()}
               {celebrate.next ? (
                 <p className="pv-next">Næste: {celebrate.next.emoji} {celebrate.next.title}</p>
               ) : (
@@ -644,7 +753,7 @@ function drawPond(ctx, x, y) {
   ctx.beginPath(); ctx.ellipse(x - 8, y - 4, 26, 13, 0, 0, Math.PI * 2); ctx.fill();
 }
 
-function drawLandmark(ctx, lm, t, isTarget, targetNear) {
+function drawLandmark(ctx, lm, t, isTarget, targetNear, isNearDone, isDone) {
   const { x, y, name, color, roof, emoji } = lm;
   ctx.save(); ctx.filter = 'none';
   ctx.fillStyle = color; ctx.fillRect(x - 34, y, 68, 46);
@@ -662,6 +771,18 @@ function drawLandmark(ctx, lm, t, isTarget, targetNear) {
   ctx.fillStyle = '#fffbe6';
   ctx.fillText(name, x, y + 63);
   ctx.restore();
+
+  // The town remembers: a gold star badge over a completed landmark.
+  if (isDone) {
+    const bob = Math.sin(t / 320 + x) * 3;
+    ctx.save();
+    ctx.globalAlpha = 0.95;
+    ctx.font = 'bold 30px system-ui'; ctx.textAlign = 'center';
+    ctx.strokeStyle = 'rgba(120,70,0,0.6)'; ctx.lineWidth = 4;
+    ctx.strokeText('⭐', x, y - 20 + bob);
+    ctx.fillText('⭐', x, y - 20 + bob);
+    ctx.restore();
+  }
 
   if (isTarget) {
     const pulse = 0.5 + 0.5 * Math.sin(t / 200);

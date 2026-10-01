@@ -186,6 +186,8 @@
 .pv-celebrate-card h3 { margin: 0.4rem 0; font-size: 1.25rem; }
 .pv-celebrate-stars { font-size: 2rem; letter-spacing: 4px; }
 .pv-celebrate-card p { margin: 0.4rem 0; }
+.pv-treat { font-weight: 700; color: #7a4a2f; background: rgba(255, 240, 200, 0.7); border-radius: 10px; padding: 0.4rem 0.6rem; }
+.pv-treat b { color: #4a2c14; }
 .pv-next { font-weight: 700; color: #6a3f5a; }
 
 /* roll dialog (NPC gives task → child walks to target → roll + voice) */
@@ -262,8 +264,34 @@
 .pv-hint { flex: 1 1 auto; color: #cfd4dc; font-size: 0.9rem; }
 .pv-hint p { margin: 0 0 0.2rem; }
 
+/* pony-type magic bonus + fest (replay) counter in the top bar */
+.pv-bonus {
+  flex: 0 0 auto;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #ffe3f4;
+  background: rgba(182, 120, 255, 0.35);
+  border: 1px solid #d7bfff;
+  border-radius: 999px;
+  padding: 0.15rem 0.55rem;
+  white-space: nowrap;
+}
+.pv-fest {
+  flex: 0 0 auto;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #5a2a00;
+  background: linear-gradient(180deg, #ffe27a, #ffd043);
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+  white-space: nowrap;
+}
+.pv-dialog-bonus { margin: 0.4rem 0 0.1rem; font-weight: 800; font-size: 0.95rem; color: #e9c9ff; }
+.pv-dialog-bonus-inline { font-size: 0.85rem !important; color: #c9a9ff !important; font-weight: 700 !important; }
+
 @media (max-width: 560px) {
   .pv-hint { display: none; }
   .pv-stars { font-size: 0.8rem; }
   .pv-journal-btn { font-size: 0.85rem; padding: 0.4rem 0.6rem; }
+  .pv-bonus { display: none; }
 }
